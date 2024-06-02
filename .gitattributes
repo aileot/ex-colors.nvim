@@ -1,0 +1,2 @@
+lua/** linguist-vendored
+test/*.lua linguist-vendored

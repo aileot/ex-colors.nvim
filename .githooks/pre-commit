@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+#
+# Enable this hook with the following command:
+# `git config --local core.hooksPath .githooks`
+#
+# Comment out all the lines temporarily if something gets wrong with this hook.
+#
+
+set -Ceu -o pipefail
+
+root=$(git rev-parse --show-toplevel)
+
+fnl_dir="$root/fnl"
+lua_dir="$root/lua"
+
+make build >/dev/null
+
+# Unstage all the compiled lua files except deleted ones.
+while read -r lua_file; do
+   git reset "$lua_file" >/dev/null
+done < <(git diff --name-only --cached --diff-filter=dr HEAD~ -- "$lua_dir")
+
+# Clear all the compiled lua files if any fnl source files are deleted.
+while read -r lua_file; do
+   # Slice path between fnl/ and .fnl.
+   lua_file="lua/${fnl_file:4:-4}.lua"
+   git rm "$root/$lua_file" >/dev/null
+done < <(git diff --name-only --cached --diff-filter=DR HEAD~ -- "$fnl_dir")
+
+# Stage the compiled lua files corresponding to currently staged fnl files.
+while read -r fnl_file; do
+   # Slice path between fnl/ and .fnl.
+   lua_file="lua/${fnl_file:4:-4}.lua"
+   git add --no-ignore-removal "$root/$lua_file" >/dev/null
+done < <(git diff --name-only --cached HEAD~ -- "$fnl_dir")
