@@ -1,21 +1,58 @@
 # 🌈 Ex-Colors
 
+## Default Options
+
+```lua
+{
+  colors_dir = vim.fn.stdpath("config") .. "/colors",
+  restore_original_before_execution = false,
+  case_sensitive = true,
+  omit_default = false,
+  resolve_links = false,
+  included_patterns = {},
+  excluded_patterns = {},
+  autocmd_patterns = { CmdlineEnter = { ["*"] = "^Nvim%u" } },
+  relinker = nil,
+  gvar_supports = {
+    "terminal_color_0",
+    "terminal_color_1",
+    "terminal_color_2",
+    "terminal_color_3",
+    "terminal_color_4",
+    "terminal_color_5",
+    "terminal_color_6",
+    "terminal_color_7",
+    "terminal_color_8",
+    "terminal_color_9",
+    "terminal_color_10",
+    "terminal_color_11",
+    "terminal_color_12",
+    "terminal_color_13",
+    "terminal_color_14",
+    "terminal_color_15",
+  },
+}
+```
+
 ## Setup
 
 Change option values via `require("ex-colors").setup`:
 
 ```lua
 require("ex-colors").setup({
-  ignore_cleared = true,
   omit_default = true,
-  excluded_patterns = vim.fn.flatten({
-    ex_patterns_apart_from_colorscheme,
-    ex_patterns_only_for_internal_convenience,
-    ex_patterns_left_as_default,
-    ex_patterns_plugins,
-    ex_patterns_plugins_extra,
-    ex_patterns_filetypes,
-  }),
+  included_patterns = {
+    -- See the Reference & Cookbook
+  },
+  excluded_patterns = {
+    -- See the Reference & Cookbook
+  },
+  autocmd_patterns = {
+    -- See the Reference & Cookbook
+  },
+  relinker = function(hl_name)
+    -- See the Reference & Cookbook
+  end,
   gvar_supports = {
     "fzf_colors", -- Add it if you use junegunn/fzf.vim.
     "terminal_color_0",
