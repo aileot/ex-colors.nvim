@@ -1,5 +1,8 @@
 # 🌈 Ex-Colors
 
+Extract current highlight definitions based on your favorite colorscheme
+(with overwriting definitions) into a new optimized colorscheme for you!
+
 ## Default Options
 
 ```lua
