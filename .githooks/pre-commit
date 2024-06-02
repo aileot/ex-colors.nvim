@@ -21,11 +21,11 @@ while read -r lua_file; do
 done < <(git diff --name-only --cached --diff-filter=dr HEAD~ -- "$lua_dir")
 
 # Clear all the compiled lua files if any fnl source files are deleted.
-while read -r lua_file; do
+while read -r fnl_file; do
    # Slice path between fnl/ and .fnl.
    lua_file="lua/${fnl_file:4:-4}.lua"
    git rm "$root/$lua_file" >/dev/null
-done < <(git diff --name-only --cached --diff-filter=DR HEAD~ -- "$fnl_dir")
+done < <(git diff --name-only --cached --diff-filter=D HEAD~ -- "$fnl_dir")
 
 # Stage the compiled lua files corresponding to currently staged fnl files.
 while read -r fnl_file; do
