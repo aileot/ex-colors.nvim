@@ -1,6 +1,6 @@
 # 🌈 Ex-Colors
 
-### Setup
+## Setup
 
 Change option values via `require("ex-colors").setup`:
 
@@ -38,7 +38,7 @@ require("ex-colors").setup({
 })
 ```
 
-### Notes
+## Notes
 
 ex-colors.nvim ignores cleared highlight definitions, for which
 `vim.api.nvim_get_hl` returns an empty table `{}`.
@@ -58,7 +58,7 @@ vim.api.nvim_create_autocmd("ColorSchemePre", {
 })
 ```
 
-### Not Planned
+## Not Planned
 
 - Byte-Compile
   Enable `vim.loader`. It does.
