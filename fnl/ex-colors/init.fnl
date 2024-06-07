@@ -13,7 +13,8 @@
                      :resolve_links false
                      :included_patterns false
                      :excluded_patterns []
-                     :autocmd_patterns {:CmdlineEnter {:* "^Nvim%u"}}
+                     :autocmd_patterns {:CmdlineEnter {:* ["^debug%u"
+                                                           "^health%u"]}}
                      :relinker nil
                      :output_prefix :ex-
                      :output_suffix ""
