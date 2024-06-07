@@ -1,63 +1,46 @@
+<div align="center">
+
 # 🌈 Ex-Colors
 
-Extract current highlight definitions based on your favorite colorscheme
-(with overwriting definitions) into a new optimized colorscheme for you!
+Extract current highlight definitions, and generate your own new colorscheme.\
+"But the colorscheme is not well tuned for startup" is
+now _no longer an issue_ to give it up.\
+Happy coding!
 
-## Default Options
+<!-- TODO: Screenshot -->
+</div>
+
+## Setup
+
+Change option values via `require("ex-colors").setup()`.
+Visit the [Reference](./REFERENCE.md) & [Cookbook](./COOKBOOK.md)
+for more details.
+The following snippet sets up the options with the default values:
 
 ```lua
-{
+require("ex-colors").setup({
   colors_dir = vim.fn.stdpath("config") .. "/colors",
   restore_original_before_execution = false,
   case_sensitive = true,
   omit_default = false,
   resolve_links = false,
+  ---@type string[] lua patterns
   included_patterns = {},
+  ---@type string[] lua patterns
   excluded_patterns = {},
-  autocmd_patterns = { CmdlineEnter = { ["*"] = "^Nvim%u" } },
-  relinker = nil,
-  gvar_supports = {
-    "terminal_color_0",
-    "terminal_color_1",
-    "terminal_color_2",
-    "terminal_color_3",
-    "terminal_color_4",
-    "terminal_color_5",
-    "terminal_color_6",
-    "terminal_color_7",
-    "terminal_color_8",
-    "terminal_color_9",
-    "terminal_color_10",
-    "terminal_color_11",
-    "terminal_color_12",
-    "terminal_color_13",
-    "terminal_color_14",
-    "terminal_color_15",
-  },
-}
-```
-
-## Setup
-
-Change option values via `require("ex-colors").setup`:
-
-```lua
-require("ex-colors").setup({
-  omit_default = true,
-  included_patterns = {
-    -- See the Reference & Cookbook
-  },
-  excluded_patterns = {
-    -- See the Reference & Cookbook
-  },
+  ---@type table<string,table<string,string[]>>
   autocmd_patterns = {
-    -- See the Reference & Cookbook
+    CmdlineEnter = {
+      ["*"] = {
+        "^debug%u",
+        "^health%u",
+      }
+    },
   },
-  relinker = function(hl_name)
-    -- See the Reference & Cookbook
-  end,
+  ---@type nil|fun(hl_name: string): string|false Return false to discard hl-group.
+  relinker = nil,
+  -- e.g., generate `vim.api.nvim_set_var("terminal_color_0","#000000")`.
   gvar_supports = {
-    "fzf_colors", -- Add it if you use junegunn/fzf.vim.
     "terminal_color_0",
     "terminal_color_1",
     "terminal_color_2",
@@ -74,31 +57,34 @@ require("ex-colors").setup({
     "terminal_color_13",
     "terminal_color_14",
     "terminal_color_15",
-    },
+  },
 })
 ```
 
 ## Notes
 
-ex-colors.nvim ignores cleared highlight definitions, for which
-`vim.api.nvim_get_hl` returns an empty table `{}`.
-If you still need to reset highlights completely before applying the generated
-colorscheme, try the following snippet
+Unlike general colorscheme plugins, generated colorscheme will
+neither `:highlight clear` nor `:syntax reset`.
+This is because
+the generated colorscheme is always expected to be loaded first,
+and only to be managed by yourself.
+If you still need to reset highlights before applying the generated
+colorscheme, try the following snippet:
 
 ```lua
 vim.api.nvim_create_autocmd("ColorSchemePre", {
-    callback = function(a)
-        if vim.g.colors_name == a.match
-        -- and a.match == "<your-colorscheme-name>"
-        then
-            vim.cmd("highlight clear")
-            vim.cmd("syntax reset")
-        end
-    end,
+  callback = function(a)
+    if vim.g.colors_name == a.match
+    -- and a.match == "<your-colorscheme-name>"
+    then
+      vim.cmd("highlight clear")
+      vim.cmd("syntax reset")
+    end
+  end,
 })
 ```
 
-## Not Planned
+## Not in Plan
 
-- Byte-Compile
-  Enable `vim.loader`. It does.
+- Byte-Compile\
+  Enable `vim.loader`. It does. The loader eventually overrides the outputs.
