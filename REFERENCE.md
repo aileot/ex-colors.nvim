@@ -85,8 +85,9 @@ copy the definition map (`fg`, `bg`, etc.) from the linked highlight definition.
 
 ### included_patterns
 
-(type: `string[]`; default: `{}`)
+(type: `string[]|false`; default: `{}`)
 
+Set `false` to disable `included_patterns`.
 The [Cookbook](./COOKBOOK.md) shows demonstrations.
 
 ### excluded_patterns
