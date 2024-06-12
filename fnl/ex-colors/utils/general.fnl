@@ -6,7 +6,7 @@
 (local flatten #(vim.fn.flatten $ 1))
 
 (fn ->oneliner [obj]
-  "Turn any object into a oneline string.
+  "Turn any object into a oneline Lua string.
   @param obj any
   @return string"
   (let [inspect-opts {:indent "" :newline ""}]
