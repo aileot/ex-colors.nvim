@@ -38,6 +38,10 @@ local function collect_defined_highlights()
   end
   return tbl_21_auto
 end
+local function format_nvim_set_hl(hl_name, opts_to_be_lua_string)
+  local cmd_template = "vim.api.nvim_set_hl(0,%q,%s)"
+  return cmd_template:format(hl_name, __3eoneliner(opts_to_be_lua_string))
+end
 local function filter_by_included_patterns(old_output_list)
   local _3_ = get_gvar("included_patterns")
   if (_3_ == false) then
@@ -213,7 +217,6 @@ local function compose_hi_cmd_lines(highlights, dump_all_3f)
     end
     autocmd_map = au_map
   end
-  local cmd_template = "vim.api.nvim_set_hl(0,%q,%s)"
   local cmd_list
   do
     local tmp_9_auto
@@ -223,7 +226,7 @@ local function compose_hi_cmd_lines(highlights, dump_all_3f)
       for hl_name, hl_map in pairs(hl_maps) do
         local val_23_auto
         if next(hl_map) then
-          local hi_cmd = cmd_template:format(hl_name, __3eoneliner(hl_map))
+          local hi_cmd = format_nvim_set_hl(hl_name, hl_map)
           local _30_
           do
             local matched_3f = false
