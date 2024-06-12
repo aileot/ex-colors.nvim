@@ -68,8 +68,8 @@
   (let [cmd-template "vim.api.nvim_set_hl(0,%q,%s)"]
     (cmd-template:format hl-name (->oneliner opts-to-be-lua-string))))
 
-(fn filter-by-included-patterns [old-output-list]
-  (case (get-gvar :included_patterns)
+(fn filter-by-included-patterns [old-output-list included-patterns]
+  (case included-patterns
     false old-output-list
     patterns (let [new-output-list []]
                (each [_ name (ipairs old-output-list)]
@@ -136,13 +136,14 @@
 (fn compose-hi-cmd-lines [highlights dump-all?]
   (let [keep-link? (not (get-gvar :resolve_links))
         omit-default? (get-gvar :omit_default)
+        included-patterns (get-gvar :included_patterns)
         ?relink (when-not dump-all?
                   (get-gvar :relinker))
         autocmd-patterns (get-gvar :autocmd_patterns)
         filtered-highlights (if dump-all?
                                 highlights
                                 (-> highlights
-                                    (filter-by-included-patterns)))
+                                    (filter-by-included-patterns included-patterns)))
         hl-maps (collect [_ hl-name (ipairs filtered-highlights)]
                   (let [hl-opts {:name hl-name :link keep-link?}
                         hl-map (vim.api.nvim_get_hl 0 hl-opts)]
