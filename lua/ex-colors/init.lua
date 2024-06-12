@@ -139,16 +139,47 @@ local function relink_map_recursively(hl_name, hl_map)
     return nil
   end
 end
-local function compose_hi_cmd_lines(highlights, dump_all_3f)
+local function remap_hl_opts_21(hl_name)
   local keep_link_3f = not get_gvar("resolve_links")
   local omit_default_3f = get_gvar("omit_default")
-  local included_patterns = get_gvar("included_patterns")
-  local _3frelink
-  if not dump_all_3f then
-    _3frelink = get_gvar("relinker")
+  local _3frelink = get_gvar("relinker")
+  local hl_opts = {name = hl_name, link = keep_link_3f}
+  local hl_map = vim.api.nvim_get_hl(0, hl_opts)
+  if omit_default_3f then
+    hl_map.default = nil
   else
-    _3frelink = nil
   end
+  if (nil == _3frelink) then
+    return hl_name, hl_map
+  else
+    local _19_ = _3frelink(hl_name)
+    if (_19_ == false) then
+      return nil
+    elseif (nil ~= _19_) then
+      local new_name = _19_
+      undefined_highlight_3f(new_name)
+      local _20_ = relink_map_recursively(new_name, hl_map)
+      if (nil ~= _20_) then
+        local new_map = _20_
+        local _21_ = new_map.link
+        if ((_21_ == new_name) or (_21_ == hl_name)) then
+          return nil
+        else
+          local _ = _21_
+          return new_name, new_map
+        end
+      else
+        return nil
+      end
+    elseif (_19_ == nil) then
+      return error(("relinker must return a value; make it return `false` explicitly to discard the hl-group " .. hl_name))
+    else
+      return nil
+    end
+  end
+end
+local function compose_hi_cmd_lines(highlights, dump_all_3f)
+  local included_patterns = get_gvar("included_patterns")
   local autocmd_patterns = get_gvar("autocmd_patterns")
   local filtered_highlights
   if dump_all_3f then
@@ -157,46 +188,20 @@ local function compose_hi_cmd_lines(highlights, dump_all_3f)
     filtered_highlights = filter_by_included_patterns(highlights, included_patterns)
   end
   local hl_maps
-  do
+  if dump_all_3f then
     local tbl_16_auto = {}
     for _, hl_name in ipairs(filtered_highlights) do
-      local k_17_auto, v_18_auto = nil, nil
-      do
-        local hl_opts = {name = hl_name, link = keep_link_3f}
-        local hl_map = vim.api.nvim_get_hl(0, hl_opts)
-        if omit_default_3f then
-          hl_map.default = nil
-        else
-        end
-        if (nil == _3frelink) then
-          k_17_auto, v_18_auto = hl_name, hl_map
-        else
-          local _21_ = _3frelink(hl_name)
-          if (_21_ == false) then
-            k_17_auto, v_18_auto = nil
-          elseif (nil ~= _21_) then
-            local new_name = _21_
-            undefined_highlight_3f(new_name)
-            local _22_ = relink_map_recursively(new_name, hl_map)
-            if (nil ~= _22_) then
-              local new_map = _22_
-              local _23_ = new_map.link
-              if ((_23_ == new_name) or (_23_ == hl_name)) then
-                k_17_auto, v_18_auto = nil
-              else
-                local _0 = _23_
-                k_17_auto, v_18_auto = new_name, new_map
-              end
-            else
-              k_17_auto, v_18_auto = nil
-            end
-          elseif (_21_ == nil) then
-            k_17_auto, v_18_auto = error(("relinker must return a value; make it return `false` explicitly to discard the hl-group " .. hl_name))
-          else
-            k_17_auto, v_18_auto = nil
-          end
-        end
+      local k_17_auto, v_18_auto = vim.api.nvim_get_hl(0, {name = hl_name})
+      if ((k_17_auto ~= nil) and (v_18_auto ~= nil)) then
+        tbl_16_auto[k_17_auto] = v_18_auto
+      else
       end
+    end
+    hl_maps = tbl_16_auto
+  else
+    local tbl_16_auto = {}
+    for _, hl_name in ipairs(filtered_highlights) do
+      local k_17_auto, v_18_auto = remap_hl_opts_21(hl_name)
       if ((k_17_auto ~= nil) and (v_18_auto ~= nil)) then
         tbl_16_auto[k_17_auto] = v_18_auto
       else
@@ -227,12 +232,12 @@ local function compose_hi_cmd_lines(highlights, dump_all_3f)
         local val_23_auto
         if next(hl_map) then
           local hi_cmd = format_nvim_set_hl(hl_name, hl_map)
-          local _29_
+          local _30_
           do
             local matched_3f = false
-            for _, _30_ in pairs(autocmd_map) do
-              local hl_patterns = _30_[1]
-              local pats_and_hi_cmds = _30_
+            for _, _31_ in pairs(autocmd_map) do
+              local hl_patterns = _31_[1]
+              local pats_and_hi_cmds = _31_
               if matched_3f then break end
               local m_3f = false
               for _0, hl_pattern in ipairs(hl_patterns) do
@@ -246,9 +251,9 @@ local function compose_hi_cmd_lines(highlights, dump_all_3f)
               end
               matched_3f = m_3f
             end
-            _29_ = matched_3f
+            _30_ = matched_3f
           end
-          if not _29_ then
+          if not _30_ then
             val_23_auto = hi_cmd
           else
             val_23_auto = nil
@@ -274,18 +279,18 @@ local function compose_hi_cmd_lines(highlights, dump_all_3f)
     do
       local tbl_21_auto = {}
       local i_22_auto = 0
-      for key, _35_ in pairs(autocmd_map) do
-        local _hl_pattern = _35_[1]
-        local hi_cmds = (function (t, k, e) local mt = getmetatable(t) if 'table' == type(mt) and mt.__fennelrest then return mt.__fennelrest(t, k) elseif e then local rest = {} for k, v in pairs(t) do if not e[k] then rest[k] = v end end return rest else return {(table.unpack or unpack)(t, k)} end end)(_35_, 2)
+      for key, _36_ in pairs(autocmd_map) do
+        local _hl_pattern = _36_[1]
+        local hi_cmds = (function (t, k, e) local mt = getmetatable(t) if 'table' == type(mt) and mt.__fennelrest then return mt.__fennelrest(t, k) elseif e then local rest = {} for k, v in pairs(t) do if not e[k] then rest[k] = v end end return rest else return {(table.unpack or unpack)(t, k)} end end)(_36_, 2)
         local val_23_auto
         do
           local au_event, au_pattern = key:match(("^(%S-)" .. sep_au_map .. "(.-)$"))
           local _ = table.sort(hi_cmds)
           local callback_line
-          local function _36_(_241)
+          local function _37_(_241)
             return ("  " .. _241)
           end
-          callback_line = flatten({"callback = function()", vim.tbl_map(_36_, hi_cmds), "end,"})
+          callback_line = flatten({"callback = function()", vim.tbl_map(_37_, hi_cmds), "end,"})
           local au_opt_lines
           if ("*" == au_pattern) then
             au_opt_lines = callback_line
@@ -293,9 +298,9 @@ local function compose_hi_cmd_lines(highlights, dump_all_3f)
             local pattern_line = ("  pattern = %s,"):format(__3eoneliner(au_pattern))
             au_opt_lines = flatten({pattern_line, callback_line})
           end
-          local _let_38_ = vim.deepcopy(autocmd_template_lines)
-          local first_line = _let_38_[1]
-          local lines = _let_38_
+          local _let_39_ = vim.deepcopy(autocmd_template_lines)
+          local first_line = _let_39_[1]
+          local lines = _let_39_
           local event_arg
           if ("string" == type(au_event)) then
             event_arg = ("\"" .. au_event .. "\"")
@@ -314,12 +319,12 @@ local function compose_hi_cmd_lines(highlights, dump_all_3f)
       end
       tmp_9_auto = tbl_21_auto
     end
-    local function _43_(_41_, _42_)
-      local cmd_line1 = _41_[1]
-      local cmd_line2 = _42_[1]
+    local function _44_(_42_, _43_)
+      local cmd_line1 = _42_[1]
+      local cmd_line2 = _43_[1]
       return (cmd_line1 < cmd_line2)
     end
-    table.sort(tmp_9_auto, _43_)
+    table.sort(tmp_9_auto, _44_)
     autocmd_list = tmp_9_auto
   end
   return flatten({cmd_list, flatten(autocmd_list)})

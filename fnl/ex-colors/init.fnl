@@ -133,36 +133,43 @@
         (error (.. "relinker must return a value; make it return `false` explicitly to discard the hl-group "
                    linked))))))
 
-(fn compose-hi-cmd-lines [highlights dump-all?]
+(fn remap-hl-opts! [hl-name]
+  "Remap hl-opts of `hl-name` as user options.
+@param hl-name string
+@return table"
   (let [keep-link? (not (get-gvar :resolve_links))
         omit-default? (get-gvar :omit_default)
-        included-patterns (get-gvar :included_patterns)
-        ?relink (when-not dump-all?
-                  (get-gvar :relinker))
+        ?relink (get-gvar :relinker)
+        hl-opts {:name hl-name :link keep-link?}
+        hl-map (vim.api.nvim_get_hl 0 hl-opts)]
+    (when omit-default?
+      (set hl-map.default nil))
+    (if (= nil ?relink)
+        (values hl-name hl-map)
+        (case (?relink hl-name)
+          false nil
+          new-name (do
+                     (undefined-highlight? new-name)
+                     (case (relink-map-recursively new-name hl-map)
+                       new-map (match new-map.link
+                                 (where (or new-name hl-name)) nil
+                                 _ (values new-name new-map))))
+          nil
+          (error (.. "relinker must return a value; make it return `false` explicitly to discard the hl-group "
+                     hl-name))))))
+
+(fn compose-hi-cmd-lines [highlights dump-all?]
+  (let [included-patterns (get-gvar :included_patterns)
         autocmd-patterns (get-gvar :autocmd_patterns)
         filtered-highlights (if dump-all?
                                 highlights
                                 (-> highlights
                                     (filter-by-included-patterns included-patterns)))
-        hl-maps (collect [_ hl-name (ipairs filtered-highlights)]
-                  (let [hl-opts {:name hl-name :link keep-link?}
-                        hl-map (vim.api.nvim_get_hl 0 hl-opts)]
-                    (when omit-default?
-                      (set hl-map.default nil))
-                    (if (= nil ?relink)
-                        (values hl-name hl-map)
-                        (case (?relink hl-name)
-                          false nil
-                          new-name (do
-                                     (undefined-highlight? new-name)
-                                     (case (relink-map-recursively new-name
-                                                                   hl-map)
-                                       new-map (match new-map.link
-                                                 (where (or new-name hl-name)) nil
-                                                 _ (values new-name new-map))))
-                          nil
-                          (error (.. "relinker must return a value; make it return `false` explicitly to discard the hl-group "
-                                     hl-name))))))
+        hl-maps (if dump-all?
+                    (collect [_ hl-name (ipairs filtered-highlights)]
+                      (vim.api.nvim_get_hl 0 {:name hl-name}))
+                    (collect [_ hl-name (ipairs filtered-highlights)]
+                      (remap-hl-opts! hl-name)))
         ;; Note: Table [au-event au-pattern] as a key is unsuitable to merge
         ;; hl-patterns/hi-cmd-list at the same combinations; combination in
         ;; table is not a key, but its address is.
