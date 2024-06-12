@@ -182,9 +182,93 @@ local function remap_hl_opts_21(hl_name)
     end
   end
 end
+local function compose_autocmd_lines(highlights)
+  local autocmd_patterns = get_gvar("autocmd_patterns")
+  local indent_size = 2
+  local indent = (" "):rep(indent_size)
+  local autocmd_template_lines = {"vim.api.nvim_create_autocmd(%s,{", (indent .. "once = true,"), "})"}
+  local autocmd_list = {}
+  for au_event, au_pat__3ehl_pats in pairs(autocmd_patterns) do
+    for au_pattern, hl_patterns in pairs(au_pat__3ehl_pats) do
+      local hl_names = filter_by_included_patterns(highlights, hl_patterns)
+      local hl_maps
+      do
+        local tbl_16_auto = {}
+        for _, hl_name in ipairs(hl_names) do
+          local k_17_auto, v_18_auto = remap_hl_opts_21(hl_name)
+          if ((k_17_auto ~= nil) and (v_18_auto ~= nil)) then
+            tbl_16_auto[k_17_auto] = v_18_auto
+          else
+          end
+        end
+        hl_maps = tbl_16_auto
+      end
+      local hi_cmds
+      do
+        local tmp_9_auto
+        do
+          local tbl_21_auto = {}
+          local i_22_auto = 0
+          for hl_name, hl_opts in pairs(hl_maps) do
+            local val_23_auto
+            if next(hl_opts) then
+              val_23_auto = (indent .. format_nvim_set_hl(hl_name, hl_opts))
+            else
+              val_23_auto = nil
+            end
+            if (nil ~= val_23_auto) then
+              i_22_auto = (i_22_auto + 1)
+              tbl_21_auto[i_22_auto] = val_23_auto
+            else
+            end
+          end
+          tmp_9_auto = tbl_21_auto
+        end
+        table.sort(tmp_9_auto)
+        hi_cmds = tmp_9_auto
+      end
+      local callback_lines = flatten({"callback = function()", hi_cmds, "end,"})
+      local au_opt_lines
+      if ("*" == au_pattern) then
+        au_opt_lines = callback_lines
+      else
+        local pattern_line = ("  pattern = %s,"):format(__3eoneliner(au_pattern))
+        au_opt_lines = flatten({pattern_line, callback_lines})
+      end
+      local _let_31_ = vim.deepcopy(autocmd_template_lines)
+      local first_line = _let_31_[1]
+      local lines = _let_31_
+      local event_arg
+      do
+        local _32_ = type(au_event)
+        if (_32_ == "string") then
+          event_arg = ("%q"):format(au_event)
+        elseif (_32_ == "table") then
+          event_arg = au_event
+        elseif (nil ~= _32_) then
+          local _else = _32_
+          event_arg = error(("expected string or table, got " .. _else))
+        else
+          event_arg = nil
+        end
+      end
+      lines[1] = first_line:format(event_arg)
+      table.insert(lines, #lines, au_opt_lines)
+      table.insert(autocmd_list, flatten(lines))
+    end
+  end
+  do
+    local function _36_(_34_, _35_)
+      local cmd_line1 = _34_[1]
+      local cmd_line2 = _35_[1]
+      return (cmd_line1 < cmd_line2)
+    end
+    table.sort(autocmd_list, _36_)
+  end
+  return flatten(autocmd_list)
+end
 local function compose_hi_cmd_lines(highlights, dump_all_3f)
   local included_patterns = get_gvar("included_patterns")
-  local autocmd_patterns = get_gvar("autocmd_patterns")
   local filtered_highlights
   if dump_all_3f then
     filtered_highlights = highlights
@@ -213,19 +297,6 @@ local function compose_hi_cmd_lines(highlights, dump_all_3f)
     end
     hl_maps = tbl_16_auto
   end
-  local sep_au_map = "\11"
-  local autocmd_map
-  do
-    local au_map = {}
-    for au_event, au_pat__3ehl_pats in pairs(autocmd_patterns) do
-      for au_pattern, hl_patterns in pairs(au_pat__3ehl_pats) do
-        local key = (au_event .. sep_au_map .. au_pattern)
-        au_map[key] = {hl_patterns}
-      end
-      au_map = au_map
-    end
-    autocmd_map = au_map
-  end
   local cmd_list
   do
     local tmp_9_auto
@@ -235,33 +306,7 @@ local function compose_hi_cmd_lines(highlights, dump_all_3f)
       for hl_name, hl_map in pairs(hl_maps) do
         local val_23_auto
         if next(hl_map) then
-          local hi_cmd = format_nvim_set_hl(hl_name, hl_map)
-          local _31_
-          do
-            local matched_3f = false
-            for _, _32_ in pairs(autocmd_map) do
-              local hl_patterns = _32_[1]
-              local pats_and_hi_cmds = _32_
-              if matched_3f then break end
-              local m_3f = false
-              for _0, hl_pattern in ipairs(hl_patterns) do
-                if m_3f then break end
-                if hl_name:find(hl_pattern) then
-                  table.insert(pats_and_hi_cmds, hi_cmd)
-                  m_3f = true
-                else
-                  m_3f = nil
-                end
-              end
-              matched_3f = m_3f
-            end
-            _31_ = matched_3f
-          end
-          if not _31_ then
-            val_23_auto = hi_cmd
-          else
-            val_23_auto = nil
-          end
+          val_23_auto = format_nvim_set_hl(hl_name, hl_map)
         else
           val_23_auto = nil
         end
@@ -276,62 +321,7 @@ local function compose_hi_cmd_lines(highlights, dump_all_3f)
     table.sort(tmp_9_auto)
     cmd_list = tmp_9_auto
   end
-  local autocmd_template_lines = {"vim.api.nvim_create_autocmd(%s,{", "  once = true,", "})"}
-  local autocmd_list
-  do
-    local tmp_9_auto
-    do
-      local tbl_21_auto = {}
-      local i_22_auto = 0
-      for key, _37_ in pairs(autocmd_map) do
-        local _hl_pattern = _37_[1]
-        local hi_cmds = (function (t, k, e) local mt = getmetatable(t) if 'table' == type(mt) and mt.__fennelrest then return mt.__fennelrest(t, k) elseif e then local rest = {} for k, v in pairs(t) do if not e[k] then rest[k] = v end end return rest else return {(table.unpack or unpack)(t, k)} end end)(_37_, 2)
-        local val_23_auto
-        do
-          local au_event, au_pattern = key:match(("^(%S-)" .. sep_au_map .. "(.-)$"))
-          local _ = table.sort(hi_cmds)
-          local callback_line
-          local function _38_(_241)
-            return ("  " .. _241)
-          end
-          callback_line = flatten({"callback = function()", vim.tbl_map(_38_, hi_cmds), "end,"})
-          local au_opt_lines
-          if ("*" == au_pattern) then
-            au_opt_lines = callback_line
-          else
-            local pattern_line = ("  pattern = %s,"):format(__3eoneliner(au_pattern))
-            au_opt_lines = flatten({pattern_line, callback_line})
-          end
-          local _let_40_ = vim.deepcopy(autocmd_template_lines)
-          local first_line = _let_40_[1]
-          local lines = _let_40_
-          local event_arg
-          if ("string" == type(au_event)) then
-            event_arg = ("\"" .. au_event .. "\"")
-          else
-            event_arg = au_event
-          end
-          lines[1] = first_line:format(event_arg)
-          table.insert(lines, #lines, au_opt_lines)
-          val_23_auto = flatten(lines)
-        end
-        if (nil ~= val_23_auto) then
-          i_22_auto = (i_22_auto + 1)
-          tbl_21_auto[i_22_auto] = val_23_auto
-        else
-        end
-      end
-      tmp_9_auto = tbl_21_auto
-    end
-    local function _45_(_43_, _44_)
-      local cmd_line1 = _43_[1]
-      local cmd_line2 = _44_[1]
-      return (cmd_line1 < cmd_line2)
-    end
-    table.sort(tmp_9_auto, _45_)
-    autocmd_list = tmp_9_auto
-  end
-  return flatten({cmd_list, flatten(autocmd_list)})
+  return flatten(cmd_list)
 end
 local function compose_colors_names()
   local ex_prefix = get_gvar("output_prefix")
@@ -418,7 +408,8 @@ local function generate_hi_cmds(dump_all_3f)
   end
   local gvar_cmd_lines = compose_gvar_cmd_lines(ex_colors_name)
   local hi_cmd_lines = compose_hi_cmd_lines(filtered_highlights, dump_all_3f)
-  local cmd_lines = flatten({gvar_cmd_lines, hi_cmd_lines})
+  local au_cmd_lines = compose_autocmd_lines(filtered_highlights)
+  local cmd_lines = flatten({gvar_cmd_lines, hi_cmd_lines, au_cmd_lines})
   local credit_lines = lines__3ecomment_lines({("This file is generated by ex-colors. The credit goes to the authors and contributors of %s."):format(original_colors_name)})
   local buf = vim.api.nvim_get_current_buf()
   local lines = flatten({credit_lines, cmd_lines})

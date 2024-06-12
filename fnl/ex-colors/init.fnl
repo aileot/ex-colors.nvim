@@ -159,9 +159,48 @@
           (error (.. "relinker must return a value; make it return `false` explicitly to discard the hl-group "
                      hl-name))))))
 
+(fn compose-autocmd-lines [highlights]
+  (let [autocmd-patterns (get-gvar :autocmd_patterns)
+        indent-size 2
+        indent (: " " :rep indent-size)
+        autocmd-template-lines ["vim.api.nvim_create_autocmd(%s,{"
+                                (.. indent "once = true,")
+                                "})"]
+        autocmd-list []]
+    (each [au-event au-pat->hl-pats (pairs autocmd-patterns)]
+      (each [au-pattern hl-patterns (pairs au-pat->hl-pats)]
+        (let [hl-names (filter-by-included-patterns highlights hl-patterns)
+              hl-maps (collect [_ hl-name (ipairs hl-names)]
+                        (remap-hl-opts! hl-name))
+              hi-cmds (doto (icollect [hl-name hl-opts (pairs hl-maps)]
+                              (when (next hl-opts)
+                                (.. indent (format-nvim-set-hl hl-name hl-opts))))
+                        (table.sort))
+              ;; Note: \n is unavailable due to the restriction of
+              ;; vim.api.nvim_buf_set_lines.
+              callback-lines (flatten ["callback = function()" hi-cmds "end,"])
+              au-opt-lines (if (= "*" au-pattern)
+                               callback-lines
+                               (let [pattern-line (: "  pattern = %s," :format
+                                                     (->oneliner au-pattern))]
+                                 (flatten [pattern-line callback-lines])))
+              [first-line &as lines] (vim.deepcopy autocmd-template-lines)
+              event-arg (case (type au-event)
+                          :string (: "%q" :format au-event)
+                          :table au-event
+                          else (error (.. "expected string or table, got " else)))]
+          (tset lines 1 (first-line:format event-arg))
+          (table.insert lines (length lines) au-opt-lines)
+          (table.insert autocmd-list (flatten lines)))))
+    (doto autocmd-list
+      (table.sort (fn [[cmd-line1] [cmd-line2]]
+                    ;; Sort by the first arg of nvim_create_autocmd, i.e., by
+                    ;; autocmd-events.
+                    (< cmd-line1 cmd-line2))))
+    (flatten autocmd-list)))
+
 (fn compose-hi-cmd-lines [highlights dump-all?]
   (let [included-patterns (get-gvar :included_patterns)
-        autocmd-patterns (get-gvar :autocmd_patterns)
         filtered-highlights (if dump-all?
                                 highlights
                                 (-> highlights
@@ -171,70 +210,12 @@
                       (vim.api.nvim_get_hl 0 {:name hl-name}))
                     (collect [_ hl-name (ipairs filtered-highlights)]
                       (remap-hl-opts! hl-name)))
-        ;; Note: Table [au-event au-pattern] as a key is unsuitable to merge
-        ;; hl-patterns/hi-cmd-list at the same combinations; combination in
-        ;; table is not a key, but its address is.
-        sep-au-map "\v"
-        autocmd-map (accumulate [au-map {} ;
-                                 au-event au-pat->hl-pats (pairs autocmd-patterns)]
-                      (do
-                        (each [au-pattern hl-patterns (pairs au-pat->hl-pats)]
-                          (let [key (.. au-event sep-au-map au-pattern)]
-                            (tset au-map key [hl-patterns])))
-                        au-map))
         cmd-list (doto ;
                    (icollect [hl-name hl-map (pairs hl-maps)]
                      (when (next hl-map)
-                       (let [hi-cmd (format-nvim-set-hl hl-name hl-map)]
-                         (when-not (accumulate [matched? false ;
-                                                _ [hl-patterns
-                                                   &as
-                                                   pats-and-hi-cmds] (pairs autocmd-map)
-                                                &until matched?]
-                                     (accumulate [m? false ;
-                                                  _ hl-pattern (ipairs hl-patterns)
-                                                  &until m?]
-                                       (when (hl-name:find hl-pattern)
-                                         (table.insert pats-and-hi-cmds hi-cmd)
-                                         true)))
-                           hi-cmd))))
-                   (table.sort))
-        autocmd-template-lines ["vim.api.nvim_create_autocmd(%s,{"
-                                "  once = true,"
-                                "})"]
-        autocmd-list (doto ;
-                       (icollect [key [_hl-pattern & hi-cmds] ;
-                                  (pairs autocmd-map)]
-                         ;; Note: \n is unavailable due to the restriction of
-                         ;; vim.api.nvim_buf_set_lines.
-                         (let [(au-event au-pattern) (key:match (.. "^(%S-)"
-                                                                    sep-au-map
-                                                                    "(.-)$"))
-                               _ (table.sort hi-cmds)
-                               callback-line (-> ["callback = function()"
-                                                  (vim.tbl_map #(.. "  " $)
-                                                               hi-cmds)
-                                                  "end,"]
-                                                 (flatten))
-                               au-opt-lines (if (= "*" au-pattern)
-                                                callback-line
-                                                (let [pattern-line (: "  pattern = %s,"
-                                                                      :format ;
-                                                                      (->oneliner au-pattern))]
-                                                  (flatten [pattern-line
-                                                            callback-line])))
-                               [first-line &as lines] (vim.deepcopy autocmd-template-lines)
-                               event-arg (if (= :string (type au-event))
-                                             (.. "\"" au-event "\"")
-                                             au-event)]
-                           (tset lines 1 (first-line:format event-arg))
-                           (table.insert lines (length lines) au-opt-lines)
-                           (flatten lines)))
-                       (table.sort (fn [[cmd-line1] [cmd-line2]]
-                                     ;; It should sort cmdlines by the first arg of
-                                     ;; nvim_create_autocmd.
-                                     (< cmd-line1 cmd-line2))))]
-    (flatten [cmd-list (flatten autocmd-list)])))
+                       (format-nvim-set-hl hl-name hl-map)))
+                   (table.sort))]
+    (flatten cmd-list)))
 
 (fn compose-colors-names []
   "Return a new colors-name and original colors-name assumed by current
@@ -312,7 +293,8 @@
                                       (filter-out-excluded-patterns)))
           gvar-cmd-lines (compose-gvar-cmd-lines ex-colors-name)
           hi-cmd-lines (compose-hi-cmd-lines filtered-highlights dump-all?)
-          cmd-lines (-> [gvar-cmd-lines hi-cmd-lines]
+          au-cmd-lines (compose-autocmd-lines filtered-highlights)
+          cmd-lines (-> [gvar-cmd-lines hi-cmd-lines au-cmd-lines]
                         (flatten))
           credit-lines (-> [(: "This file is generated by ex-colors. The credit goes to the authors and contributors of %s."
                                :format original-colors-name)]
