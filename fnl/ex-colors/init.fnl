@@ -5,8 +5,8 @@
 (local {: flatten : ->oneliner : ensure-dir! : lines->comment-lines}
        (require :ex-colors.utils.general))
 
-(local default-opts {:colors_dir (Path.join (vim.fn.stdpath :config)
-                                            :colors)
+(local default-opts {:colors_dir (-> (vim.fn.stdpath :config)
+                                     (Path.join :colors))
                      :restore_original_before_execution false
                      :case_sensitive true
                      :omit_default false
