@@ -122,10 +122,15 @@ local function relink_map_recursively(hl_name, hl_map)
     return nil
   end
 end
-local function compose_hi_cmdlist()
+local function compose_hi_cmd_lines(dump_all_3f)
   local keep_link_3f = not get_gvar("resolve_links")
   local omit_default_3f = get_gvar("omit_default")
-  local _3frelink = get_gvar("relinker")
+  local _3frelink
+  if not dump_all_3f then
+    _3frelink = get_gvar("relinker")
+  else
+    _3frelink = nil
+  end
   local autocmd_patterns = get_gvar("autocmd_patterns")
   local output = vim.fn.execute("highlight")
   local highlights
@@ -142,7 +147,12 @@ local function compose_hi_cmdlist()
     end
     highlights = tbl_21_auto
   end
-  local filtered_highlights = filter_out_excluded_patterns(filter_by_included_patterns(highlights))
+  local filtered_highlights
+  if dump_all_3f then
+    filtered_highlights = highlights
+  else
+    filtered_highlights = filter_out_excluded_patterns(filter_by_included_patterns(highlights))
+  end
   local hl_maps
   do
     local tbl_16_auto = {}
@@ -158,26 +168,26 @@ local function compose_hi_cmdlist()
         if (nil == _3frelink) then
           k_17_auto, v_18_auto = hl_name, hl_map
         else
-          local _20_ = _3frelink(hl_name)
-          if (_20_ == false) then
+          local _22_ = _3frelink(hl_name)
+          if (_22_ == false) then
             k_17_auto, v_18_auto = nil
-          elseif (nil ~= _20_) then
-            local new_name = _20_
+          elseif (nil ~= _22_) then
+            local new_name = _22_
             undefined_highlight_3f(new_name)
-            local _21_ = relink_map_recursively(new_name, hl_map)
-            if (nil ~= _21_) then
-              local new_map = _21_
-              local _22_ = new_map.link
-              if ((_22_ == new_name) or (_22_ == hl_name)) then
+            local _23_ = relink_map_recursively(new_name, hl_map)
+            if (nil ~= _23_) then
+              local new_map = _23_
+              local _24_ = new_map.link
+              if ((_24_ == new_name) or (_24_ == hl_name)) then
                 k_17_auto, v_18_auto = nil
               else
-                local _0 = _22_
+                local _0 = _24_
                 k_17_auto, v_18_auto = new_name, new_map
               end
             else
               k_17_auto, v_18_auto = nil
             end
-          elseif (_20_ == nil) then
+          elseif (_22_ == nil) then
             k_17_auto, v_18_auto = error(("relinker must return a value; make it return `false` explicitly to discard the hl-group " .. hl_name))
           else
             k_17_auto, v_18_auto = nil
@@ -215,12 +225,12 @@ local function compose_hi_cmdlist()
         local val_23_auto
         if next(hl_map) then
           local hi_cmd = cmd_template:format(hl_name, __3eoneliner(hl_map))
-          local _28_
+          local _30_
           do
             local matched_3f = false
-            for _, _29_ in pairs(autocmd_map) do
-              local hl_patterns = _29_[1]
-              local pats_and_hi_cmds = _29_
+            for _, _31_ in pairs(autocmd_map) do
+              local hl_patterns = _31_[1]
+              local pats_and_hi_cmds = _31_
               if matched_3f then break end
               local m_3f = false
               for _0, hl_pattern in ipairs(hl_patterns) do
@@ -234,9 +244,9 @@ local function compose_hi_cmdlist()
               end
               matched_3f = m_3f
             end
-            _28_ = matched_3f
+            _30_ = matched_3f
           end
-          if not _28_ then
+          if not _30_ then
             val_23_auto = hi_cmd
           else
             val_23_auto = nil
@@ -262,18 +272,18 @@ local function compose_hi_cmdlist()
     do
       local tbl_21_auto = {}
       local i_22_auto = 0
-      for key, _34_ in pairs(autocmd_map) do
-        local _hl_pattern = _34_[1]
-        local hi_cmds = (function (t, k, e) local mt = getmetatable(t) if 'table' == type(mt) and mt.__fennelrest then return mt.__fennelrest(t, k) elseif e then local rest = {} for k, v in pairs(t) do if not e[k] then rest[k] = v end end return rest else return {(table.unpack or unpack)(t, k)} end end)(_34_, 2)
+      for key, _36_ in pairs(autocmd_map) do
+        local _hl_pattern = _36_[1]
+        local hi_cmds = (function (t, k, e) local mt = getmetatable(t) if 'table' == type(mt) and mt.__fennelrest then return mt.__fennelrest(t, k) elseif e then local rest = {} for k, v in pairs(t) do if not e[k] then rest[k] = v end end return rest else return {(table.unpack or unpack)(t, k)} end end)(_36_, 2)
         local val_23_auto
         do
           local au_event, au_pattern = key:match(("^(%S-)" .. sep_au_map .. "(.-)$"))
           local _ = table.sort(hi_cmds)
           local callback_line
-          local function _35_(_241)
+          local function _37_(_241)
             return ("  " .. _241)
           end
-          callback_line = flatten({"callback = function()", vim.tbl_map(_35_, hi_cmds), "end,"})
+          callback_line = flatten({"callback = function()", vim.tbl_map(_37_, hi_cmds), "end,"})
           local au_opt_lines
           if ("*" == au_pattern) then
             au_opt_lines = callback_line
@@ -281,9 +291,9 @@ local function compose_hi_cmdlist()
             local pattern_line = ("  pattern = %s,"):format(__3eoneliner(au_pattern))
             au_opt_lines = flatten({pattern_line, callback_line})
           end
-          local _let_37_ = vim.deepcopy(autocmd_template_lines)
-          local first_line = _let_37_[1]
-          local lines = _let_37_
+          local _let_39_ = vim.deepcopy(autocmd_template_lines)
+          local first_line = _let_39_[1]
+          local lines = _let_39_
           local event_arg
           if ("string" == type(au_event)) then
             event_arg = ("\"" .. au_event .. "\"")
@@ -302,12 +312,12 @@ local function compose_hi_cmdlist()
       end
       tmp_9_auto = tbl_21_auto
     end
-    local function _42_(_40_, _41_)
-      local cmd_line1 = _40_[1]
-      local cmd_line2 = _41_[1]
+    local function _44_(_42_, _43_)
+      local cmd_line1 = _42_[1]
+      local cmd_line2 = _43_[1]
       return (cmd_line1 < cmd_line2)
     end
-    table.sort(tmp_9_auto, _42_)
+    table.sort(tmp_9_auto, _44_)
     autocmd_list = tmp_9_auto
   end
   return flatten({cmd_list, flatten(autocmd_list)})
@@ -337,7 +347,7 @@ local function compose_colors_names()
     return (ex_prefix .. raw_colors_name .. ex_suffix), raw_colors_name
   end
 end
-local function compose_hi_cmd_lines(ex_colors_name)
+local function compose_gvar_cmd_lines(ex_colors_name)
   local file_ext = "lua"
   local gvar_supports = get_gvar("gvar_supports")
   local gvar_template
@@ -368,16 +378,15 @@ local function compose_hi_cmd_lines(ex_colors_name)
     gvar_support_lines = tbl_21_auto
   end
   local colors_name_line = gvar_template:format("colors_name", ("\"" .. ex_colors_name .. "\""))
-  local hi_cmd_lines = compose_hi_cmdlist()
-  local new_lines = flatten({colors_name_line, gvar_support_lines, hi_cmd_lines})
-  return new_lines
+  local cmd_lines = flatten({colors_name_line, gvar_support_lines})
+  return cmd_lines
 end
 local function overwrite_buf_lines_21(buf, lines)
   vim.api.nvim_buf_set_lines(buf, 0, -1, true, lines)
   vim.api.nvim_win_set_cursor(0, {1, 0})
   return vim.notify("[ex-colors] The output is not saved yet just in case. Please save the generated file by yourself.", vim.log.levels.WARN)
 end
-local function generate_hi_cmds()
+local function generate_hi_cmds(dump_all_3f)
   local file_ext = "lua"
   local dir = get_gvar("colors_dir")
   local restore_original_3f = get_gvar("restore_original_before_execution")
@@ -389,10 +398,12 @@ local function generate_hi_cmds()
     vim.cmd.colorscheme(original_colors_name)
   else
   end
-  local cmd_lines = compose_hi_cmd_lines(ex_colors_name)
+  local gvar_cmd_lines = compose_gvar_cmd_lines(ex_colors_name)
+  local hi_cmd_lines = compose_hi_cmd_lines(dump_all_3f)
+  local cmd_lines = flatten({gvar_cmd_lines, hi_cmd_lines})
   local credit_lines = lines__3ecomment_lines({("This file is generated by ex-colors on the credit of %s."):format(original_colors_name)})
   local buf = vim.api.nvim_get_current_buf()
   local lines = flatten({credit_lines, cmd_lines})
   return overwrite_buf_lines_21(buf, lines)
 end
-return {setup = setup, ["compose-hi-cmdlist"] = compose_hi_cmdlist, ["generate-hi-cmds"] = generate_hi_cmds}
+return {setup = setup, ["generate-hi-cmds"] = generate_hi_cmds}
