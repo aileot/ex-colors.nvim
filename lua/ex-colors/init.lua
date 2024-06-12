@@ -24,24 +24,38 @@ local function fill_options_with_default_values()
   return nil
 end
 fill_options_with_default_values()
+local function collect_defined_highlights()
+  local output = vim.fn.execute("highlight")
+  local tbl_21_auto = {}
+  local i_22_auto = 0
+  for hl_name in output:gmatch("(%S+)%s* xxx") do
+    local val_23_auto = hl_name
+    if (nil ~= val_23_auto) then
+      i_22_auto = (i_22_auto + 1)
+      do end (tbl_21_auto)[i_22_auto] = val_23_auto
+    else
+    end
+  end
+  return tbl_21_auto
+end
 local function filter_by_included_patterns(old_output_list)
-  local _2_ = get_gvar("included_patterns")
-  if (_2_ == false) then
+  local _3_ = get_gvar("included_patterns")
+  if (_3_ == false) then
     return old_output_list
-  elseif (nil ~= _2_) then
-    local patterns = _2_
+  elseif (nil ~= _3_) then
+    local patterns = _3_
     local new_output_list = {}
     for _, name in ipairs(old_output_list) do
-      local _3_
+      local _4_
       do
         local match_3f = nil
         for _0, ex_pattern in ipairs(patterns) do
           if match_3f then break end
           match_3f = name:find(ex_pattern)
         end
-        _3_ = match_3f
+        _4_ = match_3f
       end
-      if _3_ then
+      if _4_ then
         table.insert(new_output_list, name)
       else
       end
@@ -55,16 +69,16 @@ local function filter_out_excluded_patterns(old_output_list)
   local new_output_list = {}
   local excluded_patterns = get_gvar("excluded_patterns")
   for _, name in ipairs(old_output_list) do
-    local _6_
+    local _7_
     do
       local match_3f = nil
       for _0, ex_pattern in ipairs(excluded_patterns) do
         if match_3f then break end
         match_3f = name:find(ex_pattern)
       end
-      _6_ = match_3f
+      _7_ = match_3f
     end
-    if not _6_ then
+    if not _7_ then
       table.insert(new_output_list, name)
     else
     end
@@ -73,12 +87,12 @@ local function filter_out_excluded_patterns(old_output_list)
 end
 local function undefined_highlight_3f(hl_name)
   local cmd = ("highlight " .. hl_name)
-  local _8_, _9_ = pcall(vim.fn.execute, cmd)
-  if ((_8_ == false) and (nil ~= _9_)) then
-    local result = _9_
-    local _10_ = result:match("E411: highlight group not found: (.+)")
-    if (nil ~= _10_) then
-      local undefined = _10_
+  local _9_, _10_ = pcall(vim.fn.execute, cmd)
+  if ((_9_ == false) and (nil ~= _10_)) then
+    local result = _10_
+    local _11_ = result:match("E411: highlight group not found: (.+)")
+    if (nil ~= _11_) then
+      local undefined = _11_
       local msg = ("The original colorscheme does not define " .. undefined)
       vim.notify_once(msg, vim.log.levels.INFO)
       return undefined
@@ -91,29 +105,29 @@ local function undefined_highlight_3f(hl_name)
 end
 local function relink_map_recursively(hl_name, hl_map)
   local relinker = get_gvar("relinker")
-  local _13_ = hl_map.link
-  if (_13_ == nil) then
+  local _14_ = hl_map.link
+  if (_14_ == nil) then
     return hl_map
-  elseif (nil ~= _13_) then
-    local linked = _13_
-    local _14_ = relinker(linked)
-    if (_14_ == false) then
+  elseif (nil ~= _14_) then
+    local linked = _14_
+    local _15_ = relinker(linked)
+    if (_15_ == false) then
       return nil
-    elseif (_14_ == linked) then
+    elseif (_15_ == linked) then
       if not undefined_highlight_3f(linked) then
         return hl_map
       else
         return nil
       end
-    elseif (_14_ == hl_name) then
+    elseif (_15_ == hl_name) then
       local hl_opts = {name = linked}
       local deeper_map = vim.api.nvim_get_hl(0, hl_opts)
       return relink_map_recursively(hl_name, deeper_map)
-    elseif (nil ~= _14_) then
-      local relinked = _14_
+    elseif (nil ~= _15_) then
+      local relinked = _15_
       hl_map.link = relinked
       return relink_map_recursively(hl_name, hl_map)
-    elseif (_14_ == nil) then
+    elseif (_15_ == nil) then
       return error(("relinker must return a value; make it return `false` explicitly to discard the hl-group " .. linked))
     else
       return nil
@@ -122,7 +136,7 @@ local function relink_map_recursively(hl_name, hl_map)
     return nil
   end
 end
-local function compose_hi_cmd_lines(dump_all_3f)
+local function compose_hi_cmd_lines(highlights, dump_all_3f)
   local keep_link_3f = not get_gvar("resolve_links")
   local omit_default_3f = get_gvar("omit_default")
   local _3frelink
@@ -132,21 +146,6 @@ local function compose_hi_cmd_lines(dump_all_3f)
     _3frelink = nil
   end
   local autocmd_patterns = get_gvar("autocmd_patterns")
-  local output = vim.fn.execute("highlight")
-  local highlights
-  do
-    local tbl_21_auto = {}
-    local i_22_auto = 0
-    for hl_name in output:gmatch("(%S+)%s* xxx") do
-      local val_23_auto = hl_name
-      if (nil ~= val_23_auto) then
-        i_22_auto = (i_22_auto + 1)
-        do end (tbl_21_auto)[i_22_auto] = val_23_auto
-      else
-      end
-    end
-    highlights = tbl_21_auto
-  end
   local filtered_highlights
   if dump_all_3f then
     filtered_highlights = highlights
@@ -398,10 +397,11 @@ local function generate_hi_cmds(dump_all_3f)
     vim.cmd.colorscheme(original_colors_name)
   else
   end
+  local highlights = collect_defined_highlights()
   local gvar_cmd_lines = compose_gvar_cmd_lines(ex_colors_name)
-  local hi_cmd_lines = compose_hi_cmd_lines(dump_all_3f)
+  local hi_cmd_lines = compose_hi_cmd_lines(highlights, dump_all_3f)
   local cmd_lines = flatten({gvar_cmd_lines, hi_cmd_lines})
-  local credit_lines = lines__3ecomment_lines({("This file is generated by ex-colors on the credit of %s."):format(original_colors_name)})
+  local credit_lines = lines__3ecomment_lines({("This file is generated by ex-colors. The credit goes to the authors and contributors of %s."):format(original_colors_name)})
   local buf = vim.api.nvim_get_current_buf()
   local lines = flatten({credit_lines, cmd_lines})
   return overwrite_buf_lines_21(buf, lines)
