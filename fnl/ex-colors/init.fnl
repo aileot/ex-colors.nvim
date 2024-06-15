@@ -41,9 +41,10 @@
   (. vim.g (.. option-prefix key)))
 
 (fn setup [?opts]
-  (each [k v (pairs ?opts)]
-    (let [opt-name (.. option-prefix k)]
-      (tset vim.g opt-name v))))
+  (when ?opts
+    (each [k v (pairs ?opts)]
+      (let [opt-name (.. option-prefix k)]
+        (tset vim.g opt-name v)))))
 
 (fn fill-options-with-default-values []
   (each [k v (pairs default-opts)]
