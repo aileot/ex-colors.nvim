@@ -1,7 +1,7 @@
 local Path = {}
 local path_sep
 if jit then
-  if ("windows" ~= (jit.os):lower()) then
+  if ("windows" ~= jit.os:lower()) then
     path_sep = "/"
   else
     if (1 == vim.fn.exists("+shellslash")) then
@@ -18,7 +18,7 @@ if jit then
     end
   end
 else
-  path_sep = (package.config):sub(1, 1)
+  path_sep = package.config:sub(1, 1)
 end
 local function _6_(self, key)
   if (key == "sep") then
