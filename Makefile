@@ -17,10 +17,6 @@ VUSTED_EXTRA_FLAGS ?=
 
 REPO_ROOT:=$(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 TEST_ROOT:=$(REPO_ROOT)/test
-SPEC_ROOT:=$(TEST_ROOT)
-
-FNL_SPECS:=$(wildcard $(SPEC_ROOT)/*_spec.fnl)
-LUA_SPECS:=$(FNL_SPECS:%.fnl=%.lua)
 
 FNL_SRC:=$(wildcard fnl/*/*.fnl)
 FNL_SRC+=$(wildcard fnl/*/*/*.fnl)
@@ -29,6 +25,10 @@ LUA_RES:=$(FNL_SRC:fnl/%.fnl=lua/%.lua)
 
 FNL_SRC_DIRS:=$(wildcard fnl/*/*/)
 LUA_RES_DIRS:=$(FNL_SRC_DIRS:fnl/%=lua/%)
+
+FNL_SPECS:=$(wildcard $(TEST_ROOT)/*_spec.fnl)
+FNL_SPECS+=$(filter %_spec.fnl,$(FNL_SRC))
+LUA_SPECS:=$(FNL_SPECS:%.fnl=%.lua)
 
 REPO_FNL_DIR := $(REPO_ROOT)/fnl
 REPO_FNL_PATH := $(REPO_FNL_DIR)/?.fnl;$(REPO_FNL_DIR)/?/init.fnl
@@ -53,7 +53,7 @@ lua/%.lua: fnl/%.fnl
 	@$(FENNEL) \
 		$(FNL_FLAGS) \
 		$(FNL_EXTRA_FLAGS) \
-		--add-macro-path "$(REPO_MACRO_PATH);$(SPEC_ROOT)/?.fnl" \
+		--add-macro-path "$(REPO_MACRO_PATH)" \
 		--compile $< > $@
 	@echo $< "	->	" $@
 
@@ -68,7 +68,7 @@ build: $(LUA_RES_DIRS) $(LUA_RES)
 	@$(FENNEL) \
 		$(FNL_FLAGS) \
 		$(FNL_EXTRA_FLAGS) \
-		--add-macro-path "$(REPO_MACRO_PATH);$(SPEC_ROOT)/?.fnl" \
+		--add-macro-path "$(REPO_MACRO_PATH);$(TEST_ROOT)/?.fnl" \
 		--compile $< > $@
 
 .PHONY: clean-test
@@ -76,8 +76,8 @@ clean-test: ## Clean lua test files compiled from fnl
 	@rm $(LUA_SPECS) || exit 0
 
 .PHONY: test
-test: $(LUA_SPECS) ## Run test
-	@$(VUSTED) \
+test: build $(LUA_SPECS) ## Run test
+	@TEST_ROOT=$(TEST_ROOT) $(VUSTED) \
 		$(VUSTED_FLAGS) \
 		$(VUSTED_EXTRA_FLAGS) \
 		$(TEST_ROOT)
