@@ -29,6 +29,7 @@ LUA_RES_DIRS:=$(FNL_SRC_DIRS:fnl/%=lua/%)
 FNL_SPECS:=$(wildcard $(TEST_ROOT)/*_spec.fnl)
 FNL_SPECS+=$(filter %_spec.fnl,$(FNL_SRC))
 LUA_SPECS:=$(FNL_SPECS:%.fnl=%.lua)
+TEST_CONTEXTS:=$(wildcard $(TEST_ROOT)/context/*.fnl)
 
 REPO_FNL_DIR := $(REPO_ROOT)/fnl
 REPO_FNL_PATH := $(REPO_FNL_DIR)/?.fnl;$(REPO_FNL_DIR)/?/init.fnl
@@ -64,7 +65,7 @@ clean:
 .PHONY: build
 build: $(LUA_RES_DIRS) $(LUA_RES)
 
-%_spec.lua: %_spec.fnl ## Compile fnl spec file into lua
+%_spec.lua: %_spec.fnl $(TEST_CONTEXTS) ## Compile fnl spec file into lua
 	@$(FENNEL) \
 		$(FNL_FLAGS) \
 		$(FNL_EXTRA_FLAGS) \
