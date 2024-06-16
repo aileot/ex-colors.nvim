@@ -70,6 +70,7 @@ build: $(LUA_RES_DIRS) $(LUA_RES)
 		$(FNL_EXTRA_FLAGS) \
 		--add-macro-path "$(REPO_MACRO_PATH);$(TEST_ROOT)/?.fnl" \
 		--compile $< > $@
+	@echo $< "	->	" $@
 
 .PHONY: clean-test
 clean-test: ## Clean lua test files compiled from fnl
