@@ -69,6 +69,7 @@ build: $(LUA_RES_DIRS) $(LUA_RES)
 	@$(FENNEL) \
 		$(FNL_FLAGS) \
 		$(FNL_EXTRA_FLAGS) \
+		--correlate \
 		--add-macro-path "$(REPO_MACRO_PATH);$(TEST_ROOT)/?.fnl" \
 		--compile $< > $@
 	@echo $< "	->	" $@
