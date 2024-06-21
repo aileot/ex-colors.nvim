@@ -269,16 +269,10 @@ local function compose_autocmd_lines(highlights)
 end
 local function compose_hi_cmd_lines(highlights, dump_all_3f)
   local included_patterns = get_gvar("included_patterns")
-  local filtered_highlights
-  if dump_all_3f then
-    filtered_highlights = highlights
-  else
-    filtered_highlights = filter_by_included_patterns(highlights, included_patterns)
-  end
   local hl_maps
   if dump_all_3f then
     local tbl_16_auto = {}
-    for _, hl_name in ipairs(filtered_highlights) do
+    for _, hl_name in ipairs(highlights) do
       local k_17_auto, v_18_auto = vim.api.nvim_get_hl(0, {name = hl_name})
       if ((k_17_auto ~= nil) and (v_18_auto ~= nil)) then
         tbl_16_auto[k_17_auto] = v_18_auto
@@ -287,6 +281,7 @@ local function compose_hi_cmd_lines(highlights, dump_all_3f)
     end
     hl_maps = tbl_16_auto
   else
+    local filtered_highlights = filter_by_included_patterns(highlights, included_patterns)
     local tbl_16_auto = {}
     for _, hl_name in ipairs(filtered_highlights) do
       local k_17_auto, v_18_auto = remap_hl_opts_21(hl_name)
