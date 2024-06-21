@@ -4,7 +4,7 @@
 
 Extract current highlight definitions, and generate your own new colorscheme.\
 "But the colorscheme is not well tuned for startup" is
-now _no longer an issue_ to give it up.\
+now _no longer a reason_ to give it up.\
 Happy coding!
 
 <!-- TODO: Screenshot -->
