@@ -201,16 +201,17 @@
 
 (fn compose-hi-cmd-lines [highlights dump-all?]
   (let [included-patterns (get-gvar :included_patterns)
-        hl-maps (if dump-all?
-                    (collect [_ hl-name (ipairs highlights)]
-                      (vim.api.nvim_get_hl 0 {:name hl-name}))
-                    (let [filtered-highlights (-> highlights
-                                                  (filter-by-included-patterns included-patterns))]
-                      (collect [_ hl-name (ipairs filtered-highlights)]
-                        (remap-hl-opts! hl-name))))
-        cmd-list (icollect [hl-name hl-map (pairs hl-maps)]
-                   (when (next hl-map)
-                     (format-nvim-set-hl hl-name hl-map)))]
+        cmd-list (if dump-all?
+                     (icollect [_ hl-name (ipairs highlights)]
+                       (let [hl-map (vim.api.nvim_get_hl 0 {:name hl-name})]
+                         (format-nvim-set-hl hl-name hl-map)))
+                     (let [filtered-highlights (-> highlights
+                                                   (filter-by-included-patterns included-patterns))
+                           hl-maps (collect [_ hl-name (ipairs filtered-highlights)]
+                                     (remap-hl-opts! hl-name))]
+                       (icollect [hl-name hl-map (pairs hl-maps)]
+                         (when (next hl-map)
+                           (format-nvim-set-hl hl-name hl-map)))))]
     (table.sort cmd-list)
     (flatten cmd-list)))
 
