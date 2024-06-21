@@ -208,11 +208,10 @@
                                                   (filter-by-included-patterns included-patterns))]
                       (collect [_ hl-name (ipairs filtered-highlights)]
                         (remap-hl-opts! hl-name))))
-        cmd-list (doto ;
-                   (icollect [hl-name hl-map (pairs hl-maps)]
-                     (when (next hl-map)
-                       (format-nvim-set-hl hl-name hl-map)))
-                   (table.sort))]
+        cmd-list (icollect [hl-name hl-map (pairs hl-maps)]
+                   (when (next hl-map)
+                     (format-nvim-set-hl hl-name hl-map)))]
+    (table.sort cmd-list)
     (flatten cmd-list)))
 
 (fn compose-colors-names []

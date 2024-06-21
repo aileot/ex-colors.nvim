@@ -294,28 +294,24 @@ local function compose_hi_cmd_lines(highlights, dump_all_3f)
   end
   local cmd_list
   do
-    local tmp_9_auto
-    do
-      local tbl_21_auto = {}
-      local i_22_auto = 0
-      for hl_name, hl_map in pairs(hl_maps) do
-        local val_23_auto
-        if next(hl_map) then
-          val_23_auto = format_nvim_set_hl(hl_name, hl_map)
-        else
-          val_23_auto = nil
-        end
-        if (nil ~= val_23_auto) then
-          i_22_auto = (i_22_auto + 1)
-          tbl_21_auto[i_22_auto] = val_23_auto
-        else
-        end
+    local tbl_21_auto = {}
+    local i_22_auto = 0
+    for hl_name, hl_map in pairs(hl_maps) do
+      local val_23_auto
+      if next(hl_map) then
+        val_23_auto = format_nvim_set_hl(hl_name, hl_map)
+      else
+        val_23_auto = nil
       end
-      tmp_9_auto = tbl_21_auto
+      if (nil ~= val_23_auto) then
+        i_22_auto = (i_22_auto + 1)
+        tbl_21_auto[i_22_auto] = val_23_auto
+      else
+      end
     end
-    table.sort(tmp_9_auto)
-    cmd_list = tmp_9_auto
+    cmd_list = tbl_21_auto
   end
+  table.sort(cmd_list)
   return flatten(cmd_list)
 end
 local function compose_colors_names()
