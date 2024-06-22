@@ -8,17 +8,22 @@
 (local default-opts {:colors_dir (-> (vim.fn.stdpath :config)
                                      (Path.join :colors))
                      :restore_original_before_execution false
-                     :case_sensitive true
+                     ;; NOTE: output_{prefix,suffix} are undocumented since
+                     ;; it is unclear if the options should be supported.
+                     :output_prefix :ex-
+                     :output_suffix ""
+                     ;; Related to highlight definition map
                      :ignore_clear true
                      :omit_default false
                      :resolve_links false
+                     :relinker nil
+                     ;; Related to highlight filter
+                     :case_sensitive true
                      :included_patterns false
                      :excluded_patterns []
                      :autocmd_patterns {:CmdlineEnter {:* ["^debug%u"
                                                            "^health%u"]}}
-                     :relinker nil
-                     :output_prefix :ex-
-                     :output_suffix ""
+                     ;; Related to additional outputs
                      :gvar_supports [:terminal_color_0
                                      :terminal_color_1
                                      :terminal_color_2
