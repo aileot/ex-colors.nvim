@@ -5,8 +5,9 @@
                 : describe*
                 : it*} :test.helper.busted-macros)
 
-(local {: collect-defined-highlights : collect-output-highlights}
-       (include :test.helper.utils))
+(local {: buf-get-entire-lines
+        : collect-defined-highlights
+        : collect-output-highlights} (include :test.helper.utils))
 
 (include :test.context.prerequisites)
 (local {: output-dir : output-path : original-colorscheme}
@@ -29,6 +30,16 @@
     (it* "opens output file after generation"
       (vim.cmd "silent ExColors")
       (assert.is_same output-path (vim.api.nvim_buf_get_name 0)))
+    (it* "does not output `vim.empty_dict()`"
+      (vim.api.nvim_set_hl 0 :String {})
+      (vim.cmd "silent ExColors")
+      (assert (and vim.empty_dict (vim.empty_dict))
+              "vim.empty_dict is invalid in nvim")
+      (let [lines (buf-get-entire-lines)]
+        (each [_ line (ipairs lines)]
+          (assert.has_no_error (fn []
+                                 (when (line:find "vim.empty_dict()" 1 true)
+                                   (error (.. line " contains vim.empty_dict()"))))))))
     (describe* "with `!`"
       (it* "dumps as the same highlight definitions as the previously defined highlights."
         (let [previous-highlights (collect-defined-highlights :highlight)]

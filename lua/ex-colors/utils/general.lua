@@ -7,7 +7,7 @@ end
 flatten = _2_
 local function __3eoneliner(obj)
   local inspect_opts = {indent = "", newline = ""}
-  return vim.inspect(obj, inspect_opts)
+  return vim.inspect(obj, inspect_opts):gsub("vim%.empty_dict%(%)", "{}")
 end
 local function ensure_dir_21(dir_path)
   assert_is_full_path(dir_path, ("expected absolute path, got " .. dir_path))

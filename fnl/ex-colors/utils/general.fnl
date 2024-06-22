@@ -10,7 +10,8 @@
   @param obj any
   @return string"
   (let [inspect-opts {:indent "" :newline ""}]
-    (vim.inspect obj inspect-opts)))
+    (-> (vim.inspect obj inspect-opts)
+        (: :gsub "vim%.empty_dict%(%)" "{}"))))
 
 (fn ensure-dir! [dir-path]
   "Ensure `dir-path` exists in file system. If not existed, ask to create it.
