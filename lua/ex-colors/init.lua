@@ -139,7 +139,7 @@ local function relink_map_recursively(hl_name, hl_map)
     return nil
   end
 end
-local function remap_hl_opts_21(hl_name)
+local function remap_hl_opts(hl_name)
   local keep_link_3f = not get_gvar("resolve_links")
   local omit_default_3f = get_gvar("omit_default")
   local _3frelink = get_gvar("relinker")
@@ -191,7 +191,7 @@ local function compose_autocmd_lines(highlights)
       do
         local tbl_16_auto = {}
         for _, hl_name in ipairs(hl_names) do
-          local k_17_auto, v_18_auto = remap_hl_opts_21(hl_name)
+          local k_17_auto, v_18_auto = remap_hl_opts(hl_name)
           if ((k_17_auto ~= nil) and (v_18_auto ~= nil)) then
             tbl_16_auto[k_17_auto] = v_18_auto
           else
@@ -294,7 +294,7 @@ local function compose_hi_cmd_lines(highlights, dump_all_3f)
     do
       local tbl_16_auto = {}
       for _, hl_name in ipairs(filtered_highlights) do
-        local k_17_auto, v_18_auto = remap_hl_opts_21(hl_name)
+        local k_17_auto, v_18_auto = remap_hl_opts(hl_name)
         if ((k_17_auto ~= nil) and (v_18_auto ~= nil)) then
           tbl_16_auto[k_17_auto] = v_18_auto
         else

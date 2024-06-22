@@ -139,8 +139,8 @@
         (error (.. "relinker must return a value; make it return `false` explicitly to discard the hl-group "
                    linked))))))
 
-(fn remap-hl-opts! [hl-name]
-  "Remap hl-opts of `hl-name` as user options.
+(fn remap-hl-opts [hl-name]
+  "Calculate an `hl-opts` of `hl-name` arranged as user options.
 @param hl-name string
 @return table"
   (let [keep-link? (not (get-gvar :resolve_links))
@@ -176,7 +176,7 @@
       (each [au-pattern hl-patterns (pairs au-pat->hl-pats)]
         (let [hl-names (filter-by-included-patterns highlights hl-patterns)
               hl-maps (collect [_ hl-name (ipairs hl-names)]
-                        (remap-hl-opts! hl-name))
+                        (remap-hl-opts hl-name))
               hi-cmds (doto (icollect [hl-name hl-opts (pairs hl-maps)]
                               (when (next hl-opts)
                                 (.. indent (format-nvim-set-hl hl-name hl-opts))))
@@ -216,7 +216,7 @@
                                                    (-> highlights
                                                        (filter-by-included-patterns included-patterns)))
                            hl-maps (collect [_ hl-name (ipairs filtered-highlights)]
-                                     (remap-hl-opts! hl-name))]
+                                     (remap-hl-opts hl-name))]
                        (icollect [hl-name hl-map (pairs hl-maps)]
                          (when (or (not ignore-clear?) (next hl-map))
                            (format-nvim-set-hl hl-name hl-map)))))]
