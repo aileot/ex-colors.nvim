@@ -1,0 +1,33 @@
+name: Test
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        nvim_version:
+          - v0.9.5
+          - stable
+          - nightly
+    steps:
+      - uses: actions/checkout@v4
+      - uses: leafo/gh-actions-lua@v10
+        with:
+          luaVersion: "luajit-2.1.0-beta3"
+      - uses: leafo/gh-actions-luarocks@v4
+      - name: Install test dependencies in Luarocks
+        run: |
+          luarocks --lua-version=5.1 install fennel
+          luarocks --lua-version=5.1 install vusted
+      - uses: rhysd/action-setup-vim@v1
+        id: vim
+        with:
+          neovim: true
+          version: ${{ matrix.nvim_version }}
+      - name: Run tests
+        run: make test
+        timeout-minutes: 5
