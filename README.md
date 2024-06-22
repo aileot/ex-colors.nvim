@@ -69,21 +69,6 @@ neither `:highlight clear` nor `:syntax reset`.
 This is because
 the generated colorscheme is always expected to be loaded first,
 and only to be managed by yourself.
-If you still need to reset highlights before applying the generated
-colorscheme, try the following snippet:
-
-```lua
-vim.api.nvim_create_autocmd("ColorSchemePre", {
-  callback = function(a)
-    if vim.g.colors_name == a.match
-    -- and a.match == "<your-colorscheme-name>"
-    then
-      vim.cmd("highlight clear")
-      vim.cmd("syntax reset")
-    end
-  end,
-})
-```
 
 ## Not in Plan
 
