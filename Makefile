@@ -65,7 +65,7 @@ clean:
 .PHONY: build
 build: $(LUA_RES_DIRS) $(LUA_RES)
 
-%_spec.lua: %_spec.fnl $(TEST_CONTEXTS) ## Compile fnl spec file into lua
+%_spec.lua: %_spec.fnl $(LUA_RES) $(TEST_CONTEXTS) ## Compile fnl spec file into lua
 	@$(FENNEL) \
 		$(FNL_FLAGS) \
 		$(FNL_EXTRA_FLAGS) \
