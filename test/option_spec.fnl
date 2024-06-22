@@ -20,4 +20,4 @@
   (describe* :omit_default
     (it* "removes default field in output"
       (setup! {:omit_default false})
-      (vim.cmd :ExColors))))
+      (vim.cmd "silent ExColors"))))
