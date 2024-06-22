@@ -60,6 +60,22 @@
         (local output-lines-with-included_patterns (buf-get-entire-lines))
         (assert.is_same output-lines-with-bang
                         output-lines-with-included_patterns))))
+  (describe* :ignore_clear
+    (describe* "stops :ExColors output highlight definitions with empty table;"
+      (describe* "thus, when ignore_clear=true, autocmd_patterns={} and included_patterns=['^String$'] and String is cleared,"
+        (it* ":ExColors will output no `vim.api.nvim_set_hl` lines"
+          (setup! {:included_patterns [:^String$]
+                   :autocmd_patterns {}
+                   :ignore_clear true})
+          ;; NOTE: On nvim-v0.9.5, `:highlight clear String` does not update
+          ;; the highlight maps where lua api will access.
+          ;; (vim.cmd "highlight clear String")
+          (vim.api.nvim_set_hl 0 :String {})
+          (vim.cmd "silent ExColors")
+          (let [pat "^%s*vim%.api%.nvim_set_hl"]
+            (each [_ line (pairs (buf-get-entire-lines))]
+              (assert.is_no_error #(when (line:find pat)
+                                     (error (.. "unwanted line: " line))))))))))
   (describe* :omit_default
     (it* "removes default field in output"
       (setup! {:omit_default false})
