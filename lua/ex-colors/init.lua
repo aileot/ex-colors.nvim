@@ -269,58 +269,55 @@ local function compose_autocmd_lines(highlights)
 end
 local function compose_hi_cmd_lines(highlights, dump_all_3f)
   local included_patterns = get_gvar("included_patterns")
-  local filtered_highlights
-  if dump_all_3f then
-    filtered_highlights = highlights
-  else
-    filtered_highlights = filter_by_included_patterns(highlights, included_patterns)
-  end
-  local hl_maps
-  if dump_all_3f then
-    local tbl_16_auto = {}
-    for _, hl_name in ipairs(filtered_highlights) do
-      local k_17_auto, v_18_auto = vim.api.nvim_get_hl(0, {name = hl_name})
-      if ((k_17_auto ~= nil) and (v_18_auto ~= nil)) then
-        tbl_16_auto[k_17_auto] = v_18_auto
-      else
-      end
-    end
-    hl_maps = tbl_16_auto
-  else
-    local tbl_16_auto = {}
-    for _, hl_name in ipairs(filtered_highlights) do
-      local k_17_auto, v_18_auto = remap_hl_opts_21(hl_name)
-      if ((k_17_auto ~= nil) and (v_18_auto ~= nil)) then
-        tbl_16_auto[k_17_auto] = v_18_auto
-      else
-      end
-    end
-    hl_maps = tbl_16_auto
-  end
   local cmd_list
-  do
-    local tmp_9_auto
+  if dump_all_3f then
+    local tbl_21_auto = {}
+    local i_22_auto = 0
+    for _, hl_name in ipairs(highlights) do
+      local val_23_auto
+      do
+        local hl_map = vim.api.nvim_get_hl(0, {name = hl_name})
+        val_23_auto = format_nvim_set_hl(hl_name, hl_map)
+      end
+      if (nil ~= val_23_auto) then
+        i_22_auto = (i_22_auto + 1)
+        tbl_21_auto[i_22_auto] = val_23_auto
+      else
+      end
+    end
+    cmd_list = tbl_21_auto
+  else
+    local filtered_highlights = filter_by_included_patterns(highlights, included_patterns)
+    local hl_maps
     do
-      local tbl_21_auto = {}
-      local i_22_auto = 0
-      for hl_name, hl_map in pairs(hl_maps) do
-        local val_23_auto
-        if next(hl_map) then
-          val_23_auto = format_nvim_set_hl(hl_name, hl_map)
-        else
-          val_23_auto = nil
-        end
-        if (nil ~= val_23_auto) then
-          i_22_auto = (i_22_auto + 1)
-          tbl_21_auto[i_22_auto] = val_23_auto
+      local tbl_16_auto = {}
+      for _, hl_name in ipairs(filtered_highlights) do
+        local k_17_auto, v_18_auto = remap_hl_opts_21(hl_name)
+        if ((k_17_auto ~= nil) and (v_18_auto ~= nil)) then
+          tbl_16_auto[k_17_auto] = v_18_auto
         else
         end
       end
-      tmp_9_auto = tbl_21_auto
+      hl_maps = tbl_16_auto
     end
-    table.sort(tmp_9_auto)
-    cmd_list = tmp_9_auto
+    local tbl_21_auto = {}
+    local i_22_auto = 0
+    for hl_name, hl_map in pairs(hl_maps) do
+      local val_23_auto
+      if next(hl_map) then
+        val_23_auto = format_nvim_set_hl(hl_name, hl_map)
+      else
+        val_23_auto = nil
+      end
+      if (nil ~= val_23_auto) then
+        i_22_auto = (i_22_auto + 1)
+        tbl_21_auto[i_22_auto] = val_23_auto
+      else
+      end
+    end
+    cmd_list = tbl_21_auto
   end
+  table.sort(cmd_list)
   return flatten(cmd_list)
 end
 local function compose_colors_names()
