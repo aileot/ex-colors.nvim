@@ -21,11 +21,14 @@ The following snippet sets up the options with the default values:
 require("ex-colors").setup({
   colors_dir = vim.fn.stdpath("config") .. "/colors",
   restore_original_before_execution = false,
-  case_sensitive = true,
+  ignore_clear = true,
   omit_default = false,
   resolve_links = false,
-  ---@type string[] lua patterns
-  included_patterns = {},
+  ---@type nil|fun(hl_name: string): string|false Return false to discard hl-group.
+  relinker = nil,
+  case_sensitive = true,
+  ---@type false|string[] lua patterns
+  included_patterns = false,
   ---@type string[] lua patterns
   excluded_patterns = {},
   ---@type table<string,table<string,string[]>>
@@ -37,8 +40,6 @@ require("ex-colors").setup({
       }
     },
   },
-  ---@type nil|fun(hl_name: string): string|false Return false to discard hl-group.
-  relinker = nil,
   -- e.g., generate `vim.api.nvim_set_var("terminal_color_0","#000000")`.
   gvar_supports = {
     "terminal_color_0",
