@@ -5,12 +5,38 @@
                 : describe*
                 : it*} :test.helper.busted-macros)
 
-(local {: buf-get-entire-lines} (include :test.helper.utils))
+(local {: buf-get-entire-lines : collect-output-highlights}
+       (include :test.helper.utils))
 
 (include :test.context.prerequisites)
 (local {: output-dir : original-colorscheme} (include :test.context.default))
 
-(local {:setup setup!} (require :ex-colors))
+(local {:setup setup! :reset reset!} (require :ex-colors))
+
+(describe* ".reset() resets the internal default values to be merged;"
+  (before-each (fn []
+                 (reset!)))
+  (describe* "thus, given (1) .setup(), (2) .setup({included_patterns = {'String'}), then (3) .setup(),"
+    (it* ":ExColors outputs different at (2) from at (1)"
+      (setup!)
+      (vim.cmd "silent ExColors | silent update")
+      (local output1 (collect-output-highlights))
+      (setup! {:included_patterns [:String]})
+      (vim.cmd "silent ExColors | silent update")
+      (reset!)
+      (local output2 (collect-output-highlights))
+      (assert.are_not_same output1 output2))
+    (it* ":ExColors outputs the same result at (1) and (3)"
+      (setup!)
+      (vim.cmd "silent ExColors | silent update")
+      (local output1 (collect-output-highlights))
+      (setup! {:included_patterns [:String]})
+      (vim.cmd "silent ExColors | silent update")
+      (reset!)
+      (setup!)
+      (vim.cmd "silent ExColors | silent update")
+      (local output3 (collect-output-highlights))
+      (assert.are_same output1 output3))))
 
 (describe* :option
   (before-each (fn []
