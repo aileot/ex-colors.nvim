@@ -11,11 +11,16 @@
 (include :test.context.prerequisites)
 (local {: output-dir : original-colorscheme} (include :test.context.default))
 
-(local {:setup setup! :reset reset!} (require :ex-colors))
+(local {:setup setup!} (require :ex-colors))
+
+(fn safe-reset! []
+  (let [{:reset reset!} (require :ex-colors)]
+    (reset!)
+    (setup! {:colors_dir output-dir})))
 
 (describe* ".reset() resets the internal default values to be merged;"
   (before-each (fn []
-                 (reset!)))
+                 (safe-reset!)))
   (describe* "thus, given (1) .setup(), (2) .setup({included_patterns = {'String'}), then (3) .setup(),"
     (it* ":ExColors outputs different at (2) from at (1)"
       (setup!)
@@ -23,7 +28,7 @@
       (local output1 (collect-output-highlights))
       (setup! {:included_patterns [:String]})
       (vim.cmd "silent ExColors | silent update")
-      (reset!)
+      (safe-reset!)
       (local output2 (collect-output-highlights))
       (assert.are_not_same output1 output2))
     (it* ":ExColors outputs the same result at (1) and (3)"
@@ -32,7 +37,7 @@
       (local output1 (collect-output-highlights))
       (setup! {:included_patterns [:String]})
       (vim.cmd "silent ExColors | silent update")
-      (reset!)
+      (safe-reset!)
       (setup!)
       (vim.cmd "silent ExColors | silent update")
       (local output3 (collect-output-highlights))
