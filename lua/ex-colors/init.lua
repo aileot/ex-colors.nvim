@@ -4,7 +4,7 @@ local flatten = _local_1_["flatten"]
 local __3eoneliner = _local_1_["->oneliner"]
 local ensure_dir_21 = _local_1_["ensure-dir!"]
 local lines__3ecomment_lines = _local_1_["lines->comment-lines"]
-local default_opts = {colors_dir = Path.join(vim.fn.stdpath("config"), "colors"), case_sensitive = true, excluded_patterns = {}, autocmd_patterns = {CmdlineEnter = {["*"] = {"^debug%u", "^health%u"}}}, relinker = nil, output_prefix = "ex-", output_suffix = "", gvar_supports = {"terminal_color_0", "terminal_color_1", "terminal_color_2", "terminal_color_3", "terminal_color_4", "terminal_color_5", "terminal_color_6", "terminal_color_7", "terminal_color_8", "terminal_color_9", "terminal_color_10", "terminal_color_11", "terminal_color_12", "terminal_color_13", "terminal_color_14", "terminal_color_15"}, included_patterns = false, omit_default = false, resolve_links = false, restore_original_before_execution = false}
+local default_opts = {colors_dir = Path.join(vim.fn.stdpath("config"), "colors"), case_sensitive = true, ignore_clear = true, excluded_patterns = {}, autocmd_patterns = {CmdlineEnter = {["*"] = {"^debug%u", "^health%u"}}}, relinker = nil, output_prefix = "ex-", output_suffix = "", gvar_supports = {"terminal_color_0", "terminal_color_1", "terminal_color_2", "terminal_color_3", "terminal_color_4", "terminal_color_5", "terminal_color_6", "terminal_color_7", "terminal_color_8", "terminal_color_9", "terminal_color_10", "terminal_color_11", "terminal_color_12", "terminal_color_13", "terminal_color_14", "terminal_color_15"}, included_patterns = false, omit_default = false, resolve_links = false, restore_original_before_execution = false}
 local option_prefix = "excolors_"
 local function get_gvar(key)
   return vim.g[(option_prefix .. key)]
@@ -262,6 +262,7 @@ local function compose_autocmd_lines(highlights)
 end
 local function compose_hi_cmd_lines(highlights, dump_all_3f)
   local included_patterns = get_gvar("included_patterns")
+  local ignore_clear_3f = get_gvar("ignore_clear")
   local cmd_list
   if dump_all_3f then
     local tbl_21_auto = {}
@@ -302,7 +303,7 @@ local function compose_hi_cmd_lines(highlights, dump_all_3f)
     local i_22_auto = 0
     for hl_name, hl_map in pairs(hl_maps) do
       local val_23_auto
-      if next(hl_map) then
+      if (not ignore_clear_3f or next(hl_map)) then
         val_23_auto = format_nvim_set_hl(hl_name, hl_map)
       else
         val_23_auto = nil

@@ -9,6 +9,7 @@
                                      (Path.join :colors))
                      :restore_original_before_execution false
                      :case_sensitive true
+                     :ignore_clear true
                      :omit_default false
                      :resolve_links false
                      :included_patterns false
@@ -199,6 +200,7 @@
 
 (fn compose-hi-cmd-lines [highlights dump-all?]
   (let [included-patterns (get-gvar :included_patterns)
+        ignore-clear? (get-gvar :ignore_clear)
         cmd-list (if dump-all?
                      (icollect [_ hl-name (ipairs highlights)]
                        (let [hl-map (vim.api.nvim_get_hl 0 {:name hl-name})]
@@ -210,7 +212,7 @@
                            hl-maps (collect [_ hl-name (ipairs filtered-highlights)]
                                      (remap-hl-opts! hl-name))]
                        (icollect [hl-name hl-map (pairs hl-maps)]
-                         (when (next hl-map)
+                         (when (or (not ignore-clear?) (next hl-map))
                            (format-nvim-set-hl hl-name hl-map)))))]
     (table.sort cmd-list)
     (flatten cmd-list)))
