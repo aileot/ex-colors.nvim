@@ -5,8 +5,9 @@
                 : describe*
                 : it*} :test.helper.busted-macros)
 
-(local {: buf-get-entire-lines : collect-output-highlights}
-       (include :test.helper.utils))
+(local {: buf-get-entire-lines
+        : collect-output-highlights
+        : generate-random-hl-name} (include :test.helper.utils))
 
 (include :test.context.prerequisites)
 (local {: output-dir : original-colorscheme} (include :test.context.default))
@@ -77,6 +78,31 @@
               (assert.is_no_error #(when (line:find pat)
                                      (error (.. "unwanted line: " line))))))))))
   (describe* :omit_default
-    (it* "removes default field in output"
-      (setup! {:omit_default false})
-      (vim.cmd "silent ExColors"))))
+    (describe* "discards default field in output;"
+      (describe* "thus, when <new-hl-name> is {fg='Red',default=true}"
+        (describe* "with options {omit_default=true, included_patterns=[<new-hl-name>]},"
+          (it* ":ExColors only outputs <new-hl-name> line without 'default' key."
+            (let [new-hl-name (generate-random-hl-name)]
+              (setup! {:omit_default true
+                       :included_patterns [(.. "^" new-hl-name "$")]})
+              (vim.api.nvim_set_hl 0 new-hl-name {:fg :Red :default true})
+              (vim.cmd "silent ExColors | silent update")
+              (each [_ line (ipairs (buf-get-entire-lines))]
+                (case (line:match (.. "vim%.api%.nvim_set_hl%(.-" new-hl-name
+                                      ".-{(.+)}"))
+                  opt-line (assert.has_no_error #(when (opt-line:find :default)
+                                                   (error (.. line
+                                                              " contains 'default' key")))))))))
+        (describe* "with options {omit_default=false, included_patterns=[<new-hl-name>]},"
+          (it* ":ExColors outputs <new-hl-name> line with 'default' key."
+            (let [new-hl-name (generate-random-hl-name)]
+              (setup! {:omit_default false
+                       :included_patterns [(.. "^" new-hl-name "$")]})
+              (vim.api.nvim_set_hl 0 new-hl-name {:fg :Red :default true})
+              (vim.cmd "silent ExColors | silent update")
+              (each [_ line (ipairs (buf-get-entire-lines))]
+                (case (line:match (.. "vim%.api%.nvim_set_hl%(.-" new-hl-name
+                                      ".-{(.+)}"))
+                  opt-line (assert.has_no_error #(when (not (opt-line:find :default))
+                                                   (error (.. line
+                                                              " does NOT contains 'default' key")))))))))))))
