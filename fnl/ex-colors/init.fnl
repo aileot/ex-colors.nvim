@@ -42,6 +42,8 @@
   (. vim.g (.. option-prefix key)))
 
 (fn setup [?opts]
+  "Set up config.
+@param ?opts table"
   (when ?opts
     (each [k v (pairs ?opts)]
       (let [opt-name (.. option-prefix k)]
@@ -54,6 +56,10 @@
                                v)))))
 
 (fill-options-with-default-values)
+
+(fn reset []
+  "Reset config to the default options."
+  (setup default-opts))
 
 (fn collect-defined-highlights []
   (let [output (vim.fn.execute :highlight)]
@@ -304,4 +310,4 @@
                     (flatten))]
       (overwrite-buf-lines! buf lines))))
 
-{: setup : generate-hi-cmds}
+{: setup : reset : generate-hi-cmds}

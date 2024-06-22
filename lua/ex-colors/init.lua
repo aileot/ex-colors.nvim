@@ -28,6 +28,9 @@ local function fill_options_with_default_values()
   return nil
 end
 fill_options_with_default_values()
+local function reset()
+  return setup(default_opts)
+end
 local function collect_defined_highlights()
   local output = vim.fn.execute("highlight")
   local tbl_21_auto = {}
@@ -411,4 +414,4 @@ local function generate_hi_cmds(dump_all_3f)
   local lines = flatten({credit_lines, cmd_lines})
   return overwrite_buf_lines_21(buf, lines)
 end
-return {setup = setup, ["generate-hi-cmds"] = generate_hi_cmds}
+return {setup = setup, reset = reset, ["generate-hi-cmds"] = generate_hi_cmds}
