@@ -62,15 +62,26 @@ require("ex-colors").setup({
 })
 ```
 
-## Notes
-
-Unlike general colorscheme plugins, generated colorscheme will
-neither `:highlight clear` nor `:syntax reset`.
-This is because
-the generated colorscheme is always expected to be loaded first,
-and only to be managed by yourself.
-
 ## Not in Plan
 
+Unlike general colorscheme plugins,
+the generated colorschemes expect the following usages:
+
+- NOT to be loaded after any other colorschemes,
+- NOT to be independent plugin repositories,
+
+however,
+
+- to be **loaded first** on your nvim startup.
+- to be **managed by yourself** in your dotfiles
+  or any repository for yourself.
+
+Because of the backgrounds above,
+`ex-colors.nvim` will NOT support the following features:
+
 - Byte-Compile\
-  Enable `vim.loader`. It does. The loader eventually overrides the outputs.
+  To manage the output in version control system,
+  byte codes are bad for human to compare diffs.\
+  Please enable `vim.loader`. It does instead.
+- `:highlight clear` and `:syntax reset` in the outputs\
+  They are only overheads on nvim startup.
