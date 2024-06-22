@@ -62,7 +62,7 @@
                         output-lines-with-included_patterns))))
   (describe* :ignore_clear
     (describe* "stops :ExColors output highlight definitions with empty table;"
-      (describe* "thus, when ignore_clear=true, autocmd_patterns={} and included_patterns=['^String$'] and String is cleared,"
+      (describe* "thus, when hl-String is cleared, with setup-options {ignore_clear=true, autocmd_patterns={}, included_patterns=['^String$']},"
         (it* ":ExColors will output no `vim.api.nvim_set_hl` lines"
           (setup! {:included_patterns [:^String$]
                    :autocmd_patterns {}
