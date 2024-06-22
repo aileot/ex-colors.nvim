@@ -70,15 +70,13 @@
     (cmd-template:format hl-name (->oneliner opts-to-be-lua-string))))
 
 (fn filter-by-included-patterns [old-output-list included-patterns]
-  (case included-patterns
-    false old-output-list
-    patterns (let [new-output-list []]
-               (each [_ name (ipairs old-output-list)]
-                 (when (accumulate [match? nil ;
-                                    _ ex-pattern (ipairs patterns) &until match?]
-                         (name:find ex-pattern))
-                   (table.insert new-output-list name)))
-               new-output-list)))
+  (let [new-output-list []]
+    (each [_ name (ipairs old-output-list)]
+      (when (accumulate [match? nil ;
+                         _ ex-pattern (ipairs included-patterns) &until match?]
+              (name:find ex-pattern))
+        (table.insert new-output-list name)))
+    new-output-list))
 
 (fn filter-out-excluded-patterns [old-output-list]
   (let [new-output-list []
@@ -205,8 +203,10 @@
                      (icollect [_ hl-name (ipairs highlights)]
                        (let [hl-map (vim.api.nvim_get_hl 0 {:name hl-name})]
                          (format-nvim-set-hl hl-name hl-map)))
-                     (let [filtered-highlights (-> highlights
-                                                   (filter-by-included-patterns included-patterns))
+                     (let [filtered-highlights (if (= false included-patterns)
+                                                   highlights
+                                                   (-> highlights
+                                                       (filter-by-included-patterns included-patterns)))
                            hl-maps (collect [_ hl-name (ipairs filtered-highlights)]
                                      (remap-hl-opts! hl-name))]
                        (icollect [hl-name hl-map (pairs hl-maps)]
