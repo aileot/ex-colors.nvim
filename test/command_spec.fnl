@@ -30,16 +30,8 @@
       (vim.cmd "silent ExColors")
       (assert.is_same output-path (vim.api.nvim_buf_get_name 0)))
     (describe* "with `!`"
-      (it* "dumps all the defined highlights."
-        ;; TODO: add specs regardless of {included,excluded}-patterns
-        (let [defined-highlights (collect-defined-highlights :highlight)]
+      (it* "dumps as the same highlight definitions as the previously defined highlights."
+        (let [previous-highlights (collect-defined-highlights :highlight)]
           (vim.cmd "noautocmd silent ExColors!")
           (let [output-highlights (collect-output-highlights)]
-            (each [hl-name _ (pairs defined-highlights)]
-              (assert.is_true (. output-highlights hl-name))))))
-      (it* "only dumps the previously defined highlights."
-        (let [defined-highlights (collect-defined-highlights :highlight)]
-          (vim.cmd "noautocmd silent ExColors!")
-          (let [output-highlights (collect-output-highlights)]
-            (each [hl-name _ (pairs output-highlights)]
-              (assert.is_true (. defined-highlights hl-name)))))))))
+            (assert.are_same previous-highlights output-highlights)))))))
