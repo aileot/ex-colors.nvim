@@ -51,6 +51,9 @@
 ;;       (inject-desc-fn `pending desc ...)
 ;;       (inject-fn `pending desc ...)))
 
+(fn assert/spy [spy-instance method ...]
+  `((. (assert.spy ,spy-instance) ,method) ,...))
+
 {: after_each*
  : before_each*
  :after-each after_each*
@@ -61,4 +64,5 @@
  : it*
  ;; :pending pending*
  : setup*
- : teardown*}
+ : teardown*
+ : assert/spy}
