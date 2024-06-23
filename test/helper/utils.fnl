@@ -19,6 +19,15 @@ buffer with `vim.api.nvim_set_hl(0, ...)`.
         hl-name (tset output-highlights hl-name true)))
     output-highlights))
 
+(fn generate-random-hl-name []
+  "Generate new random highlight name.
+@return string"
+  (var hl-name :_Random)
+  (while (and (not (vim.api.nvim_get_hl 0 {:name hl-name})))
+    (set hl-name (.. hl-name (os.time))))
+  hl-name)
+
 {: buf-get-entire-lines
  : collect-defined-highlights
- : collect-output-highlights}
+ : collect-output-highlights
+ : generate-random-hl-name}
