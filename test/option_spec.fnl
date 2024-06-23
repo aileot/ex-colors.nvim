@@ -87,12 +87,9 @@
                        :included_patterns [(.. "^" new-hl-name "$")]})
               (vim.api.nvim_set_hl 0 new-hl-name {:fg :Red :default true})
               (vim.cmd "silent ExColors | silent update")
-              (let [(hl-opts first-line) (buf-search-line (.. "vim%.api%.nvim_set_hl%(.-"
-                                                              new-hl-name
-                                                              ".-{(.+)}"))]
-                (assert.has_no_error #(when (hl-opts:find :default)
-                                        (error (.. first-line
-                                                   " contains 'default' key"))))))))
+              (assert.buf-contains-no-pattern (.. "vim%.api%.nvim_set_hl%(.-"
+                                                  new-hl-name
+                                                  ".-{(.*default.+)}")))))
         (describe* "with options {omit_default=false, included_patterns=[<new-hl-name>]},"
           (it* ":ExColors outputs <new-hl-name> line with 'default' key."
             (let [new-hl-name (generate-random-hl-name)]
@@ -100,9 +97,5 @@
                        :included_patterns [(.. "^" new-hl-name "$")]})
               (vim.api.nvim_set_hl 0 new-hl-name {:fg :Red :default true})
               (vim.cmd "silent ExColors | silent update")
-              (let [(hl-opts first-line) (buf-search-line (.. "vim%.api%.nvim_set_hl%(.-"
-                                                              new-hl-name
-                                                              ".-{(.+)}"))]
-                (assert.has_no_error #(when (not (hl-opts:find :default))
-                                        (error (.. first-line
-                                                   " does NOT contains 'default' key"))))))))))))
+              (assert.buf-contains-pattern (.. "vim%.api%.nvim_set_hl%(.-"
+                                               new-hl-name ".-{(.*default.+)}")))))))))
