@@ -46,8 +46,8 @@ buffer with `vim.api.nvim_set_hl(0, ...)`.
 (lambda assert.buf-contains-no-pattern [lua-pattern]
   (case (buf-search-line lua-pattern)
     (matched first-line)
-    (error (: "The current buffer unexpectedly matches against the lua pattern %q at %q in %q"
-              :format lua-pattern matched first-line))))
+    (assert false (: "The current buffer unexpectedly matches against the lua pattern %q at %q in %q"
+                     :format lua-pattern matched first-line))))
 
 {: buf-get-entire-lines
  : buf-search-line
