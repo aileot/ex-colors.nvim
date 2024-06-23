@@ -9,19 +9,19 @@
        (include :test.helper.utils))
 
 (include :test.context.prerequisites)
-(local {: output-dir : output-path : original-colorscheme}
+(local {: output-colors-dir : output-path : original-colorscheme}
        (include :test.context.default))
 
 (local {:setup setup!} (require :ex-colors))
 
 (describe* :command
   (setup* (fn []
-            (vim.fn.mkdir output-dir :p)))
+            (vim.fn.mkdir output-colors-dir :p)))
   (teardown* (fn []
-               (vim.fn.delete output-dir)))
+               (vim.fn.delete output-colors-dir)))
   (before-each (fn []
                  (vim.cmd.colorscheme original-colorscheme)
-                 (setup! {:colors_dir output-dir})))
+                 (setup! {:colors_dir output-colors-dir})))
   (after-each (fn []
                 (vim.cmd "%delete _")
                 (vim.cmd "silent update")))

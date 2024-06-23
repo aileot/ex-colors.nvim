@@ -11,14 +11,14 @@
         : generate-random-hl-name} (include :test.helper.utils))
 
 (include :test.context.prerequisites)
-(local {: output-dir : original-colorscheme} (include :test.context.default))
+(local {: output-colors-dir : original-colorscheme} (include :test.context.default))
 
 (local {:setup setup!} (require :ex-colors))
 
 (fn safe-reset! []
   (let [{:reset reset!} (require :ex-colors)]
     (reset!)
-    (setup! {:colors_dir output-dir})))
+    (setup! {:colors_dir output-colors-dir})))
 
 (describe* ".reset() resets the internal default values to be merged;"
   (before-each (fn []
@@ -48,7 +48,7 @@
 (describe* :option
   (before-each (fn []
                  (vim.cmd.colorscheme original-colorscheme)
-                 (setup! {:colors_dir output-dir})))
+                 (setup! {:colors_dir output-colors-dir})))
   (after-each (fn []
                 (vim.cmd "%delete _")
                 (vim.cmd "silent update")))
