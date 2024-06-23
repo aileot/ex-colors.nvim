@@ -6,6 +6,7 @@
                 : it*} :test.helper.busted-macros)
 
 (local {: buf-get-entire-lines
+        : buf-search-line
         : collect-output-highlights
         : generate-random-hl-name} (include :test.helper.utils))
 
@@ -87,12 +88,12 @@
                        :included_patterns [(.. "^" new-hl-name "$")]})
               (vim.api.nvim_set_hl 0 new-hl-name {:fg :Red :default true})
               (vim.cmd "silent ExColors | silent update")
-              (each [_ line (ipairs (buf-get-entire-lines))]
-                (case (line:match (.. "vim%.api%.nvim_set_hl%(.-" new-hl-name
-                                      ".-{(.+)}"))
-                  opt-line (assert.has_no_error #(when (opt-line:find :default)
-                                                   (error (.. line
-                                                              " contains 'default' key")))))))))
+              (let [(hl-opts first-line) (buf-search-line (.. "vim%.api%.nvim_set_hl%(.-"
+                                                              new-hl-name
+                                                              ".-{(.+)}"))]
+                (assert.has_no_error #(when (hl-opts:find :default)
+                                        (error (.. first-line
+                                                   " contains 'default' key"))))))))
         (describe* "with options {omit_default=false, included_patterns=[<new-hl-name>]},"
           (it* ":ExColors outputs <new-hl-name> line with 'default' key."
             (let [new-hl-name (generate-random-hl-name)]
@@ -100,9 +101,9 @@
                        :included_patterns [(.. "^" new-hl-name "$")]})
               (vim.api.nvim_set_hl 0 new-hl-name {:fg :Red :default true})
               (vim.cmd "silent ExColors | silent update")
-              (each [_ line (ipairs (buf-get-entire-lines))]
-                (case (line:match (.. "vim%.api%.nvim_set_hl%(.-" new-hl-name
-                                      ".-{(.+)}"))
-                  opt-line (assert.has_no_error #(when (not (opt-line:find :default))
-                                                   (error (.. line
-                                                              " does NOT contains 'default' key")))))))))))))
+              (let [(hl-opts first-line) (buf-search-line (.. "vim%.api%.nvim_set_hl%(.-"
+                                                              new-hl-name
+                                                              ".-{(.+)}"))]
+                (assert.has_no_error #(when (not (hl-opts:find :default))
+                                        (error (.. first-line
+                                                   " does NOT contains 'default' key"))))))))))))
