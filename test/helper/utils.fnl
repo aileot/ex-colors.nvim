@@ -1,6 +1,17 @@
 (fn buf-get-entire-lines [?buf]
   (vim.api.nvim_buf_get_lines (or ?buf 0) 0 -1 true))
 
+(lambda buf-search-line [lua-pattern]
+  "Return the first line matched against `lua-pattern` in current buffer.
+@param lua-pattern string
+@return string the first line matched against `lua-pattern`
+@return string the entire line of which a part is matched against `lua-pattern`."
+  (let [lines (buf-get-entire-lines)]
+    (accumulate [(?matched ?first-match-line) nil _ line (ipairs lines)
+                 &until ?matched]
+      (case (line:match lua-pattern)
+        m (values m line)))))
+
 (fn collect-defined-highlights []
   "Return a table whose keys are all the currently defined highlight names.
 @return table<string,true>"
@@ -28,6 +39,7 @@ buffer with `vim.api.nvim_set_hl(0, ...)`.
   hl-name)
 
 {: buf-get-entire-lines
+ : buf-search-line
  : collect-defined-highlights
  : collect-output-highlights
  : generate-random-hl-name}
