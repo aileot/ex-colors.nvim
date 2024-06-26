@@ -16,7 +16,7 @@
                      :ignore_clear true
                      :omit_default false
                      :resolve_links false
-                     :relinker nil
+                     :relinker #$
                      ;; Related to highlight filter
                      :case_sensitive true
                      :included_patterns false
