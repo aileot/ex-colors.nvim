@@ -8,7 +8,7 @@ local default_opts
 local function _2_(_241)
   return _241
 end
-default_opts = {colors_dir = Path.join(vim.fn.stdpath("config"), "colors"), output_prefix = "ex-", output_suffix = "", ignore_clear = true, relinker = _2_, case_sensitive = true, excluded_patterns = {}, autocmd_patterns = {CmdlineEnter = {["*"] = {"^debug%u", "^health%u"}}}, gvar_supports = {"terminal_color_0", "terminal_color_1", "terminal_color_2", "terminal_color_3", "terminal_color_4", "terminal_color_5", "terminal_color_6", "terminal_color_7", "terminal_color_8", "terminal_color_9", "terminal_color_10", "terminal_color_11", "terminal_color_12", "terminal_color_13", "terminal_color_14", "terminal_color_15"}, included_patterns = false, omit_default = false, resolve_links = false, restore_original_before_execution = false}
+default_opts = {colors_dir = Path.join(vim.fn.stdpath("config"), "colors"), output_prefix = "ex-", output_suffix = "", ignore_clear = true, relinker = _2_, case_sensitive = true, included_patterns = {}, excluded_patterns = {}, autocmd_patterns = {CmdlineEnter = {["*"] = {"^debug%u", "^health%u"}}}, gvar_supports = {"terminal_color_0", "terminal_color_1", "terminal_color_2", "terminal_color_3", "terminal_color_4", "terminal_color_5", "terminal_color_6", "terminal_color_7", "terminal_color_8", "terminal_color_9", "terminal_color_10", "terminal_color_11", "terminal_color_12", "terminal_color_13", "terminal_color_14", "terminal_color_15"}, omit_default = false, resolve_links = false, restore_original_before_execution = false}
 local option_prefix = "excolors_"
 local function get_gvar(key)
   return vim.g[(option_prefix .. key)]
@@ -289,10 +289,10 @@ local function compose_hi_cmd_lines(highlights, dump_all_3f)
     cmd_list = tbl_21_auto
   else
     local filtered_highlights
-    if (false == included_patterns) then
-      filtered_highlights = highlights
-    else
+    if next(included_patterns) then
       filtered_highlights = filter_by_included_patterns(highlights, included_patterns)
+    else
+      filtered_highlights = highlights
     end
     local hl_maps
     do
