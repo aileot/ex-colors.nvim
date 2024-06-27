@@ -61,20 +61,6 @@ when you re-run [`:ExColors`](#:ExColors).
 If set to `true`, `ex-colors` will NOT generate highlight definitions whose
 options are empty tables.
 
-### case_sensitive
-
-(type: `boolean`; default: `true`)
-
-If `true`, the patterns are applied to `hl-group` names as they are;
-on the other hand, if `false`, the patterns are applied in lowercased
-`hl-group` names.
-
-This option affects the patterns of the following options:
-
-- [autocmd_patterns](#autocmd_patterns)
-- [excluded_patterns](#excluded_patterns)
-- [included_patterns](#included_patterns)
-
 ### omit_default
 
 (type: `boolean`; default: `false`)
@@ -89,6 +75,32 @@ See `:help :hi-default`.
 Resolve `link` option,
 i.e.,
 copy the definition map (`fg`, `bg`, etc.) from the linked highlight definition.
+
+### relinker
+
+(type: `fun(string): string|false`; default: `function() end`)
+
+This option is for advanced users.
+
+If `nil`, it does nothing.
+It helps you eliminate obsolete, or deprecated, highlight definitions
+in the output.
+
+The [Cookbook](./COOKBOOK.md) shows demonstrations.
+
+### case_sensitive
+
+(type: `boolean`; default: `true`)
+
+If `true`, the patterns are applied to `hl-group` names as they are;
+on the other hand, if `false`, the patterns are applied in lowercased
+`hl-group` names.
+
+This option affects the patterns of the following options:
+
+- [autocmd_patterns](#autocmd_patterns)
+- [excluded_patterns](#excluded_patterns)
+- [included_patterns](#included_patterns)
 
 ### included_patterns
 
@@ -115,18 +127,6 @@ The [Cookbook](./COOKBOOK.md) shows demonstrations.
 }`)
 
 Generate matched highlight definitions only on the autocmd event.
-
-The [Cookbook](./COOKBOOK.md) shows demonstrations.
-
-### relinker
-
-(type: `fun(string): string|false`; default: `function() end`)
-
-This option is for advanced users.
-
-If `nil`, it does nothing.
-It helps you eliminate obsolete, or deprecated, highlight definitions
-in the output.
 
 The [Cookbook](./COOKBOOK.md) shows demonstrations.
 
