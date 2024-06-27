@@ -75,7 +75,19 @@
           ;; (vim.cmd "highlight clear String")
           (vim.api.nvim_set_hl 0 :String {})
           (vim.cmd "silent ExColors")
-          (assert.buf-contains-no-pattern (.. "vim%.api%.nvim_set_hl%(.-"))))))
+          (assert.buf-contains-no-pattern (.. "vim%.api%.nvim_set_hl%(.-")))))
+    (describe* "does nothing when set to `false`;"
+      (describe* "thus, when hl-String is cleared, with setup-options {ignore_clear=false, autocmd_patterns={}, included_patterns=['^String$']},"
+        (it* ":ExColors will output a `vim.api.nvim_set_hl` line"
+          (setup! {:included_patterns [:^String$]
+                   :autocmd_patterns {}
+                   :ignore_clear false})
+          ;; NOTE: On nvim-v0.9.5, `:highlight clear String` does not update
+          ;; the highlight maps where lua api will access.
+          ;; (vim.cmd "highlight clear String")
+          (vim.api.nvim_set_hl 0 :String {})
+          (vim.cmd "silent ExColors")
+          (assert.buf-contains-pattern (.. "vim%.api%.nvim_set_hl%(.-"))))))
   (describe* :omit_default
     (describe* "discards default field in output;"
       (describe* "thus, when <new-hl-name> is {fg='Red',default=true}"
