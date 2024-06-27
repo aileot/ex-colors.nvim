@@ -54,6 +54,13 @@ increase your filtering costs.
 Keep it disabled, and restart your nvim with the original colorscheme
 when you re-run [`:ExColors`](#:ExColors).
 
+### ignore_clear
+
+(type: `boolean`; default: `true`)
+
+If set to `true`, `ex-colors` will NOT generate highlight definitions whose
+options are empty tables.
+
 ### case_sensitive
 
 (type: `boolean`; default: `true`)
