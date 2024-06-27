@@ -6,7 +6,6 @@
                 : it*} :test.helper.busted-macros)
 
 (local {: buf-get-entire-lines
-        : buf-search-line
         : collect-output-highlights
         : generate-random-hl-name} (include :test.helper.utils))
 
