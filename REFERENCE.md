@@ -92,7 +92,7 @@ copy the definition map (`fg`, `bg`, etc.) from the linked highlight definition.
 
 ### included_patterns
 
-(type: `string[]|false`; default: `{}`)
+(type: `string[]`; default: `{}`)
 
 Set `false` to disable `included_patterns`.
 The [Cookbook](./COOKBOOK.md) shows demonstrations.
@@ -120,7 +120,7 @@ The [Cookbook](./COOKBOOK.md) shows demonstrations.
 
 ### relinker
 
-(type: `nil|fun(string): string|false`; default: `nil`)
+(type: `fun(string): string|false`; default: `function() end`)
 
 This option is for advanced users.
 
