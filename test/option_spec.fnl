@@ -11,7 +11,8 @@
         : generate-random-hl-name} (include :test.helper.utils))
 
 (include :test.context.prerequisites)
-(local {: output-colors-dir : original-colorscheme} (include :test.context.default))
+(local {: output-colors-dir : original-colorscheme}
+       (include :test.context.default))
 
 (local {:setup setup!} (require :ex-colors))
 
