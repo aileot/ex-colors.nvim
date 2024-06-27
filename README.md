@@ -24,11 +24,11 @@ require("ex-colors").setup({
   ignore_clear = true,
   omit_default = false,
   resolve_links = false,
-  ---@type nil|fun(hl_name: string): string|false Return false to discard hl-group.
-  relinker = nil,
+  ---@type fun(hl_name: string): string|false Return false to discard hl-group.
+  relinker = function() end,
   case_sensitive = true,
-  ---@type false|string[] lua patterns
-  included_patterns = false,
+  ---@type string[] lua patterns Set an empty table to disable included_patterns, i.e, just apply excluded_patterns.
+  included_patterns = {},
   ---@type string[] lua patterns
   excluded_patterns = {},
   ---@type table<string,table<string,string[]>>
