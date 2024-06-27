@@ -75,9 +75,7 @@
           ;; (vim.cmd "highlight clear String")
           (vim.api.nvim_set_hl 0 :String {})
           (vim.cmd "silent ExColors")
-          (let [(hl-opts first-line) (buf-search-line (.. "vim%.api%.nvim_set_hl%(.-"))]
-            (when hl-opts
-              (error (.. "unwanted line: " first-line))))))))
+          (assert.buf-contains-no-pattern (.. "vim%.api%.nvim_set_hl%(.-"))))))
   (describe* :omit_default
     (describe* "discards default field in output;"
       (describe* "thus, when <new-hl-name> is {fg='Red',default=true}"
