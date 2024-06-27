@@ -47,6 +47,7 @@
 
 (describe* :option
   (before-each (fn []
+                 (safe-reset!)
                  (vim.cmd.colorscheme original-colorscheme)
                  (setup! {:colors_dir output-colors-dir})))
   (after-each (fn []
