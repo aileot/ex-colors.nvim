@@ -74,7 +74,7 @@ however,
 
 - to be **loaded first** on your nvim startup.
 - to be **managed by yourself** in your dotfiles
-  or any repository for yourself.
+  or any other repository for yourself.
 
 Because of the backgrounds above,
 `ex-colors.nvim` will NOT support the following features:
