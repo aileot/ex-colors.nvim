@@ -11,7 +11,8 @@
         : generate-random-hl-name} (include :test.helper.utils))
 
 (include :test.context.prerequisites)
-(local {: output-colors-dir : original-colorscheme} (include :test.context.default))
+(local {: output-colors-dir : original-colorscheme}
+       (include :test.context.default))
 
 (local {:setup setup!} (require :ex-colors))
 
@@ -52,12 +53,12 @@
   (after-each (fn []
                 (vim.cmd "%delete _")
                 (vim.cmd "silent update")))
-  (describe* "with included_patterns=false and ignore_clear=false, :ExColors does not filter out any highlight definitions;"
+  (describe* "with included_patterns=[] and ignore_clear=false, :ExColors does not filter out any highlight definitions;"
     (describe* "thus, with no other filter options,"
       (it* "the output becomes the same as the output by :ExColors!"
         (vim.cmd "silent ExColors! | silent update")
         (local output-lines-with-bang (buf-get-entire-lines))
-        (setup! {:included_patterns false :ignore_clear false})
+        (setup! {:included_patterns [] :ignore_clear false})
         (vim.cmd "silent ExColors | silent update")
         (local output-lines-with-included_patterns (buf-get-entire-lines))
         (assert.is_same output-lines-with-bang
@@ -98,4 +99,8 @@
               (vim.api.nvim_set_hl 0 new-hl-name {:fg :Red :default true})
               (vim.cmd "silent ExColors | silent update")
               (assert.buf-contains-pattern (.. "vim%.api%.nvim_set_hl%(.-"
-                                               new-hl-name ".-{(.*default.+)}")))))))))
+                                               new-hl-name ".-{(.*default.+)}"))))))))
+  (describe* :included_patterns
+    (describe* "value must be a sequence;"
+      (it* "thus, included_patterns=false throws error"
+        (assert.has_error #(setup! {:included_patterns false}))))))

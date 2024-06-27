@@ -16,10 +16,10 @@
                      :ignore_clear true
                      :omit_default false
                      :resolve_links false
-                     :relinker nil
+                     :relinker #$
                      ;; Related to highlight filter
                      :case_sensitive true
-                     :included_patterns false
+                     :included_patterns []
                      :excluded_patterns []
                      :autocmd_patterns {:CmdlineEnter {:* ["^debug%u"
                                                            "^health%u"]}}
@@ -41,26 +41,25 @@
                                      :terminal_color_14
                                      :terminal_color_15]})
 
-(local option-prefix :excolors_)
+(local opts (setmetatable {}
+              {:__index (fn [self key]
+                          (let [val (. default-opts key)]
+                            (rawset self key val)
+                            val))}))
 
 (fn get-gvar [key]
-  (. vim.g (.. option-prefix key)))
+  (. opts key))
 
 (fn setup [?opts]
   "Set up config.
 @param ?opts table"
   (when ?opts
-    (each [k v (pairs ?opts)]
-      (let [opt-name (.. option-prefix k)]
-        (tset vim.g opt-name v)))))
-
-(fn fill-options-with-default-values []
-  (each [k v (pairs default-opts)]
-    (let [opt-name (.. option-prefix k)]
-      (tset vim.g opt-name (or (. vim.g opt-name) ;
-                               v)))))
-
-(fill-options-with-default-values)
+    (each [key val (pairs ?opts)]
+      (let [expected-type (type (. default-opts key))
+            got-type (type val)]
+        (assert (= got-type expected-type)
+                (: "expected %s, got %s" :format expected-type got-type)))
+      (tset opts key val))))
 
 (fn reset []
   "Reset config to the default options."
@@ -216,10 +215,10 @@
                      (icollect [_ hl-name (ipairs highlights)]
                        (let [hl-map (vim.api.nvim_get_hl 0 {:name hl-name})]
                          (format-nvim-set-hl hl-name hl-map)))
-                     (let [filtered-highlights (if (= false included-patterns)
-                                                   highlights
+                     (let [filtered-highlights (if (next included-patterns)
                                                    (-> highlights
-                                                       (filter-by-included-patterns included-patterns)))
+                                                       (filter-by-included-patterns included-patterns))
+                                                   highlights)
                            hl-maps (collect [_ hl-name (ipairs filtered-highlights)]
                                      (remap-hl-opts hl-name))]
                        (icollect [hl-name hl-map (pairs hl-maps)]
