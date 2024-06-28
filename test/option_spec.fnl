@@ -3,7 +3,8 @@
                 : before-each
                 : after-each
                 : describe*
-                : it*} :test.helper.busted-macros)
+                : it*
+                : assert/spy} :test.helper.busted-macros)
 
 (local {: buf-get-entire-lines
         : collect-output-highlights
@@ -19,6 +20,8 @@
   (let [{:reset reset!} (require :ex-colors)]
     (reset!)
     (setup! {:colors_dir output-colors-dir})))
+
+(var new-hl-name nil)
 
 (describe* ".reset() resets the internal default values to be merged;"
   (before-each (fn []
@@ -47,11 +50,33 @@
 
 (describe* :option
   (before-each (fn []
+                 (safe-reset!)
                  (vim.cmd.colorscheme original-colorscheme)
-                 (setup! {:colors_dir output-colors-dir})))
+                 (setup! {:colors_dir output-colors-dir})
+                 (set new-hl-name (generate-random-hl-name))))
   (after-each (fn []
                 (vim.cmd "%delete _")
                 (vim.cmd "silent update")))
+  (describe* :restore_original_before_execution
+    (describe* "applies the original colorscheme in executing `:ExColors`;"
+      (describe* "thus, when the current colorscheme is `ex-habamax`,"
+        (it* "the original `hamabax` is once applied in executing `:ExColors`"
+          (var ColorScheme-habamax/spy nil)
+          (var ColorScheme-habamax/au-id nil)
+          (vim.cmd "colorscheme habamax")
+          (set ColorScheme-habamax/spy (spy.new #nil))
+          (set ColorScheme-habamax/au-id
+               (vim.api.nvim_create_autocmd :ColorScheme
+                 {:pattern :habamax
+                  :callback (fn []
+                              (ColorScheme-habamax/spy))}))
+          (setup! {:restore_original_before_execution true})
+          (vim.cmd "silent ExColors | silent update")
+          (vim.cmd "colorscheme ex-habamax")
+          (assert/spy ColorScheme-habamax/spy :was_called)
+          (set ColorScheme-habamax/spy nil)
+          (vim.api.nvim_del_autocmd ColorScheme-habamax/au-id)
+          (set ColorScheme-habamax/au-id nil)))))
   (describe* "with included_patterns=[] and ignore_clear=false, :ExColors does not filter out any highlight definitions;"
     (describe* "thus, with no other filter options,"
       (it* "the output becomes the same as the output by :ExColors!"
@@ -92,23 +117,20 @@
       (describe* "thus, when <new-hl-name> is {fg='Red',default=true}"
         (describe* "with options {omit_default=true, included_patterns=[<new-hl-name>]},"
           (it* ":ExColors only outputs <new-hl-name> line without 'default' key."
-            (let [new-hl-name (generate-random-hl-name)]
-              (setup! {:omit_default true
-                       :included_patterns [(.. "^" new-hl-name "$")]})
-              (vim.api.nvim_set_hl 0 new-hl-name {:fg :Red :default true})
-              (vim.cmd "silent ExColors | silent update")
-              (assert.buf-contains-no-pattern (.. "vim%.api%.nvim_set_hl%(.-"
-                                                  new-hl-name
-                                                  ".-{(.*default.+)}")))))
+            (setup! {:omit_default true
+                     :included_patterns [(.. "^" new-hl-name "$")]})
+            (vim.api.nvim_set_hl 0 new-hl-name {:fg :Red :default true})
+            (vim.cmd "silent ExColors | silent update")
+            (assert.buf-contains-no-pattern (.. "vim%.api%.nvim_set_hl%(.-"
+                                                new-hl-name ".-{(.*default.+)}"))))
         (describe* "with options {omit_default=false, included_patterns=[<new-hl-name>]},"
           (it* ":ExColors outputs <new-hl-name> line with 'default' key."
-            (let [new-hl-name (generate-random-hl-name)]
-              (setup! {:omit_default false
-                       :included_patterns [(.. "^" new-hl-name "$")]})
-              (vim.api.nvim_set_hl 0 new-hl-name {:fg :Red :default true})
-              (vim.cmd "silent ExColors | silent update")
-              (assert.buf-contains-pattern (.. "vim%.api%.nvim_set_hl%(.-"
-                                               new-hl-name ".-{(.*default.+)}"))))))))
+            (setup! {:omit_default false
+                     :included_patterns [(.. "^" new-hl-name "$")]})
+            (vim.api.nvim_set_hl 0 new-hl-name {:fg :Red :default true})
+            (vim.cmd "silent ExColors | silent update")
+            (assert.buf-contains-pattern (.. "vim%.api%.nvim_set_hl%(.-"
+                                             new-hl-name ".-{(.*default.+)}")))))))
   (describe* :included_patterns
     (describe* "value must be a sequence;"
       (it* "thus, included_patterns=false throws error"
