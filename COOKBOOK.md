@@ -2,7 +2,8 @@
 
 ## setup
 
-The snippets below are for users who uses the following plugins:
+The set of the snippets below is an example
+for users who uses the following plugins:
 
 - [sainnhe/everforest](https://github.com/sainnhe/everforest)
 - [nvim-telescope/telescope.nvim](https://github.com/)
