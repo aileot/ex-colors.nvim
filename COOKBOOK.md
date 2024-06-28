@@ -1,5 +1,20 @@
 # Cookbook
 
+## Get Active Highlights
+
+To get the currently active highlight definitions,
+try the following commands:
+
+- `:highlight` to display.
+- `:ExColors!`
+  to dump in `ex-<colorscheme>.lua` at [colors_dir](./REFERENCE.md#colors_dir).
+
+To get what highlights are defined by your favorite colorscheme,
+try the following commands:
+
+- `:let &path = &rtp`, and then `:find colors/<tab>`
+  to execute `:find colors/<colorscheme>.vim` or `:find colors/<colorscheme>.lua`.
+
 ## setup
 
 The set of the snippets below is an example
@@ -9,11 +24,6 @@ for users who uses the following plugins:
 - [nvim-telescope/telescope.nvim](https://github.com/)
 
 Please adjust and maintain a copy as your need.
-
-To get what your favorite colorscheme defines, try the following commands:
-- `:ExColors!` in Command line mode.
-- `:let &path = &rtp`, and then `:find colors/<tab>`
-  to execute `:find colors/<colorscheme>.vim` or `:find colors/<colorscheme>.lua`.
 
 <details>
 <summary>
