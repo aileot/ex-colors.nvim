@@ -89,9 +89,21 @@ copy the definition map (`fg`, `bg`, etc.) from the linked highlight definition.
 
 (type: `fun(string): string|false`; default: `function() end`)
 
-This option is for advanced users.
+This option is only for _advanced users_ who find it worthwhile.
 
-If `nil`, it does nothing.
+The callback function will get each highlight definition name, and
+the function can change the highlight name in the output
+as the following rules:
+
+- If a string value is returned for the definition,
+  the highlight definition will be renamed to the returned string value.
+- If `false` is returned for the definition,
+  the definition will NOT be in the output file.
+
+Addition to that, the callback function is also applied to each `link`ed
+highlight definition name.
+(See `:help :hi-link`)
+
 It helps you eliminate obsolete, or deprecated, highlight definitions
 in the output.
 
