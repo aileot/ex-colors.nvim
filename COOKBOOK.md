@@ -427,7 +427,8 @@ require("ex-colors").setup({
       },
     },
   },
+  -- If you find it worthwhile, uncomment `relinker` with a copy of relinker definition in the collapsed snippet above.
   ---@type fun(hl_name: string): string|false Return false to discard hl-group.
-  relinker = relinker,
+  -- relinker = relinker,
 })
 ```
