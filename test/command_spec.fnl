@@ -8,13 +8,13 @@
 (local {: collect-defined-highlights : collect-output-highlights}
        (include :test.helper.utils))
 
+(local {: safe-reset!} (include :test.helper.wrapper))
+
 (local {: assert/buf-contains-no-pattern} (include :test.helper.assert))
 
 (include :test.context.prerequisites)
 (local {: output-colors-dir : output-path : original-colorscheme}
        (include :test.context.default))
-
-(local {:setup setup!} (require :ex-colors))
 
 (describe* :command
   (setup* (fn []
@@ -23,7 +23,7 @@
                (vim.fn.delete output-colors-dir)))
   (before-each (fn []
                  (vim.cmd.colorscheme original-colorscheme)
-                 (setup! {:colors_dir output-colors-dir})))
+                 (safe-reset!)))
   (after-each (fn []
                 (vim.cmd "%delete _")
                 (vim.cmd "silent update")))
