@@ -16,7 +16,7 @@ To get what your favorite colorscheme defines, try the following commands:
 
 <details>
 <summary>
-<i>Given the variables defined in this collapse... (Toooooo long)</i>
+<i>Given the variables defined in this collapsed snippet (This is just a set of lua patterns lists named for convenience sake.),</i>
 </summary>
 
 ```lua
@@ -209,7 +209,7 @@ local inc_patterns_builtin = vim.tbl_map(literal, {
 
 <details>
 <summary>
-<i>and a <b>relinker</b> function... (Toooooooo long again)</i>
+<i>and a <b>relinker</b> function in this collapsed snippet (for advanced users),</i>
 </summary>
 
 ```lua
