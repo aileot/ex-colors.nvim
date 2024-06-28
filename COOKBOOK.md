@@ -399,9 +399,20 @@ require("ex-colors").setup({
     inc_patterns_internal,
   }),
   excluded_patterns = {
-    "@.*%.lua$",
+    "^@.*%.bash$", -- Filetype-specific
+    "^@.*%.c$", -- Filetype-specific
+    "^@.*%.cpp$", -- Filetype-specific
+    "^@.*%.css$", -- Filetype-specific
+    "^@.*%.java$", -- Filetype-specific
+    "^@.*%.json$", -- Filetype-specific
+    "^@.*%.lua$", -- Filetype-specific
+    "^@.*%.php$", -- Filetype-specific
+    "^@.*%.ruby$", -- Filetype-specific
+    "^@.*%.toml$", -- Filetype-specific
+    "^@.*%.tsx$", -- Filetype-specific
+    "^@.*%.typescript$", -- Filetype-specific
     "^Lightspeed", -- LightspeedGreyWash
-    "^MiniIcon%u", -- MiniIconRed, MiniIconBlue, and so on
+    "^MiniIcons%u", -- MiniIconsRed, MiniIconsBlue, and so on
     "^RainbowDelimiter", -- RainbowDelimiterRed, RainbowDelimiterBlue, and so on
     "^Ufo", -- UfoFoldedFg/Bg
   },
