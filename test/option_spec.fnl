@@ -10,6 +10,8 @@
         : collect-output-highlights
         : generate-random-hl-name} (include :test.helper.utils))
 
+(local {: safe-reset!} (include :test.helper.wrapper))
+
 (local {: assert/buf-contains-pattern : assert/buf-contains-no-pattern}
        (include :test.helper.assert))
 
@@ -18,11 +20,6 @@
        (include :test.context.default))
 
 (local {:setup setup!} (require :ex-colors))
-
-(fn safe-reset! []
-  (let [{:reset reset!} (require :ex-colors)]
-    (reset!)
-    (setup! {:colors_dir output-colors-dir})))
 
 (var new-hl-name nil)
 
