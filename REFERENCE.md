@@ -87,7 +87,19 @@ copy the definition map (`fg`, `bg`, etc.) from the linked highlight definition.
 
 ### relinker
 
-(type: `fun(string): string|false`; default: `function() end`)
+(type: `fun(string): string|false`; default: `nil`)
+
+<!--
+NOTE: Actually, the default value is such a function:
+
+```lua
+function(hl_name: string)
+  return hl_name
+end
+```
+
+However, such accuracy is redundant for end-users.
+-->
 
 This option is only for _advanced users_ who find it worthwhile.
 
