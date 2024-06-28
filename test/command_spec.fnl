@@ -8,6 +8,8 @@
 (local {: collect-defined-highlights : collect-output-highlights}
        (include :test.helper.utils))
 
+(local {: assert/buf-contains-no-pattern} (include :test.helper.assert))
+
 (include :test.context.prerequisites)
 (local {: output-colors-dir : output-path : original-colorscheme}
        (include :test.context.default))
@@ -34,7 +36,7 @@
       (vim.cmd "silent ExColors")
       (assert (and vim.empty_dict (vim.empty_dict))
               "vim.empty_dict is invalid in nvim")
-      (assert.buf-contains-no-pattern "vim%.empty_dict%(%)"))
+      (assert/buf-contains-no-pattern "vim%.empty_dict%(%)"))
     (describe* "with `!`"
       (it* "dumps as the same highlight definitions as the previously defined highlights."
         (let [previous-highlights (collect-defined-highlights :highlight)]

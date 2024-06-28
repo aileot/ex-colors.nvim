@@ -10,6 +10,9 @@
         : collect-output-highlights
         : generate-random-hl-name} (include :test.helper.utils))
 
+(local {: assert/buf-contains-pattern : assert/buf-contains-no-pattern}
+       (include :test.helper.assert))
+
 (include :test.context.prerequisites)
 (local {: output-colors-dir : original-colorscheme}
        (include :test.context.default))
@@ -99,7 +102,7 @@
           ;; (vim.cmd "highlight clear String")
           (vim.api.nvim_set_hl 0 :String {})
           (vim.cmd "silent ExColors")
-          (assert.buf-contains-no-pattern (.. "vim%.api%.nvim_set_hl%(.-")))))
+          (assert/buf-contains-no-pattern (.. "vim%.api%.nvim_set_hl%(.-")))))
     (describe* "does nothing when set to `false`;"
       (describe* "thus, when hl-String is cleared, with setup-options {ignore_clear=false, autocmd_patterns={}, included_patterns=['^String$']},"
         (it* ":ExColors will output a `vim.api.nvim_set_hl` line"
@@ -111,7 +114,7 @@
           ;; (vim.cmd "highlight clear String")
           (vim.api.nvim_set_hl 0 :String {})
           (vim.cmd "silent ExColors")
-          (assert.buf-contains-pattern (.. "vim%.api%.nvim_set_hl%(.-"))))))
+          (assert/buf-contains-pattern (.. "vim%.api%.nvim_set_hl%(.-"))))))
   (describe* :omit_default
     (describe* "discards default field in output;"
       (describe* "thus, when <new-hl-name> is {fg='Red',default=true}"
@@ -121,7 +124,7 @@
                      :included_patterns [(.. "^" new-hl-name "$")]})
             (vim.api.nvim_set_hl 0 new-hl-name {:fg :Red :default true})
             (vim.cmd "silent ExColors | silent update")
-            (assert.buf-contains-no-pattern (.. "vim%.api%.nvim_set_hl%(.-"
+            (assert/buf-contains-no-pattern (.. "vim%.api%.nvim_set_hl%(.-"
                                                 new-hl-name ".-{(.*default.+)}"))))
         (describe* "with options {omit_default=false, included_patterns=[<new-hl-name>]},"
           (it* ":ExColors outputs <new-hl-name> line with 'default' key."
@@ -129,7 +132,7 @@
                      :included_patterns [(.. "^" new-hl-name "$")]})
             (vim.api.nvim_set_hl 0 new-hl-name {:fg :Red :default true})
             (vim.cmd "silent ExColors | silent update")
-            (assert.buf-contains-pattern (.. "vim%.api%.nvim_set_hl%(.-"
+            (assert/buf-contains-pattern (.. "vim%.api%.nvim_set_hl%(.-"
                                              new-hl-name ".-{(.*default.+)}")))))))
   (describe* :included_patterns
     (describe* "value must be a sequence;"
