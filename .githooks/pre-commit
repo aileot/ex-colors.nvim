@@ -24,7 +24,9 @@ done < <(git diff --name-only --cached --diff-filter=dr HEAD~ -- "$lua_dir")
 while read -r fnl_file; do
    # Slice path between fnl/ and .fnl.
    lua_file="lua/${fnl_file:4:-4}.lua"
-   if [ "$(git ls-files "$lua_file")" != "" ] || [ -r "$lua_file" ]; then
+   if [ "$(git ls-files "$lua_file")" != "" ] \
+     || [ -r "$lua_file" ] \
+     && [ "${lua_file:(-9)}" != "_spec.lua" ]; then
     git add --no-ignore-removal "$root/$lua_file" >/dev/null
    fi
 done < <(git diff --name-only --cached HEAD~ -- "$fnl_dir")
