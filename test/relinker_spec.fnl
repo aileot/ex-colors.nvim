@@ -19,6 +19,29 @@
                  (safe-reset!)))
   (describe* :relinker
     (describe* "with a definition linked to another definition"
+      (describe* "which also linked to another definition,"
+        (describe* "inherits the second one's map;"
+          (describe* "thus, given `Foo` is linked to `Bar` which also links to `Baz`"
+            (before-each (fn []
+                           (vim.api.nvim_set_hl 0 :Foo {:link :Bar})
+                           (vim.api.nvim_set_hl 0 :Bar {:link :Baz})
+                           (vim.api.nvim_set_hl 0 :Baz {:fg :Red})))
+            (before-each (fn []))
+            (describe* "and the setup option is {included_patterns={'^Foo$', '^Baz$'}, relinker=<OMIT>}"
+              (describe* "where `Bar` is relinked to `Foo`,"
+                (before-each (fn []
+                               (setup! {:included_patterns [:^Foo$ :^Baz$]
+                                        :relinker (fn [hl-name]
+                                                    (case hl-name
+                                                      :Bar :Foo
+                                                      _ hl-name))})
+                               (vim.cmd "silent ExColors | silent update")))
+                (it* "`Bar` does not appear in the output"
+                  (assert/buf-contains-no-pattern :Bar))
+                (it* "`Foo` is linked to `Baz`"
+                  (assert/buf-contains-pattern "Foo.-{.-link.-Baz.-}"))
+                (it* "`Baz` is mapped to {fg=<OMIT>}"
+                  (assert/buf-contains-pattern "Baz.-{.-fg.-}")))))))
       (describe* "which is excluded in setup"
         (describe* "inherits the map from the excluded one;"
           (describe* "thus, given `@boolean` is linked to `TSBoolean`"
