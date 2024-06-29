@@ -67,6 +67,8 @@ local function remap_hl_opts(hl_name)
   local _13_ = relink(hl_name)
   if (_13_ == discard_marker) then
     return nil
+  elseif (_13_ == hl_map.link) then
+    return nil
   elseif (nil ~= _13_) then
     local new_name = _13_
     undefined_highlight_3f(new_name)

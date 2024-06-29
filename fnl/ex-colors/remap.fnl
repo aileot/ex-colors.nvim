@@ -56,6 +56,7 @@
       (set hl-map.default nil))
     (match (relink hl-name)
       discard-marker nil
+      hl-map.link nil
       new-name (do
                  (undefined-highlight? new-name)
                  (case (relink-map-recursively new-name hl-map)
