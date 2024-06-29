@@ -5,65 +5,8 @@
 (local {: flatten : ->oneliner : ensure-dir! : lines->comment-lines}
        (require :ex-colors.utils.general))
 
-(local default-opts {:colors_dir (-> (vim.fn.stdpath :config)
-                                     (Path.join :colors))
-                     :restore_original_before_execution false
-                     ;; NOTE: output_{prefix,suffix} are undocumented since
-                     ;; it is unclear if the options should be supported.
-                     :output_prefix :ex-
-                     :output_suffix ""
-                     ;; Related to highlight definition map
-                     :ignore_clear true
-                     :omit_default false
-                     :resolve_links false
-                     :relinker #$
-                     ;; Related to highlight filter
-                     :case_sensitive true
-                     :included_patterns []
-                     :excluded_patterns []
-                     :autocmd_patterns {:CmdlineEnter {:* ["^debug%u"
-                                                           "^health%u"]}}
-                     ;; Related to additional outputs
-                     :gvar_supports [:terminal_color_0
-                                     :terminal_color_1
-                                     :terminal_color_2
-                                     :terminal_color_3
-                                     :terminal_color_4
-                                     :terminal_color_5
-                                     :terminal_color_6
-                                     :terminal_color_7
-                                     :terminal_color_8
-                                     :terminal_color_9
-                                     :terminal_color_10
-                                     :terminal_color_11
-                                     :terminal_color_12
-                                     :terminal_color_13
-                                     :terminal_color_14
-                                     :terminal_color_15]})
-
-(local opts (setmetatable {}
-              {:__index (fn [self key]
-                          (let [val (. default-opts key)]
-                            (rawset self key val)
-                            val))}))
-
-(fn get-gvar [key]
-  (. opts key))
-
-(fn setup [?opts]
-  "Set up config.
-@param ?opts table"
-  (when ?opts
-    (each [key val (pairs ?opts)]
-      (let [expected-type (type (. default-opts key))
-            got-type (type val)]
-        (assert (= got-type expected-type)
-                (: "expected %s, got %s" :format expected-type got-type)))
-      (tset opts key val))))
-
-(fn reset []
-  "Reset config to the default options."
-  (setup default-opts))
+(local {: get-gvar :setup! setup :reset! reset} (require :ex-colors.config))
+(local {: remap-hl-opts} (require :ex-colors.remap))
 
 (fn collect-defined-highlights []
   (let [output (vim.fn.execute :highlight)]
@@ -99,74 +42,6 @@
                   (name:find ex-pattern))
         (table.insert new-output-list name)))
     new-output-list))
-
-(fn undefined-highlight? [hl-name]
-  "Test `hl-name` is undefined.
-  @param hl-name string
-  @return string?"
-  (let [cmd (.. "highlight " hl-name)]
-    (case (pcall vim.fn.execute cmd)
-      (false result) (case (result:match "E411: highlight group not found: (.+)")
-                       undefined (let [msg (.. "The original colorscheme does not define "
-                                               undefined)]
-                                   (vim.notify_once msg vim.log.levels.INFO)
-                                   undefined)))))
-
-(fn relink-map-recursively [hl-name hl-map]
-  "Apply `relinker` to `hl-map.link`.
-  @param hl-name string
-  @param hl-map table
-  @return table a new hl-map table for the hl-name."
-  (let [relinker (get-gvar :relinker)]
-    (match hl-map.link
-      nil
-      hl-map
-      ;; Note: The option resolve_links must be set to true
-      ;; below.
-      linked
-      (match (relinker linked)
-        ;; Return false to discard the highlight.
-        false
-        nil
-        linked
-        (when-not (undefined-highlight? linked)
-          hl-map)
-        hl-name
-        (let [hl-opts {:name linked}
-              deeper-map (vim.api.nvim_get_hl 0 hl-opts)]
-          (relink-map-recursively hl-name deeper-map))
-        relinked
-        (do
-          (set hl-map.link relinked)
-          (relink-map-recursively hl-name hl-map))
-        nil
-        (error (.. "relinker must return a value; make it return `false` explicitly to discard the hl-group "
-                   linked))))))
-
-(fn remap-hl-opts [hl-name]
-  "Calculate an `hl-opts` of `hl-name` arranged as user options.
-@param hl-name string
-@return table"
-  (let [keep-link? (not (get-gvar :resolve_links))
-        omit-default? (get-gvar :omit_default)
-        ?relink (get-gvar :relinker)
-        hl-opts {:name hl-name :link keep-link?}
-        hl-map (vim.api.nvim_get_hl 0 hl-opts)]
-    (when omit-default?
-      (set hl-map.default nil))
-    (if (= nil ?relink)
-        (values hl-name hl-map)
-        (case (?relink hl-name)
-          false nil
-          new-name (do
-                     (undefined-highlight? new-name)
-                     (case (relink-map-recursively new-name hl-map)
-                       new-map (match new-map.link
-                                 (where (or new-name hl-name)) nil
-                                 _ (values new-name new-map))))
-          nil
-          (error (.. "relinker must return a value; make it return `false` explicitly to discard the hl-group "
-                     hl-name))))))
 
 (fn compose-autocmd-lines [highlights]
   (let [autocmd-patterns (get-gvar :autocmd_patterns)
