@@ -51,23 +51,21 @@
 @return table"
   (let [keep-link? (not (get-gvar :resolve_links))
         omit-default? (get-gvar :omit_default)
-        ?relink (get-gvar :relinker)
+        relink (get-gvar :relinker)
         hl-opts {:name hl-name :link keep-link?}
         hl-map (vim.api.nvim_get_hl 0 hl-opts)]
     (when omit-default?
       (set hl-map.default nil))
-    (if (= nil ?relink)
-        (values hl-name hl-map)
-        (case (?relink hl-name)
-          false nil
-          new-name (do
-                     (undefined-highlight? new-name)
-                     (case (relink-map-recursively new-name hl-map)
-                       new-map (match new-map.link
-                                 (where (or new-name hl-name)) nil
-                                 _ (values new-name new-map))))
-          nil
-          (error (.. "relinker must return a value; make it return `false` explicitly to discard the hl-group "
-                     hl-name))))))
+    (case (relink hl-name)
+      false nil
+      new-name (do
+                 (undefined-highlight? new-name)
+                 (case (relink-map-recursively new-name hl-map)
+                   new-map (match new-map.link
+                             (where (or new-name hl-name)) nil
+                             _ (values new-name new-map))))
+      nil
+      (error (.. "relinker must return a value; make it return `false` explicitly to discard the hl-group "
+                 hl-name)))))
 
 {: remap-hl-opts}
