@@ -20,13 +20,14 @@ local function undefined_highlight_3f(hl_name)
 end
 local function relink_map_recursively(hl_name, hl_map)
   local relinker = get_gvar("relinker")
+  local discard_marker = false
   local _7_ = hl_map.link
   if (_7_ == nil) then
     return hl_map
   elseif (nil ~= _7_) then
     local linked = _7_
     local _8_ = relinker(linked)
-    if (_8_ == false) then
+    if (_8_ == discard_marker) then
       return nil
     elseif (_8_ == linked) then
       if not undefined_highlight_3f(linked) then
@@ -55,6 +56,7 @@ local function remap_hl_opts(hl_name)
   local keep_link_3f = not get_gvar("resolve_links")
   local omit_default_3f = get_gvar("omit_default")
   local relink = get_gvar("relinker")
+  local discard_marker = false
   local hl_opts = {name = hl_name, link = keep_link_3f}
   local hl_map = vim.api.nvim_get_hl(0, hl_opts)
   if omit_default_3f then
@@ -62,7 +64,7 @@ local function remap_hl_opts(hl_name)
   else
   end
   local _13_ = relink(hl_name)
-  if (_13_ == false) then
+  if (_13_ == discard_marker) then
     return nil
   elseif (nil ~= _13_) then
     local new_name = _13_

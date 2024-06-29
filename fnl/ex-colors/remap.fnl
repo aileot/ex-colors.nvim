@@ -19,7 +19,8 @@
   @param hl-name string
   @param hl-map table
   @return table a new hl-map table for the hl-name."
-  (let [relinker (get-gvar :relinker)]
+  (let [relinker (get-gvar :relinker)
+        discard-marker false]
     (match hl-map.link
       nil
       hl-map
@@ -27,20 +28,15 @@
       ;; below.
       linked
       (match (relinker linked)
-        ;; Return false to discard the highlight.
-        false
-        nil
-        linked
-        (when-not (undefined-highlight? linked)
-          hl-map)
-        hl-name
-        (let [hl-opts {:name linked}
-              deeper-map (vim.api.nvim_get_hl 0 hl-opts)]
-          (relink-map-recursively hl-name deeper-map))
-        relinked
-        (do
-          (set hl-map.link relinked)
-          (relink-map-recursively hl-name hl-map))
+        discard-marker nil
+        linked (when-not (undefined-highlight? linked)
+                 hl-map)
+        hl-name (let [hl-opts {:name linked}
+                      deeper-map (vim.api.nvim_get_hl 0 hl-opts)]
+                  (relink-map-recursively hl-name deeper-map))
+        relinked (do
+                   (set hl-map.link relinked)
+                   (relink-map-recursively hl-name hl-map))
         nil
         (error (.. "relinker must return a value; make it return `false` explicitly to discard the hl-group "
                    linked))))))
@@ -52,12 +48,13 @@
   (let [keep-link? (not (get-gvar :resolve_links))
         omit-default? (get-gvar :omit_default)
         relink (get-gvar :relinker)
+        discard-marker false
         hl-opts {:name hl-name :link keep-link?}
         hl-map (vim.api.nvim_get_hl 0 hl-opts)]
     (when omit-default?
       (set hl-map.default nil))
-    (case (relink hl-name)
-      false nil
+    (match (relink hl-name)
+      discard-marker nil
       new-name (do
                  (undefined-highlight? new-name)
                  (case (relink-map-recursively new-name hl-map)
