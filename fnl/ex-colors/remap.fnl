@@ -36,6 +36,7 @@
                   (relink-map-recursively hl-name deeper-map))
         relinked (do
                    (set hl-map.link relinked)
+                   (undefined-highlight? relinked)
                    (relink-map-recursively hl-name hl-map))
         nil
         (error (.. "relinker must return a value; make it return `false` explicitly to discard the hl-group "

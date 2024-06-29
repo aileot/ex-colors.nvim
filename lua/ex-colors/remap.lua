@@ -42,6 +42,7 @@ local function relink_map_recursively(hl_name, hl_map)
     elseif (nil ~= _8_) then
       local relinked = _8_
       hl_map.link = relinked
+      undefined_highlight_3f(relinked)
       return relink_map_recursively(hl_name, hl_map)
     elseif (_8_ == nil) then
       return error(("relinker must return a value; make it return `false` explicitly to discard the hl-group " .. linked))
