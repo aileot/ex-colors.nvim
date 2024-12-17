@@ -1,11 +1,11 @@
 (import-macros {: when-not} :ex-colors.macros)
 
-(local {: get-gvar} (require :ex-colors.config))
+(local config (require :ex-colors.config))
 
 (fn undefined-highlight? [hl-name]
   "Test `hl-name` is undefined.
-  @param hl-name string
-  @return string?"
+@param hl-name string
+@return string?"
   (let [cmd (.. "highlight " hl-name)]
     (case (pcall vim.fn.execute cmd)
       (false result) (case (result:match "E411: highlight group not found: (.+)")
@@ -16,10 +16,10 @@
 
 (fn relink-map-recursively [hl-name hl-map]
   "Apply `relinker` to `hl-map.link`.
-  @param hl-name string
-  @param hl-map table
-  @return table a new hl-map table for the hl-name."
-  (let [relinker (get-gvar :relinker)
+@param hl-name string
+@param hl-map table
+@return table a new hl-map table for the hl-name."
+  (let [relinker config.relinker
         discard-marker false]
     (match hl-map.link
       nil
@@ -46,9 +46,9 @@
   "Calculate an `hl-opts` of `hl-name` arranged as user options.
 @param hl-name string
 @return table"
-  (let [keep-link? (not (get-gvar :resolve_links))
-        omit-default? (get-gvar :omit_default)
-        relink (get-gvar :relinker)
+  (let [keep-link? (not config.resolve_links)
+        omit-default? config.omit_default
+        relink config.relinker
         discard-marker false
         hl-opts {:name hl-name :link keep-link?}
         hl-map (vim.api.nvim_get_hl 0 hl-opts)]

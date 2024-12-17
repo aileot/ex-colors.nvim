@@ -4,12 +4,9 @@ local flatten = _local_1_["flatten"]
 local __3eoneliner = _local_1_["->oneliner"]
 local ensure_dir_21 = _local_1_["ensure-dir!"]
 local lines__3ecomment_lines = _local_1_["lines->comment-lines"]
-local _local_2_ = require("ex-colors.config")
-local get_gvar = _local_2_["get-gvar"]
-local setup = _local_2_["setup!"]
-local reset = _local_2_["reset!"]
-local _local_3_ = require("ex-colors.remap")
-local remap_hl_opts = _local_3_["remap-hl-opts"]
+local config = require("ex-colors.config")
+local _local_2_ = require("ex-colors.remap")
+local remap_hl_opts = _local_2_["remap-hl-opts"]
 local function collect_defined_highlights()
   local output = vim.fn.execute("highlight")
   local tbl_21_auto = {}
@@ -31,16 +28,16 @@ end
 local function filter_by_included_patterns(old_output_list, included_patterns)
   local new_output_list = {}
   for _, name in ipairs(old_output_list) do
-    local _5_
+    local _4_
     do
       local match_3f = nil
       for _0, ex_pattern in ipairs(included_patterns) do
         if match_3f then break end
         match_3f = name:find(ex_pattern)
       end
-      _5_ = match_3f
+      _4_ = match_3f
     end
-    if _5_ then
+    if _4_ then
       table.insert(new_output_list, name)
     else
     end
@@ -49,18 +46,18 @@ local function filter_by_included_patterns(old_output_list, included_patterns)
 end
 local function filter_out_excluded_patterns(old_output_list)
   local new_output_list = {}
-  local excluded_patterns = get_gvar("excluded_patterns")
+  local excluded_patterns = config.excluded_patterns
   for _, name in ipairs(old_output_list) do
-    local _7_
+    local _6_
     do
       local match_3f = nil
       for _0, ex_pattern in ipairs(excluded_patterns) do
         if match_3f then break end
         match_3f = name:find(ex_pattern)
       end
-      _7_ = match_3f
+      _6_ = match_3f
     end
-    if not _7_ then
+    if not _6_ then
       table.insert(new_output_list, name)
     else
     end
@@ -68,7 +65,7 @@ local function filter_out_excluded_patterns(old_output_list)
   return new_output_list
 end
 local function compose_autocmd_lines(highlights)
-  local autocmd_patterns = get_gvar("autocmd_patterns")
+  local autocmd_patterns = config.autocmd_patterns
   local indent_size = 2
   local indent = (" "):rep(indent_size)
   local autocmd_template_lines = {"vim.api.nvim_create_autocmd(%s,{", (indent .. "once = true,"), "})"}
@@ -120,18 +117,18 @@ local function compose_autocmd_lines(highlights)
         local pattern_line = ("  pattern = %s,"):format(__3eoneliner(au_pattern))
         au_opt_lines = flatten({pattern_line, callback_lines})
       end
-      local _let_13_ = vim.deepcopy(autocmd_template_lines)
-      local first_line = _let_13_[1]
-      local lines = _let_13_
+      local _let_12_ = vim.deepcopy(autocmd_template_lines)
+      local first_line = _let_12_[1]
+      local lines = _let_12_
       local event_arg
       do
-        local _14_ = type(au_event)
-        if (_14_ == "string") then
+        local _13_ = type(au_event)
+        if (_13_ == "string") then
           event_arg = ("%q"):format(au_event)
-        elseif (_14_ == "table") then
+        elseif (_13_ == "table") then
           event_arg = au_event
-        elseif (nil ~= _14_) then
-          local _else = _14_
+        elseif (nil ~= _13_) then
+          local _else = _13_
           event_arg = error(("expected string or table, got " .. _else))
         else
           event_arg = nil
@@ -143,18 +140,18 @@ local function compose_autocmd_lines(highlights)
     end
   end
   do
-    local function _18_(_16_, _17_)
-      local cmd_line1 = _16_[1]
-      local cmd_line2 = _17_[1]
+    local function _17_(_15_, _16_)
+      local cmd_line1 = _15_[1]
+      local cmd_line2 = _16_[1]
       return (cmd_line1 < cmd_line2)
     end
-    table.sort(autocmd_list, _18_)
+    table.sort(autocmd_list, _17_)
   end
   return flatten(autocmd_list)
 end
 local function compose_hi_cmd_lines(highlights, dump_all_3f)
-  local included_patterns = get_gvar("included_patterns")
-  local ignore_clear_3f = get_gvar("ignore_clear")
+  local included_patterns = config.included_patterns
+  local ignore_clear_3f = config.ignore_clear
   local cmd_list
   if dump_all_3f then
     local tbl_21_auto = {}
@@ -212,8 +209,8 @@ local function compose_hi_cmd_lines(highlights, dump_all_3f)
   return flatten(cmd_list)
 end
 local function compose_colors_names()
-  local ex_prefix = get_gvar("output_prefix")
-  local ex_suffix = get_gvar("output_suffix")
+  local ex_prefix = config.output_prefix
+  local ex_suffix = config.output_suffix
   local ex_prefix_length = #ex_prefix
   local ex_suffix_length = #ex_suffix
   local raw_colors_name = vim.fn.execute("colorscheme"):gsub("\n", "")
@@ -238,7 +235,7 @@ local function compose_colors_names()
 end
 local function compose_gvar_cmd_lines(ex_colors_name)
   local file_ext = "lua"
-  local gvar_supports = get_gvar("gvar_supports")
+  local gvar_supports = config.gvar_supports
   local gvar_template
   if (file_ext == "lua") then
     gvar_template = "vim.api.nvim_set_var(%q,%s)"
@@ -277,8 +274,8 @@ local function overwrite_buf_lines_21(buf, lines)
 end
 local function generate_hi_cmds(dump_all_3f)
   local file_ext = "lua"
-  local dir = get_gvar("colors_dir")
-  local restore_original_3f = get_gvar("restore_original_before_execution")
+  local dir = config.colors_dir
+  local restore_original_3f = config.restore_original_before_execution
   local ex_colors_name, original_colors_name = compose_colors_names()
   local output_path = Path.join(dir, (ex_colors_name .. "." .. file_ext))
   ensure_dir_21(dir)
@@ -302,5 +299,19 @@ local function generate_hi_cmds(dump_all_3f)
   local buf = vim.api.nvim_get_current_buf()
   local lines = flatten({credit_lines, cmd_lines})
   return overwrite_buf_lines_21(buf, lines)
+end
+
+--- Setup `ex-colors`.
+---@param opts? table
+
+local function setup(opts)
+  local opts0 = (opts or {})
+  return config.merge(opts0)
+end
+
+--- Reset `ex-colors` config. for Testing purposes only.
+
+local function reset()
+  return config.reset()
 end
 return {setup = setup, reset = reset, ["generate-hi-cmds"] = generate_hi_cmds}
