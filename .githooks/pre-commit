@@ -13,20 +13,26 @@ root=$(git rev-parse --show-toplevel)
 fnl_dir="$root/fnl"
 lua_dir="$root/lua"
 
+declare -A lua_exceptions=(
+  ["lua/ex-colors/config.lua"]=1
+)
+
 make build >/dev/null
 
 # Unstage all the compiled lua files except deleted ones.
 while read -r lua_file; do
-   git reset "$lua_file" >/dev/null
+  set +u
+  if [[ "${lua_exceptions[$lua_file]}" == "" ]]; then
+    git restore --staged "$lua_file" >/dev/null
+  fi
+  set -u
 done < <(git diff --name-only --cached --diff-filter=dr HEAD~ -- "$lua_dir")
 
 # Stage the compiled lua files corresponding to currently staged fnl files.
 while read -r fnl_file; do
-   # Slice path between fnl/ and .fnl.
-   lua_file="lua/${fnl_file:4:-4}.lua"
-   if [ "$(git ls-files "$lua_file")" != "" ] \
-     || [ -r "$lua_file" ] \
-     && [ "${lua_file:(-9)}" != "_spec.lua" ]; then
+  # Slice path between fnl/ and .fnl.
+  lua_file="lua/${fnl_file:4:-4}.lua"
+  if [ "$(git ls-files "$lua_file")" != "" ] || [ -r "$lua_file" ]; then
     git add --no-ignore-removal "$root/$lua_file" >/dev/null
-   fi
+  fi
 done < <(git diff --name-only --cached HEAD~ -- "$fnl_dir")
