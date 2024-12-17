@@ -1,14 +1,15 @@
 local Path = require("ex-colors.utils.path")
 local default_opts
-local function _1_(_241)
-  return _241
-end
 default_opts = {
   colors_dir = Path.join(vim.fn.stdpath("config"), "colors"),
   output_prefix = "ex-",
   output_suffix = "",
   ignore_clear = true,
-  relinker = _1_,
+  ---@param hl_name string
+  ---@return string|false
+  relinker = function(hl_name)
+    return hl_name
+  end,
   case_sensitive = true,
   included_patterns = {},
   excluded_patterns = {},
