@@ -13,19 +13,11 @@ root=$(git rev-parse --show-toplevel)
 fnl_dir="$root/fnl"
 lua_dir="$root/lua"
 
-declare -A lua_exceptions=(
-  ["lua/ex-colors/config.lua"]=1
-)
-
 make build >/dev/null
 
 # Unstage all the compiled lua files except deleted ones.
 while read -r lua_file; do
-  set +u
-  if [[ "${lua_exceptions[$lua_file]}" == "" ]]; then
-    git restore --staged "$lua_file" >/dev/null
-  fi
-  set -u
+  git restore --staged "$lua_file" >/dev/null
 done < <(git diff --name-only --cached --diff-filter=dr HEAD~ -- "$lua_dir")
 
 # Stage the compiled lua files corresponding to currently staged fnl files.
