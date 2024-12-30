@@ -5,12 +5,22 @@ local M = {}
 
 ---@class ExColors.Config
 local default_opts = {
+  --- The output directory path. The path should end with `/colors` on any
+  --- path included in `&runtimepath`.
   ---@type string
   colors_dir = Path.join(vim.fn.stdpath("config"), "colors"),
+  --- If true, the filter options like `included_patterns`,
+  --- `excluded_patterns`, and `relinker` are applied to the highlight groups
+  --- as they are last defined; otherwise, the highlight definitions are
+  --- lowered.
   ---@type boolean
   case_sensitive = true,
+  --- If true, highlight definitions cleared by `:highlight clear` will not be
+  --- included in the output. See `:h highlight-clear` for details.
   ---@type boolean
   ignore_clear = true,
+  --- If true, omit `default` keys from the output highlight definitions.
+  --- See `:h highlight-default` for the details.
   ---@type boolean
   omit_default = false,
   ---@type boolean
@@ -20,11 +30,17 @@ local default_opts = {
   relinker = function(hl_name)
     return hl_name
   end,
+  --- Highlight group name patterns which should be included in the output.
   ---@type string[]
   included_patterns = {},
+  --- Highlight group name patterns which should be excluded in the output.
   ---@type string[]
   excluded_patterns = {},
+  --- Highlight group name patterns which should be only defined on the
+  --- autocmd event patterns.
+  ---@type table<string,string[]>
   autocmd_patterns = {},
+  --- Vim options which should be also included in the colorscheme output.
   ---@type string[]
   gvar_supports = {
     "terminal_color_0",
