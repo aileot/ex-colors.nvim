@@ -21,7 +21,6 @@ The following snippet sets up the options with the default values:
 ```lua
 require("ex-colors").setup({
   colors_dir = vim.fn.stdpath("config") .. "/colors",
-  restore_original_before_execution = false,
   ignore_clear = true,
   omit_default = false,
   resolve_links = false,
