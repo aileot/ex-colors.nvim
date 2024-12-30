@@ -34,14 +34,7 @@ require("ex-colors").setup({
   ---@type string[] lua patterns
   excluded_patterns = {},
   ---@type table<string,table<string,string[]>>
-  autocmd_patterns = {
-    CmdlineEnter = {
-      ["*"] = {
-        "^debug%u",
-        "^health%u",
-      },
-    },
-  },
+  autocmd_patterns = {},
   -- e.g., generate `vim.api.nvim_set_var("terminal_color_0","#000000")`.
   gvar_supports = {
     "terminal_color_0",
@@ -60,6 +53,21 @@ require("ex-colors").setup({
     "terminal_color_13",
     "terminal_color_14",
     "terminal_color_15",
+  },
+})
+```
+
+### Recommended Settings
+
+```lua
+require("ex-colors").setup({
+  autocmd_patterns = {
+    CmdlineEnter = {
+      ["*"] = {
+        "^debug%u",
+        "^health%u",
+      },
+    },
   },
 })
 ```

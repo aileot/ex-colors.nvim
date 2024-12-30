@@ -8,19 +8,19 @@ local default_opts = {
   ---@type string
   colors_dir = Path.join(vim.fn.stdpath("config"), "colors"),
   ---@type boolean
-  ignore_clear = true,
+  ignore_clear = false,
   ---@param hl_name string
   ---@return string|false
   relinker = function(hl_name)
     return hl_name
   end,
   ---@type boolean
-  case_sensitive = true,
+  case_sensitive = false,
   ---@type string[]
   included_patterns = {},
   ---@type string[]
   excluded_patterns = {},
-  autocmd_patterns = { CmdlineEnter = { ["*"] = { "^debug%u", "^health%u" } } },
+  autocmd_patterns = {},
   ---@type string[]
   gvar_supports = {
     "terminal_color_0",

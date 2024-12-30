@@ -20,7 +20,7 @@ local default_opts = {
   included_patterns = {},
   ---@type string[]
   excluded_patterns = {},
-  autocmd_patterns = { CmdlineEnter = { ["*"] = { "^debug%u", "^health%u" } } },
+  autocmd_patterns = {},
   ---@type string[]
   gvar_supports = {
     "terminal_color_0",
