@@ -8,14 +8,18 @@ local default_opts = {
   ---@type string
   colors_dir = Path.join(vim.fn.stdpath("config"), "colors"),
   ---@type boolean
+  case_sensitive = true,
+  ---@type boolean
   ignore_clear = true,
+  ---@type boolean
+  omit_default = false,
+  ---@type boolean
+  resolve_links = false,
   ---@param hl_name string
   ---@return string|false
   relinker = function(hl_name)
     return hl_name
   end,
-  ---@type boolean
-  case_sensitive = true,
   ---@type string[]
   included_patterns = {},
   ---@type string[]
@@ -40,10 +44,6 @@ local default_opts = {
     "terminal_color_14",
     "terminal_color_15",
   },
-  ---@type boolean
-  omit_default = false,
-  ---@type boolean
-  resolve_links = false,
 }
 
 local current_config = vim.deepcopy(default_opts)
