@@ -26,7 +26,9 @@ require("ex-colors").setup({
   omit_default = false,
   resolve_links = false,
   ---@type fun(hl_name: string): string|false Return false to discard hl-group.
-  relinker = function() end,
+  relinker = function(hl_name)
+    return hl_name
+  end,
   case_sensitive = true,
   ---@type string[] lua patterns Set an empty table to disable included_patterns, i.e, just apply excluded_patterns.
   included_patterns = {},
@@ -38,7 +40,7 @@ require("ex-colors").setup({
       ["*"] = {
         "^debug%u",
         "^health%u",
-      }
+      },
     },
   },
   -- e.g., generate `vim.api.nvim_set_var("terminal_color_0","#000000")`.

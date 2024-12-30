@@ -1,0 +1,14 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "bump-minor-pre-major": true,
+  "bump-patch-for-minor-pre-major": true,
+  "release-search-depth": 3,
+  "commit-search-depth": 50,
+  "packages": {
+    ".": {
+      "release-type": "simple",
+      "package-name": "ex-colors.nvim",
+      "include-component-in-tag": false
+    }
+  }
+}

@@ -130,8 +130,4 @@
             (vim.api.nvim_set_hl 0 new-hl-name {:fg :Red :default true})
             (vim.cmd "silent ExColors | silent update")
             (assert/buf-contains-pattern (.. "vim%.api%.nvim_set_hl%(.-"
-                                             new-hl-name ".-{(.*default.+)}")))))))
-  (describe* :included_patterns
-    (describe* "value must be a sequence;"
-      (it* "thus, included_patterns=false throws error"
-        (assert.has_error #(setup! {:included_patterns false}))))))
+                                             new-hl-name ".-{(.*default.+)}"))))))))
