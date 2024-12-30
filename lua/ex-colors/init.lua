@@ -275,15 +275,10 @@ end
 local function generate_hi_cmds(dump_all_3f)
   local file_ext = "lua"
   local dir = config.colors_dir
-  local restore_original_3f = config.restore_original_before_execution
   local ex_colors_name, original_colors_name = compose_colors_names()
   local output_path = Path.join(dir, (ex_colors_name .. "." .. file_ext))
   ensure_dir_21(dir)
   vim.cmd(("tab drop " .. output_path))
-  if restore_original_3f then
-    vim.cmd.colorscheme(original_colors_name)
-  else
-  end
   local highlights = collect_defined_highlights()
   local filtered_highlights
   if dump_all_3f then

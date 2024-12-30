@@ -164,13 +164,10 @@
 (fn generate-hi-cmds [dump-all?]
   (let [file-ext :lua
         dir config.colors_dir
-        restore-original? config.restore_original_before_execution
         (ex-colors-name original-colors-name) (compose-colors-names)
         output-path (Path.join dir (.. ex-colors-name "." file-ext))]
     (ensure-dir! dir)
     (vim.cmd (.. "tab drop " output-path))
-    (when restore-original?
-      (vim.cmd.colorscheme original-colors-name))
     (let [highlights (collect-defined-highlights)
           filtered-highlights (if dump-all?
                                   highlights

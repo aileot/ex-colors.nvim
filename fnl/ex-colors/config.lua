@@ -46,7 +46,6 @@ local default_opts = {
   omit_default = false,
   ---@type boolean
   resolve_links = false,
-  restore_original_before_execution = false,
 }
 
 local current_config = vim.deepcopy(default_opts)
