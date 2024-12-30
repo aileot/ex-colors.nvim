@@ -56,7 +56,7 @@ local current_config = vim.deepcopy(default_opts)
 M.merge = function(opts)
   opts = opts or {}
   -- NOTE: Call `reset` before to make it idempotent.
-  current_config = vim.tbl_deep_extend("keep", opts, current_config)
+  current_config = vim.tbl_extend("keep", opts, current_config)
   return current_config
 end
 
