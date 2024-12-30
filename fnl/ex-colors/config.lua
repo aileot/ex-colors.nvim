@@ -7,8 +7,6 @@ local M = {}
 local default_opts = {
   ---@type string
   colors_dir = Path.join(vim.fn.stdpath("config"), "colors"),
-  output_prefix = "ex-",
-  output_suffix = "",
   ---@type boolean
   ignore_clear = true,
   ---@param hl_name string
