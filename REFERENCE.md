@@ -50,19 +50,6 @@ a single `g:colors_name`:
 The directory, in absolute path,
 to generate new colorscheme files by the command [`:ExColors`](#:ExColors).
 
-### restore_original_before_execution
-
-(type: `boolean`; default: `false`)
-
-If set to `true`, `ex-colors` resets to the original colorscheme,
-assumed by current <i>ex-</i>colorscheme name,
-just before collecting highlight definitions.
-Enabling this option is, however, _unrecommended;_
-the reset is likely to make `ex-colors` collect unwanted definitions only to
-increase your filtering costs.
-Keep it disabled, and restart your nvim with the original colorscheme
-when you re-run [`:ExColors`](#:ExColors).
-
 ### ignore_clear
 
 (type: `boolean`; default: `true`)
@@ -76,14 +63,6 @@ options are empty tables.
 
 If `true`, omit the `default` keys in the output.
 See `:help :hi-default`.
-
-### resolve_links
-
-(type: `boolean`; default: `false`)
-
-Resolve `link` option,
-i.e.,
-copy the definition map (`fg`, `bg`, etc.) from the linked highlight definition.
 
 ### relinker
 

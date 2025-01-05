@@ -46,7 +46,7 @@
   "Calculate an `hl-opts` of `hl-name` arranged as user options.
 @param hl-name string
 @return table"
-  (let [keep-link? (not config.resolve_links)
+  (let [keep-link? true
         omit-default? config.omit_default
         relink config.relinker
         discard-marker false

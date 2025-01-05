@@ -23,8 +23,6 @@ local default_opts = {
   --- See `:h highlight-default` for the details.
   ---@type boolean
   omit_default = false,
-  ---@type boolean
-  resolve_links = false,
   ---@param hl_name string
   ---@return string|false
   relinker = function(hl_name)
