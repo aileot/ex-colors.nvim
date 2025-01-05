@@ -40,13 +40,8 @@ REPO_MACRO_PATH := $(REPO_MACRO_DIR)/?.fnl;$(REPO_MACRO_DIR)/?/init.fnl
 .DEFAULT_GOAL := help
 .PHONY: help
 help: ## Show this help
-	@echo
-	@echo 'Usage:'
-	@echo '  make <target> [flags...]'
-	@echo
-	@echo 'Targets:'
-	@egrep -h '^\S+: .*## \S+' $(MAKEFILE_LIST) | sed 's/: .*##/:/' | column -t -c 2 -s ':' | sed 's/^/  /'
-	@echo
+	@echo Targets:
+	@egrep -h '^\S+: .*## \S+' $(MAKEFILE_LIST) | sed 's/: .*##/:/' | column -t -s ':' | sed 's/^/  /'
 
 lua/%/:
 	@mkdir -p $@
@@ -66,14 +61,14 @@ lua/ex-colors/config.lua: fnl/ex-colors/config.lua
 	@echo $< "	->	" $@
 
 .PHONY: clean
-clean:
+clean: ## Remove generated files
 	@rm -rf lua/
 	@rm -f $(LUA_SPECS)
 
 .PHONY: build
-build: $(LUA_RES_DIRS) $(LUA_RES)
+build: $(LUA_RES_DIRS) $(LUA_RES) ## Compile fennel files from fnl/ into lua/
 
-%_spec.lua: %_spec.fnl $(LUA_RES) $(TEST_DEPS) ## Compile fnl spec file into lua
+%_spec.lua: %_spec.fnl $(LUA_RES) $(TEST_DEPS)
 	@$(FENNEL) \
 		$(FNL_FLAGS) \
 		$(FNL_EXTRA_FLAGS) \
