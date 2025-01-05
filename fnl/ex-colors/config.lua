@@ -7,8 +7,6 @@ local M = {}
 local default_opts = {
   ---@type string
   colors_dir = Path.join(vim.fn.stdpath("config"), "colors"),
-  output_prefix = "ex-",
-  output_suffix = "",
   ---@type boolean
   ignore_clear = true,
   ---@param hl_name string
@@ -46,7 +44,6 @@ local default_opts = {
   omit_default = false,
   ---@type boolean
   resolve_links = false,
-  restore_original_before_execution = false,
 }
 
 local current_config = vim.deepcopy(default_opts)

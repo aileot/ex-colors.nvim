@@ -57,26 +57,6 @@
   (after-each (fn []
                 (vim.cmd "%delete _")
                 (vim.cmd "silent update")))
-  (describe* :restore_original_before_execution
-    (describe* "applies the original colorscheme in executing `:ExColors`;"
-      (describe* "thus, when the current colorscheme is `ex-habamax`,"
-        (it* "the original `hamabax` is once applied in executing `:ExColors`"
-          (var ColorScheme-habamax/spy nil)
-          (var ColorScheme-habamax/au-id nil)
-          (vim.cmd "colorscheme habamax")
-          (set ColorScheme-habamax/spy (spy.new #nil))
-          (set ColorScheme-habamax/au-id
-               (vim.api.nvim_create_autocmd :ColorScheme
-                 {:pattern :habamax
-                  :callback (fn []
-                              (ColorScheme-habamax/spy))}))
-          (setup! {:restore_original_before_execution true})
-          (vim.cmd "silent ExColors | silent update")
-          (vim.cmd "colorscheme ex-habamax")
-          (assert/spy ColorScheme-habamax/spy :was_called)
-          (set ColorScheme-habamax/spy nil)
-          (vim.api.nvim_del_autocmd ColorScheme-habamax/au-id)
-          (set ColorScheme-habamax/au-id nil)))))
   (describe* "with included_patterns=[] and ignore_clear=false, :ExColors does not filter out any highlight definitions;"
     (describe* "thus, with no other filter options,"
       (it* "the output becomes the same as the output by :ExColors!"

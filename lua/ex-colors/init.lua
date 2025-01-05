@@ -209,10 +209,8 @@ local function compose_hi_cmd_lines(highlights, dump_all_3f)
   return flatten(cmd_list)
 end
 local function compose_colors_names()
-  local ex_prefix = config.output_prefix
-  local ex_suffix = config.output_suffix
+  local ex_prefix = "ex-"
   local ex_prefix_length = #ex_prefix
-  local ex_suffix_length = #ex_suffix
   local raw_colors_name = vim.fn.execute("colorscheme"):gsub("\n", "")
   local raw_prefix
   if ("" == ex_prefix) then
@@ -220,17 +218,11 @@ local function compose_colors_names()
   else
     raw_prefix = raw_colors_name:sub(1, ex_prefix_length)
   end
-  local raw_suffix
-  if ("" == ex_suffix) then
-    raw_suffix = ""
-  else
-    raw_suffix = raw_colors_name:sub((-1 - #raw_colors_name - ex_suffix_length))
-  end
-  local already_extracted_3f = ((raw_prefix == ex_prefix) and (raw_suffix == ex_suffix))
+  local already_extracted_3f = (raw_prefix == ex_prefix)
   if already_extracted_3f then
-    return raw_colors_name, raw_colors_name:sub((1 + ex_prefix_length), (-1 - ex_suffix_length))
+    return raw_colors_name, raw_colors_name:sub((1 + ex_prefix_length))
   else
-    return (ex_prefix .. raw_colors_name .. ex_suffix), raw_colors_name
+    return (ex_prefix .. raw_colors_name), raw_colors_name
   end
 end
 local function compose_gvar_cmd_lines(ex_colors_name)
@@ -275,15 +267,10 @@ end
 local function generate_hi_cmds(dump_all_3f)
   local file_ext = "lua"
   local dir = config.colors_dir
-  local restore_original_3f = config.restore_original_before_execution
   local ex_colors_name, original_colors_name = compose_colors_names()
   local output_path = Path.join(dir, (ex_colors_name .. "." .. file_ext))
   ensure_dir_21(dir)
   vim.cmd(("tab drop " .. output_path))
-  if restore_original_3f then
-    vim.cmd.colorscheme(original_colors_name)
-  else
-  end
   local highlights = collect_defined_highlights()
   local filtered_highlights
   if dump_all_3f then
