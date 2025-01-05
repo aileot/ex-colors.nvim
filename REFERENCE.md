@@ -27,9 +27,9 @@ a single `g:colors_name`:
 1. Given a colorscheme plugin _foobar.nvim_,
 
    - which provides 3 flavors:
-   (_foobar-dark_,
-   _foobar-light_,
-   _foobar-dimmed_),
+     (_foobar-dark_,
+     _foobar-light_,
+     _foobar-dimmed_),
 
    - but `g:colors_name` is set to `"foobar"` each.
 
