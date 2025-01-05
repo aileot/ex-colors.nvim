@@ -61,9 +61,10 @@ require("ex-colors").setup({
   --- autocmd event patterns.
   ---@type table<string,string[]>
   autocmd_patterns = {},
-  --- Vim options which should be also included in the colorscheme output.
+  --- Vim global variables (g:foobar or vim.g.foobar) which should be also
+  --- embedded in the colorscheme output to be updated at the same time.
   ---@type string[]
-  gvar_supports = {
+  embedded_variables = {
     "terminal_color_0",
     "terminal_color_1",
     "terminal_color_2",

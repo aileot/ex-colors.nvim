@@ -142,7 +142,7 @@ Generate matched highlight definitions only on the autocmd event.
 
 The [Cookbook](./COOKBOOK.md) shows demonstrations.
 
-### gvar_supports
+### embedded_variables
 
 (type: `string[]`; default: `{
     "terminal_color_0",

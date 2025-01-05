@@ -229,7 +229,7 @@ local function compose_colors_names()
 end
 local function compose_gvar_cmd_lines(ex_colors_name)
   local file_ext = "lua"
-  local gvar_supports = config.gvar_supports
+  local gvar_supports = config.embedded_variables
   local gvar_template
   if (file_ext == "lua") then
     gvar_template = "vim.api.nvim_set_var(%q,%s)"
