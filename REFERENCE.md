@@ -80,7 +80,7 @@ end
 However, such accuracy is redundant for end-users.
 -->
 
-This option is only for _advanced users_ who find it worthwhile.
+This option is for _advanced users_ who find it worthwhile.
 
 The callback function will get each highlight definition name, and
 the function can change the highlight name in the output
