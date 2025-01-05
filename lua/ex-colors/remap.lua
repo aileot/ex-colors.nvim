@@ -53,7 +53,7 @@ local function relink_map_recursively(hl_name, hl_map)
   end
 end
 local function remap_hl_opts(hl_name)
-  local keep_link_3f = not config.resolve_links
+  local keep_link_3f = true
   local omit_default_3f = config.omit_default
   local relink = config.relinker
   local discard_marker = false

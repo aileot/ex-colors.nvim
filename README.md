@@ -20,30 +20,43 @@ The following snippet sets up the options with the default values:
 
 ```lua
 require("ex-colors").setup({
+  --- The output directory path. The path should end with `/colors` on any
+  --- path included in `&runtimepath`.
+  ---@type string
   colors_dir = vim.fn.stdpath("config") .. "/colors",
-  restore_original_before_execution = false,
+  --- If true, the filter options like `included_patterns`,
+  --- `excluded_patterns`, and `relinker` are applied to the highlight groups
+  --- as they are last defined; otherwise, the highlight definitions are
+  --- lowered.
+  ---@type boolean
+  case_sensitive = true,
+  --- If true, highlight definitions cleared by `:highlight clear` will not be
+  --- included in the output. See `:h highlight-clear` for details.
+  ---@type boolean
   ignore_clear = true,
+  --- If true, omit `default` keys from the output highlight definitions.
+  --- See `:h highlight-default` for the details.
+  ---@type boolean
   omit_default = false,
+  ---@type boolean
   resolve_links = false,
-  ---@type fun(hl_name: string): string|false Return false to discard hl-group.
+  ---@param hl_name string
+  ---@return string|false
   relinker = function(hl_name)
     return hl_name
   end,
-  case_sensitive = true,
-  ---@type string[] lua patterns Set an empty table to disable included_patterns, i.e, just apply excluded_patterns.
+  --- Highlight group name patterns which should be included in the output.
+  ---@type string[]
   included_patterns = {},
-  ---@type string[] lua patterns
+  --- Highlight group name patterns which should be excluded in the output.
+  ---@type string[]
   excluded_patterns = {},
-  ---@type table<string,table<string,string[]>>
-  autocmd_patterns = {
-    CmdlineEnter = {
-      ["*"] = {
-        "^debug%u",
-        "^health%u",
-      },
-    },
-  },
-  -- e.g., generate `vim.api.nvim_set_var("terminal_color_0","#000000")`.
+  --- Highlight group name patterns which should be only defined on the
+  --- autocmd event patterns.
+  ---@type table<string,string[]>
+  autocmd_patterns = {},
+  --- Vim options which should be also included in the colorscheme output.
+  ---@type string[]
   gvar_supports = {
     "terminal_color_0",
     "terminal_color_1",
@@ -61,6 +74,21 @@ require("ex-colors").setup({
     "terminal_color_13",
     "terminal_color_14",
     "terminal_color_15",
+  },
+})
+```
+
+### Recommended Settings
+
+```lua
+require("ex-colors").setup({
+  autocmd_patterns = {
+    CmdlineEnter = {
+      ["*"] = {
+        "^debug%u",
+        "^health%u",
+      },
+    },
   },
 })
 ```

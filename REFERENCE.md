@@ -27,9 +27,9 @@ a single `g:colors_name`:
 1. Given a colorscheme plugin _foobar.nvim_,
 
    - which provides 3 flavors:
-   (_foobar-dark_,
-   _foobar-light_,
-   _foobar-dimmed_),
+     (_foobar-dark_,
+     _foobar-light_,
+     _foobar-dimmed_),
 
    - but `g:colors_name` is set to `"foobar"` each.
 
@@ -50,19 +50,6 @@ a single `g:colors_name`:
 The directory, in absolute path,
 to generate new colorscheme files by the command [`:ExColors`](#:ExColors).
 
-### restore_original_before_execution
-
-(type: `boolean`; default: `false`)
-
-If set to `true`, `ex-colors` resets to the original colorscheme,
-assumed by current <i>ex-</i>colorscheme name,
-just before collecting highlight definitions.
-Enabling this option is, however, _unrecommended;_
-the reset is likely to make `ex-colors` collect unwanted definitions only to
-increase your filtering costs.
-Keep it disabled, and restart your nvim with the original colorscheme
-when you re-run [`:ExColors`](#:ExColors).
-
 ### ignore_clear
 
 (type: `boolean`; default: `true`)
@@ -76,14 +63,6 @@ options are empty tables.
 
 If `true`, omit the `default` keys in the output.
 See `:help :hi-default`.
-
-### resolve_links
-
-(type: `boolean`; default: `false`)
-
-Resolve `link` option,
-i.e.,
-copy the definition map (`fg`, `bg`, etc.) from the linked highlight definition.
 
 ### relinker
 
@@ -101,7 +80,7 @@ end
 However, such accuracy is redundant for end-users.
 -->
 
-This option is only for _advanced users_ who find it worthwhile.
+This option is for _advanced users_ who find it worthwhile.
 
 The callback function will get each highlight definition name, and
 the function can change the highlight name in the output
