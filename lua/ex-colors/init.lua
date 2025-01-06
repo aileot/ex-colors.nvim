@@ -270,7 +270,9 @@ local function generate_hi_cmds(dump_all_3f)
   local ex_colors_name, original_colors_name = compose_colors_names()
   local output_path = Path.join(dir, (ex_colors_name .. "." .. file_ext))
   ensure_dir_21(dir)
+  vim.cmd("syntax off")
   vim.cmd(("tab drop " .. output_path))
+  vim.cmd("syntax enable")
   local highlights = collect_defined_highlights()
   local filtered_highlights
   if dump_all_3f then
