@@ -1,4 +1,4 @@
--- NOTE: This file will be copied to lua/ex-colors/config.lua by make.
+-- NOTE: This file will be copied into lua/ by make.
 local Path = require("ex-colors.utils.path")
 
 local M = {}
