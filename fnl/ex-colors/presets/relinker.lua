@@ -2,7 +2,9 @@
 
 local M = {}
 
----@type fun(hl_name: string): string|false Return false to discard hl-group.
+---@alias ExColors.relinker fun(hl_name: string): string|false Return false to discard hl-group.
+
+---@type ExColors.relinker
 function M.all_in_one(hl_name)
   if hl_name:find("%aItalic$") then
     -- Merge internal italic-color hl-groups like RedItalic into Red.
