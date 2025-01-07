@@ -23,11 +23,9 @@ local default_opts = {
   --- See `:h highlight-default` for the details.
   ---@type boolean
   omit_default = false,
-  ---@param hl_name string
-  ---@return string|false
-  relinker = function(hl_name)
-    return hl_name
-  end,
+  --- Return false to discard hl-group.
+  ---@type fun(hl_name: string): string|false
+  relinker = require("ex-colors.presets").relinker.all_in_one,
   --- Highlight group name patterns which should be included in the output.
   ---@type string[]
   included_patterns = {},
