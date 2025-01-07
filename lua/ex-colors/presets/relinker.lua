@@ -5,19 +5,8 @@ local M = {}
 ---@alias ExColors.relinker fun(hl_name: string): string|false Return false to discard hl-group.
 
 ---@type ExColors.relinker
-function M.all_in_one(hl_name)
-  if hl_name:find("%aItalic$") then
-    -- Merge internal italic-color hl-groups like RedItalic into Red.
-    -- If you only wants italic in nothing but only on comments, the italic
-    -- hl-groups are redundant when a colorscheme directly maps "italic"
-    -- fields on hl-Comment and hl-SpecialComment like everforest does.
-    return hl_name:match("^(%a+)Italic$")
-  end
+function M.no_TS_prefixed(hl_name)
   local hl_name_lower = hl_name:lower()
-  if hl_name_lower == "vertsplit" then
-    -- hl-VertSplit is superseded by hl-WinSeparator.
-    return "WinSeparator"
-  end
   if hl_name_lower == "tsdefinition" or hl_name_lower == "tsdefinitionusage" then
     -- Discard the hl-groups.
     return false
@@ -150,6 +139,24 @@ function M.all_in_one(hl_name)
   if hl_name:find("^TS%u%l+$") then
     return "@" .. hl_name:match("^TS(%u%l+)$"):lower()
   end
+  return hl_name
+end
+
+---@type ExColors.relinker
+function M.all_in_one(hl_name)
+  if hl_name:find("%aItalic$") then
+    -- Merge internal italic-color hl-groups like RedItalic into Red.
+    -- If you only wants italic in nothing but only on comments, the italic
+    -- hl-groups are redundant when a colorscheme directly maps "italic"
+    -- fields on hl-Comment and hl-SpecialComment like everforest does.
+    return hl_name:match("^(%a+)Italic$")
+  end
+  local hl_name_lower = hl_name:lower()
+  if hl_name_lower == "vertsplit" then
+    -- hl-VertSplit is superseded by hl-WinSeparator.
+    return "WinSeparator"
+  end
+  hl_name = M.no_TS_prefixed(hl_name)
   return hl_name
 end
 
