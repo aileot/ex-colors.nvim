@@ -15,8 +15,8 @@ FNL_EXTRA_FLAGS ?=
 VUSTED_EXTRA_ARGS ?= -Es
 VUSTED_ARGS ?= "--headless --clean $(VUSTED_EXTRA_ARGS)"
 
-VUSTED_FLAGS ?= --shuffle --output=utfTerminal
 VUSTED_EXTRA_FLAGS ?=
+VUSTED_FLAGS ?= --shuffle --output=utfTerminal $(VUSTED_EXTRA_FLAGS)
 
 REPO_ROOT:=$(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 TEST_ROOT:=$(REPO_ROOT)/test
@@ -86,5 +86,4 @@ test: build $(LUA_SPECS) ## Run test
 		VUSTED_ARGS=$(VUSTED_ARGS) \
 	  $(VUSTED) \
 		$(VUSTED_FLAGS) \
-		$(VUSTED_EXTRA_FLAGS) \
 		$(TEST_ROOT)
