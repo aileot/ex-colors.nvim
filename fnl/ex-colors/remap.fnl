@@ -24,8 +24,6 @@
     (match hl-map.link
       nil
       hl-map
-      ;; Note: The option resolve_links must be set to true
-      ;; below.
       linked
       (match (relinker linked)
         discard-marker nil
