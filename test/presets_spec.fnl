@@ -13,6 +13,10 @@
 (describe* "preset"
   (before_each (fn []
                  (safe-reset!)))
+  (it* "table detects invalid preset"
+    (assert.has_error #presets.should-be-error)
+    (assert.has_no_error #presets.relinker)
+    (assert.has_error #presets.relinker.should-be-error))
   (describe* "relinker"
     (describe* "with the all-in-one preset"
       (before_each (fn []
