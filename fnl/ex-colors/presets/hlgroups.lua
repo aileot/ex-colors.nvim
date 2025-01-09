@@ -1,9 +1,11 @@
 -- NOTE: This file will be copied into lua/ by make.
 local M = {
+  --- hlgroups defined even with `nvim --clean`.
   ---@type table<string,string[]>
   builtin = {},
 }
 
+-- :help highlight-default
 M.builtin.default = {
   "ColorColumn",
   "Conceal",
@@ -80,12 +82,13 @@ M.builtin.default = {
   "WildMenu",
   "WinBar",
   "WinBarNC",
+  -- For GUI. The hlgroups below could be undefined.
   "Menu",
   "Scrollbar",
   "Tooltip",
 }
 
---- :help *group-name*
+--- :help group-name
 M.builtin.naming_conventions = {
   "Comment",
   "Constant",
@@ -127,7 +130,7 @@ M.builtin.naming_conventions = {
   "Removed",
 }
 
---- :help *treesitter-highlight-groups*
+--- :help treesitter-highlight-groups
 M.builtin.treesitter = {
   "@variable",
   "@variable.builtin",
