@@ -22,25 +22,21 @@
   (let [relinker config.relinker
         discard-marker false]
     (match hl-map.link
-      nil
-      hl-map
-      ;; Note: The option resolve_links must be set to true
-      ;; below.
-      linked
-      (match (relinker linked)
-        discard-marker nil
-        linked (when-not (undefined-highlight? linked)
-                 hl-map)
-        hl-name (let [hl-opts {:name linked}
-                      deeper-map (vim.api.nvim_get_hl 0 hl-opts)]
-                  (relink-map-recursively hl-name deeper-map))
-        relinked (do
-                   (set hl-map.link relinked)
-                   (undefined-highlight? relinked)
-                   (relink-map-recursively hl-name hl-map))
-        nil
-        (error (.. "relinker must return a value; make it return `false` explicitly to discard the hl-group "
-                   linked))))))
+      nil hl-map
+      linked (match (relinker linked)
+               discard-marker nil
+               linked (when-not (undefined-highlight? linked)
+                        hl-map)
+               hl-name (let [hl-opts {:name linked}
+                             deeper-map (vim.api.nvim_get_hl 0 hl-opts)]
+                         (relink-map-recursively hl-name deeper-map))
+               relinked (do
+                          (set hl-map.link relinked)
+                          (undefined-highlight? relinked)
+                          (relink-map-recursively hl-name hl-map))
+               nil
+               (error (.. "relinker must return a value; make it return `false` explicitly to discard the hl-group "
+                          linked))))))
 
 (fn remap-hl-opts [hl-name]
   "Calculate an `hl-opts` of `hl-name` arranged as user options.
