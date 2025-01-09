@@ -29,22 +29,22 @@
   (describe* "thus, given (1) .setup(), (2) .setup({included_patterns = {'String'}), then (3) .setup(),"
     (it* ":ExColors outputs different at (2) from at (1)"
       (setup!)
-      (vim.cmd "silent ExColors | silent update")
+      (vim.cmd "ExColors | update")
       (local output1 (collect-output-highlights))
       (setup! {:included_patterns [:String]})
-      (vim.cmd "silent ExColors | silent update")
+      (vim.cmd "ExColors | update")
       (safe-reset!)
       (local output2 (collect-output-highlights))
       (assert.are_not_same output1 output2))
     (it* ":ExColors outputs the same result at (1) and (3)"
       (setup!)
-      (vim.cmd "silent ExColors | silent update")
+      (vim.cmd "ExColors | update")
       (local output1 (collect-output-highlights))
       (setup! {:included_patterns [:String]})
-      (vim.cmd "silent ExColors | silent update")
+      (vim.cmd "ExColors | update")
       (safe-reset!)
       (setup!)
-      (vim.cmd "silent ExColors | silent update")
+      (vim.cmd "ExColors | update")
       (local output3 (collect-output-highlights))
       (assert.are_same output1 output3))))
 
@@ -56,14 +56,14 @@
                  (set new-hl-name (generate-random-hl-name))))
   (after-each (fn []
                 (vim.cmd "%delete _")
-                (vim.cmd "silent update")))
+                (vim.cmd :update)))
   (describe* "with included_patterns=[] and ignore_clear=false, :ExColors does not filter out any highlight definitions;"
     (describe* "thus, with no other filter options,"
       (it* "the output becomes the same as the output by :ExColors!"
-        (vim.cmd "silent ExColors! | silent update")
+        (vim.cmd "ExColors! | update")
         (local output-lines-with-bang (buf-get-entire-lines))
         (setup! {:included_patterns [] :ignore_clear false})
-        (vim.cmd "silent ExColors | silent update")
+        (vim.cmd "ExColors | update")
         (local output-lines-with-included_patterns (buf-get-entire-lines))
         (assert.is_same output-lines-with-bang
                         output-lines-with-included_patterns))))
@@ -78,7 +78,7 @@
           ;; the highlight maps where lua api will access.
           ;; (vim.cmd "highlight clear String")
           (vim.api.nvim_set_hl 0 :String {})
-          (vim.cmd "silent ExColors")
+          (vim.cmd :ExColors)
           (assert/buf-contains-no-pattern (.. "vim%.api%.nvim_set_hl%(.-")))))
     (describe* "does nothing when set to `false`;"
       (describe* "thus, when hl-String is cleared, with setup-options {ignore_clear=false, autocmd_patterns={}, included_patterns=['^String$']},"
@@ -90,7 +90,7 @@
           ;; the highlight maps where lua api will access.
           ;; (vim.cmd "highlight clear String")
           (vim.api.nvim_set_hl 0 :String {})
-          (vim.cmd "silent ExColors")
+          (vim.cmd :ExColors)
           (assert/buf-contains-pattern (.. "vim%.api%.nvim_set_hl%(.-"))))))
   (describe* :omit_default
     (describe* "discards default field in output;"
@@ -100,7 +100,7 @@
             (setup! {:omit_default true
                      :included_patterns [(.. "^" new-hl-name "$")]})
             (vim.api.nvim_set_hl 0 new-hl-name {:fg :Red :default true})
-            (vim.cmd "silent ExColors | silent update")
+            (vim.cmd "ExColors | update")
             (assert/buf-contains-no-pattern (.. "vim%.api%.nvim_set_hl%(.-"
                                                 new-hl-name ".-{(.*default.+)}"))))
         (describe* "with options {omit_default=false, included_patterns=[<new-hl-name>]},"
@@ -108,6 +108,6 @@
             (setup! {:omit_default false
                      :included_patterns [(.. "^" new-hl-name "$")]})
             (vim.api.nvim_set_hl 0 new-hl-name {:fg :Red :default true})
-            (vim.cmd "silent ExColors | silent update")
+            (vim.cmd "ExColors | update")
             (assert/buf-contains-pattern (.. "vim%.api%.nvim_set_hl%(.-"
                                              new-hl-name ".-{(.*default.+)}"))))))))

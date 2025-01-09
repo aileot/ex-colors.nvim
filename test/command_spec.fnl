@@ -26,20 +26,20 @@
                  (safe-reset!)))
   (after-each (fn []
                 (vim.cmd "%delete _")
-                (vim.cmd "silent update")))
+                (vim.cmd :update)))
   (describe* ":ExColors"
     (it* "opens output file after generation"
-      (vim.cmd "silent ExColors")
+      (vim.cmd :ExColors)
       (assert.is_same output-path (vim.api.nvim_buf_get_name 0)))
     (it* "does not output `vim.empty_dict()`"
       (vim.api.nvim_set_hl 0 :String {})
-      (vim.cmd "silent ExColors")
+      (vim.cmd :ExColors)
       (assert (and vim.empty_dict (vim.empty_dict))
               "vim.empty_dict is invalid in nvim")
       (assert/buf-contains-no-pattern "vim%.empty_dict%(%)"))
     (describe* "with `!`"
       (it* "dumps as the same highlight definitions as the previously defined highlights."
         (let [previous-highlights (collect-defined-highlights :highlight)]
-          (vim.cmd "noautocmd silent ExColors!")
+          (vim.cmd "noautocmd ExColors!")
           (let [output-highlights (collect-output-highlights)]
             (assert.are_same previous-highlights output-highlights)))))))
