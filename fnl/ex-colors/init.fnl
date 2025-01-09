@@ -126,20 +126,20 @@
 @param ex-colors-name string
 @return string[]"
   (let [file-ext :lua
-        gvar-supports config.embedded_variables
-        gvar-template (case file-ext
+        embedded_vars config.embedded_variables
+        expr-template (case file-ext
                         :lua
                         ;; Note: ->oneliner output includes double-quotes.
                         "vim.api.nvim_set_var(%q,%s)"
                         :vim
                         "let g:%s = %q")
-        gvar-support-lines (icollect [_ gvar-name (ipairs gvar-supports)]
-                             (when (. vim.g gvar-name)
-                               (gvar-template:format gvar-name
-                                                     (->oneliner (vim.api.nvim_get_var gvar-name)))))
-        colors-name-line (gvar-template:format :colors_name
+        cmd-lines (icollect [_ gvar-name (ipairs embedded_vars)]
+                    (when (. vim.g gvar-name)
+                      (expr-template:format gvar-name
+                                            (->oneliner (vim.api.nvim_get_var gvar-name)))))
+        colors-name-line (expr-template:format :colors_name
                                                (.. "\"" ex-colors-name "\""))
-        cmd-lines (-> [colors-name-line gvar-support-lines]
+        cmd-lines (-> [colors-name-line cmd-lines]
                       (flatten))]
     cmd-lines))
 
