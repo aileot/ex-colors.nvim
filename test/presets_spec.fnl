@@ -23,4 +23,10 @@
                      (setup! {:relinker presets.relinker.all_in_one})))
       (it* "eliminate TS-prefixed hl-groups"
         (vim.cmd "ExColors | update")
+        (assert/buf-contains-no-pattern "TS")))
+    (describe* "with the no_TS_prefixed preset"
+      (before_each (fn []
+                     (setup! {:relinker presets.relinker.no_TS_prefixed})))
+      (it* "eliminate TS-prefixed hl-groups"
+        (vim.cmd "ExColors | update")
         (assert/buf-contains-no-pattern "TS")))))
