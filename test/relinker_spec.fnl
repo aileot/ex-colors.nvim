@@ -35,7 +35,7 @@
                                                     (case hl-name
                                                       :Bar :Foo
                                                       _ hl-name))})
-                               (vim.cmd "silent ExColors | silent update")))
+                               (vim.cmd "ExColors | update")))
                 (it* "`Bar` does not appear in the output"
                   (assert/buf-contains-no-pattern :Bar))
                 (it* "`Foo` is linked to `Baz`"
@@ -57,7 +57,7 @@
                                                     (case hl-name
                                                       :TSBoolean "@boolean"
                                                       _ hl-name))})
-                               (vim.cmd "silent ExColors | silent update")))
+                               (vim.cmd "ExColors | update")))
                 (it* "@boolean map contains 'fg' field"
                   (assert/buf-contains-pattern "@boolean.-{.-fg.-}"))
                 (it* "@boolean map does NOT contain 'link' field"
@@ -78,7 +78,7 @@
                                                     (case hl-name
                                                       :TSBoolean "@boolean"
                                                       _ hl-name))})
-                               (vim.cmd "silent ExColors | silent update")))
+                               (vim.cmd "ExColors | update")))
                 (it* "@boolean map contains 'fg' field"
                   (assert/buf-contains-pattern "@boolean.-{.-fg.-}"))
                 (it* "@boolean map does NOT contain 'link' field"
@@ -98,6 +98,6 @@
                                                     (case hl-name
                                                       :TSBoolean "@boolean"
                                                       _ hl-name))})
-                               (vim.cmd "silent ExColors | silent update")))
+                               (vim.cmd "ExColors | update")))
                 (it* "TSBoolean will not appear in the output"
                   (assert/buf-contains-no-pattern :TSBoolean))))))))))
