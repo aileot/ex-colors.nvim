@@ -40,11 +40,9 @@ require("ex-colors").setup({
   omit_default = false,
   ---@type boolean
   resolve_links = false,
-  ---@param hl_name string
-  ---@return string|false
-  relinker = function(hl_name)
-    return hl_name
-  end,
+  --- Set false to disable it.
+  ---@type ExColors.relinker|false
+  relinker = require("ex-colors.presets").relinker.all_in_one,
   --- Highlight group name patterns which should be included in the output.
   ---@type string[]
   included_patterns = {},

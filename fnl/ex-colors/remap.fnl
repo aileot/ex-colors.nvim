@@ -19,7 +19,7 @@
 @param hl-name string
 @param hl-map table
 @return table a new hl-map table for the hl-name."
-  (let [relinker config.relinker
+  (let [relinker (or config.relinker #$)
         discard-marker false]
     (match hl-map.link
       nil hl-map
@@ -44,7 +44,7 @@
 @return table"
   (let [keep-link? true
         omit-default? config.omit_default
-        relink config.relinker
+        relink (or config.relinker #$)
         discard-marker false
         hl-opts {:name hl-name :link keep-link?}
         hl-map (vim.api.nvim_get_hl 0 hl-opts)]
