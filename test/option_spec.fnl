@@ -16,7 +16,7 @@
        (include :test.helper.assert))
 
 (include :test.context.prerequisites)
-(local {: output-colors-dir : original-colorscheme}
+(local {: output-colors-dir : original-colors-name}
        (include :test.context.default))
 
 (local {:setup setup!} (require :ex-colors))
@@ -51,7 +51,7 @@
 (describe* :option
   (before-each (fn []
                  (safe-reset!)
-                 (vim.cmd.colorscheme original-colorscheme)
+                 (vim.cmd.colorscheme original-colors-name)
                  (setup! {:colors_dir output-colors-dir})
                  (set new-hl-name (generate-random-hl-name))))
   (after-each (fn []
