@@ -22,7 +22,7 @@ local default_opts = {
   --- If true, omit `default` keys from the output highlight definitions.
   --- See `:h highlight-default` for the details.
   ---@type boolean
-  omit_default = false,
+  omit_default = true,
   --- Return false to discard hl-group.
   ---@type fun(hl_name: string): string|false
   relinker = require("ex-colors.presets").relinker.all_in_one,

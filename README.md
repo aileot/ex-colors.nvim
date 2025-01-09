@@ -37,7 +37,7 @@ require("ex-colors").setup({
   --- If true, omit `default` keys from the output highlight definitions.
   --- See `:h highlight-default` for the details.
   ---@type boolean
-  omit_default = false,
+  omit_default = true,
   ---@type boolean
   resolve_links = false,
   --- Set false to disable it.
