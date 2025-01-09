@@ -13,7 +13,7 @@
 (local {: assert/buf-contains-no-pattern} (include :test.helper.assert))
 
 (include :test.context.prerequisites)
-(local {: output-colors-dir : output-path : original-colorscheme}
+(local {: output-colors-dir : output-path : original-colors-name}
        (include :test.context.default))
 
 (describe* :command
@@ -22,7 +22,7 @@
   (teardown* (fn []
                (vim.fn.delete output-colors-dir)))
   (before-each (fn []
-                 (vim.cmd.colorscheme original-colorscheme)
+                 (vim.cmd.colorscheme original-colors-name)
                  (safe-reset!)))
   (after-each (fn []
                 (vim.cmd "%delete _")
