@@ -12,6 +12,9 @@ VUSTED ?= vusted
 FNL_FLAGS ?=
 FNL_EXTRA_FLAGS ?=
 
+VUSTED_EXTRA_ARGS ?= -Es
+VUSTED_ARGS ?= "--headless --clean $(VUSTED_EXTRA_ARGS)"
+
 VUSTED_FLAGS ?= --shuffle --output=utfTerminal
 VUSTED_EXTRA_FLAGS ?=
 
@@ -79,7 +82,9 @@ build: $(LUA_RES_DIRS) $(LUA_RES) ## Compile fennel files from fnl/ into lua/
 
 .PHONY: test
 test: build $(LUA_SPECS) ## Run test
-	@TEST_ROOT=$(TEST_ROOT) $(VUSTED) \
+	@TEST_ROOT=$(TEST_ROOT) \
+		VUSTED_ARGS=$(VUSTED_ARGS) \
+	  $(VUSTED) \
 		$(VUSTED_FLAGS) \
 		$(VUSTED_EXTRA_FLAGS) \
 		$(TEST_ROOT)
