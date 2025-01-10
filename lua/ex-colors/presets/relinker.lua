@@ -4,6 +4,14 @@ local M = {}
 
 ---@alias ExColors.relinker fun(hl_name: string): string|false Return false to discard hl-group.
 
+function M.no_typo(hl_name)
+  local hl_name_lower = hl_name:lower()
+  if hl_name_lower:find("^@%a[.%a]+%.uri$") then
+    return hl_name_lower:gsub("i$", "l")
+  end
+  return hl_name
+end
+
 ---@type ExColors.relinker
 function M.no_TS_prefixed(hl_name)
   local hl_name_lower = hl_name:lower()
