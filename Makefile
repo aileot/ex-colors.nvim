@@ -87,6 +87,7 @@ build: $(LUA_RES_DIRS) $(LUA_RES) ## Compile fennel files from fnl/ into lua/
 
 .PHONY: test
 test: build $(LUA_SPECS) ## Run test
+	@nvim --version
 	@TEST_ROOT=$(TEST_ROOT) \
 		VUSTED_ARGS=$(VUSTED_ARGS) \
 	  $(VUSTED) \
