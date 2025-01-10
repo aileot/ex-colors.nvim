@@ -34,7 +34,7 @@ function M.no_superseded(hl_name)
     return false
   end
   local hl_name_lower = hl_name:lower()
-  if vim.fn.has("nvim") == 1 then
+  if vim.fn.has("nvim-0.7") == 1 then
     if hl_name_lower == "vertsplit" then
       -- hl-VertSplit is superseded by hl-WinSeparator.
       return "WinSeparator"
