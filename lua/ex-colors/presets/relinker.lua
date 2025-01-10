@@ -2,9 +2,12 @@
 
 local M = {}
 
----@alias ExColors.relinker fun(hl_name: string): string|false Return false to discard hl-group.
+---@alias ExColors.relinkerInProcess fun(hl_name: string|false): string|false Return false to discard hl-group.
 
 function M.no_typo(hl_name)
+  if hl_name == false then
+    return false
+  end
   local hl_name_lower = hl_name:lower()
   if hl_name_lower:find("^@%a[.%a]+%.uri$") then
     return hl_name_lower:gsub("i$", "l")
@@ -12,8 +15,11 @@ function M.no_typo(hl_name)
   return hl_name
 end
 
----@type ExColors.relinker
+---@type ExColors.RelinkerInProcess
 function M.no_TS_prefixed(hl_name)
+  if hl_name == false then
+    return false
+  end
   local hl_name_lower = hl_name:lower()
   if hl_name_lower == "tsdefinition" or hl_name_lower == "tsdefinitionusage" then
     -- Discard the hl-groups.
@@ -150,8 +156,11 @@ function M.no_TS_prefixed(hl_name)
   return hl_name
 end
 
----@type ExColors.relinker
+---@type ExColors.relinkerInProcess
 function M.all_in_one(hl_name)
+  if hl_name == false then
+    return false
+  end
   if hl_name:find("%aItalic$") then
     -- Merge internal italic-color hl-groups like RedItalic into Red.
     -- If you only wants italic in nothing but only on comments, the italic
