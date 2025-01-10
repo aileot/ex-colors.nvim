@@ -42,7 +42,15 @@ require("ex-colors").setup({
   resolve_links = false,
   --- Set false to disable it.
   ---@type ExColors.relinker|false
-  relinker = require("ex-colors.presets").relinker.all_in_one,
+  relinker = require("ex-colors.presets").relinker.recommended,
+  relinker = function(hl_name)
+    local preset = require("ex-colors.presets").relinker
+    hl_name = preset.no_typo(hl_name)
+    hl_name = preset.no_superseded(hl_name)
+    hl_name = preset.no_TS_prefixed(hl_name)
+    -- hl_name = preset.no_lsp_semantic_highlight(hl_name)
+    return hl_name
+  end,
   --- Highlight group name patterns which should be included in the output.
   ---@type string[]
   included_patterns = {},

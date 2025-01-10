@@ -18,9 +18,9 @@
     (assert.has_no_error #presets.relinker)
     (assert.has_error #presets.relinker.should-be-error))
   (describe* "relinker"
-    (describe* "with the all-in-one preset"
+    (describe* "with the recommended preset"
       (before_each (fn []
-                     (setup! {:relinker presets.relinker.all_in_one})))
+                     (setup! {:relinker presets.relinker.recommended})))
       (it* "eliminate TS-prefixed hl-groups"
         (vim.cmd "ExColors | update")
         (assert/buf-contains-no-pattern "TS")))

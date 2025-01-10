@@ -25,7 +25,7 @@ local default_opts = {
   omit_default = true,
   --- Return false to discard hl-group.
   ---@type fun(hl_name: string): string|false
-  relinker = require("ex-colors.presets").relinker.all_in_one,
+  relinker = require("ex-colors.presets").relinker.recommended,
   --- Highlight group name patterns which should be included in the output.
   ---@type string[]
   included_patterns = {},

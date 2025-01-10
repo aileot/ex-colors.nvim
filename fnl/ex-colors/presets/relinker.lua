@@ -2,10 +2,53 @@
 
 local M = {}
 
----@alias ExColors.relinker fun(hl_name: string): string|false Return false to discard hl-group.
+---@alias ExColors.RelinkerInProcess fun(hl_name: string|false): string|false Return false to discard hl-group.
 
----@type ExColors.relinker
+function M.no_typo(hl_name)
+  if hl_name == false then
+    return false
+  end
+  local hl_name_lower = hl_name:lower()
+  if hl_name_lower:find("^@%a[.%a]+%.uri$") then
+    return hl_name_lower:gsub("i$", "l")
+  end
+  return hl_name
+end
+
+--- :help *lsp-semantic-highlight*
+--- Discard @lsp.foobar hl-groups which are defined for semantic tokens.
+---@type ExColors.RelinkerInProcess
+function M.no_lsp_semantic_highlight(hl_name)
+  if hl_name == false then
+    return false
+  end
+  if hl_name:sub(1, 4) == "@lsp" then
+    return false
+  end
+  return hl_name
+end
+
+--- Discard superseded hl-groups.
+function M.no_superseded(hl_name)
+  if hl_name == false then
+    return false
+  end
+  local hl_name_lower = hl_name:lower()
+  if vim.fn.has("nvim-0.7") == 1 then
+    if hl_name_lower == "vertsplit" then
+      -- hl-VertSplit is superseded by hl-WinSeparator.
+      return "WinSeparator"
+    end
+  end
+  return hl_name
+end
+
+--- Discard deprecated TS-prefixed Treesitter hl-groups.
+---@type ExColors.RelinkerInProcess
 function M.no_TS_prefixed(hl_name)
+  if hl_name == false then
+    return false
+  end
   local hl_name_lower = hl_name:lower()
   if hl_name_lower == "tsdefinition" or hl_name_lower == "tsdefinitionusage" then
     -- Discard the hl-groups.
@@ -142,21 +185,13 @@ function M.no_TS_prefixed(hl_name)
   return hl_name
 end
 
----@type ExColors.relinker
-function M.all_in_one(hl_name)
-  if hl_name:find("%aItalic$") then
-    -- Merge internal italic-color hl-groups like RedItalic into Red.
-    -- If you only wants italic in nothing but only on comments, the italic
-    -- hl-groups are redundant when a colorscheme directly maps "italic"
-    -- fields on hl-Comment and hl-SpecialComment like everforest does.
-    return hl_name:match("^(%a+)Italic$")
-  end
-  local hl_name_lower = hl_name:lower()
-  if hl_name_lower == "vertsplit" then
-    -- hl-VertSplit is superseded by hl-WinSeparator.
-    return "WinSeparator"
-  end
+function M.recommended(hl_name)
+  hl_name = M.no_typo(hl_name)
+  hl_name = M.no_superseded(hl_name)
   hl_name = M.no_TS_prefixed(hl_name)
+  -- NOTE: It might be undesirable for general users to exclude
+  -- lsp-semantic-highlight.
+  -- hl_name = M.no_lsp_semantic_highlight(hl_name)
   return hl_name
 end
 
