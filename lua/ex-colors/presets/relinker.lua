@@ -2,7 +2,7 @@
 
 local M = {}
 
----@alias ExColors.relinkerInProcess fun(hl_name: string|false): string|false Return false to discard hl-group.
+---@alias ExColors.RelinkerInProcess fun(hl_name: string|false): string|false Return false to discard hl-group.
 
 function M.no_typo(hl_name)
   if hl_name == false then
@@ -15,6 +15,20 @@ function M.no_typo(hl_name)
   return hl_name
 end
 
+--- :help *lsp-semantic-highlight*
+--- Discard @lsp.foobar hl-groups which are defined for semantic tokens.
+---@type ExColors.RelinkerInProcess
+function M.no_lsp(hl_name)
+  if hl_name == false then
+    return false
+  end
+  if hl_name:sub(1, 4) == "@lsp" then
+    return false
+  end
+  return hl_name
+end
+
+--- Discard deprecated TS-prefixed Treesitter hl-groups.
 ---@type ExColors.RelinkerInProcess
 function M.no_TS_prefixed(hl_name)
   if hl_name == false then
@@ -156,7 +170,7 @@ function M.no_TS_prefixed(hl_name)
   return hl_name
 end
 
----@type ExColors.relinkerInProcess
+---@type ExColors.RelinkerInProcess
 function M.all_in_one(hl_name)
   if hl_name == false then
     return false
