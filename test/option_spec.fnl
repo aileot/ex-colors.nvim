@@ -40,14 +40,12 @@
       (clean-setup! {:included_patterns [:String]})
       (vim.cmd "ExColors | update")
       (clean-setup!)
-      (clean-setup!)
       (vim.cmd "ExColors | update")
       (local output3 (collect-output-highlights))
       (assert.are_same output1 output3))))
 
 (describe* :option
   (before-each (fn []
-                 (clean-setup!)
                  (vim.cmd.colorscheme original-colors-name)
                  (clean-setup! {:colors_dir output-colors-dir})
                  (set new-hl-name (generate-random-hl-name))))
@@ -151,6 +149,14 @@
           (vim.cmd.colorscheme output-colors-name)
           (assert.equals foo vim.g.foo)
           (assert.equals bar vim.g.bar)))))
+  (describe* "included_hlgroups"
+    (it* "can filter hlgroups by name."
+      (clean-setup! {:included_hlgroups []})
+      (vim.cmd "ExColors | update")
+      (assert/buf-contains-no-pattern (.. "vim%.api%.nvim_set_hl%(.-String"))
+      (clean-setup! {:included_hlgroups [:String]})
+      (vim.cmd "ExColors | update")
+      (assert/buf-contains-pattern (.. "vim%.api%.nvim_set_hl%(.-String"))))
   (describe* "embedded_global_options"
     (it* "generates nothing when set to empty table;"
       (clean-setup! {:embedded_global_options []})

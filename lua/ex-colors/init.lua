@@ -46,20 +46,30 @@ local function filter_by_included_patterns(old_output_list, included_patterns)
   end
   return new_output_list
 end
+local function filter_by_included_hlgroups(old_output_list)
+  local new_output_list = {}
+  for _, name in ipairs(config.included_hlgroups) do
+    if vim.list_contains(old_output_list, name) then
+      table.insert(new_output_list, name)
+    else
+    end
+  end
+  return new_output_list
+end
 local function filter_out_excluded_patterns(old_output_list)
   local new_output_list = {}
   local excluded_patterns = config.excluded_patterns
   for _, name in ipairs(old_output_list) do
-    local _7_
+    local _8_
     do
       local match_3f = nil
       for _0, ex_pattern in ipairs(excluded_patterns) do
         if match_3f then break end
         match_3f = name:find(ex_pattern)
       end
-      _7_ = match_3f
+      _8_ = match_3f
     end
-    if not _7_ then
+    if not _8_ then
       table.insert(new_output_list, name)
     else
     end
@@ -119,18 +129,18 @@ local function compose_autocmd_lines(highlights)
         local pattern_line = ("  pattern = %s,"):format(__3eoneliner(au_pattern))
         au_opt_lines = flatten({pattern_line, callback_lines})
       end
-      local _let_13_ = vim.deepcopy(autocmd_template_lines)
-      local first_line = _let_13_[1]
-      local lines = _let_13_
+      local _let_14_ = vim.deepcopy(autocmd_template_lines)
+      local first_line = _let_14_[1]
+      local lines = _let_14_
       local event_arg
       do
-        local _14_ = type(au_event)
-        if (_14_ == "string") then
+        local _15_ = type(au_event)
+        if (_15_ == "string") then
           event_arg = ("%q"):format(au_event)
-        elseif (_14_ == "table") then
+        elseif (_15_ == "table") then
           event_arg = au_event
-        elseif (nil ~= _14_) then
-          local _else = _14_
+        elseif (nil ~= _15_) then
+          local _else = _15_
           event_arg = error(("expected string or table, got " .. _else))
         else
           event_arg = nil
@@ -142,17 +152,18 @@ local function compose_autocmd_lines(highlights)
     end
   end
   do
-    local function _18_(_16_, _17_)
-      local cmd_line1 = _16_[1]
-      local cmd_line2 = _17_[1]
+    local function _19_(_17_, _18_)
+      local cmd_line1 = _17_[1]
+      local cmd_line2 = _18_[1]
       return (cmd_line1 < cmd_line2)
     end
-    table.sort(autocmd_list, _18_)
+    table.sort(autocmd_list, _19_)
   end
   return flatten(autocmd_list)
 end
 local function compose_hi_cmd_lines(highlights, dump_all_3f)
   local included_patterns = config.included_patterns
+  local included_hlgroups = filter_by_included_hlgroups(highlights)
   local ignore_clear_3f = config.ignore_clear
   local cmd_list
   if dump_all_3f then
@@ -172,7 +183,7 @@ local function compose_hi_cmd_lines(highlights, dump_all_3f)
     end
     cmd_list = tbl_21_auto
   else
-    local filtered_highlights = filter_by_included_patterns(highlights, included_patterns)
+    local filtered_highlights = vim.list_extend(filter_by_included_patterns(highlights, included_patterns), included_hlgroups)
     local hl_maps
     do
       local tbl_16_auto = {}
@@ -271,9 +282,9 @@ local function compose_vim_options_cmd_lines_21()
     for _, vim_option_name in ipairs(vim_options) do
       local k_17_auto, v_18_auto = nil, nil
       do
-        local _30_ = vim.api.nvim_get_option_value(vim_option_name, {scope = "global"})
-        if (nil ~= _30_) then
-          local val = _30_
+        local _31_ = vim.api.nvim_get_option_value(vim_option_name, {scope = "global"})
+        if (nil ~= _31_) then
+          local val = _31_
           if (vim.api.nvim_get_option_info2(vim_option_name, {}).default ~= val) then
             k_17_auto, v_18_auto = vim_option_name, val
           else

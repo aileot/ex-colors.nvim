@@ -20,7 +20,10 @@ local default_opts = {
   --- Return false to discard hl-group.
   ---@type fun(hl_name: string): string|false
   relinker = require("ex-colors.presets").relinker.recommended,
-  --- Highlight group name patterns which should be included in the output.
+  --- Highlight group names which should be included in the output.
+  ---@type string[]
+  included_hlgroups = require("ex-colors.presets").hlgroup.recommended,
+  --- Highlight group name Lua patterns which should be included in the output.
   ---@type string[]
   included_patterns = {},
   --- Highlight group name patterns which should be excluded in the output.
