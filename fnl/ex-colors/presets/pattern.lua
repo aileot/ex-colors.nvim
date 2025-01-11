@@ -330,4 +330,4 @@ M.convention.ansi_color_prefixes =
     return name .. "%u"
   end, hlgroup_presets.convention.ansi_colors))
 
-return M
+return mt_utils.new_readonly(M)

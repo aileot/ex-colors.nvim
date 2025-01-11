@@ -428,6 +428,6 @@ M.convention.ansi_colors = mt_utils.new_addable({
   "Yellow",
 })
 
-return M
+return mt_utils.new_readonly(M)
 
 -- vim:iskeyword+=-
