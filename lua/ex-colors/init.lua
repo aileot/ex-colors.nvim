@@ -7,6 +7,8 @@ local lines__3ecomment_lines = _local_1_["lines->comment-lines"]
 local config = require("ex-colors.config")
 local _local_2_ = require("ex-colors.remap")
 local remap_hl_opts = _local_2_["remap-hl-opts"]
+local _local_3_ = require("ex-colors.commands")
+local define_commands_21 = _local_3_["define-commands!"]
 local function collect_defined_highlights()
   local output = vim.fn.execute("highlight")
   local tbl_21_auto = {}
@@ -28,16 +30,16 @@ end
 local function filter_by_included_patterns(old_output_list, included_patterns)
   local new_output_list = {}
   for _, name in ipairs(old_output_list) do
-    local _4_
+    local _5_
     do
       local match_3f = nil
       for _0, ex_pattern in ipairs(included_patterns) do
         if match_3f then break end
         match_3f = name:find(ex_pattern)
       end
-      _4_ = match_3f
+      _5_ = match_3f
     end
-    if _4_ then
+    if _5_ then
       table.insert(new_output_list, name)
     else
     end
@@ -48,16 +50,16 @@ local function filter_out_excluded_patterns(old_output_list)
   local new_output_list = {}
   local excluded_patterns = config.excluded_patterns
   for _, name in ipairs(old_output_list) do
-    local _6_
+    local _7_
     do
       local match_3f = nil
       for _0, ex_pattern in ipairs(excluded_patterns) do
         if match_3f then break end
         match_3f = name:find(ex_pattern)
       end
-      _6_ = match_3f
+      _7_ = match_3f
     end
-    if not _6_ then
+    if not _7_ then
       table.insert(new_output_list, name)
     else
     end
@@ -117,18 +119,18 @@ local function compose_autocmd_lines(highlights)
         local pattern_line = ("  pattern = %s,"):format(__3eoneliner(au_pattern))
         au_opt_lines = flatten({pattern_line, callback_lines})
       end
-      local _let_12_ = vim.deepcopy(autocmd_template_lines)
-      local first_line = _let_12_[1]
-      local lines = _let_12_
+      local _let_13_ = vim.deepcopy(autocmd_template_lines)
+      local first_line = _let_13_[1]
+      local lines = _let_13_
       local event_arg
       do
-        local _13_ = type(au_event)
-        if (_13_ == "string") then
+        local _14_ = type(au_event)
+        if (_14_ == "string") then
           event_arg = ("%q"):format(au_event)
-        elseif (_13_ == "table") then
+        elseif (_14_ == "table") then
           event_arg = au_event
-        elseif (nil ~= _13_) then
-          local _else = _13_
+        elseif (nil ~= _14_) then
+          local _else = _14_
           event_arg = error(("expected string or table, got " .. _else))
         else
           event_arg = nil
@@ -140,12 +142,12 @@ local function compose_autocmd_lines(highlights)
     end
   end
   do
-    local function _17_(_15_, _16_)
-      local cmd_line1 = _15_[1]
-      local cmd_line2 = _16_[1]
+    local function _18_(_16_, _17_)
+      local cmd_line1 = _16_[1]
+      local cmd_line2 = _17_[1]
       return (cmd_line1 < cmd_line2)
     end
-    table.sort(autocmd_list, _17_)
+    table.sort(autocmd_list, _18_)
   end
   return flatten(autocmd_list)
 end
@@ -294,8 +296,11 @@ end
 ---@param opts? table
 
 local function setup(opts)
-  local opts0 = (opts or {})
-  return config.merge(opts0)
+  do
+    local opts0 = (opts or {})
+    config.merge(opts0)
+  end
+  return define_commands_21()
 end
 
 --- Reset `ex-colors` config. for Testing purposes only.
