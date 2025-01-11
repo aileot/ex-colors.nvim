@@ -15,10 +15,10 @@
 (local {: assert/buf-contains-pattern : assert/buf-contains-no-pattern}
        (include :test.helper.assert))
 
-(include :test.context.prerequisites)
-
 (local {: output-colors-dir : original-colors-name : output-colors-name}
        (include :test.context.default))
+
+(include :test.context.prerequisites)
 
 (local {:setup setup!} (require :ex-colors))
 
