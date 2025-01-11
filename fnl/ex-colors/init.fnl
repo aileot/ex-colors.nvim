@@ -126,7 +126,7 @@
 @param ex-colors-name string
 @return string[]"
   (let [file-ext :lua
-        embedded_vars config.embedded_variables
+        embedded_vars config.embedded_global_variables
         expr-template (case file-ext
                         :lua
                         ;; Note: ->oneliner output includes double-quotes.

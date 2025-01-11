@@ -47,7 +47,7 @@ local default_opts = {
   --- Vim global variables (g:foobar or vim.g.foobar) which should be also
   --- embedded in the colorscheme output to be updated at the same time.
   ---@type string[]
-  embedded_variables = {
+  embedded_global_variables = {
     "terminal_color_0",
     "terminal_color_1",
     "terminal_color_2",
