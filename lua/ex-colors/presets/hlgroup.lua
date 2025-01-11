@@ -420,13 +420,15 @@ M.convention.ansi_colors = {
   "Yellow",
 }
 
-M.recommended = M.builtin.default
-  + M.builtin.naming_conventions
-  + M.builtin.diagnostic
-  + M.builtin.treesitter
-  + M.builtin.lsp
-  + M.builtin.lsp_semantic_highlight
-  + M.convention.ansi_colors
+M.recommended = utils.new_addable(
+  M.builtin.default
+    + M.builtin.naming_conventions
+    + M.builtin.diagnostic
+    + M.builtin.treesitter
+    + M.builtin.lsp
+    + M.builtin.lsp_semantic_highlight
+    + M.convention.ansi_colors
+)
 
 return M
 
