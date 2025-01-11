@@ -8,7 +8,7 @@
 (local {: collect-defined-highlights : collect-output-highlights}
        (include :test.helper.utils))
 
-(local {: clean-reset!} (include :test.helper.wrapper))
+(local {: clean-setup!} (include :test.helper.wrapper))
 
 (local {: assert/buf-contains-no-pattern} (include :test.helper.assert))
 
@@ -24,7 +24,7 @@
                (vim.fn.delete output-colors-dir)))
   (before-each (fn []
                  (vim.cmd.colorscheme original-colors-name)
-                 (clean-reset!)))
+                 (clean-setup!)))
   (after-each (fn []
                 (vim.cmd "%delete _")
                 (vim.cmd :update)))

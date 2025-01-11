@@ -1,15 +1,12 @@
 (import-macros {: describe* : it*} :test.helper.busted-macros)
 
-(local {: clean-reset!} (include :test.helper.wrapper))
+(local {: clean-setup!} (include :test.helper.wrapper))
 (local {: assert/buf-contains-no-pattern} (include :test.helper.assert))
 (include :test.context.prerequisites)
 
-(local {:setup setup!} (require :ex-colors))
 (local presets (require :ex-colors.presets))
 
 (describe* "preset"
-  (before_each (fn []
-                 (clean-reset!)))
   (it* "table detects invalid preset"
     (assert.has_error #presets.should-be-error)
     (assert.has_no_error #presets.relinker)
@@ -17,13 +14,13 @@
   (describe* "relinker"
     (describe* "with the recommended preset"
       (before_each (fn []
-                     (setup! {:relinker presets.relinker.recommended})))
+                     (clean-setup! {:relinker presets.relinker.recommended})))
       (it* "eliminate TS-prefixed hl-groups"
         (vim.cmd "ExColors | update")
         (assert/buf-contains-no-pattern "TS")))
     (describe* "with the no_TS_prefixed preset"
       (before_each (fn []
-                     (setup! {:relinker presets.relinker.no_TS_prefixed})))
+                     (clean-setup! {:relinker presets.relinker.no_TS_prefixed})))
       (it* "eliminate TS-prefixed hl-groups"
         (vim.cmd "ExColors | update")
         (assert/buf-contains-no-pattern "TS")))))
