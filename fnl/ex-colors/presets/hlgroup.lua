@@ -428,16 +428,6 @@ M.convention.ansi_colors = mt_utils.new_addable({
   "Yellow",
 })
 
-M.recommended = mt_utils.new_addable(
-  M.builtin.default
-    + M.builtin.naming_conventions
-    + M.builtin.diagnostic
-    + M.builtin.treesitter
-    + M.builtin.lsp
-    + M.builtin.lsp_semantic_highlight
-    + M.convention.ansi_colors
-)
-
 return M
 
 -- vim:iskeyword+=-
