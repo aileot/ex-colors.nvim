@@ -90,16 +90,16 @@
       (describe* "thus, when <new-hl-name> is {fg='Red',default=true}"
         (describe* "with options {omit_default=true, included_patterns=[<new-hl-name>]},"
           (it* ":ExColors only outputs <new-hl-name> line without 'default' key."
-            (clean-setup! {:omit_default true} :included_patterns
-                          [(.. "^" new-hl-name "$")])
+            (clean-setup! {:omit_default true
+                           :included_patterns [(.. "^" new-hl-name "$")]})
             (vim.api.nvim_set_hl 0 new-hl-name {:fg :Red :default true})
             (vim.cmd "ExColors | update")
             (assert/buf-contains-no-pattern (.. "vim%.api%.nvim_set_hl%(.-"
                                                 new-hl-name ".-{(.*default.+)}"))))
         (describe* "with options {omit_default=false, included_patterns=[<new-hl-name>]},"
           (it* ":ExColors outputs <new-hl-name> line with 'default' key."
-            (clean-setup! {:omit_default false} :included_patterns
-                          [(.. "^" new-hl-name "$")])
+            (clean-setup! {:omit_default false
+                           :included_patterns [(.. "^" new-hl-name "$")]})
             (vim.api.nvim_set_hl 0 new-hl-name {:fg :Red :default true})
             (vim.cmd "ExColors | update")
             (assert/buf-contains-pattern (.. "vim%.api%.nvim_set_hl%(.-"
