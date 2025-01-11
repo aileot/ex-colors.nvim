@@ -243,6 +243,10 @@ M.builtin.treesitter = {
   "@tag.delimiter",
 }
 
+M.recommended = M.builtin.default
+  + M.builtin.naming_conventions
+  + M.builtin.treesitter
+
 return M
 
 -- vim:iskeyword+=-

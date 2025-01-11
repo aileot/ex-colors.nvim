@@ -22,9 +22,7 @@ local default_opts = {
   relinker = require("ex-colors.presets").relinker.recommended,
   --- Highlight group names which should be included in the output.
   ---@type string[]
-  included_hlgroups = require("ex-colors.presets").hlgroup.builtin.default
-    + require("ex-colors.presets").hlgroup.builtin.naming_conventions
-    + require("ex-colors.presets").hlgroup.builtin.treesitter,
+  included_hlgroups = require("ex-colors.presets").hlgroup.recommended,
   --- Highlight group name Lua patterns which should be included in the output.
   ---@type string[]
   included_patterns = {},
