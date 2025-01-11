@@ -40,14 +40,12 @@
       (clean-setup! {:included_patterns [:String]})
       (vim.cmd "ExColors | update")
       (clean-setup!)
-      (clean-setup!)
       (vim.cmd "ExColors | update")
       (local output3 (collect-output-highlights))
       (assert.are_same output1 output3))))
 
 (describe* :option
   (before-each (fn []
-                 (clean-setup!)
                  (vim.cmd.colorscheme original-colors-name)
                  (clean-setup! {:colors_dir output-colors-dir})
                  (set new-hl-name (generate-random-hl-name))))
