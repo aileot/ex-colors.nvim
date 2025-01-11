@@ -7,7 +7,7 @@ try the following commands:
 
 - `:highlight` to display.
 - `:ExColors!`
-  to dump in `ex-<colorscheme>.lua` at [colors_dir](./REFERENCE.md#colors_dir).
+  to dump in `ex-<colorscheme>.lua` at [colors_dir](./reference.md#colors_dir).
 
 To get what highlights are defined by your favorite colorscheme,
 try the following commands:

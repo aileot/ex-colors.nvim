@@ -98,7 +98,7 @@ highlight definition name.
 It helps you eliminate obsolete, or deprecated, highlight definitions
 in the output.
 
-The [Cookbook](./COOKBOOK.md) shows demonstrations.
+The [Cookbook](./cookbook.md) shows demonstrations.
 
 ### case_sensitive
 
@@ -119,13 +119,13 @@ This option affects the patterns of the following options:
 (type: `string[]`; default: `{}`)
 
 Set `false` to disable `included_patterns`.
-The [Cookbook](./COOKBOOK.md) shows demonstrations.
+The [Cookbook](./cookbook.md) shows demonstrations.
 
 ### excluded_patterns
 
 (type: `string[]`; default: `{}`)
 
-The [Cookbook](./COOKBOOK.md) shows demonstrations.
+The [Cookbook](./cookbook.md) shows demonstrations.
 
 ### autocmd_patterns
 
@@ -140,7 +140,7 @@ The [Cookbook](./COOKBOOK.md) shows demonstrations.
 
 Generate matched highlight definitions only on the autocmd event.
 
-The [Cookbook](./COOKBOOK.md) shows demonstrations.
+The [Cookbook](./cookbook.md) shows demonstrations.
 
 ### embedded_variables
 
