@@ -434,6 +434,8 @@ M.reasonable_default = mt_utils.new_addable({
   "@markup.strikethrough",
   "@markup.underline",
 
+  "Underlined",
+
   "DiagnosticVirtualTextError",
   "DiagnosticVirtualTextWarn",
   "DiagnosticVirtualTextInfo",

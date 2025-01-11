@@ -76,6 +76,17 @@ local function filter_out_excluded_patterns(old_output_list)
   end
   return new_output_list
 end
+local function filter_out_excluded_hlgroups(old_output_list)
+  local new_output_list = {}
+  local excluded_hlgroups = config.excluded_hlgroups
+  for _, name in ipairs(old_output_list) do
+    if not vim.list_contains(excluded_hlgroups, name) then
+      table.insert(new_output_list, name)
+    else
+    end
+  end
+  return new_output_list
+end
 local function compose_autocmd_lines(highlights)
   local autocmd_patterns = config.autocmd_patterns
   local indent_size = 2
@@ -129,18 +140,18 @@ local function compose_autocmd_lines(highlights)
         local pattern_line = ("  pattern = %s,"):format(__3eoneliner(au_pattern))
         au_opt_lines = flatten({pattern_line, callback_lines})
       end
-      local _let_14_ = vim.deepcopy(autocmd_template_lines)
-      local first_line = _let_14_[1]
-      local lines = _let_14_
+      local _let_15_ = vim.deepcopy(autocmd_template_lines)
+      local first_line = _let_15_[1]
+      local lines = _let_15_
       local event_arg
       do
-        local _15_ = type(au_event)
-        if (_15_ == "string") then
+        local _16_ = type(au_event)
+        if (_16_ == "string") then
           event_arg = ("%q"):format(au_event)
-        elseif (_15_ == "table") then
+        elseif (_16_ == "table") then
           event_arg = au_event
-        elseif (nil ~= _15_) then
-          local _else = _15_
+        elseif (nil ~= _16_) then
+          local _else = _16_
           event_arg = error(("expected string or table, got " .. _else))
         else
           event_arg = nil
@@ -152,12 +163,12 @@ local function compose_autocmd_lines(highlights)
     end
   end
   do
-    local function _19_(_17_, _18_)
-      local cmd_line1 = _17_[1]
-      local cmd_line2 = _18_[1]
+    local function _20_(_18_, _19_)
+      local cmd_line1 = _18_[1]
+      local cmd_line2 = _19_[1]
       return (cmd_line1 < cmd_line2)
     end
-    table.sort(autocmd_list, _19_)
+    table.sort(autocmd_list, _20_)
   end
   return flatten(autocmd_list)
 end
@@ -282,9 +293,9 @@ local function compose_vim_options_cmd_lines_21()
     for _, vim_option_name in ipairs(vim_options) do
       local k_17_auto, v_18_auto = nil, nil
       do
-        local _31_ = vim.api.nvim_get_option_value(vim_option_name, {scope = "global"})
-        if (nil ~= _31_) then
-          local val = _31_
+        local _32_ = vim.api.nvim_get_option_value(vim_option_name, {scope = "global"})
+        if (nil ~= _32_) then
+          local val = _32_
           if (vim.api.nvim_get_option_info2(vim_option_name, {}).default ~= val) then
             k_17_auto, v_18_auto = vim_option_name, val
           else
@@ -336,7 +347,7 @@ local function generate_hi_cmds(dump_all_3f)
   if dump_all_3f then
     filtered_highlights = highlights
   else
-    filtered_highlights = filter_out_excluded_patterns(highlights)
+    filtered_highlights = filter_out_excluded_patterns(filter_out_excluded_hlgroups(highlights))
   end
   local gvar_cmd_lines = compose_gvar_cmd_lines(ex_colors_name)
   local vim_option_cmd_lines = compose_vim_options_cmd_lines_21()
