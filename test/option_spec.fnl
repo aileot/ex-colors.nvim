@@ -10,7 +10,7 @@
         : collect-output-highlights
         : generate-random-hl-name} (include :test.helper.utils))
 
-(local {: safe-reset!} (include :test.helper.wrapper))
+(local {: clean-reset!} (include :test.helper.wrapper))
 
 (local {: assert/buf-contains-pattern : assert/buf-contains-no-pattern}
        (include :test.helper.assert))
@@ -26,7 +26,7 @@
 
 (describe* ".reset() resets the internal default values to be merged;"
   (before-each (fn []
-                 (safe-reset!)))
+                 (clean-reset!)))
   (describe* "thus, given (1) .setup(), (2) .setup({included_patterns = {'String'}), then (3) .setup(),"
     (it* ":ExColors outputs different at (2) from at (1)"
       (setup!)
@@ -34,7 +34,7 @@
       (local output1 (collect-output-highlights))
       (setup! {:included_patterns [:String]})
       (vim.cmd "ExColors | update")
-      (safe-reset!)
+      (clean-reset!)
       (local output2 (collect-output-highlights))
       (assert.are_not_same output1 output2))
     (it* ":ExColors outputs the same result at (1) and (3)"
@@ -43,7 +43,7 @@
       (local output1 (collect-output-highlights))
       (setup! {:included_patterns [:String]})
       (vim.cmd "ExColors | update")
-      (safe-reset!)
+      (clean-reset!)
       (setup!)
       (vim.cmd "ExColors | update")
       (local output3 (collect-output-highlights))
@@ -51,7 +51,7 @@
 
 (describe* :option
   (before-each (fn []
-                 (safe-reset!)
+                 (clean-reset!)
                  (vim.cmd.colorscheme original-colors-name)
                  (setup! {:colors_dir output-colors-dir})
                  (set new-hl-name (generate-random-hl-name))))

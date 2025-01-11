@@ -1,6 +1,6 @@
 (import-macros {: describe* : it*} :test.helper.busted-macros)
 
-(local {: safe-reset!} (include :test.helper.wrapper))
+(local {: clean-reset!} (include :test.helper.wrapper))
 
 (include :test.context.prerequisites)
 
@@ -12,7 +12,7 @@
 
 (describe* "preset"
   (before_each (fn []
-                 (safe-reset!)))
+                 (clean-reset!)))
   (it* "table detects invalid preset"
     (assert.has_error #presets.should-be-error)
     (assert.has_no_error #presets.relinker)
