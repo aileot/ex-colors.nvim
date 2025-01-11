@@ -21,26 +21,26 @@
     (describe* "with a definition linked to another definition"
       (describe* "which also linked to another definition,"
         (describe* "inherits the second one's map;"
-          (describe* "thus, given `Foo` is linked to `Bar` which also links to `Baz`"
+          (describe* "thus, given `Foo` is linked to `Baz` which also links to `Qux`"
             (before-each (fn []
-                           (vim.api.nvim_set_hl 0 :Foo {:link :Bar})
-                           (vim.api.nvim_set_hl 0 :Bar {:link :Baz})
-                           (vim.api.nvim_set_hl 0 :Baz {:fg :Red})))
-            (describe* "and the setup option is {included_patterns={'^Foo$', '^Baz$'}, relinker=<OMIT>}"
-              (describe* "where `Bar` is relinked to `Foo`,"
+                           (vim.api.nvim_set_hl 0 :Foo {:link :Baz})
+                           (vim.api.nvim_set_hl 0 :Baz {:link :Qux})
+                           (vim.api.nvim_set_hl 0 :Qux {:fg :Red})))
+            (describe* "and the setup option is {included_patterns={'^Foo$', '^Qux$'}, relinker=<OMIT>}"
+              (describe* "where `Baz` is relinked to `Foo`,"
                 (before-each (fn []
-                               (setup! {:included_patterns [:^Foo$ :^Baz$]
+                               (setup! {:included_patterns [:^Foo$ :^Qux$]
                                         :relinker (fn [hl-name]
                                                     (case hl-name
-                                                      :Bar :Foo
+                                                      :Baz :Foo
                                                       _ hl-name))})
                                (vim.cmd "ExColors | update")))
-                (it* "`Bar` does not appear in the output"
-                  (assert/buf-contains-no-pattern :Bar))
-                (it* "`Foo` is linked to `Baz`"
-                  (assert/buf-contains-pattern "Foo.-{.-link.-Baz.-}"))
-                (it* "`Baz` is mapped to {fg=<OMIT>}"
-                  (assert/buf-contains-pattern "Baz.-{.-fg.-}")))))))
+                (it* "`Baz` does not appear in the output"
+                  (assert/buf-contains-no-pattern :Baz))
+                (it* "`Foo` is linked to `Qux`"
+                  (assert/buf-contains-pattern "Foo.-{.-link.-Qux.-}"))
+                (it* "`Qux` is mapped to {fg=<OMIT>}"
+                  (assert/buf-contains-pattern "Qux.-{.-fg.-}")))))))
       (describe* "which is excluded in setup"
         (describe* "inherits the map from the excluded one;"
           (describe* "thus, given `@boolean` is linked to `TSBoolean`"
