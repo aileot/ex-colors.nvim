@@ -35,8 +35,6 @@ local default_opts = {
   ---@type string[]
   embedded_global_options = {
     "background",
-    "pumblend",
-    "winblend",
   },
   --- Vim global variables (g:foobar or vim.g.foobar) which should be also
   --- embedded in the colorscheme output to be updated at the same time.
