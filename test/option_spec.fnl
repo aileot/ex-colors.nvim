@@ -56,14 +56,15 @@
                 (vim.cmd :update)))
   (describe* :ignore_clear
     (describe* "set to false does not filter out any highlight definitions;"
-      (it* "the output becomes the same as the output by :ExColors!"
-        (vim.cmd "ExColors! | update")
-        (local output-lines-with-bang (buf-get-entire-lines))
-        (clean-setup! {:ignore_clear false})
-        (vim.cmd "ExColors | update")
-        (local output-lines-with-included_patterns (buf-get-entire-lines))
-        (assert.is_same output-lines-with-bang
-                        output-lines-with-included_patterns)))
+      (describe* "with {included_patterns={'.*'}},"
+        (it* "the output becomes the same as the output by :ExColors!"
+          (vim.cmd "ExColors! | update")
+          (local output-lines-with-bang (buf-get-entire-lines))
+          (clean-setup! {:ignore_clear false :included_patterns [".*"]})
+          (vim.cmd "ExColors | update")
+          (local output-lines-with-included_patterns (buf-get-entire-lines))
+          (assert.is_same output-lines-with-bang
+                          output-lines-with-included_patterns))))
     (describe* "stops :ExColors output highlight definitions with empty table;"
       (describe* "thus, when hl-String is cleared, with setup-options {ignore_clear=true, autocmd_patterns={}, included_patterns=['^String$']},"
         (it* ":ExColors will output no `vim.api.nvim_set_hl` lines"
