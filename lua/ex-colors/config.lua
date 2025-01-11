@@ -9,12 +9,6 @@ local default_opts = {
   --- path included in `&runtimepath`.
   ---@type string
   colors_dir = Path.join(vim.fn.stdpath("config"), "colors"),
-  --- If true, the filter options like `included_patterns`,
-  --- `excluded_patterns`, and `relinker` are applied to the highlight groups
-  --- as they are last defined; otherwise, the highlight definitions are
-  --- lowered.
-  ---@type boolean
-  case_sensitive = true,
   --- If true, highlight definitions cleared by `:highlight clear` will not be
   --- included in the output. See `:h highlight-clear` for details.
   ---@type boolean
