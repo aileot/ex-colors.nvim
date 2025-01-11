@@ -6,7 +6,7 @@
                 : it*
                 : assert/spy} :test.helper.busted-macros)
 
-(local {: safe-reset!} (include :test.helper.wrapper))
+(local {: clean-reset!} (include :test.helper.wrapper))
 (local {: assert/buf-contains-pattern : assert/buf-contains-no-pattern}
        (include :test.helper.assert))
 
@@ -16,7 +16,7 @@
 
 (describe* :option
   (before-each (fn []
-                 (safe-reset!)))
+                 (clean-reset!)))
   (describe* :relinker
     (describe* "with a definition linked to another definition"
       (describe* "which also linked to another definition,"
