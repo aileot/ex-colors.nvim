@@ -1,16 +1,16 @@
 -- NOTE: This file will be copied into lua/ by make.
 
-local utils = require("ex-colors.utils")
+local mt_utils = require("ex-colors.utils.metatable")
 
 local M = {
   ---@type table<string,string[]>
-  builtin = utils.new_addable(),
+  builtin = mt_utils.new_addable(),
   ---@type table<string,string[]>
-  convention = utils.new_addable(),
+  convention = mt_utils.new_addable(),
 }
 
 --- :help highlight-default
-M.builtin.default = {
+M.builtin.default = mt_utils.new_addable({
   "ColorColumn",
   "Conceal",
   "CurSearch",
@@ -86,18 +86,18 @@ M.builtin.default = {
   "WildMenu",
   "WinBar",
   "WinBarNC",
-}
+})
 
 --- For GUI. The hlgroups below could be undefined.
 --- :help highlight-default
-M.builtin.gui = {
+M.builtin.gui = mt_utils.new_addable({
   "Menu",
   "Scrollbar",
   "Tooltip",
-}
+})
 
 --- :help group-name
-M.builtin.naming_conventions = {
+M.builtin.naming_conventions = mt_utils.new_addable({
   "Comment",
   "Constant",
   "String",
@@ -136,10 +136,10 @@ M.builtin.naming_conventions = {
   "Added",
   "Changed",
   "Removed",
-}
+})
 
 --- :help diagnostic-highlight
-M.builtin.diagnostic = {
+M.builtin.diagnostic = mt_utils.new_addable({
   "DiagnosticError",
   "DiagnosticWarn",
   "DiagnosticInfo",
@@ -167,10 +167,10 @@ M.builtin.diagnostic = {
   "DiagnosticSignOk",
   "DiagnosticDeprecated",
   "DiagnosticUnnecessary",
-}
+})
 
 --- :help treesitter-highlight-groups
-M.builtin.treesitter = {
+M.builtin.treesitter = mt_utils.new_addable({
   "@variable",
   "@variable.builtin",
   "@variable.parameter",
@@ -261,10 +261,10 @@ M.builtin.treesitter = {
   "@tag.builtin",
   "@tag.attribute",
   "@tag.delimiter",
-}
+})
 
 --- :help lsp-highlight
-M.builtin.lsp = {
+M.builtin.lsp = mt_utils.new_addable({
   "LspReferenceText",
   "LspReferenceRead",
   "LspReferenceWrite",
@@ -272,10 +272,10 @@ M.builtin.lsp = {
   "LspCodeLens",
   "LspCodeLensSeparator",
   "LspSignatureActiveParameter",
-}
+})
 
 --- :help lsp-semantic-highlight
-M.builtin.lsp_semantic_highlight = {
+M.builtin.lsp_semantic_highlight = mt_utils.new_addable({
   "@lsp.type.class",
   "@lsp.type.comment",
   "@lsp.type.decorator",
@@ -309,10 +309,10 @@ M.builtin.lsp_semantic_highlight = {
   "@lsp.mod.modification",
   "@lsp.mod.readonly",
   "@lsp.mod.static",
-}
+})
 
 --- :help expr-highlight
-M.builtin.expr = {
+M.builtin.expr = mt_utils.new_addable({
   "NvimInvalid",
   "NvimInternalError",
   "NvimAssignment",
@@ -380,10 +380,10 @@ M.builtin.expr = {
   "NvimDoubleQuotedBody",
   "NvimDoubleQuotedEscape",
   "NvimDoubleQuotedUnknownEscape",
-}
+})
 
 --- $VIMRUNTIME/syntax/diff.vim
-M.builtin.diff = {
+M.builtin.diff = mt_utils.new_addable({
   "diffOldFile",
   "diffNewFile",
   "diffIndexLine",
@@ -401,17 +401,17 @@ M.builtin.diff = {
   "diffLine",
   "diffSubname",
   "diffComment",
-}
+})
 
 --- :help 'redrawdebug'
-M.builtin.redrawdebug = {
+M.builtin.redrawdebug = mt_utils.new_addable({
   "RedrawDebugNormal",
   "RedrawDebugClear",
   "RedrawDebugComposed",
   "RedrawDebugRecompose",
-}
+})
 
-M.convention.ansi_colors = {
+M.convention.ansi_colors = mt_utils.new_addable({
   "Aqua",
   "Black",
   "Blue",
@@ -426,9 +426,9 @@ M.convention.ansi_colors = {
   "Red",
   "White",
   "Yellow",
-}
+})
 
-M.recommended = utils.new_addable(
+M.recommended = mt_utils.new_addable(
   M.builtin.default
     + M.builtin.naming_conventions
     + M.builtin.diagnostic

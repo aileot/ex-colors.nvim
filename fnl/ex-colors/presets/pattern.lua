@@ -1,10 +1,10 @@
 -- NOTE: This file will be copied into lua/ by make.
 
 local hlgroup_presets = require("ex-colors.presets.hlgroup")
-local utils = require("ex-colors.utils")
+local mt_utils = require("ex-colors.utils.metatable")
 
 local M = {
-  convention = utils.new_addable(),
+  convention = {},
 }
 
 --- Copied from nvim-treesitter/queries/ to exclude via excluded_patterns.
@@ -321,12 +321,13 @@ local filetypes = {
 }
 
 M.treesitter_filetype_captures =
-  utils.new_addable(vim.tbl_map(function(filetype)
+  mt_utils.new_addable(vim.tbl_map(function(filetype)
     return ("^@.*%%.%s$"):format(filetype)
   end, filetypes))
 
-M.convention.ansi_color_prefixes = utils.new_addable(vim.tbl_map(function(name)
-  return name .. "%u"
-end, hlgroup_presets.convention.ansi_colors))
+M.convention.ansi_color_prefixes =
+  mt_utils.new_addable(vim.tbl_map(function(name)
+    return name .. "%u"
+  end, hlgroup_presets.convention.ansi_colors))
 
 return M
