@@ -234,6 +234,54 @@ M.builtin.treesitter = {
   "@tag.delimiter",
 }
 
+--- :help lsp-highlight
+M.builtin.lsp = {
+  "LspReferenceText",
+  "LspReferenceRead",
+  "LspReferenceWrite",
+  "LspInlayHint",
+  "LspCodeLens",
+  "LspCodeLensSeparator",
+  "LspSignatureActiveParameter",
+}
+
+--- :help lsp-semantic-highlight
+M.builtin.lsp_semantic_highlight = {
+  "@lsp.type.class",
+  "@lsp.type.comment",
+  "@lsp.type.decorator",
+  "@lsp.type.enum",
+  "@lsp.type.enumMember",
+  "@lsp.type.event",
+  "@lsp.type.function",
+  "@lsp.type.interface",
+  "@lsp.type.keyword",
+  "@lsp.type.macro",
+  "@lsp.type.method",
+  "@lsp.type.modifier",
+  "@lsp.type.namespace",
+  "@lsp.type.number",
+  "@lsp.type.operator",
+  "@lsp.type.parameter",
+  "@lsp.type.property",
+  "@lsp.type.regexp",
+  "@lsp.type.string",
+  "@lsp.type.struct",
+  "@lsp.type.type",
+  "@lsp.type.typeParameter",
+  "@lsp.type.variable",
+  "@lsp.mod.abstract",
+  "@lsp.mod.async",
+  "@lsp.mod.declaration",
+  "@lsp.mod.defaultLibrary",
+  "@lsp.mod.definition",
+  "@lsp.mod.deprecated",
+  "@lsp.mod.documentation",
+  "@lsp.mod.modification",
+  "@lsp.mod.readonly",
+  "@lsp.mod.static",
+}
+
 M.recommended = M.builtin.default
   + M.builtin.naming_conventions
   + M.builtin.treesitter
