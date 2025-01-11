@@ -12,9 +12,10 @@
 
 (local {: assert/buf-contains-no-pattern} (include :test.helper.assert))
 
-(include :test.context.prerequisites)
 (local {: output-colors-dir : output-path : original-colors-name}
        (include :test.context.default))
+
+(include :test.context.prerequisites)
 
 (describe* :command
   (setup* (fn []

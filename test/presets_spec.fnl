@@ -1,14 +1,11 @@
 (import-macros {: describe* : it*} :test.helper.busted-macros)
 
 (local {: clean-reset!} (include :test.helper.wrapper))
-
+(local {: assert/buf-contains-no-pattern} (include :test.helper.assert))
 (include :test.context.prerequisites)
 
 (local {:setup setup!} (require :ex-colors))
-
 (local presets (require :ex-colors.presets))
-
-(local {: assert/buf-contains-no-pattern} (include :test.helper.assert))
 
 (describe* "preset"
   (before_each (fn []
