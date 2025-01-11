@@ -16,6 +16,7 @@ end
 local M = {
   ---@type table<string,string[]>
   builtin = new_addable(),
+  convention = new_addable(),
 }
 
 --- :help highlight-default
@@ -412,12 +413,30 @@ M.builtin.diff = {
   "diffComment",
 }
 
+M.convention.ansi_colors = {
+  "Aqua",
+  "Black",
+  "Blue",
+  "Cyan",
+  "Fg",
+  "Gray",
+  "Green",
+  "Grey",
+  "Magenta",
+  "Orange",
+  "Purple",
+  "Red",
+  "White",
+  "Yellow",
+}
+
 M.recommended = M.builtin.default
   + M.builtin.naming_conventions
   + M.builtin.diagnostic
   + M.builtin.treesitter
   + M.builtin.lsp
   + M.builtin.lsp_semantic_highlight
+  + M.convention.ansi_colors
 
 return M
 
