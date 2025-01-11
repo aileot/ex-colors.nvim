@@ -17,4 +17,15 @@ function M.new_addable(tbl)
   })
 end
 
+function M.new_readonly(tbl)
+  return setmetatable(tbl or {}, {
+    __index = function(_, k)
+      error("undefined key: " .. k)
+    end,
+    __newindex = function()
+      error("readonly table")
+    end,
+  })
+end
+
 return M
