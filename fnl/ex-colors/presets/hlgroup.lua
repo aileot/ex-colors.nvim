@@ -388,6 +388,27 @@ M.builtin.expr = {
   "NvimDoubleQuotedUnknownEscape",
 }
 
+--- $VIMRUNTIME/syntax/diff.vim
+M.builtin.diff = {
+  "diffOldFile",
+  "diffNewFile",
+  "diffIndexLine",
+  "diffFile",
+  "diffOnly",
+  "diffIdentical",
+  "diffDiffer",
+  "diffBDiffer",
+  "diffIsA",
+  "diffNoEOL",
+  "diffCommon",
+  "diffRemoved",
+  "diffChanged",
+  "diffAdded",
+  "diffLine",
+  "diffSubname",
+  "diffComment",
+}
+
 M.recommended = M.builtin.default
   + M.builtin.naming_conventions
   + M.builtin.diagnostic
