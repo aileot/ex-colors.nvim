@@ -172,12 +172,7 @@ local function compose_hi_cmd_lines(highlights, dump_all_3f)
     end
     cmd_list = tbl_21_auto
   else
-    local filtered_highlights
-    if next(included_patterns) then
-      filtered_highlights = filter_by_included_patterns(highlights, included_patterns)
-    else
-      filtered_highlights = highlights
-    end
+    local filtered_highlights = filter_by_included_patterns(highlights, included_patterns)
     local hl_maps
     do
       local tbl_16_auto = {}
@@ -276,9 +271,9 @@ local function compose_vim_options_cmd_lines_21()
     for _, vim_option_name in ipairs(vim_options) do
       local k_17_auto, v_18_auto = nil, nil
       do
-        local _31_ = vim.api.nvim_get_option_value(vim_option_name, {scope = "global"})
-        if (nil ~= _31_) then
-          local val = _31_
+        local _30_ = vim.api.nvim_get_option_value(vim_option_name, {scope = "global"})
+        if (nil ~= _30_) then
+          local val = _30_
           if (vim.api.nvim_get_option_info2(vim_option_name, {}).default ~= val) then
             k_17_auto, v_18_auto = vim_option_name, val
           else
