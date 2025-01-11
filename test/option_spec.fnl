@@ -112,7 +112,7 @@
             (vim.cmd "ExColors | update")
             (assert/buf-contains-pattern (.. "vim%.api%.nvim_set_hl%(.-"
                                              new-hl-name ".-{(.*default.+)}")))))))
-  (describe* "embedded_variables"
+  (describe* "embedded_global_variables"
     ;; NOTE: It's hard to test with terminal_color_{0,15}, which are only
     ;; defined when both &termguicolors and has('gui_running') return true in
     ;; builtin colorschemes.
@@ -126,7 +126,7 @@
                   (assert.is_nil vim.g.foo)
                   (assert.is_nil vim.g.bar)))
     (it* "saves no vim variables with empty list"
-      (setup! {:embedded_variables []})
+      (setup! {:embedded_global_variables []})
       (vim.cmd "silent ExColors | silent update")
       (let [val vim.g.foo]
         (assert.is_not_nil val)
@@ -135,7 +135,7 @@
         (vim.cmd.colorscheme output-colors-name)
         (assert.not_equals val vim.g.foo)))
     (it* "can save only one vim variable"
-      (setup! {:embedded_variables [:foo]})
+      (setup! {:embedded_global_variables [:foo]})
       (vim.cmd "silent ExColors | silent update")
       (assert/buf-contains-pattern "foo")
       (let [val vim.g.foo]
@@ -146,7 +146,7 @@
         (assert.equals val vim.g.foo)))
     (describe* "can save multiple vim variables;"
       (it* "thus, it can save two vim variables"
-        (setup! {:embedded_variables [:foo :bar]})
+        (setup! {:embedded_global_variables [:foo :bar]})
         (vim.cmd "silent ExColors | silent update")
         (let [foo vim.g.foo
               bar vim.g.bar]
