@@ -1,6 +1,6 @@
 -- NOTE: This file will be copied into lua/ by make.
 local M = {
-  hlgroups = require("ex-colors.presets.hlgroups"),
+  hlgroup = require("ex-colors.presets.hlgroup"),
   relinker = require("ex-colors.presets.relinker"),
 }
 
