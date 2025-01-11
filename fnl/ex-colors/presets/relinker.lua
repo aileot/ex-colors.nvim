@@ -10,7 +10,8 @@ function M.no_typo(hl_name)
   end
   local hl_name_lower = hl_name:lower()
   if hl_name_lower:find("^@%a[.%a]+%.uri$") then
-    return hl_name_lower:gsub("i$", "l")
+    local hl_name = hl_name_lower:gsub("i$", "l")
+    return hl_name
   end
   return hl_name
 end
