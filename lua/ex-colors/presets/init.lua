@@ -19,6 +19,9 @@ M.recommended.included_hlgroups = mt_utils.new_addable(
     + M.hlgroup.convention.ansi_colors
 )
 
+M.recommended.excluded_patterns =
+  mt_utils.new_addable(M.pattern.treesitter_filetype_captures)
+
 function M.recommended.relinker(hl_name)
   hl_name = M.relinker.no_typo(hl_name)
   hl_name = M.relinker.no_superseded(hl_name)
