@@ -158,4 +158,47 @@
           (assert.not_equals bar vim.g.bar)
           (vim.cmd.colorscheme output-colors-name)
           (assert.equals foo vim.g.foo)
-          (assert.equals bar vim.g.bar))))))
+          (assert.equals bar vim.g.bar)))))
+  (describe* "embedded_global_options"
+    (it* "generates nothing when set to empty table;"
+      (setup! {:embedded_global_options []})
+      (vim.cmd "ExColors | update")
+      (assert/buf-contains-no-pattern "vim%.api%.nvim_set_option_value%(.*"))
+    (pending #(describe* "can keep one option settings;"
+                (it* "thus, the option can keep 'background' option value."
+                  (vim.cmd.colorscheme original-colors-name)
+                  (setup! {:embedded_global_options [:background]})
+                  (set vim.go.background "light")
+                  (vim.cmd "ExColors | update")
+                  (assert/buf-contains-pattern ".*background.*light")
+                  (set vim.go.background "dark")
+                  ;; FIXME: Why vim.api.nvim_set_option_value is not called
+                  ;; in spite of the output?
+                  (vim.cmd.colorscheme output-colors-name)
+                  (assert.equals "light" vim.go.background))))
+    (pending #(describe* "can keep multiple option settings;"
+                (it* "output could contain `vim.api.nvim_set_option_value` which includes `background` and `guicursor` in the function argument"
+                  (set vim.go.background "light")
+                  (set vim.go.guicursor "n:block")
+                  (setup! {:embedded_global_options [:background :guicursor]})
+                  (vim.cmd "ExColors | update")
+                  (set vim.go.background "dark")
+                  (set vim.go.guicursor "n-v-c:block")
+                  (vim.cmd.colorscheme output-colors-name)
+                  (assert.equals "light" vim.go.background)
+                  (assert.equals "n:block" vim.go.guicursor))))
+    (describe* "will ignore options which remains a default value;"
+      (it* "thus, background=dark will not be included in the output."
+        (set vim.go.background "dark")
+        (setup! {:embedded_global_options [:background]})
+        (vim.cmd "ExColors | update")
+        (assert/buf-contains-no-pattern ".*background.*"))
+      (it* "thus, the output could ignore a default-value option in given three options."
+        (set vim.go.background "dark")
+        (set vim.go.pumblend 50)
+        (set vim.go.winblend 50)
+        (setup! {:embedded_global_options [:pumblend :background :winblend]})
+        (vim.cmd "ExColors | update")
+        (assert/buf-contains-no-pattern ".*background.*")
+        (assert/buf-contains-pattern ".*pumblend.*50")
+        (assert/buf-contains-pattern ".*winblend.*50")))))
