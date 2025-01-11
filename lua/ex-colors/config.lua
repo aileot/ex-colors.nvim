@@ -19,16 +19,16 @@ local default_opts = {
   omit_default = true,
   --- Return false to discard hl-group.
   ---@type fun(hl_name: string): string|false
-  relinker = require("ex-colors.presets").relinker.recommended,
+  relinker = require("ex-colors.presets").recommended.relinker,
   --- Highlight group names which should be included in the output.
   ---@type string[]
-  included_hlgroups = require("ex-colors.presets").hlgroup.recommended,
+  included_hlgroups = require("ex-colors.presets").recommended.included_hlgroups,
   --- Highlight group name Lua patterns which should be included in the output.
   ---@type string[]
   included_patterns = {},
   --- Highlight group name patterns which should be excluded in the output.
   ---@type string[]
-  excluded_patterns = require("ex-colors.presets").pattern.treesitter_filetype_captures,
+  excluded_patterns = require("ex-colors.presets").recommended.excluded_patterns,
   --- Highlight group name patterns which should be only defined on the
   --- autocmd event patterns.
   ---@type table<string,string[]>

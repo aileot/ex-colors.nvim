@@ -14,7 +14,7 @@
   (describe* "relinker"
     (describe* "with the recommended preset"
       (before_each (fn []
-                     (clean-setup! {:relinker presets.relinker.recommended})))
+                     (clean-setup! {:relinker presets.recommended.relinker})))
       (it* "eliminate TS-prefixed hl-groups"
         (vim.cmd "ExColors | update")
         (assert/buf-contains-no-pattern "TS")))

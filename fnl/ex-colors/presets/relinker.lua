@@ -197,14 +197,4 @@ function M.no_TS_prefixed(hl_name)
   return hl_name
 end
 
-function M.recommended(hl_name)
-  hl_name = M.no_typo(hl_name)
-  hl_name = M.no_superseded(hl_name)
-  hl_name = M.no_TS_prefixed(hl_name)
-  -- NOTE: It might be undesirable for general users to exclude
-  -- lsp-semantic-highlight.
-  -- hl_name = M.no_lsp_semantic_highlight(hl_name)
-  return hl_name
-end
-
 return M

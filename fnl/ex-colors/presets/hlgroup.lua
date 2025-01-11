@@ -4,9 +4,9 @@ local mt_utils = require("ex-colors.utils.metatable")
 
 local M = {
   ---@type table<string,string[]>
-  builtin = mt_utils.new_addable(),
+  builtin = {},
   ---@type table<string,string[]>
-  convention = mt_utils.new_addable(),
+  convention = {},
 }
 
 --- :help highlight-default
@@ -427,16 +427,6 @@ M.convention.ansi_colors = mt_utils.new_addable({
   "White",
   "Yellow",
 })
-
-M.recommended = mt_utils.new_addable(
-  M.builtin.default
-    + M.builtin.naming_conventions
-    + M.builtin.diagnostic
-    + M.builtin.treesitter
-    + M.builtin.lsp
-    + M.builtin.lsp_semantic_highlight
-    + M.convention.ansi_colors
-)
 
 return M
 
