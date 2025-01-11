@@ -149,6 +149,14 @@
           (vim.cmd.colorscheme output-colors-name)
           (assert.equals foo vim.g.foo)
           (assert.equals bar vim.g.bar)))))
+  (describe* "included_hlgroups"
+    (it* "can filter hlgroups by name."
+      (clean-setup! {:included_hlgroups []})
+      (vim.cmd "ExColors | update")
+      (assert/buf-contains-no-pattern (.. "vim%.api%.nvim_set_hl%(.-String"))
+      (clean-setup! {:included_hlgroups [:String]})
+      (vim.cmd "ExColors | update")
+      (assert/buf-contains-pattern (.. "vim%.api%.nvim_set_hl%(.-String"))))
   (describe* "embedded_global_options"
     (it* "generates nothing when set to empty table;"
       (clean-setup! {:embedded_global_options []})
