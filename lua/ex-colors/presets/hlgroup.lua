@@ -140,6 +140,37 @@ M.builtin.naming_conventions = {
   "Removed",
 }
 
+--- :help diagnostic-highlight
+M.builtin.diagnostic = {
+  "DiagnosticError",
+  "DiagnosticWarn",
+  "DiagnosticInfo",
+  "DiagnosticHint",
+  "DiagnosticOk",
+  "DiagnosticVirtualTextError",
+  "DiagnosticVirtualTextWarn",
+  "DiagnosticVirtualTextInfo",
+  "DiagnosticVirtualTextHint",
+  "DiagnosticVirtualTextOk",
+  "DiagnosticUnderlineError",
+  "DiagnosticUnderlineWarn",
+  "DiagnosticUnderlineInfo",
+  "DiagnosticUnderlineHint",
+  "DiagnosticUnderlineOk",
+  "DiagnosticFloatingError",
+  "DiagnosticFloatingWarn",
+  "DiagnosticFloatingInfo",
+  "DiagnosticFloatingHint",
+  "DiagnosticFloatingOk",
+  "DiagnosticSignError",
+  "DiagnosticSignWarn",
+  "DiagnosticSignInfo",
+  "DiagnosticSignHint",
+  "DiagnosticSignOk",
+  "DiagnosticDeprecated",
+  "DiagnosticUnnecessary",
+}
+
 --- :help treesitter-highlight-groups
 M.builtin.treesitter = {
   "@variable",
@@ -284,6 +315,7 @@ M.builtin.lsp_semantic_highlight = {
 
 M.recommended = M.builtin.default
   + M.builtin.naming_conventions
+  + M.builtin.diagnostic
   + M.builtin.treesitter
   + M.builtin.lsp
   + M.builtin.lsp_semantic_highlight
