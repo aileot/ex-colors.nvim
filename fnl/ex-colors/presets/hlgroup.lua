@@ -403,6 +403,14 @@ M.builtin.diff = {
   "diffComment",
 }
 
+--- :help 'redrawdebug'
+M.builtin.redrawdebug = {
+  "RedrawDebugNormal",
+  "RedrawDebugClear",
+  "RedrawDebugComposed",
+  "RedrawDebugRecompose",
+}
+
 M.convention.ansi_colors = {
   "Aqua",
   "Black",
