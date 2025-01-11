@@ -229,23 +229,23 @@ local function compose_colors_names()
 end
 local function compose_gvar_cmd_lines(ex_colors_name)
   local file_ext = "lua"
-  local gvar_supports = config.gvar_supports
-  local gvar_template
+  local embedded_vars = config.embedded_variables
+  local expr_template
   if (file_ext == "lua") then
-    gvar_template = "vim.api.nvim_set_var(%q,%s)"
+    expr_template = "vim.api.nvim_set_var(%q,%s)"
   elseif (file_ext == "vim") then
-    gvar_template = "let g:%s = %q"
+    expr_template = "let g:%s = %q"
   else
-    gvar_template = nil
+    expr_template = nil
   end
-  local gvar_support_lines
+  local cmd_lines
   do
     local tbl_21_auto = {}
     local i_22_auto = 0
-    for _, gvar_name in ipairs(gvar_supports) do
+    for _, gvar_name in ipairs(embedded_vars) do
       local val_23_auto
       if vim.g[gvar_name] then
-        val_23_auto = gvar_template:format(gvar_name, __3eoneliner(vim.api.nvim_get_var(gvar_name)))
+        val_23_auto = expr_template:format(gvar_name, __3eoneliner(vim.api.nvim_get_var(gvar_name)))
       else
         val_23_auto = nil
       end
@@ -255,11 +255,11 @@ local function compose_gvar_cmd_lines(ex_colors_name)
       else
       end
     end
-    gvar_support_lines = tbl_21_auto
+    cmd_lines = tbl_21_auto
   end
-  local colors_name_line = gvar_template:format("colors_name", ("\"" .. ex_colors_name .. "\""))
-  local cmd_lines = flatten({colors_name_line, gvar_support_lines})
-  return cmd_lines
+  local colors_name_line = expr_template:format("colors_name", ("\"" .. ex_colors_name .. "\""))
+  local cmd_lines0 = flatten({colors_name_line, cmd_lines})
+  return cmd_lines0
 end
 local function overwrite_buf_lines_21(buf, lines)
   vim.api.nvim_buf_set_lines(buf, 0, -1, true, lines)
