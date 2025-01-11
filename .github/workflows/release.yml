@@ -17,32 +17,32 @@ jobs:
       - name: Generate vimdoc (reference)
         uses: kdheepak/panvimdoc@v4.0.0
         with:
-          vimdoc: laurel-reference
-          pandoc: REFERENCE.md
+          vimdoc: ex-colors-reference
+          pandoc: docs/reference.md
           version: "Neovim >= 0.9.5"
-          description: "Reference of nvim-laurel"
+          description: "Reference of ex-colors.nvim"
           demojify: true
           treesitter: true
           dedupsubheadings: false # Add heading to subheading anchor links to ensure that subheadings are unique
           docmapping: true # Use h4 headers as mapping docs
-      - name: Generate vimdoc (cookbook)
+      - name: Generate vimdoc (readme)
         uses: kdheepak/panvimdoc@v4.0.0
         with:
-          vimdoc: laurel-cookbook
-          pandoc: COOKBOOK.md
+          vimdoc: ex-colors
+          pandoc: README.md
           version: "Neovim >= 0.9.5"
-          description: "Cookbook of nvim-laurel"
+          description: "ex-colors.nvim"
           demojify: true
           treesitter: true
           dedupsubheadings: false # Add heading to subheading anchor links to ensure that subheadings are unique
           docmapping: false # Use h4 headers as mapping docs
-      - name: Generate vimdoc (appendix)
+      - name: Generate vimdoc (cookbook)
         uses: kdheepak/panvimdoc@v4.0.0
         with:
-          vimdoc: laurel-appendix
-          pandoc: APPENDIX.md
+          vimdoc: ex-colors-cookbook
+          pandoc: docs/cookbook.md
           version: "Neovim >= 0.9.5"
-          description: "Appendix of nvim-laurel"
+          description: "Cookbook of ex-colors.nvim"
           demojify: true
           treesitter: true
           dedupsubheadings: false # Add heading to subheading anchor links to ensure that subheadings are unique
