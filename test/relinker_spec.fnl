@@ -6,17 +6,13 @@
                 : it*
                 : assert/spy} :test.helper.busted-macros)
 
-(local {: clean-reset!} (include :test.helper.wrapper))
+(local {: clean-setup!} (include :test.helper.wrapper))
 (local {: assert/buf-contains-pattern : assert/buf-contains-no-pattern}
        (include :test.helper.assert))
 
 (include :test.context.prerequisites)
 
-(local {:setup setup!} (require :ex-colors))
-
 (describe* :option
-  (before-each (fn []
-                 (clean-reset!)))
   (describe* :relinker
     (describe* "with a definition linked to another definition"
       (describe* "which also linked to another definition,"
@@ -29,11 +25,12 @@
             (describe* "and the setup option is {included_patterns={'^Foo$', '^Qux$'}, relinker=<OMIT>}"
               (describe* "where `Baz` is relinked to `Foo`,"
                 (before-each (fn []
-                               (setup! {:included_patterns [:^Foo$ :^Qux$]
-                                        :relinker (fn [hl-name]
-                                                    (case hl-name
-                                                      :Baz :Foo
-                                                      _ hl-name))})
+                               (clean-setup! {:included_patterns [:^Foo$
+                                                                  :^Qux$]
+                                              :relinker (fn [hl-name]
+                                                          (case hl-name
+                                                            :Baz :Foo
+                                                            _ hl-name))})
                                (vim.cmd "ExColors | update")))
                 (it* "`Baz` does not appear in the output"
                   (assert/buf-contains-no-pattern :Baz))
@@ -51,11 +48,11 @@
                              (vim.api.nvim_set_hl 0 :TSBoolean {:fg :Red})))
               (describe* "and the setup option is {included_patterns={'^@boolean$'}, relinker=<OMIT>}"
                 (before-each (fn []
-                               (setup! {:included_patterns ["^@boolean$"]
-                                        :relinker (fn [hl-name]
-                                                    (case hl-name
-                                                      :TSBoolean "@boolean"
-                                                      _ hl-name))})
+                               (clean-setup! {:included_patterns ["^@boolean$"]
+                                              :relinker (fn [hl-name]
+                                                          (case hl-name
+                                                            :TSBoolean "@boolean"
+                                                            _ hl-name))})
                                (vim.cmd "ExColors | update")))
                 (it* "@boolean map contains 'fg' field"
                   (assert/buf-contains-pattern "@boolean.-{.-fg.-}"))
@@ -71,12 +68,12 @@
                              (vim.api.nvim_set_hl 0 :TSBoolean {:fg :Red})))
               (describe* "and the setup option is {included_patterns={'^@boolean$','^TSBoolean$'}, relinker=<OMIT>}"
                 (before-each (fn []
-                               (setup! {:included_patterns ["^@boolean$"
-                                                            :^TSBoolean$]
-                                        :relinker (fn [hl-name]
-                                                    (case hl-name
-                                                      :TSBoolean "@boolean"
-                                                      _ hl-name))})
+                               (clean-setup! {:included_patterns ["^@boolean$"
+                                                                  :^TSBoolean$]
+                                              :relinker (fn [hl-name]
+                                                          (case hl-name
+                                                            :TSBoolean "@boolean"
+                                                            _ hl-name))})
                                (vim.cmd "ExColors | update")))
                 (it* "@boolean map contains 'fg' field"
                   (assert/buf-contains-pattern "@boolean.-{.-fg.-}"))
@@ -91,12 +88,12 @@
                              (vim.api.nvim_set_hl 0 :TSBoolean {:fg :Red})))
               (describe* "and the setup option is {included_patterns={'^@boolean$','^TSBoolean$'}, relinker=<OMIT>}"
                 (before-each (fn []
-                               (setup! {:included_patterns ["^@boolean$"
-                                                            :^TSBoolean$]
-                                        :relinker (fn [hl-name]
-                                                    (case hl-name
-                                                      :TSBoolean "@boolean"
-                                                      _ hl-name))})
+                               (clean-setup! {:included_patterns ["^@boolean$"
+                                                                  :^TSBoolean$]
+                                              :relinker (fn [hl-name]
+                                                          (case hl-name
+                                                            :TSBoolean "@boolean"
+                                                            _ hl-name))})
                                (vim.cmd "ExColors | update")))
                 (it* "TSBoolean will not appear in the output"
                   (assert/buf-contains-no-pattern :TSBoolean))))))))))
