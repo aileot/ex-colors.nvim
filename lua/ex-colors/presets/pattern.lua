@@ -4,7 +4,7 @@ local hlgroup_presets = require("ex-colors.presets.hlgroup")
 local mt_utils = require("ex-colors.utils.metatable")
 
 local M = {
-  convention = mt_utils.new_addable(),
+  convention = {},
 }
 
 --- Copied from nvim-treesitter/queries/ to exclude via excluded_patterns.
