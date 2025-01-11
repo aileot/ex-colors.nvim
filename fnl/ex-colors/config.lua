@@ -28,7 +28,7 @@ local default_opts = {
   included_patterns = {},
   --- Highlight group name patterns which should be excluded in the output.
   ---@type string[]
-  excluded_patterns = {},
+  excluded_patterns = require("ex-colors.presets").pattern.treesitter_filetype_captures,
   --- Highlight group name patterns which should be only defined on the
   --- autocmd event patterns.
   ---@type table<string,string[]>
