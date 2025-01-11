@@ -54,23 +54,20 @@
   (after-each (fn []
                 (vim.cmd "%delete _")
                 (vim.cmd :update)))
-  (describe* "with included_patterns=[] and ignore_clear=false, :ExColors does not filter out any highlight definitions;"
-    (describe* "thus, with no other filter options,"
+  (describe* :ignore_clear
+    (describe* "set to false does not filter out any highlight definitions;"
       (it* "the output becomes the same as the output by :ExColors!"
         (vim.cmd "ExColors! | update")
         (local output-lines-with-bang (buf-get-entire-lines))
-        (clean-setup! {:included_patterns [] :ignore_clear false})
+        (clean-setup! {:ignore_clear false})
         (vim.cmd "ExColors | update")
         (local output-lines-with-included_patterns (buf-get-entire-lines))
         (assert.is_same output-lines-with-bang
-                        output-lines-with-included_patterns))))
-  (describe* :ignore_clear
+                        output-lines-with-included_patterns)))
     (describe* "stops :ExColors output highlight definitions with empty table;"
       (describe* "thus, when hl-String is cleared, with setup-options {ignore_clear=true, autocmd_patterns={}, included_patterns=['^String$']},"
         (it* ":ExColors will output no `vim.api.nvim_set_hl` lines"
-          (clean-setup! {:included_patterns [:^String$]
-                         :autocmd_patterns {}
-                         :ignore_clear true})
+          (clean-setup! {:included_patterns [:^String$] :ignore_clear true})
           ;; NOTE: On nvim-v0.9.5, `:highlight clear String` does not update
           ;; the highlight maps where lua api will access.
           ;; (vim.cmd "highlight clear String")
@@ -80,9 +77,7 @@
     (describe* "does nothing when set to `false`;"
       (describe* "thus, when hl-String is cleared, with setup-options {ignore_clear=false, autocmd_patterns={}, included_patterns=['^String$']},"
         (it* ":ExColors will output a `vim.api.nvim_set_hl` line"
-          (clean-setup! {:included_patterns [:^String$]
-                         :autocmd_patterns {}
-                         :ignore_clear false})
+          (clean-setup! {:included_patterns [:^String$] :ignore_clear false})
           ;; NOTE: On nvim-v0.9.5, `:highlight clear String` does not update
           ;; the highlight maps where lua api will access.
           ;; (vim.cmd "highlight clear String")
