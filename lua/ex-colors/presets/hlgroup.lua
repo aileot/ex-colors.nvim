@@ -92,7 +92,11 @@ M.builtin.default = {
   "WildMenu",
   "WinBar",
   "WinBarNC",
-  -- For GUI. The hlgroups below could be undefined.
+}
+
+--- For GUI. The hlgroups below could be undefined.
+--- :help highlight-default
+M.builtin.gui = {
   "Menu",
   "Scrollbar",
   "Tooltip",
@@ -312,6 +316,8 @@ M.builtin.lsp_semantic_highlight = {
   "@lsp.mod.readonly",
   "@lsp.mod.static",
 }
+
+M.builtin.eval = {}
 
 M.recommended = M.builtin.default
   + M.builtin.naming_conventions

@@ -92,7 +92,11 @@ M.builtin.default = {
   "WildMenu",
   "WinBar",
   "WinBarNC",
-  -- For GUI. The hlgroups below could be undefined.
+}
+
+--- For GUI. The hlgroups below could be undefined.
+--- :help highlight-default
+M.builtin.gui = {
   "Menu",
   "Scrollbar",
   "Tooltip",
