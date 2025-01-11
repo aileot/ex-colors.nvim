@@ -4,9 +4,9 @@ local mt_utils = require("ex-colors.utils.metatable")
 
 local M = {
   ---@type table<string,string[]>
-  builtin = mt_utils.new_addable(),
+  builtin = {},
   ---@type table<string,string[]>
-  convention = mt_utils.new_addable(),
+  convention = {},
 }
 
 --- :help highlight-default
