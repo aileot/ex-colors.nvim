@@ -50,12 +50,15 @@ function M.no_TS_prefixed(hl_name)
     return false
   end
   local hl_name_lower = hl_name:lower()
-  if hl_name_lower == "tsdefinition" or hl_name_lower == "tsdefinitionusage" then
+  if
+    hl_name_lower == "tsdefinition" or hl_name_lower == "tsdefinitionusage"
+  then
     -- Discard the hl-groups.
     return false
   end
   -- Deprecated Treesitter nodes
-  local ts_node_suffix = hl_name_lower:match("^ts(.+)$") or hl_name_lower:gsub("%.", ""):match("^@(.+)$")
+  local ts_node_suffix = hl_name_lower:match("^ts(.+)$")
+    or hl_name_lower:gsub("%.", ""):match("^@(.+)$")
   if ts_node_suffix == "parameterreference" then
     return false
   elseif ts_node_suffix == "method" then
@@ -123,7 +126,11 @@ function M.no_TS_prefixed(hl_name)
     return "@markup.heading" .. hl_name:match("^@text%.title(.*)$")
   end
   -- @comment.foobar
-  if hl_name_lower == "tsnote" or hl_name_lower == "@markup.note" or hl_name_lower == "@text.note" then
+  if
+    hl_name_lower == "tsnote"
+    or hl_name_lower == "@markup.note"
+    or hl_name_lower == "@text.note"
+  then
     return "@comment.note"
   elseif hl_name_lower == "tsdanger" then
     return "@comment.error"
@@ -135,7 +142,11 @@ function M.no_TS_prefixed(hl_name)
     return "@markup.emphasis"
   elseif hl_name_lower == "tsliteral" then
     return "@markup.raw"
-  elseif ts_node_suffix == "strike" or hl_name_lower == "@text.strike" or hl_name_lower == "@markup.strike" then
+  elseif
+    ts_node_suffix == "strike"
+    or hl_name_lower == "@text.strike"
+    or hl_name_lower == "@markup.strike"
+  then
     return "@markup.strikethrough"
   elseif hl_name_lower == "tsstrong" then
     return "@markup.strong"
