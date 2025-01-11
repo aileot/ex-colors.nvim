@@ -5,6 +5,7 @@ local utils = require("ex-colors.utils")
 local M = {
   ---@type table<string,string[]>
   builtin = utils.new_addable(),
+  ---@type table<string,string[]>
   convention = utils.new_addable(),
 }
 

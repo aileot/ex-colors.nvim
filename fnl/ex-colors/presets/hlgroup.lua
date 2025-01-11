@@ -1,22 +1,12 @@
 -- NOTE: This file will be copied into lua/ by make.
 
-local function new_addable()
-  local mt = {
-    __add = function(self, right)
-      return vim.list_extend(vim.list_slice(self), right)
-    end,
-  }
-  return setmetatable({}, {
-    __newindex = function(t, k, v)
-      rawset(t, k, setmetatable(v, mt))
-    end,
-  })
-end
+local utils = require("ex-colors.utils")
 
 local M = {
   ---@type table<string,string[]>
-  builtin = new_addable(),
-  convention = new_addable(),
+  builtin = utils.new_addable(),
+  ---@type table<string,string[]>
+  convention = utils.new_addable(),
 }
 
 --- :help highlight-default
