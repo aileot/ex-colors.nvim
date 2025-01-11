@@ -6,15 +6,6 @@ local mt = {
   end,
 }
 
----@type table<string,string[]>
-local M = {
-  builtin = setmetatable({}, {
-    __newindex = function(t, k, v)
-      rawset(t, k, setmetatable(v, mt))
-    end,
-  }),
-}
-
 local M = {
   ---@type table<string,string[]>
   builtin = setmetatable({}, {
