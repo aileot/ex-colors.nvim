@@ -34,17 +34,8 @@ function M.recommended.relinker(hl_name)
   return hl_name
 end
 
-local mt = {
-  __index = function(_, k)
-    return error("undefined preset: " .. k)
-  end,
-  __newindex = function()
-    error("presets are read-only")
-  end,
-}
-
 for _, v in pairs(M) do
-  setmetatable(v, mt)
+  mt_utils.new_readonly(v)
 end
 
-return setmetatable(M, mt)
+return mt_utils.new_readonly(M)
