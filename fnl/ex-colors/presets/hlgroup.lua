@@ -1,18 +1,21 @@
 -- NOTE: This file will be copied into lua/ by make.
 
-local mt = {
-  __add = function(self, right)
-    return vim.list_extend(vim.list_slice(self), right)
-  end,
-}
-
-local M = {
-  ---@type table<string,string[]>
-  builtin = setmetatable({}, {
+local function new_addable()
+  local mt = {
+    __add = function(self, right)
+      return vim.list_extend(vim.list_slice(self), right)
+    end,
+  }
+  return setmetatable({}, {
     __newindex = function(t, k, v)
       rawset(t, k, setmetatable(v, mt))
     end,
-  }),
+  })
+end
+
+local M = {
+  ---@type table<string,string[]>
+  builtin = new_addable(),
 }
 
 --- :help highlight-default
