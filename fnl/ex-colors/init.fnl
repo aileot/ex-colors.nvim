@@ -33,6 +33,13 @@
         (table.insert new-output-list name)))
     new-output-list))
 
+(fn filter-by-included-hlgroups [old-output-list]
+  (let [new-output-list []]
+    (each [_ name (ipairs config.included_hlgroups)]
+      (when (vim.list_contains old-output-list name)
+        (table.insert new-output-list name)))
+    new-output-list))
+
 (fn filter-out-excluded-patterns [old-output-list]
   (let [new-output-list []
         excluded-patterns config.excluded_patterns]
@@ -86,13 +93,15 @@
 
 (fn compose-hi-cmd-lines [highlights dump-all?]
   (let [included-patterns config.included_patterns
+        included-hlgroups (filter-by-included-hlgroups highlights)
         ignore-clear? config.ignore_clear
         cmd-list (if dump-all?
                      (icollect [_ hl-name (ipairs highlights)]
                        (let [hl-map (vim.api.nvim_get_hl 0 {:name hl-name})]
                          (format-nvim-set-hl hl-name hl-map)))
                      (let [filtered-highlights (-> highlights
-                                                   (filter-by-included-patterns included-patterns))
+                                                   (filter-by-included-patterns included-patterns)
+                                                   (vim.list_extend included-hlgroups))
                            hl-maps (collect [_ hl-name (ipairs filtered-highlights)]
                                      (remap-hl-opts hl-name))]
                        (icollect [hl-name hl-map (pairs hl-maps)]
