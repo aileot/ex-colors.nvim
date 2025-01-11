@@ -285,6 +285,8 @@ M.builtin.lsp_semantic_highlight = {
 M.recommended = M.builtin.default
   + M.builtin.naming_conventions
   + M.builtin.treesitter
+  + M.builtin.lsp
+  + M.builtin.lsp_semantic_highlight
 
 return M
 
