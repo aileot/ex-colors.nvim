@@ -91,10 +91,8 @@
                      (icollect [_ hl-name (ipairs highlights)]
                        (let [hl-map (vim.api.nvim_get_hl 0 {:name hl-name})]
                          (format-nvim-set-hl hl-name hl-map)))
-                     (let [filtered-highlights (if (next included-patterns)
-                                                   (-> highlights
-                                                       (filter-by-included-patterns included-patterns))
-                                                   highlights)
+                     (let [filtered-highlights (-> highlights
+                                                   (filter-by-included-patterns included-patterns))
                            hl-maps (collect [_ hl-name (ipairs filtered-highlights)]
                                      (remap-hl-opts hl-name))]
                        (icollect [hl-name hl-map (pairs hl-maps)]
