@@ -7,6 +7,7 @@
 
 (local config (require :ex-colors.config))
 (local {: remap-hl-opts} (require :ex-colors.remap))
+(local {: define-commands!} (require :ex-colors.commands))
 
 (fn collect-defined-highlights []
   (let [output (vim.fn.execute :highlight)]
@@ -187,7 +188,8 @@
 
 (fn setup [opts]
   (let [opts (or opts {})]
-    (config.merge opts)))
+    (config.merge opts))
+  (define-commands!))
 
 (lua "
 --- Reset `ex-colors` config. for Testing purposes only.
