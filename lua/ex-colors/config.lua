@@ -23,9 +23,12 @@ local default_opts = {
   --- Highlight group names which should be included in the output.
   ---@type string[]
   included_hlgroups = require("ex-colors.presets").recommended.included_hlgroups,
+  --- Highlight group names which should be excluded in the output.
+  ---@type string[]
+  excluded_hlgroups = require("ex-colors.presets").recommended.excluded_hlgroups,
   --- Highlight group name Lua patterns which should be included in the output.
   ---@type string[]
-  included_patterns = {},
+  included_patterns = require("ex-colors.presets").recommended.included_patterns,
   --- Highlight group name patterns which should be excluded in the output.
   ---@type string[]
   excluded_patterns = require("ex-colors.presets").recommended.excluded_patterns,

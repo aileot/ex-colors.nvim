@@ -51,6 +51,14 @@
         (table.insert new-output-list name)))
     new-output-list))
 
+(fn filter-out-excluded-hlgroups [old-output-list]
+  (let [new-output-list []
+        excluded-hlgroups config.excluded_hlgroups]
+    (each [_ name (ipairs old-output-list)]
+      (when-not (vim.list_contains excluded-hlgroups name)
+        (table.insert new-output-list name)))
+    new-output-list))
+
 (fn compose-autocmd-lines [highlights]
   (let [autocmd-patterns config.autocmd_patterns
         indent-size 2
@@ -194,6 +202,7 @@ performance.
           filtered-highlights (if dump-all?
                                   highlights
                                   (-> highlights
+                                      (filter-out-excluded-hlgroups)
                                       (filter-out-excluded-patterns)))
           gvar-cmd-lines (compose-gvar-cmd-lines ex-colors-name)
           vim-option-cmd-lines (compose-vim-options-cmd-lines!)
