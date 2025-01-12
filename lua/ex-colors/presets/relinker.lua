@@ -49,7 +49,7 @@ M.no_lsp_semantic_highlight = new_addable_relinker(function(hl_name)
   return hl_name
 end)
 
---- Discard superseded hl-groups.
+--- Relink or discard superseded hl-groups.
 M.no_superseded = new_addable_relinker(function(hl_name)
   if hl_name == false then
     return false
@@ -64,7 +64,8 @@ M.no_superseded = new_addable_relinker(function(hl_name)
   return hl_name
 end)
 
---- Discard deprecated TS-prefixed Treesitter hl-groups.
+--- Relink deprecated TS-prefixed Treesitter hl-groups to `@foo.bar` hl-groups,
+--- or discard them.
 ---@type ExColors.RelinkerInProcess
 M.no_TS_prefixed = new_addable_relinker(function(hl_name)
   if hl_name == false then
