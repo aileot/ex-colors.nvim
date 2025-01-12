@@ -32,19 +32,20 @@ require("ex-colors").setup({
   --- See `:h highlight-default` for the details.
   ---@type boolean
   omit_default = true,
-  --- Return false to discard hl-group.
+  --- (For advanced users only) Return false to discard hl-group.
   ---@type fun(hl_name: string): string|false
   relinker = require("ex-colors.presets").recommended.relinker,
   --- Highlight group names which should be included in the output.
   ---@type string[]
   included_hlgroups = require("ex-colors.presets").recommended.included_hlgroups,
-  --- Highlight group names which should be excluded in the output.
-  ---@type string[]
-  excluded_hlgroups = require("ex-colors.presets").recommended.excluded_hlgroups,
   --- Highlight group name Lua patterns which should be included in the output.
   ---@type string[]
   included_patterns = require("ex-colors.presets").recommended.included_patterns,
+  --- Highlight group names which should be excluded in the output.
+  ---@type string[]
+  excluded_hlgroups = require("ex-colors.presets").recommended.excluded_hlgroups,
   --- Highlight group name patterns which should be excluded in the output.
+  --- You can join presets with `+`, e.g.,
   ---@type string[]
   excluded_patterns = require("ex-colors.presets").recommended.excluded_patterns,
   --- Highlight group name patterns which should be only defined on the
