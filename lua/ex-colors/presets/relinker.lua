@@ -22,7 +22,8 @@ local function new_addable_relinker(fn)
   })
 end
 
----@alias ExColors.RelinkerInProcess fun(hl_name: string|false): string|false Return false to discard hl-group.
+--- NOTE: The table means metatable to let relinker presets addable with `+`.
+---@alias ExColors.RelinkerInProcess table|fun(hl_name: string|false): string|false Return false to discard hl-group.
 
 M.no_typo = new_addable_relinker(function(hl_name)
   if hl_name == false then
@@ -30,7 +31,7 @@ M.no_typo = new_addable_relinker(function(hl_name)
   end
   local hl_name_lower = hl_name:lower()
   if hl_name_lower:find("^@%a[.%a]+%.uri$") then
-    local hl_name = hl_name_lower:gsub("i$", "l")
+    hl_name = hl_name_lower:gsub("i$", "l")
     return hl_name
   end
   return hl_name
