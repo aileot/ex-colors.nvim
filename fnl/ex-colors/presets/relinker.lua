@@ -6,7 +6,7 @@ local M = {}
 
 ---@alias ExColors.RelinkerInProcess fun(hl_name: string|false): string|false Return false to discard hl-group.
 
-M.no_typo = mt_utils.new_addable_filter(function(hl_name)
+M.no_typo = mt_utils.new_addable_relinker(function(hl_name)
   if hl_name == false then
     return false
   end
@@ -21,7 +21,7 @@ end)
 --- :help *lsp-semantic-highlight*
 --- Discard @lsp.foobar hl-groups which are defined for semantic tokens.
 ---@type ExColors.RelinkerInProcess
-M.no_lsp_semantic_highlight = mt_utils.new_addable_filter(function(hl_name)
+M.no_lsp_semantic_highlight = mt_utils.new_addable_relinker(function(hl_name)
   if hl_name == false then
     return false
   end
@@ -32,7 +32,7 @@ M.no_lsp_semantic_highlight = mt_utils.new_addable_filter(function(hl_name)
 end)
 
 --- Discard superseded hl-groups.
-M.no_superseded = mt_utils.new_addable_filter(function(hl_name)
+M.no_superseded = mt_utils.new_addable_relinker(function(hl_name)
   if hl_name == false then
     return false
   end
@@ -48,7 +48,7 @@ end)
 
 --- Discard deprecated TS-prefixed Treesitter hl-groups.
 ---@type ExColors.RelinkerInProcess
-M.no_TS_prefixed = mt_utils.new_addable_filter(function(hl_name)
+M.no_TS_prefixed = mt_utils.new_addable_relinker(function(hl_name)
   if hl_name == false then
     return false
   end
@@ -198,5 +198,14 @@ M.no_TS_prefixed = mt_utils.new_addable_filter(function(hl_name)
   end
   return hl_name
 end)
+
+M.recommended = mt_utils.new_addable_relinker(
+  M.no_typo
+    + M.no_superseded
+    -- NOTE: It might be undesirable for general users to exclude
+    -- lsp-semantic-highlight.
+    -- + M.no_lsp_semantic_highlight
+    + M.no_TS_prefixed
+)
 
 return mt_utils.new_readonly(M)

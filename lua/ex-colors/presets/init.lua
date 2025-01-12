@@ -28,14 +28,7 @@ M.recommended.included_patterns =
 M.recommended.excluded_patterns =
   mt_utils.new_addable(M.pattern.treesitter_filetype_captures)
 
-M.recommended.relinker = mt_utils.new_addable_filter(
-  M.relinker.no_typo
-    + M.relinker.no_superseded
-    -- NOTE: It might be undesirable for general users to exclude
-    -- lsp-semantic-highlight.
-    -- + M.no_lsp_semantic_highlight
-    + M.relinker.no_TS_prefixed
-)
+M.recommended.relinker = M.relinker.recommended
 
 for _, v in pairs(M) do
   mt_utils.new_readonly(v)
