@@ -17,19 +17,59 @@ local default_opts = {
   --- See `:h highlight-default` for the details.
   ---@type boolean
   omit_default = true,
-  --- Return false to discard hl-group.
+  --- (For advanced users only) Return false to discard hl-group.
+  --- You can join relinker presets with `+`, e.g.,
+  --- ```lua
+  --- relinker = require("ex-colors.presets").relinker.no_typo
+  ---   + require("ex-colors.presets").relinker.no_superseded
+  ---   + require("ex-colors.presets").relinker.no_lsp_semantic_highlight
+  ---   + function(hl_name)
+  ---     return "YourRelinked"
+  ---   end
+  ---   + function(hl_name)
+  ---     return "AnotherRelinked"
+  ---   end
+  --- ```
   ---@type fun(hl_name: string): string|false
   relinker = require("ex-colors.presets").recommended.relinker,
   --- Highlight group names which should be included in the output.
+  --- You can join presets with `+`, e.g.,
+  --- ```lua
+  --- included_hlgroups =
+  ---   require("ex-colors.presets").recommended.included_hlgroups
+  ---   + { "foo", "bar" }
+  ---   + { "baz", "qux" }
+  --- ```
   ---@type string[]
   included_hlgroups = require("ex-colors.presets").recommended.included_hlgroups,
   --- Highlight group name Lua patterns which should be included in the output.
+  --- You can join presets with `+`, e.g.,
+  --- ```lua
+  --- included_patterns =
+  ---   require("ex-colors.presets").recommended.included_patterns
+  ---   + { "foo", "bar" }
+  ---   + { "baz", "qux" }
+  --- ```
   ---@type string[]
   included_patterns = require("ex-colors.presets").recommended.included_patterns,
   --- Highlight group names which should be excluded in the output.
+  --- You can join presets with `+`, e.g.,
+  --- ```lua
+  --- excluded_hlgroups =
+  ---   require("ex-colors.presets").recommended.excluded_hlgroups
+  ---   + { "foo", "bar" }
+  ---   + { "baz", "qux" }
+  --- ```
   ---@type string[]
   excluded_hlgroups = require("ex-colors.presets").recommended.excluded_hlgroups,
   --- Highlight group name patterns which should be excluded in the output.
+  --- You can join presets with `+`, e.g.,
+  --- ```lua
+  --- excluded_patterns =
+  ---   require("ex-colors.presets").recommended.excluded_patterns
+  ---   + { "foo", "bar" }
+  ---   + { "baz", "qux" }
+  --- ```
   ---@type string[]
   excluded_patterns = require("ex-colors.presets").recommended.excluded_patterns,
   --- Highlight group name patterns which should be only defined on the
@@ -85,9 +125,9 @@ end
 
 return setmetatable(M, {
   __index = function(_, k)
-    return current_config[k]
+  return current_config[k]
   end,
   __newindex = function()
-    error("config is read-only")
+  error("config is read-only")
   end,
 })
