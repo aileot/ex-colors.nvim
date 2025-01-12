@@ -22,7 +22,14 @@
                          (length (+ presets.recommended.included_hlgroups
                                     [:foo :bar])))))
       (it* "thus, recommended.relinker can be added with a function with `+`"
-        (assert.has_no_error #(+ presets.recommended.relinker #$)))))
+        (assert.has_no_error #(+ presets.recommended.relinker #$)))
+      (describe* "moreover, added user definitions can be also added with `+`;"
+        (it* "thus, recommended.included_hlgroups can be added with two tables with `+`"
+          (assert.has_no_error #(+ presets.recommended.included_hlgroups
+                                   [:foo :bar] [:baz :qux])))
+        (it* "thus, recommended.relinker can be added with two functions with `+`"
+          (assert.has_no_error #(+ presets.recommended.relinker ;
+                                   #:foo #:bar))))))
   (describe* "relinker"
     (describe* "with the recommended preset"
       (before_each (fn []

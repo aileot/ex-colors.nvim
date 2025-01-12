@@ -5,7 +5,7 @@ local M = {}
 function M.new_addable(tbl)
   return setmetatable(tbl or {}, {
     __add = function(self, right)
-      local new_list = {}
+      local new_list = M.new_addable()
       for _, v in ipairs(self) do
         table.insert(new_list, v)
       end
