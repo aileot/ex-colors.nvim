@@ -4,24 +4,43 @@ local mt_utils = require("ex-colors.utils.metatable")
 
 local M = {}
 
----@alias ExColors.RelinkerInProcess fun(hl_name: string|false): string|false Return false to discard hl-group.
+--- Create a new metatable which supports addition via `fn1 + fn2`.
+local function new_addable_relinker(fn)
+  return setmetatable({}, {
+    __call = function(_, ...)
+      return fn(...)
+    end,
+    __add = function(self, right)
+      return new_addable_relinker(function(...)
+        local val = self(...)
+        if val  then
+          return right(val)
+        end
+        return false
+      end)
+    end,
+  })
+end
 
-function M.no_typo(hl_name)
+--- NOTE: The table means metatable to let relinker presets addable with `+`.
+---@alias ExColors.RelinkerInProcess table|fun(hl_name: string|false): string|false Return false to discard hl-group.
+
+M.no_typo = new_addable_relinker(function(hl_name)
   if hl_name == false then
     return false
   end
   local hl_name_lower = hl_name:lower()
   if hl_name_lower:find("^@%a[.%a]+%.uri$") then
-    local hl_name = hl_name_lower:gsub("i$", "l")
+    hl_name = hl_name_lower:gsub("i$", "l")
     return hl_name
   end
   return hl_name
-end
+end)
 
 --- :help *lsp-semantic-highlight*
 --- Discard @lsp.foobar hl-groups which are defined for semantic tokens.
 ---@type ExColors.RelinkerInProcess
-function M.no_lsp_semantic_highlight(hl_name)
+M.no_lsp_semantic_highlight = new_addable_relinker(function(hl_name)
   if hl_name == false then
     return false
   end
@@ -29,10 +48,10 @@ function M.no_lsp_semantic_highlight(hl_name)
     return false
   end
   return hl_name
-end
+end)
 
---- Discard superseded hl-groups.
-function M.no_superseded(hl_name)
+--- Relink or discard superseded hl-groups.
+M.no_superseded = new_addable_relinker(function(hl_name)
   if hl_name == false then
     return false
   end
@@ -44,11 +63,12 @@ function M.no_superseded(hl_name)
     end
   end
   return hl_name
-end
+end)
 
---- Discard deprecated TS-prefixed Treesitter hl-groups.
+--- Relink deprecated TS-prefixed Treesitter hl-groups to `@foo.bar` hl-groups,
+--- or discard them.
 ---@type ExColors.RelinkerInProcess
-function M.no_TS_prefixed(hl_name)
+M.no_TS_prefixed = new_addable_relinker(function(hl_name)
   if hl_name == false then
     return false
   end
@@ -197,6 +217,15 @@ function M.no_TS_prefixed(hl_name)
     return "@" .. hl_name:match("^TS(%u%l+)$"):lower()
   end
   return hl_name
-end
+end)
+
+M.recommended = new_addable_relinker(
+  M.no_typo
+    + M.no_superseded
+    -- NOTE: It might be undesirable for general users to exclude
+    -- lsp-semantic-highlight.
+    -- + M.no_lsp_semantic_highlight
+    + M.no_TS_prefixed
+)
 
 return mt_utils.new_readonly(M)
