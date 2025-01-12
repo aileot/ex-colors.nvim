@@ -27,9 +27,9 @@
         (it* "thus, recommended.included_hlgroups can be added with two tables with `+`"
           (assert.has_no_error #(+ presets.recommended.included_hlgroups
                                    [:foo :bar] [:baz :qux])))
-        (pending #(it* "thus, recommended.relinker can be added with two functions with `+`"
-                    (assert.has_no_error #(+ presets.recommended.included_hlgroups #:foo
-                                             #:bar)))))))
+        (it* "thus, recommended.relinker can be added with two functions with `+`"
+          (assert.has_no_error #(+ presets.recommended.relinker ;
+                                   #:foo #:bar))))))
   (describe* "relinker"
     (describe* "with the recommended preset"
       (before_each (fn []

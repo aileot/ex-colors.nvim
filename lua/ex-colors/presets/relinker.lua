@@ -13,6 +13,9 @@ local function new_addable_relinker(fn)
     __add = function(self, right)
       return new_addable_relinker(function(...)
         local val = self(...)
+        if type(right) == "function" then
+          right = new_addable_relinker(right)
+        end
         if val  then
           return right(val)
         end
