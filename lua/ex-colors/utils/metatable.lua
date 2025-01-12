@@ -17,6 +17,24 @@ function M.new_addable(tbl)
   })
 end
 
+--- Create a new metatable which supports addition via `fn1 + fn2`.
+M.new_addable_filter = function(fn)
+  return setmetatable({}, {
+    __call = function(_, ...)
+      return fn(...)
+    end,
+    __add = function(self, right)
+      return M.new_addable_filter(function(...)
+        local val = self(...)
+        if val  then
+          return right(val)
+        end
+        return false
+      end)
+    end,
+  })
+end
+
 function M.new_readonly(tbl)
   return setmetatable(tbl or {}, {
     __index = function(_, k)
