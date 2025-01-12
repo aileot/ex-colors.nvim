@@ -32,32 +32,35 @@ require("ex-colors").setup({
   --- See `:h highlight-default` for the details.
   ---@type boolean
   omit_default = true,
-  ---@type boolean
-  resolve_links = false,
-  --- Set false to disable it.
-  ---@type ExColors.relinker|false
-  relinker = require("ex-colors.presets").relinker.recommended,
-  included_hlgroups = require("ex-colors.presets").hlgroups.recommended,
-  --- Highlight group name patterns which should be included in the output.
+  --- Return false to discard hl-group.
+  ---@type fun(hl_name: string): string|false
+  relinker = require("ex-colors.presets").recommended.relinker,
+  --- Highlight group names which should be included in the output.
   ---@type string[]
-  included_patterns = {},
+  included_hlgroups = require("ex-colors.presets").recommended.included_hlgroups,
+  --- Highlight group names which should be excluded in the output.
+  ---@type string[]
+  excluded_hlgroups = require("ex-colors.presets").recommended.excluded_hlgroups,
+  --- Highlight group name Lua patterns which should be included in the output.
+  ---@type string[]
+  included_patterns = require("ex-colors.presets").recommended.included_patterns,
   --- Highlight group name patterns which should be excluded in the output.
   ---@type string[]
-  excluded_patterns = {},
+  excluded_patterns = require("ex-colors.presets").recommended.excluded_patterns,
   --- Highlight group name patterns which should be only defined on the
   --- autocmd event patterns.
   ---@type table<string,string[]>
   autocmd_patterns = {},
-  --- Vim global options (&g:foobar or vim.go.foobar) which should be also
+  --- Vim global options (`&g:foobar` or `vim.go.foobar`) which should be also
   --- embedded in the colorscheme output to be updated at the same time.
   ---@type string[]
   embedded_global_options = {
     "background",
   },
-  --- Vim global variables (g:foobar or vim.g.foobar) which should be also
+  --- Vim global variables (`g:foobar` or `vim.g.foobar`) which should be also
   --- embedded in the colorscheme output to be updated at the same time.
   ---@type string[]
-  embedded_variables = {
+  embedded_global_variables = {
     "terminal_color_0",
     "terminal_color_1",
     "terminal_color_2",
