@@ -12,14 +12,13 @@ by _ex-_, e.g., _ex-habamax_ for _habamax_.
 
 With `!` appended, overwrite the file `ex-{g:colors_name}.lua`,
 ignoring all the filter and modifier options.
-It is useful
-to know what you can get primarily,
+It is useful to know what you can get primarily,
 and, once committed in git, to know
 (not necessarily but with some git integration plugins like
 [vim-fugitive][],
 [gitsigns.nvim][],
 etc.)
-what definitions are filtered off, or converted,
+what definitions are filtered off, or converted.
 
 Please note that some colorscheme plugins provide multiple flavors sharing
 a single `g:colors_name`:
@@ -47,38 +46,26 @@ a single `g:colors_name`:
 
 (type: `string`; default: `vim.fn.stdpath("config") .. "/colors"`)
 
-The directory, in absolute path,
-to generate new colorscheme files by the command [`:ExColors`](#:ExColors).
+The output directory path. The path should end with `/colors` on any path
+included in `&runtimepath`.
 
 ### ignore_clear
 
 (type: `boolean`; default: `true`)
 
-If set to `true`, `ex-colors` will NOT generate highlight definitions whose
-options are empty tables.
+If true, highlight definitions cleared by `:highlight clear` will not be
+included in the output. See `:h highlight-clear` for details.
 
 ### omit_default
 
 (type: `boolean`; default: `false`)
 
-If `true`, omit the `default` keys in the output.
-See `:help :hi-default`.
+If true, omit `default` keys from the output highlight definitions.
+See `:h highlight-default` for the details.
 
 ### relinker
 
-(type: `fun(string): string|false`; default: `nil`)
-
-<!--
-NOTE: Actually, the default value is such a function:
-
-```lua
-function(hl_name: string)
-  return hl_name
-end
-```
-
-However, such accuracy is redundant for end-users.
--->
+(type: `fun(string): string|false`; default: `require("ex-colors.presets").recommended.relinker`)
 
 This option is for _advanced users_ who find it worthwhile.
 
@@ -93,56 +80,59 @@ as the following rules:
 
 Addition to that, the callback function is also applied to each `link`ed
 highlight definition name.
-(See `:help :hi-link`)
+(See `:help :highlight-link`)
 
 It helps you eliminate obsolete, or deprecated, highlight definitions
 in the output.
 
 The [Cookbook](./cookbook.md) shows demonstrations.
 
-### case_sensitive
+### included_hlgroups
 
-(type: `boolean`; default: `true`)
+(type: `string[]`; default: `require("ex-colors.presets").recommended.included_hlgroups`)
 
-If `true`, the patterns are applied to `hl-group` names as they are;
-on the other hand, if `false`, the patterns are applied in lowercased
-`hl-group` names.
+Highlight group names which should be included in the output.
+The [Cookbook](./cookbook.md) shows demonstrations.
 
-This option affects the patterns of the following options:
+### excluded_hlgroups
 
-- [autocmd_patterns](#autocmd_patterns)
-- [excluded_patterns](#excluded_patterns)
-- [included_patterns](#included_patterns)
+(type: `string[]`; default: `require("ex-colors.presets").recommended.excluded_hlgroups`)
+
+Highlight group names which should be excluded in the output.
+The [Cookbook](./cookbook.md) shows demonstrations.
 
 ### included_patterns
 
-(type: `string[]`; default: `{}`)
+(type: `string[]`; default: `require("ex-colors.presets").recommended.excluded_hlgroups`)
 
-Set `false` to disable `included_patterns`.
+Highlight group name Lua patterns which should be included in the output.
 The [Cookbook](./cookbook.md) shows demonstrations.
 
 ### excluded_patterns
 
-(type: `string[]`; default: `{}`)
+(type: `string[]`; default: `require("ex-colors.presets").recommended.excluded_patterns`)
 
+Highlight group name patterns which should be excluded in the output.
 The [Cookbook](./cookbook.md) shows demonstrations.
 
 ### autocmd_patterns
 
-(type: `string[]`; default:
-`{
-    CmdlineEnter = {
-        ["*"] = {
-                "^Nvim%u"
-            }
-    }
-}`)
+(type: `string[]`; default: `{}`)
 
 Generate matched highlight definitions only on the autocmd event.
 
 The [Cookbook](./cookbook.md) shows demonstrations.
 
-### embedded_variables
+### embedded_global_options
+
+Vim global options (`&g:foobar` or `vim.go.foobar`) which should be also
+embedded in the colorscheme output to be updated at the same time.
+
+(type: `string[]`; default: `{
+  "background"
+}`)
+
+### embedded_global_variables
 
 (type: `string[]`; default: `{
     "terminal_color_0",
@@ -163,7 +153,8 @@ The [Cookbook](./cookbook.md) shows demonstrations.
     "terminal_color_15",
 }`)
 
-`ex-colors` also generates lines for `vim.g` variables set in this option.
+Vim global variables (`g:foobar` or `vim.g.foobar`) which should be also
+embedded in the colorscheme output to be updated at the same time.
 
 [gitsigns.nvim]: https://github.com/lewis6991/gitsigns.nvim
 [vim-fugitive]: https://github/tpope/vim-fugitive
