@@ -431,6 +431,10 @@ M.convention.ansi_colors = mt_utils.new_addable({
 -- Highlight groups which are unlikely to be overridden regardless of
 -- colorscheme.
 M.reasonable_default = mt_utils.new_addable({
+  "@diff.delta",
+  "@diff.plus",
+  "@diff.minus",
+
   "@markup.strikethrough",
   "@markup.underline",
 
