@@ -4,9 +4,21 @@ local mt_utils = require("ex-colors.utils.metatable")
 
 local M = {}
 
+--- Create a new table which supports addition via `t + t2`.
+function new_addable_filter(fn)
+  return setmetatable({}, {
+    __call = fn,
+    __add = function(self, right)
+      return function(...)
+        return right(self(...))
+      end
+    end,
+  })
+end
+
 ---@alias ExColors.RelinkerInProcess fun(hl_name: string|false): string|false Return false to discard hl-group.
 
-function M.no_typo(hl_name)
+M.no_typo = new_addable_filter(function(hl_name)
   if hl_name == false then
     return false
   end
@@ -16,12 +28,12 @@ function M.no_typo(hl_name)
     return hl_name
   end
   return hl_name
-end
+end)
 
 --- :help *lsp-semantic-highlight*
 --- Discard @lsp.foobar hl-groups which are defined for semantic tokens.
 ---@type ExColors.RelinkerInProcess
-function M.no_lsp_semantic_highlight(hl_name)
+M.no_lsp_semantic_highlight = new_addable_filter(function(hl_name)
   if hl_name == false then
     return false
   end
@@ -29,10 +41,10 @@ function M.no_lsp_semantic_highlight(hl_name)
     return false
   end
   return hl_name
-end
+end)
 
 --- Discard superseded hl-groups.
-function M.no_superseded(hl_name)
+M.no_superseded = new_addable_filter(function(hl_name)
   if hl_name == false then
     return false
   end
@@ -44,11 +56,11 @@ function M.no_superseded(hl_name)
     end
   end
   return hl_name
-end
+end)
 
 --- Discard deprecated TS-prefixed Treesitter hl-groups.
 ---@type ExColors.RelinkerInProcess
-function M.no_TS_prefixed(hl_name)
+M.no_TS_prefixed = new_addable_filter( function(hl_name)
   if hl_name == false then
     return false
   end
@@ -197,6 +209,6 @@ function M.no_TS_prefixed(hl_name)
     return "@" .. hl_name:match("^TS(%u%l+)$"):lower()
   end
   return hl_name
-end
+end)
 
 return mt_utils.new_readonly(M)
