@@ -11,6 +11,18 @@
     (assert.has_error #presets.should-be-error)
     (assert.has_no_error #presets.relinker)
     (assert.has_error #presets.relinker.should-be-error))
+  (describe* "recommended"
+    (describe* "are addable with `+`;"
+      (it* "thus, recommended.included_hlgroups can be added with a table with `+`"
+        (assert.has_no_error #(+ presets.recommended.included_hlgroups
+                                 [:foo :bar])))
+      (it* "thus, the length of recommended.included_hlgroups added with a table results in the total length of the tables"
+        (let [len (length presets.recommended.included_hlgroups)]
+          (assert.equals (+ len 2)
+                         (length (+ presets.recommended.included_hlgroups
+                                    [:foo :bar])))))
+      (it* "thus, recommended.relinker can be added with a function with `+`"
+        (assert.has_no_error #(+ presets.recommended.relinker #$)))))
   (describe* "relinker"
     (describe* "with the recommended preset"
       (before_each (fn []
