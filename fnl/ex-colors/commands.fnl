@@ -222,7 +222,8 @@ performance.
 
 (fn define-commands! []
   (vim.api.nvim_create_user_command "ExColors"
-    #(generate-hi-cmds $.bang)
+    (fn [a]
+      (generate-hi-cmds a.bang))
     {:bang true
      :bar true
      :desc "Extract highlight groups from current colorscheme"}))

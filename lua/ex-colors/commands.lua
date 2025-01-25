@@ -358,8 +358,8 @@ local function generate_hi_cmds(dump_all_3f)
   return overwrite_buf_lines_21(buf, lines)
 end
 local function define_commands_21()
-  local function _37_(_241)
-    return generate_hi_cmds(_241.bang)
+  local function _37_(a)
+    return generate_hi_cmds(a.bang)
   end
   return vim.api.nvim_create_user_command("ExColors", _37_, {bang = true, bar = true, desc = "Extract highlight groups from current colorscheme"})
 end
