@@ -330,4 +330,14 @@ M.convention.ansi_color_prefixes =
     return name .. "%u"
   end, hlgroup_presets.convention.ansi_colors))
 
+M.convention.ansi_color_numbered = vim.tbl_map(function(name)
+  return "^" .. name .. "%d+$"
+end, hlgroup_presets.convention.ansi_colors)
+
+M.new_ansi_colored = function(prefix)
+  mt_utils.new_addable(vim.tbl_map(function(name)
+    return "^" .. prefix .. name
+  end, hlgroup_presets.colorscheme.ansi_colored))
+end
+
 return mt_utils.new_readonly(M)

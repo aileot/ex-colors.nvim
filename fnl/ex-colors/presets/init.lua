@@ -22,8 +22,10 @@ M.recommended.included_hlgroups = mt_utils.new_addable(
 M.recommended.excluded_hlgroups =
   mt_utils.new_addable(M.hlgroup.reasonable_default)
 
-M.recommended.included_patterns =
-  mt_utils.new_addable(M.pattern.convention.ansi_color_prefixes)
+M.recommended.included_patterns = mt_utils.new_addable(
+  M.pattern.convention.ansi_color_prefixes
+    + M.pattern.convention.ansi_color_numbered
+)
 
 M.recommended.excluded_patterns =
   mt_utils.new_addable(M.pattern.treesitter_filetype_captures)

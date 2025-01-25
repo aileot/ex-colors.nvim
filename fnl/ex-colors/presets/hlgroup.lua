@@ -431,6 +431,10 @@ M.convention.ansi_colors = mt_utils.new_addable({
 -- Highlight groups which are unlikely to be overridden regardless of
 -- colorscheme.
 M.reasonable_default = mt_utils.new_addable({
+  "@diff.delta",
+  "@diff.plus",
+  "@diff.minus",
+
   "@markup.strikethrough",
   "@markup.underline",
 
@@ -441,11 +445,11 @@ M.reasonable_default = mt_utils.new_addable({
   "DiagnosticVirtualTextInfo",
   "DiagnosticVirtualTextHint",
   "DiagnosticVirtualTextOk",
-  "DiagnosticUnderlineError",
-  "DiagnosticUnderlineWarn",
-  "DiagnosticUnderlineInfo",
-  "DiagnosticUnderlineHint",
-  "DiagnosticUnderlineOk",
+  -- "DiagnosticUnderlineError",
+  -- "DiagnosticUnderlineWarn",
+  -- "DiagnosticUnderlineInfo",
+  -- "DiagnosticUnderlineHint",
+  -- "DiagnosticUnderlineOk",
   "DiagnosticFloatingError",
   "DiagnosticFloatingWarn",
   "DiagnosticFloatingInfo",
