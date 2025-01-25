@@ -41,7 +41,7 @@ require("ex-colors").setup({
   --- syntax highlight groups are defined before collecting them.
   ---@type string[]
   required_syntaxes = {
-    "html",
+    "markdown",
   },
   --- Highlight group names which should be included in the output.
   ---@type string[]

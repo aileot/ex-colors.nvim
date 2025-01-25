@@ -44,6 +44,7 @@ local default_opts = {
   ---@type string[]
   required_syntaxes = {
     "html",
+    "markdown",
   },
   --- Highlight group names which should be included in the output.
   --- You can join presets with `+`, e.g.,
