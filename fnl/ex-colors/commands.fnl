@@ -226,9 +226,12 @@ For example, everforest.vim only defines `htmlH1` and `htmlH2`, ..., after
 loading syntax/html/everforest.vim.
 This function makes sure such highlight groups are defined before collecting
 highlight definitions."
-  ;; NOTE: Intended to invoke the "Syntax" autocmd in
-  ;; $VIMRUNTIME/syntax/synload.vim.
-  (vim.api.nvim_exec_autocmds :Syntax {:pattern config.required_syntaxes}))
+  (when (< 0 (length config.required_syntaxes))
+    ;; Ensure the autocmd defined in $VIMRUNTIME/syntax/synload.vim is active.
+    (vim.cmd "syntax enable")
+    ;; NOTE: Intended to invoke the "Syntax" autocmd in
+    ;; $VIMRUNTIME/syntax/synload.vim.
+    (vim.api.nvim_exec_autocmds :Syntax {:pattern config.required_syntaxes})))
 
 (fn define-commands! []
   (vim.api.nvim_create_user_command "ExColors"

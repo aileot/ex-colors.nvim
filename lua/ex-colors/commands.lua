@@ -358,13 +358,18 @@ local function generate_hi_cmds(dump_all_3f)
   return overwrite_buf_lines_21(buf, lines)
 end
 local function define_filetype_specific_hlgroups_21()
-  return vim.api.nvim_exec_autocmds("Syntax", {pattern = config.required_syntaxes})
+  if (0 < #config.required_syntaxes) then
+    vim.cmd("syntax enable")
+    return vim.api.nvim_exec_autocmds("Syntax", {pattern = config.required_syntaxes})
+  else
+    return nil
+  end
 end
 local function define_commands_21()
-  local function _37_(a)
+  local function _38_(a)
     define_filetype_specific_hlgroups_21()
     return generate_hi_cmds(a.bang)
   end
-  return vim.api.nvim_create_user_command("ExColors", _37_, {bang = true, bar = true, desc = "Extract highlight groups from current colorscheme"})
+  return vim.api.nvim_create_user_command("ExColors", _38_, {bang = true, bar = true, desc = "Extract highlight groups from current colorscheme"})
 end
 return {["define-commands!"] = define_commands_21}
