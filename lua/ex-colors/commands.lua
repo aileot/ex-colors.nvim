@@ -357,8 +357,12 @@ local function generate_hi_cmds(dump_all_3f)
   local lines = flatten({credit_lines, cmd_lines})
   return overwrite_buf_lines_21(buf, lines)
 end
+local function define_filetype_specific_hlgroups_21()
+  return vim.api.nvim_exec_autocmds("Syntax", {pattern = config.required_syntaxes})
+end
 local function define_commands_21()
   local function _37_(a)
+    define_filetype_specific_hlgroups_21()
     return generate_hi_cmds(a.bang)
   end
   return vim.api.nvim_create_user_command("ExColors", _37_, {bang = true, bar = true, desc = "Extract highlight groups from current colorscheme"})
