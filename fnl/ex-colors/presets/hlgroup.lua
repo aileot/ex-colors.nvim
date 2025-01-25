@@ -139,6 +139,7 @@ M.builtin.naming_conventions = mt_utils.new_addable({
 })
 
 --- Defined in $VIMRUNTIME/syntax/html.vim
+--- It might require "html" in the `required_syntaxes` option.
 --- NOTE: markdownH1, markdownH2, ..., are linked to htmlH1, htmlH2, ...,
 --- in $VIMRUNTIME/syntax/markdown.vim by default.
 M.builtin.html_headers = mt_utils.new_addable({
@@ -148,6 +149,17 @@ M.builtin.html_headers = mt_utils.new_addable({
   "htmlH4",
   "htmlH5",
   "htmlH6",
+})
+
+--- Defined in $VIMRUNTIME/syntax/markdown.vim
+--- It might require "markdown" in the `required_syntaxes` option.
+M.builtin.markdown_headers = mt_utils.new_addable({
+  "markdownH1",
+  "markdownH2",
+  "markdownH3",
+  "markdownH4",
+  "markdownH5",
+  "markdownH6",
 })
 
 --- :help diagnostic-highlight
