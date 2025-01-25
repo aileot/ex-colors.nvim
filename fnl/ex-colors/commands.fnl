@@ -220,9 +220,21 @@ performance.
                     (flatten))]
       (overwrite-buf-lines! buf lines))))
 
+(fn define-filetype-specific-hlgroups! []
+  "Define filetype-specific highlight groups for current colorscheme.
+For example, everforest.vim only defines `htmlH1` and `htmlH2`, ..., after
+loading syntax/html/everforest.vim.
+This function makes sure such highlight groups are defined before collecting
+highlight definitions."
+  ;; NOTE: Intended to invoke the "Syntax" autocmd in
+  ;; $VIMRUNTIME/syntax/synload.vim.
+  (vim.api.nvim_exec_autocmds :Syntax {:pattern config.required_syntaxes}))
+
 (fn define-commands! []
   (vim.api.nvim_create_user_command "ExColors"
-    #(generate-hi-cmds $.bang)
+    (fn [a]
+      (define-filetype-specific-hlgroups!)
+      (generate-hi-cmds a.bang))
     {:bang true
      :bar true
      :desc "Extract highlight groups from current colorscheme"}))
