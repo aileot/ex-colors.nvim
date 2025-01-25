@@ -138,6 +138,18 @@ M.builtin.naming_conventions = mt_utils.new_addable({
   "Removed",
 })
 
+--- Defined in $VIMRUNTIME/syntax/html.vim
+--- NOTE: markdownH1, markdownH2, ..., are linked to htmlH1, htmlH2, ...,
+--- in $VIMRUNTIME/syntax/markdown.vim by default.
+M.builtin.html_headers = mt_utils.new_addable({
+  "htmlH1",
+  "htmlH2",
+  "htmlH3",
+  "htmlH4",
+  "htmlH5",
+  "htmlH6",
+})
+
 --- :help diagnostic-highlight
 M.builtin.diagnostic = mt_utils.new_addable({
   "DiagnosticError",
