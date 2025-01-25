@@ -35,6 +35,14 @@ require("ex-colors").setup({
   --- (For advanced users only) Return false to discard hl-group.
   ---@type fun(hl_name: string): string|false
   relinker = require("ex-colors.presets").recommended.relinker,
+  --- A list of syntax names. Some colorscheme plugins define
+  --- filetype-specific syntax highlight groups only on "Syntax" autocmd event
+  --- for performance reasons. This option makes sure such lazily-loaded
+  --- syntax highlight groups are defined before collecting them.
+  ---@type string[]
+  required_syntaxes = {
+    "html",
+  },
   --- Highlight group names which should be included in the output.
   ---@type string[]
   included_hlgroups = require("ex-colors.presets").recommended.included_hlgroups,
