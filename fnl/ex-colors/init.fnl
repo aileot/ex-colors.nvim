@@ -12,7 +12,7 @@
   (define-commands!))
 
 (lua "
---- Reset `ex-colors` config. for Testing purposes only.
+--- Reset `ex-colors` config. (Testing purposes only)
 ")
 
 (fn reset []

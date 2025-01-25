@@ -13,7 +13,7 @@ local function setup(opts)
   return define_commands_21()
 end
 
---- Reset `ex-colors` config. for Testing purposes only.
+--- Reset `ex-colors` config. (Testing purposes only)
 
 local function reset()
   return config.reset()
