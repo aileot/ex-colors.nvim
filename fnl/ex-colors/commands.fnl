@@ -115,12 +115,13 @@
                            hl-maps (collect [_ hl-name (ipairs filtered-highlights)]
                                      (remap-hl-opts hl-name))]
                        (icollect [hl-name hl-map (pairs hl-maps)]
-                         (when (or (not ignore-default-colors?)
-                                   (not (vim.deep_equal hl-map
-                                                        (. default-colors
-                                                           hl-name))))
-                           (when (or (not ignore-clear?) (next hl-map))
-                             (format-nvim-set-hl hl-name hl-map))))))]
+                         (when (and (or (not ignore-default-colors?)
+                                        (not (vim.deep_equal hl-map
+                                                             (. default-colors
+                                                                hl-name))))
+                                    (or (not ignore-clear?) ;
+                                        (next hl-map)))
+                           (format-nvim-set-hl hl-name hl-map)))))]
     (table.sort cmd-list)
     (flatten cmd-list)))
 
