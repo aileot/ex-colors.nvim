@@ -8,6 +8,10 @@ function! ex_colors#load_syntaxes() abort
 
   syntax enable
 
+  " NOTE: Make sure to load syntax/markdown.vim before dependent syntax files
+  " like syntax/lsp_markdown.vim.
+  doautocmd Syntax markdown
+
   " Load one-character filetype syntaxes like c.vim.
   doautocmd Syntax .
 
