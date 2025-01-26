@@ -1251,5 +1251,677 @@ return
   lCursor = {
     bg = 14738154,
     fg = 1316379
+  },
+  luaComment = {
+    link = "Comment"
+  },
+  luaCommentDelimiter = {
+    link = "luaComment"
+  },
+  luaCond = {
+    link = "Conditional"
+  },
+  luaCondElse = {
+    link = "Conditional"
+  },
+  luaConstant = {
+    link = "Constant"
+  },
+  luaError = {
+    link = "Error"
+  },
+  luaFor = {
+    link = "Repeat"
+  },
+  luaFunc = {
+    link = "Identifier"
+  },
+  luaFunction = {
+    link = "Function"
+  },
+  luaLabel = {
+    link = "Label"
+  },
+  luaMetaMethod = {
+    link = "Function"
+  },
+  luaNumber = {
+    link = "Number"
+  },
+  luaOperator = {
+    link = "Operator"
+  },
+  luaParenError = {
+    link = "Error"
+  },
+  luaRepeat = {
+    link = "Repeat"
+  },
+  luaSpecial = {
+    link = "SpecialChar"
+  },
+  luaStatement = {
+    link = "Statement"
+  },
+  luaString = {
+    link = "String"
+  },
+  luaString2 = {
+    link = "String"
+  },
+  luaStringDelimiter = {
+    link = "luaString"
+  },
+  luaSymbolOperator = {
+    link = "luaOperator"
+  },
+  luaTable = {
+    link = "Structure"
+  },
+  luaTodo = {
+    link = "Todo"
+  },
+  nvimAutoEvent = {
+    link = "vimAutoEvent"
+  },
+  nvimHLGroup = {
+    link = "vimHLGroup"
+  },
+  vim9Comment = {
+    link = "Comment"
+  },
+  vim9CommentTitle = {
+    link = "PreProc"
+  },
+  vim9KeymapLineComment = {
+    link = "vimKeymapLineComment"
+  },
+  vim9LineComment = {
+    link = "vimComment"
+  },
+  vim9Vim9Script = {
+    link = "vimCommand"
+  },
+  vim9Vim9ScriptArg = {
+    link = "Special"
+  },
+  vimAbb = {
+    link = "vimCommand"
+  },
+  vimAddress = {
+    link = "vimMark"
+  },
+  vimAugroupBang = {
+    link = "vimBang"
+  },
+  vimAugroupError = {
+    link = "vimError"
+  },
+  vimAugroupKey = {
+    link = "vimCommand"
+  },
+  vimAutoCmd = {
+    link = "vimCommand"
+  },
+  vimAutoCmdMod = {
+    link = "Special"
+  },
+  vimAutoEvent = {
+    link = "Type"
+  },
+  vimBang = {
+    link = "vimOper"
+  },
+  vimBehave = {
+    link = "vimCommand"
+  },
+  vimBehaveBang = {
+    link = "vimBang"
+  },
+  vimBehaveError = {
+    link = "vimError"
+  },
+  vimBehaveModel = {
+    link = "vimBehave"
+  },
+  vimBracket = {
+    link = "Delimiter"
+  },
+  vimBufnrWarn = {
+    link = "vimWarn"
+  },
+  vimCmplxRepeat = {
+    link = "SpecialChar"
+  },
+  vimCollClassErr = {
+    link = "vimError"
+  },
+  vimCommand = {
+    link = "Statement"
+  },
+  vimComment = {
+    link = "Comment"
+  },
+  vimCommentString = {
+    link = "vimString"
+  },
+  vimCommentTitle = {
+    link = "PreProc"
+  },
+  vimCondHL = {
+    link = "vimCommand"
+  },
+  vimConst = {
+    link = "vimCommand"
+  },
+  vimContinue = {
+    link = "Special"
+  },
+  vimContinueComment = {
+    link = "vimComment"
+  },
+  vimCtrlChar = {
+    link = "SpecialChar"
+  },
+  vimDefComment = {
+    link = "vimComment"
+  },
+  vimDefKey = {
+    link = "vimCommand"
+  },
+  vimDefParam = {
+    link = "vimVar"
+  },
+  vimEcho = {
+    link = "vimCommand"
+  },
+  vimEchohl = {
+    link = "vimCommand"
+  },
+  vimEchohlNone = {
+    link = "vimGroup"
+  },
+  vimElseIfErr = {
+    link = "Error"
+  },
+  vimEmbedError = {
+    link = "Normal"
+  },
+  vimEnddef = {
+    link = "vimCommand"
+  },
+  vimEndfunction = {
+    link = "vimCommand"
+  },
+  vimEnvvar = {
+    link = "PreProc"
+  },
+  vimErrSetting = {
+    link = "vimError"
+  },
+  vimError = {
+    link = "Error"
+  },
+  vimEscape = {
+    link = "Special"
+  },
+  vimFBVar = {
+    link = "vimVar"
+  },
+  vimFTCmd = {
+    link = "vimCommand"
+  },
+  vimFTError = {
+    link = "vimError"
+  },
+  vimFTOption = {
+    link = "vimSynType"
+  },
+  vimFgBgAttrib = {
+    link = "vimHiAttrib"
+  },
+  vimFor = {
+    link = "vimCommand"
+  },
+  vimFunc = {
+    link = "vimError"
+  },
+  vimFuncBang = {
+    link = "vimBang"
+  },
+  vimFuncComment = {
+    link = "vimComment"
+  },
+  vimFuncEcho = {
+    link = "vimCommand"
+  },
+  vimFuncKey = {
+    link = "vimCommand"
+  },
+  vimFuncMod = {
+    link = "Special"
+  },
+  vimFuncName = {
+    link = "Function"
+  },
+  vimFuncParam = {
+    link = "vimVar"
+  },
+  vimFuncParamEquals = {
+    link = "vimOper"
+  },
+  vimFuncSID = {
+    link = "Special"
+  },
+  vimFuncVar = {
+    link = "Identifier"
+  },
+  vimFunctionError = {
+    link = "vimError"
+  },
+  vimGroup = {
+    link = "Type"
+  },
+  vimGroupAdd = {
+    link = "vimSynOption"
+  },
+  vimGroupName = {
+    link = "vimGroup"
+  },
+  vimGroupRem = {
+    link = "vimSynOption"
+  },
+  vimGroupSpecial = {
+    link = "Special"
+  },
+  vimHLGroup = {
+    link = "vimGroup"
+  },
+  vimHiAttrib = {
+    link = "PreProc"
+  },
+  vimHiAttribList = {
+    link = "vimError"
+  },
+  vimHiBang = {
+    link = "vimBang"
+  },
+  vimHiBlend = {
+    link = "vimHiTerm"
+  },
+  vimHiCTerm = {
+    link = "vimHiTerm"
+  },
+  vimHiClear = {
+    link = "Type"
+  },
+  vimHiCtermColor = {
+    link = "Constant"
+  },
+  vimHiCtermError = {
+    link = "vimError"
+  },
+  vimHiCtermFgBg = {
+    link = "vimHiTerm"
+  },
+  vimHiCtermfont = {
+    link = "vimHiTerm"
+  },
+  vimHiCtermul = {
+    link = "vimHiTerm"
+  },
+  vimHiGroup = {
+    link = "vimGroupName"
+  },
+  vimHiGui = {
+    link = "vimHiTerm"
+  },
+  vimHiGuiFgBg = {
+    link = "vimHiTerm"
+  },
+  vimHiGuiFont = {
+    link = "vimHiTerm"
+  },
+  vimHiGuiRgb = {
+    link = "vimNumber"
+  },
+  vimHiKeyError = {
+    link = "vimError"
+  },
+  vimHiNmbr = {
+    link = "Number"
+  },
+  vimHiStartStop = {
+    link = "vimHiTerm"
+  },
+  vimHiTerm = {
+    link = "Type"
+  },
+  vimHighlight = {
+    link = "vimCommand"
+  },
+  vimInsert = {
+    link = "vimString"
+  },
+  vimIskSep = {
+    link = "Delimiter"
+  },
+  vimKeymapLineComment = {
+    link = "vimComment"
+  },
+  vimKeymapTailComment = {
+    link = "vimComment"
+  },
+  vimLet = {
+    link = "vimCommand"
+  },
+  vimLetHereDoc = {
+    link = "vimString"
+  },
+  vimLetHereDocStart = {
+    link = "Special"
+  },
+  vimLetHereDocStop = {
+    link = "Special"
+  },
+  vimLetRegister = {
+    link = "Special"
+  },
+  vimLineComment = {
+    link = "vimComment"
+  },
+  vimMap = {
+    link = "vimCommand"
+  },
+  vimMapBang = {
+    link = "vimBang"
+  },
+  vimMapMod = {
+    link = "vimBracket"
+  },
+  vimMapModErr = {
+    link = "vimError"
+  },
+  vimMapModKey = {
+    link = "vimFuncSID"
+  },
+  vimMark = {
+    link = "Number"
+  },
+  vimMarkNumber = {
+    link = "vimNumber"
+  },
+  vimMenu = {
+    link = "vimCommand"
+  },
+  vimMenuBang = {
+    link = "vimBang"
+  },
+  vimMenuClear = {
+    link = "Special"
+  },
+  vimMenuMod = {
+    link = "vimMapMod"
+  },
+  vimMenuName = {
+    link = "PreProc"
+  },
+  vimMenuNotation = {
+    link = "vimNotation"
+  },
+  vimMenuPriority = {
+    link = "Number"
+  },
+  vimMenuStatus = {
+    link = "Special"
+  },
+  vimMenutranslateComment = {
+    link = "vimComment"
+  },
+  vimMtchComment = {
+    link = "vimComment"
+  },
+  vimNorm = {
+    link = "vimCommand"
+  },
+  vimNotFunc = {
+    link = "vimCommand"
+  },
+  vimNotPatSep = {
+    link = "vimString"
+  },
+  vimNotation = {
+    link = "Special"
+  },
+  vimNumber = {
+    link = "Number"
+  },
+  vimOper = {
+    link = "Operator"
+  },
+  vimOperError = {
+    link = "Error"
+  },
+  vimOption = {
+    link = "PreProc"
+  },
+  vimParenSep = {
+    link = "Delimiter"
+  },
+  vimPatSep = {
+    link = "SpecialChar"
+  },
+  vimPatSepErr = {
+    link = "vimError"
+  },
+  vimPatSepR = {
+    link = "vimPatSep"
+  },
+  vimPatSepZ = {
+    link = "vimPatSep"
+  },
+  vimPatSepZone = {
+    link = "vimString"
+  },
+  vimPattern = {
+    link = "Type"
+  },
+  vimPlainMark = {
+    link = "vimMark"
+  },
+  vimPlainRegister = {
+    link = "vimRegister"
+  },
+  vimRegister = {
+    link = "SpecialChar"
+  },
+  vimScriptDelim = {
+    link = "Comment"
+  },
+  vimSearch = {
+    link = "vimString"
+  },
+  vimSearchDelim = {
+    link = "Statement"
+  },
+  vimSep = {
+    link = "Delimiter"
+  },
+  vimSetMod = {
+    link = "vimOption"
+  },
+  vimSetSep = {
+    link = "Statement"
+  },
+  vimSetString = {
+    link = "vimString"
+  },
+  vimSpecFile = {
+    link = "Identifier"
+  },
+  vimSpecFileMod = {
+    link = "vimSpecFile"
+  },
+  vimSpecial = {
+    link = "Type"
+  },
+  vimString = {
+    link = "String"
+  },
+  vimStringCont = {
+    link = "vimString"
+  },
+  vimStringEnd = {
+    link = "vimString"
+  },
+  vimStringInterpolationBrace = {
+    link = "vimEscape"
+  },
+  vimSubst = {
+    link = "vimCommand"
+  },
+  vimSubst1 = {
+    link = "vimSubst"
+  },
+  vimSubstDelim = {
+    link = "Delimiter"
+  },
+  vimSubstFlagErr = {
+    link = "vimError"
+  },
+  vimSubstFlags = {
+    link = "Special"
+  },
+  vimSubstSubstr = {
+    link = "SpecialChar"
+  },
+  vimSubstTwoBS = {
+    link = "vimString"
+  },
+  vimSynCase = {
+    link = "Type"
+  },
+  vimSynCaseError = {
+    link = "vimError"
+  },
+  vimSynCchar = {
+    link = "vimSynOption"
+  },
+  vimSynCcharValue = {
+    link = "Character"
+  },
+  vimSynContains = {
+    link = "vimSynOption"
+  },
+  vimSynError = {
+    link = "Error"
+  },
+  vimSynFoldMethod = {
+    link = "Type"
+  },
+  vimSynFoldMethodError = {
+    link = "vimError"
+  },
+  vimSynKeyContainedin = {
+    link = "vimSynContains"
+  },
+  vimSynKeyOpt = {
+    link = "vimSynOption"
+  },
+  vimSynMtchGrp = {
+    link = "vimSynOption"
+  },
+  vimSynMtchOpt = {
+    link = "vimSynOption"
+  },
+  vimSynNextgroup = {
+    link = "vimSynOption"
+  },
+  vimSynNotPatRange = {
+    link = "vimSynRegPat"
+  },
+  vimSynOption = {
+    link = "Special"
+  },
+  vimSynPatRange = {
+    link = "vimString"
+  },
+  vimSynReg = {
+    link = "Type"
+  },
+  vimSynRegOpt = {
+    link = "vimSynOption"
+  },
+  vimSynRegPat = {
+    link = "vimString"
+  },
+  vimSynType = {
+    link = "vimSpecial"
+  },
+  vimSyncC = {
+    link = "Type"
+  },
+  vimSyncError = {
+    link = "Error"
+  },
+  vimSyncGroup = {
+    link = "vimGroupName"
+  },
+  vimSyncGroupName = {
+    link = "vimGroupName"
+  },
+  vimSyncKey = {
+    link = "Type"
+  },
+  vimSyncNone = {
+    link = "Type"
+  },
+  vimSyntax = {
+    link = "vimCommand"
+  },
+  vimTodo = {
+    link = "Todo"
+  },
+  vimType = {
+    link = "Type"
+  },
+  vimUnlet = {
+    link = "vimCommand"
+  },
+  vimUnletBang = {
+    link = "vimBang"
+  },
+  vimUnmap = {
+    link = "vimMap"
+  },
+  vimUserAttrb = {
+    link = "vimSpecial"
+  },
+  vimUserAttrbCmplt = {
+    link = "vimSpecial"
+  },
+  vimUserAttrbCmpltFunc = {
+    link = "Special"
+  },
+  vimUserAttrbError = {
+    link = "Error"
+  },
+  vimUserAttrbKey = {
+    link = "vimOption"
+  },
+  vimUserCmdError = {
+    link = "Error"
+  },
+  vimUserCommand = {
+    link = "vimCommand"
+  },
+  vimUserFunc = {
+    link = "Normal"
+  },
+  vimVar = {
+    link = "Identifier"
+  },
+  vimWarn = {
+    link = "WarningMsg"
   }
 }
