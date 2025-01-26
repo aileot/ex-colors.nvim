@@ -18,7 +18,7 @@ VUSTED_ARGS ?= "--headless --clean $(VUSTED_EXTRA_ARGS)"
 VUSTED_EXTRA_FLAGS ?=
 VUSTED_FLAGS ?= --shuffle --output=utfTerminal $(VUSTED_EXTRA_FLAGS)
 
-REPO_ROOT:=$(dir $(abspath $(lastword $(MAKEFILE_LIST))))
+REPO_ROOT:=$(abspath $(dir $(lastword $(MAKEFILE_LIST))))
 TEST_ROOT:=$(REPO_ROOT)/test
 
 FNL_SRC:=$(wildcard fnl/*/*.fnl)
