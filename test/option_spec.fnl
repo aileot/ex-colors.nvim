@@ -52,6 +52,26 @@
   (after-each (fn []
                 (vim.cmd "%delete _")
                 (vim.cmd :update)))
+  (describe* "ignore_default_colors"
+    (describe* "excludes the same definitions as those defined in require('ex-colors.default-colors);"
+      (describe* "thus, when using \"habamax\" colorscheme,"
+        (describe* "as the colorscheme does not overrides `@comment`"
+          (describe* "with the option set to `false`,"
+            (before_each (fn []
+                           (clean-setup! {:ignore_default_colors false
+                                          :included_hlgroups ["@comment"]})))
+            (it* ":ExColors output will contain `@comment`"
+              (vim.cmd.colorscheme "habamax")
+              (vim.cmd "ExColors | update")
+              (assert/buf-contains-pattern ".*@comment.*")))
+          (describe* "with the option set to `true`,"
+            (before_each (fn []
+                           (clean-setup! {:ignore_default_colors true
+                                          :included_hlgroups ["@comment"]})))
+            (it* ":ExColors output will not contain `@comment`"
+              (vim.cmd.colorscheme "habamax")
+              (vim.cmd "ExColors | update")
+              (assert/buf-contains-no-pattern ".*@comment.*")))))))
   (describe* :ignore_clear
     (describe* "set to false does not filter out any highlight definitions;"
       (describe* "with {included_patterns={'.*'}},"
