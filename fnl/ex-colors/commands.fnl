@@ -105,6 +105,13 @@
         included-hlgroups (filter-by-included-hlgroups highlights)
         ignore-default-colors? config.ignore_default_colors
         ignore-clear? config.ignore_clear
+        ignored-definition? (fn [hl-name hl-map]
+                              (or (and ignore-default-colors? ;
+                                       (vim.deep_equal hl-map
+                                                       (. default-colors
+                                                          hl-name)))
+                                  (and ignore-clear? ;
+                                       (not (next hl-map)))))
         cmd-list (if dump-all?
                      (icollect [_ hl-name (ipairs highlights)]
                        (let [hl-map (vim.api.nvim_get_hl 0 {:name hl-name})]
@@ -115,12 +122,7 @@
                            hl-maps (collect [_ hl-name (ipairs filtered-highlights)]
                                      (remap-hl-opts hl-name))]
                        (icollect [hl-name hl-map (pairs hl-maps)]
-                         (when (and (or (not ignore-default-colors?)
-                                        (not (vim.deep_equal hl-map
-                                                             (. default-colors
-                                                                hl-name))))
-                                    (or (not ignore-clear?) ;
-                                        (next hl-map)))
+                         (when-not (ignored-definition? hl-name hl-map)
                            (format-nvim-set-hl hl-name hl-map)))))]
     (table.sort cmd-list)
     (flatten cmd-list)))
