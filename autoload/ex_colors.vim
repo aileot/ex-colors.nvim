@@ -6,6 +6,12 @@ function! ex_colors#load_syntaxes() abort
   " - synload.vim
   " - syntax.vim
 
+  " NOTE: To collect syntax definitions more greedily, use `doautocmd Syntax`
+  " instead of `runtime! *`. Because this `doautocmd` choice depends on
+  " the autocmd defined in $VIMRUNTIME/syntax/synload.vim without `++nested`,
+  " `autocmd SourceCmd` approach is unavailable to exclude the files listed
+  " above.
+
   syntax enable
 
   " NOTE: Make sure to load syntax/markdown.vim before dependent syntax files
