@@ -8,6 +8,9 @@ function! ex_colors#load_syntaxes() abort
 
   syntax enable
 
+  " Load one-character filetype syntaxes like c.vim.
+  doautocmd Syntax .
+
   " Exluding hitest.vim.
   doautocmd Syntax [a-g]*
   doautocmd Syntax h[^i]*
