@@ -11,6 +11,7 @@ in each specs in spite of the default values for users."
   (reset!)
   (let [default-opts {:colors_dir output-colors-dir
                       :relinker #$
+                      :ignore_default_colors false
                       :included_hlgroups []
                       :excluded_hlgroups []
                       :included_patterns []
