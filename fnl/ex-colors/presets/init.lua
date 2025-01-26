@@ -12,6 +12,7 @@ local M = {
 M.recommended.included_hlgroups = mt_utils.new_addable(
   M.hlgroup.builtin.default
     + M.hlgroup.builtin.naming_conventions
+    + M.hlgroup.builtin.diff
     + M.hlgroup.builtin.html_headers
     + M.hlgroup.builtin.markdown_headers
     + M.hlgroup.builtin.diagnostic
