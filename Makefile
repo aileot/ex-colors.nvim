@@ -8,6 +8,8 @@ MAKEFLAGS += --warn-undefined-variables
 FENNEL ?= fennel
 VUSTED ?= vusted
 
+PLUGIN_NAME := ex-colors
+
 # Note: The --correlate flag is likely to cause conflicts.
 FNL_FLAGS ?=
 FNL_EXTRA_FLAGS ?=
@@ -30,7 +32,7 @@ LUA_IN_FNL+=$(wildcard fnl/*/*/*.lua)
 LUA_COPIED:=$(LUA_IN_FNL:fnl/%.lua=lua/%.lua)
 
 LUA_RES:=$(FNL_SRC:fnl/%.fnl=lua/%.lua)
-LUA_RES+=lua/ex-colors/config.lua
+LUA_RES+=lua/${PLUGIN_NAME}/config.lua
 LUA_RES+=$(LUA_COPIED)
 
 FNL_SRC_DIRS:=$(wildcard fnl/*/*/)
