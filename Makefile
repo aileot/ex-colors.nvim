@@ -87,6 +87,16 @@ build: $(LUA_RES_DIRS) $(LUA_RES) ## Compile fennel files from fnl/ into lua/
 		--compile $< > $@
 	@echo $< "	->	" $@
 
+.PHONY: default-colors
+default-colors: $(REPO_FNL_DIR)/$(PLUGIN_NAME) ## Dump default-colors definitions
+	@OUTPUT_PATH="$(REPO_FNL_DIR)/ex-colors/default-colors.lua"
+	@echo "return" > "$${OUTPUT_PATH}"
+	@nvim --clean -u NONE --headless -Es \
+		-c "redir! >> $${OUTPUT_PATH}" \
+		-c '= vim.api.nvim_get_hl(0, {})' \
+		-c 'redir END' \
+		+q
+
 .PHONY: test
 test: build $(LUA_SPECS) ## Run test
 	@nvim --version
