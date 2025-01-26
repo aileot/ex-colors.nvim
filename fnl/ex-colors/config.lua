@@ -43,6 +43,7 @@ local default_opts = {
   --- syntax highlight groups are defined before collecting them.
   ---@type string[]
   required_syntaxes = {
+    "diff", -- "diffAdded", "diffRemoved", "diffChanged"
     "html",
     "markdown",
   },
