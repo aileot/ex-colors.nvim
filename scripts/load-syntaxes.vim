@@ -7,11 +7,17 @@
 syntax enable
 
 doautocmd Syntax [a-m]*
+
+" Exlude nosyntax.vim.
 doautocmd Syntax n[a-n]*
 doautocmd Syntax no[^n]*
 doautocmd Syntax n[p-z]*
+
 doautocmd Syntax [o-r]*
+
+" Exlude synload.vim and syntax.vim.
 doautocmd Syntax s[a-x]*
 doautocmd Syntax sy[^n]*
 doautocmd Syntax sz*
+
 doautocmd Syntax [t-z]*
