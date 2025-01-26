@@ -6,37 +6,24 @@ function! ex_colors#load_syntaxes() abort
   " - synload.vim
   " - syntax.vim
 
-  " NOTE: To collect syntax definitions more greedily, use `doautocmd Syntax`
-  " instead of `runtime! *`. Because this `doautocmd` choice depends on
-  " the autocmd defined in $VIMRUNTIME/syntax/synload.vim without `++nested`,
-  " `autocmd SourceCmd` approach is unavailable to exclude the files listed
-  " above.
+  augroup ex_colors-ensure-no-current_syntax
+    autocmd!
+    " NOTE: Elude the guards: exists('b:current_syntax').
+    autocmd SourcePost * unlet! b:current_syntax
+    autocmd SourceCmd $VIMRUNTIME/syntax/hitest.vim :
+    autocmd SourceCmd $VIMRUNTIME/syntax/nosyntax.vim :
+    autocmd SourceCmd $VIMRUNTIME/syntax/synload.vim :
+    autocmd SourceCmd $VIMRUNTIME/syntax/syntax.vim :
+  augroup END
 
   syntax enable
 
   " NOTE: Make sure to load syntax/markdown.vim before dependent syntax files
   " like syntax/lsp_markdown.vim.
-  doautocmd Syntax markdown
+  runtime! syntax/markdown.vim
 
-  " Load one-character filetype syntaxes like c.vim.
-  doautocmd Syntax .
-
-  " Exluding hitest.vim.
-  doautocmd Syntax [a-g]*
-  doautocmd Syntax h[^i]*
-  doautocmd Syntax [i-m]*
-
-  " Exluding nosyntax.vim.
-  doautocmd Syntax n[a-n]*
-  doautocmd Syntax no[^n]*
-  doautocmd Syntax n[p-z]*
-
-  doautocmd Syntax [o-r]*
-
-  " Exluding synload.vim and syntax.vim.
-  doautocmd Syntax s[a-x]*
-  doautocmd Syntax sy[^n]*
-  doautocmd Syntax sz*
-
-  doautocmd Syntax [t-z]*
+  " NOTE: Another approach using `doautocmd Syntax` instead of `runtime!` (to
+  " collect syntax definitions potentially defined outside of syntax/) has no
+  " way to `unlet b:current_syntax` on each load.
+  runtime! syntax/*.{vim,lua}
 endfunction
