@@ -8,6 +8,8 @@ MAKEFLAGS += --warn-undefined-variables
 FENNEL ?= fennel
 VUSTED ?= vusted
 
+PLUGIN_NAME := ex-colors
+
 # Note: The --correlate flag is likely to cause conflicts.
 FNL_FLAGS ?=
 FNL_EXTRA_FLAGS ?=
@@ -18,7 +20,7 @@ VUSTED_ARGS ?= "--headless --clean $(VUSTED_EXTRA_ARGS)"
 VUSTED_EXTRA_FLAGS ?=
 VUSTED_FLAGS ?= --shuffle --output=utfTerminal $(VUSTED_EXTRA_FLAGS)
 
-REPO_ROOT:=$(dir $(abspath $(lastword $(MAKEFILE_LIST))))
+REPO_ROOT:=$(abspath $(dir $(lastword $(MAKEFILE_LIST))))
 TEST_ROOT:=$(REPO_ROOT)/test
 
 FNL_SRC:=$(wildcard fnl/*/*.fnl)
@@ -30,7 +32,7 @@ LUA_IN_FNL+=$(wildcard fnl/*/*/*.lua)
 LUA_COPIED:=$(LUA_IN_FNL:fnl/%.lua=lua/%.lua)
 
 LUA_RES:=$(FNL_SRC:fnl/%.fnl=lua/%.lua)
-LUA_RES+=lua/ex-colors/config.lua
+LUA_RES+=lua/${PLUGIN_NAME}/config.lua
 LUA_RES+=$(LUA_COPIED)
 
 FNL_SRC_DIRS:=$(wildcard fnl/*/*/)
@@ -84,6 +86,16 @@ build: $(LUA_RES_DIRS) $(LUA_RES) ## Compile fennel files from fnl/ into lua/
 		--add-macro-path "$(REPO_MACRO_PATH);$(TEST_ROOT)/?.fnl" \
 		--compile $< > $@
 	@echo $< "	->	" $@
+
+.PHONY: default-colors
+default-colors: $(REPO_FNL_DIR)/$(PLUGIN_NAME) ## Dump default-colors definitions
+	@OUTPUT_PATH="$(REPO_FNL_DIR)/ex-colors/default-colors.lua"
+	@echo "return" > "$${OUTPUT_PATH}"
+	@nvim --clean -u NONE --headless -Es \
+		-c "redir! >> $${OUTPUT_PATH}" \
+		-c "lua local hls = vim.api.nvim_get_hl(0, {}); local result = vim.inspect(hls):gsub('vim%.empty_dict%(%)','{}'); print(result)" \
+		-c 'redir END' \
+		+q
 
 .PHONY: test
 test: build $(LUA_SPECS) ## Run test

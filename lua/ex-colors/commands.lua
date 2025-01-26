@@ -7,6 +7,7 @@ local lines__3ecomment_lines = _local_1_["lines->comment-lines"]
 local config = require("ex-colors.config")
 local _local_2_ = require("ex-colors.remap")
 local remap_hl_opts = _local_2_["remap-hl-opts"]
+local default_colors = require("ex-colors.default-colors")
 local function collect_defined_highlights()
   local output = vim.fn.execute("highlight")
   local tbl_21_auto = {}
@@ -173,7 +174,13 @@ end
 local function compose_hi_cmd_lines(highlights, dump_all_3f)
   local included_patterns = config.included_patterns
   local included_hlgroups = filter_by_included_hlgroups(highlights)
+  local ignore_default_colors_3f = config.ignore_default_colors
   local ignore_clear_3f = config.ignore_clear
+  local ignored_definition_3f
+  local function _20_(hl_name, hl_map)
+    return ((ignore_default_colors_3f and vim.deep_equal(hl_map, default_colors[hl_name])) or (ignore_clear_3f and not next(hl_map)))
+  end
+  ignored_definition_3f = _20_
   local cmd_list
   if dump_all_3f then
     local tbl_21_auto = {}
@@ -209,7 +216,7 @@ local function compose_hi_cmd_lines(highlights, dump_all_3f)
     local i_22_auto = 0
     for hl_name, hl_map in pairs(hl_maps) do
       local val_23_auto
-      if (not ignore_clear_3f or next(hl_map)) then
+      if not ignored_definition_3f(hl_name, hl_map) then
         val_23_auto = format_nvim_set_hl(hl_name, hl_map)
       else
         val_23_auto = nil
@@ -291,9 +298,9 @@ local function compose_vim_options_cmd_lines_21()
     for _, vim_option_name in ipairs(vim_options) do
       local k_17_auto, v_18_auto = nil, nil
       do
-        local _31_ = vim.api.nvim_get_option_value(vim_option_name, {scope = "global"})
-        if (nil ~= _31_) then
-          local val = _31_
+        local _32_ = vim.api.nvim_get_option_value(vim_option_name, {scope = "global"})
+        if (nil ~= _32_) then
+          local val = _32_
           if (vim.api.nvim_get_option_info2(vim_option_name, {}).default ~= val) then
             k_17_auto, v_18_auto = vim_option_name, val
           else
@@ -366,10 +373,10 @@ local function define_filetype_specific_hlgroups_21()
   end
 end
 local function define_commands_21()
-  local function _38_(a)
+  local function _39_(a)
     define_filetype_specific_hlgroups_21()
     return generate_hi_cmds(a.bang)
   end
-  return vim.api.nvim_create_user_command("ExColors", _38_, {bang = true, bar = true, desc = "Extract highlight groups from current colorscheme"})
+  return vim.api.nvim_create_user_command("ExColors", _39_, {bang = true, bar = true, desc = "Extract highlight groups from current colorscheme"})
 end
 return {["define-commands!"] = define_commands_21}
