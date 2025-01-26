@@ -92,6 +92,7 @@ default-colors: $(REPO_FNL_DIR)/$(PLUGIN_NAME) ## Dump default-colors definition
 	@OUTPUT_PATH="$(REPO_FNL_DIR)/ex-colors/default-colors.lua"
 	@echo "return" > "$${OUTPUT_PATH}"
 	@nvim --clean -u NONE --headless -Es \
+		-s "$(REPO_ROOT)/scripts/load-syntaxes.vim" \
 		-c "redir! >> $${OUTPUT_PATH}" \
 		-c "lua local hls = vim.api.nvim_get_hl(0, {}); local result = vim.inspect(hls):gsub('vim%.empty_dict%(%)','{}'); print(result)" \
 		-c 'redir END' \
