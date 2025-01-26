@@ -554,7 +554,7 @@ return
     ctermfg = 14,
     fg = 9238775
   },
-  MsgArea = vim.empty_dict(),
+  MsgArea = {},
   MsgSeparator = {
     link = "StatusLine"
   },
@@ -568,7 +568,7 @@ return
   NormalFloat = {
     bg = 460813
   },
-  NormalNC = vim.empty_dict(),
+  NormalNC = {},
   Number = {
     link = "Constant"
   },
@@ -1182,7 +1182,7 @@ return
     },
     reverse = true
   },
-  TermCursorNC = vim.empty_dict(),
+  TermCursorNC = {},
   Title = {
     bold = true,
     cterm = {
