@@ -112,20 +112,25 @@
                                                           hl-name)))
                                   (and ignore-clear? ;
                                        (not (next hl-map)))))
-        cmd-list (if dump-all?
-                     (icollect [_ hl-name (ipairs highlights)]
-                       (let [hl-map (vim.api.nvim_get_hl 0 {:name hl-name})]
-                         (format-nvim-set-hl hl-name hl-map)))
-                     (let [filtered-highlights (-> highlights
-                                                   (filter-by-included-patterns included-patterns)
-                                                   (vim.list_extend included-hlgroups))
-                           hl-maps (collect [_ hl-name (ipairs filtered-highlights)]
-                                     (remap-hl-opts hl-name))]
-                       (icollect [hl-name hl-map (pairs hl-maps)]
-                         (when-not (ignored-definition? hl-name hl-map)
-                           (format-nvim-set-hl hl-name hl-map)))))]
+        filtered-hl-maps (if dump-all?
+                             (collect [_ hl-name (ipairs highlights)]
+                               (let [hl-map (vim.api.nvim_get_hl 0
+                                                                 {:name hl-name})]
+                                 (values hl-name hl-map)))
+                             (let [filtered-highlights (-> highlights
+                                                           (filter-by-included-patterns included-patterns)
+                                                           (vim.list_extend included-hlgroups))
+                                   hl-maps (collect [_ hl-name (ipairs filtered-highlights)]
+                                             (remap-hl-opts hl-name))]
+                               (-> (collect [hl-name hl-map (pairs hl-maps)]
+                                     (when-not (ignored-definition? hl-name
+                                                                    hl-map)
+                                       (values hl-name hl-map))))))
+        cmd-list (-> (icollect [hl-name hl-map (pairs filtered-hl-maps)]
+                       (format-nvim-set-hl hl-name hl-map))
+                     (flatten))]
     (table.sort cmd-list)
-    (flatten cmd-list)))
+    cmd-list))
 
 (fn compose-colors-names []
   "Return a new colors-name and original colors-name assumed by current
