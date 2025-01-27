@@ -435,6 +435,17 @@ M.builtin.redrawdebug = mt_utils.new_addable({
   "RedrawDebugRecompose",
 })
 
+-- Internal definitions like those on catppuccin.nvim.
+M.convention.rainbow = {
+  "rainbow1",
+  "rainbow2",
+  "rainbow3",
+  "rainbow4",
+  "rainbow5",
+  "rainbow6",
+  "rainbow7",
+}
+
 M.convention.ansi_colors = mt_utils.new_addable({
   "Aqua",
   "Black",
@@ -451,6 +462,16 @@ M.convention.ansi_colors = mt_utils.new_addable({
   "White",
   "Yellow",
 })
+
+-- Internal definitions like RedSign on everforest.vim.
+M.convention.ansi_colors_sign = vim.tbl_map(function(name)
+  return name .. "Sign"
+end, M.convention.ansi_colors)
+
+-- Internal definitions like RedItalic on everforest.vim.
+M.convention.ansi_colors_italic = vim.tbl_map(function(name)
+  return name .. "Italic"
+end, M.convention.ansi_colors)
 
 return mt_utils.new_readonly(M)
 

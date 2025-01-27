@@ -19,15 +19,16 @@ M.recommended.included_hlgroups = mt_utils.new_addable(
     + M.hlgroup.builtin.treesitter
     + M.hlgroup.builtin.lsp
     + M.hlgroup.builtin.lsp_semantic_highlight
+    + M.hlgroup.convention.rainbow
     + M.hlgroup.convention.ansi_colors
+    + M.hlgroup.convention.ansi_colors_sign
+    + M.hlgroup.convention.ansi_colors_italic
 )
 
 M.recommended.excluded_hlgroups = mt_utils.new_addable({})
 
-M.recommended.included_patterns = mt_utils.new_addable(
-  M.pattern.convention.ansi_color_prefixes
-    + M.pattern.convention.ansi_color_numbered
-)
+M.recommended.included_patterns =
+  mt_utils.new_addable(M.pattern.convention.ansi_color_numbered)
 
 M.recommended.excluded_patterns =
   mt_utils.new_addable(M.pattern.treesitter_filetype_captures)
