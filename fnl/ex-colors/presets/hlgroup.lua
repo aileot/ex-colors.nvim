@@ -452,6 +452,16 @@ M.convention.ansi_colors = mt_utils.new_addable({
   "Yellow",
 })
 
+-- Internal definitions like RedSign on everforest.vim.
+M.convention.ansi_colors_sign = vim.tbl_map(function(name)
+  return name .. "Sign"
+end, M.convention.ansi_colors)
+
+-- Internal definitions like RedItalic on everforest.vim.
+M.convention.ansi_colors_italic = vim.tbl_map(function(name)
+  return name .. "Italic"
+end, M.convention.ansi_colors)
+
 return mt_utils.new_readonly(M)
 
 -- vim:iskeyword+=-

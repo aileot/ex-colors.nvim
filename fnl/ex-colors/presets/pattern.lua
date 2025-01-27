@@ -325,11 +325,6 @@ M.treesitter_filetype_captures =
     return ("^@.*%%.%s$"):format(filetype)
   end, filetypes))
 
-M.convention.ansi_color_prefixes =
-  mt_utils.new_addable(vim.tbl_map(function(name)
-    return name .. "%u"
-  end, hlgroup_presets.convention.ansi_colors))
-
 M.convention.ansi_color_numbered = vim.tbl_map(function(name)
   return "^" .. name .. "%d+$"
 end, hlgroup_presets.convention.ansi_colors)
