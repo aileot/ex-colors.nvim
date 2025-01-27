@@ -435,6 +435,17 @@ M.builtin.redrawdebug = mt_utils.new_addable({
   "RedrawDebugRecompose",
 })
 
+-- Internal definitions like those on catppuccin.nvim.
+M.convention.rainbow = {
+  "rainbow1",
+  "rainbow2",
+  "rainbow3",
+  "rainbow4",
+  "rainbow5",
+  "rainbow6",
+  "rainbow7",
+}
+
 M.convention.ansi_colors = mt_utils.new_addable({
   "Aqua",
   "Black",
