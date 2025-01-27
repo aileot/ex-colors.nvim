@@ -452,40 +452,6 @@ M.convention.ansi_colors = mt_utils.new_addable({
   "Yellow",
 })
 
--- Highlight groups which are unlikely to be overridden regardless of
--- colorscheme.
-M.reasonable_default = mt_utils.new_addable({
-  "@diff.delta",
-  "@diff.plus",
-  "@diff.minus",
-
-  "@markup.strikethrough",
-  "@markup.underline",
-
-  "Underlined",
-
-  "DiagnosticVirtualTextError",
-  "DiagnosticVirtualTextWarn",
-  "DiagnosticVirtualTextInfo",
-  "DiagnosticVirtualTextHint",
-  "DiagnosticVirtualTextOk",
-  -- "DiagnosticUnderlineError",
-  -- "DiagnosticUnderlineWarn",
-  -- "DiagnosticUnderlineInfo",
-  -- "DiagnosticUnderlineHint",
-  -- "DiagnosticUnderlineOk",
-  "DiagnosticFloatingError",
-  "DiagnosticFloatingWarn",
-  "DiagnosticFloatingInfo",
-  "DiagnosticFloatingHint",
-  "DiagnosticFloatingOk",
-  "DiagnosticSignError",
-  "DiagnosticSignWarn",
-  "DiagnosticSignInfo",
-  "DiagnosticSignHint",
-  "DiagnosticSignOk",
-})
-
 return mt_utils.new_readonly(M)
 
 -- vim:iskeyword+=-

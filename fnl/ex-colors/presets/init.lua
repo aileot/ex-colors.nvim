@@ -22,8 +22,7 @@ M.recommended.included_hlgroups = mt_utils.new_addable(
     + M.hlgroup.convention.ansi_colors
 )
 
-M.recommended.excluded_hlgroups =
-  mt_utils.new_addable(M.hlgroup.reasonable_default)
+M.recommended.excluded_hlgroups = mt_utils.new_addable({})
 
 M.recommended.included_patterns = mt_utils.new_addable(
   M.pattern.convention.ansi_color_prefixes
