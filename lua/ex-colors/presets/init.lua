@@ -12,6 +12,9 @@ local M = {
 M.recommended.included_hlgroups = mt_utils.new_addable(
   M.hlgroup.builtin.default
     + M.hlgroup.builtin.naming_conventions
+    + M.hlgroup.builtin.diff
+    + M.hlgroup.builtin.html_headers
+    + M.hlgroup.builtin.markdown_headers
     + M.hlgroup.builtin.diagnostic
     + M.hlgroup.builtin.treesitter
     + M.hlgroup.builtin.lsp
@@ -19,8 +22,7 @@ M.recommended.included_hlgroups = mt_utils.new_addable(
     + M.hlgroup.convention.ansi_colors
 )
 
-M.recommended.excluded_hlgroups =
-  mt_utils.new_addable(M.hlgroup.reasonable_default)
+M.recommended.excluded_hlgroups = mt_utils.new_addable({})
 
 M.recommended.included_patterns = mt_utils.new_addable(
   M.pattern.convention.ansi_color_prefixes
