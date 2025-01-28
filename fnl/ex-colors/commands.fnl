@@ -6,7 +6,7 @@
        (require :ex-colors.utils.general))
 
 (local config (require :ex-colors.config))
-(local {: remap-hl-opts} (require :ex-colors.remap))
+(local {: rename-hl-group : remap-hl-opts} (require :ex-colors.remap))
 
 (local default-colors (require :ex-colors.default-colors))
 
@@ -215,9 +215,24 @@ performance.
     (let [highlights (collect-defined-highlights)
           filtered-highlights (if dump-all?
                                   highlights
-                                  (-> highlights
-                                      (filter-out-excluded-hlgroups)
-                                      (filter-out-excluded-patterns)))
+                                  (let [new-hl-name->map (collect [_ hl-name (ipairs highlights)]
+                                                           (case (or (rename-hl-group hl-name)
+                                                                     nil)
+                                                             new-hl-name (values new-hl-name
+                                                                                 (vim.api.nvim_get_hl 0
+                                                                                                      {:name hl-name}))))
+                                        new-hl-names (icollect [hl-name (pairs new-hl-name->map)]
+                                                       hl-name)]
+                                    (each [hl-name hl-map (pairs new-hl-name->map)]
+                                      (when-not (next (vim.api.nvim_get_hl 0
+                                                                           {:name hl-name
+                                                                            :create false}))
+                                        ;; Make sure renamed hl-groups are
+                                        ;; defined.
+                                        (vim.api.nvim_set_hl 0 hl-name hl-map)))
+                                    (-> new-hl-names
+                                        (filter-out-excluded-hlgroups)
+                                        (filter-out-excluded-patterns))))
           gvar-cmd-lines (compose-gvar-cmd-lines ex-colors-name)
           vim-option-cmd-lines (compose-vim-options-cmd-lines!)
           hi-cmd-lines (compose-hi-cmd-lines filtered-highlights dump-all?)

@@ -63,4 +63,11 @@
       (error (.. "relinker must return a value; make it return `false` explicitly to discard the hl-group "
                  hl-name)))))
 
-{: remap-hl-opts}
+(fn rename-hl-group [old-hl-name]
+  (if (not config.relinker)
+      old-hl-name
+      (let [relink config.relinker
+            new-hl-name (relink old-hl-name)]
+        new-hl-name)))
+
+{: rename-hl-group : remap-hl-opts}
