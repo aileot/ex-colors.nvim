@@ -6,6 +6,7 @@ local ensure_dir_21 = _local_1_["ensure-dir!"]
 local lines__3ecomment_lines = _local_1_["lines->comment-lines"]
 local config = require("ex-colors.config")
 local _local_2_ = require("ex-colors.remap")
+local rename_hl_group = _local_2_["rename-hl-group"]
 local remap_hl_opts = _local_2_["remap-hl-opts"]
 local default_colors = require("ex-colors.default-colors")
 local function collect_defined_highlights()
@@ -363,7 +364,48 @@ local function generate_hi_cmds(dump_all_3f)
   if dump_all_3f then
     filtered_highlights = highlights
   else
-    filtered_highlights = filter_out_excluded_patterns(filter_out_excluded_hlgroups(highlights))
+    local new_hl_name__3emap
+    do
+      local tbl_16_auto = {}
+      for _, hl_name in ipairs(highlights) do
+        local k_17_auto, v_18_auto = nil, nil
+        do
+          local _39_ = (rename_hl_group(hl_name) or nil)
+          if (nil ~= _39_) then
+            local new_hl_name = _39_
+            k_17_auto, v_18_auto = new_hl_name, vim.api.nvim_get_hl(0, {name = hl_name})
+          else
+            k_17_auto, v_18_auto = nil
+          end
+        end
+        if ((k_17_auto ~= nil) and (v_18_auto ~= nil)) then
+          tbl_16_auto[k_17_auto] = v_18_auto
+        else
+        end
+      end
+      new_hl_name__3emap = tbl_16_auto
+    end
+    local new_hl_names
+    do
+      local tbl_21_auto = {}
+      local i_22_auto = 0
+      for hl_name in pairs(new_hl_name__3emap) do
+        local val_23_auto = hl_name
+        if (nil ~= val_23_auto) then
+          i_22_auto = (i_22_auto + 1)
+          tbl_21_auto[i_22_auto] = val_23_auto
+        else
+        end
+      end
+      new_hl_names = tbl_21_auto
+    end
+    for hl_name, hl_map in pairs(new_hl_name__3emap) do
+      if not next(vim.api.nvim_get_hl(0, {name = hl_name, create = false})) then
+        vim.api.nvim_set_hl(0, hl_name, hl_map)
+      else
+      end
+    end
+    filtered_highlights = filter_out_excluded_patterns(filter_out_excluded_hlgroups(new_hl_names))
   end
   local gvar_cmd_lines = compose_gvar_cmd_lines(ex_colors_name)
   local vim_option_cmd_lines = compose_vim_options_cmd_lines_21()
@@ -384,10 +426,10 @@ local function define_filetype_specific_hlgroups_21()
   end
 end
 local function define_commands_21()
-  local function _41_(a)
+  local function _46_(a)
     define_filetype_specific_hlgroups_21()
     return generate_hi_cmds(a.bang)
   end
-  return vim.api.nvim_create_user_command("ExColors", _41_, {bang = true, bar = true, desc = "Extract highlight groups from current colorscheme"})
+  return vim.api.nvim_create_user_command("ExColors", _46_, {bang = true, bar = true, desc = "Extract highlight groups from current colorscheme"})
 end
 return {["define-commands!"] = define_commands_21}
