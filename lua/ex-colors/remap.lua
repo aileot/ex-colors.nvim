@@ -106,4 +106,13 @@ local function remap_hl_opts(hl_name)
     return nil
   end
 end
-return {["remap-hl-opts"] = remap_hl_opts}
+local function rename_hl_group(old_hl_name)
+  if not config.relinker then
+    return old_hl_name
+  else
+    local relink = config.relinker
+    local new_hl_name = relink(old_hl_name)
+    return new_hl_name
+  end
+end
+return {["rename-hl-group"] = rename_hl_group, ["remap-hl-opts"] = remap_hl_opts}
