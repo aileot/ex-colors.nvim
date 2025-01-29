@@ -1,7 +1,8 @@
 (import-macros {: describe* : it*} :test.helper.busted-macros)
 
 (local {: clean-setup!} (include :test.helper.wrapper))
-(local {: assert/buf-contains-no-pattern} (include :test.helper.assert))
+(local {: assert/buf-contains-pattern : assert/buf-contains-no-pattern}
+       (include :test.helper.assert))
 (include :test.context.prerequisites)
 
 (local presets (require :ex-colors.presets))
@@ -31,6 +32,20 @@
           (assert.has_no_error #(+ presets.recommended.relinker ;
                                    #:foo #:bar))))))
   (describe* "relinker"
+    (describe* "trim_colors_name_prefix"
+      (describe* "keeps ansi-colors;"
+        (describe* "thus, when colorscheme is gruvbox,"
+          (before_each (fn []
+                         (set vim.g.colors_name "gruvbox")))
+          (after_each (fn []
+                        (set vim.g.colors_name nil)))
+          (it* "removes GruvboxRed but leaves Red"
+            (vim.api.nvim_set_hl 0 :GruvboxRed {:fg :Red})
+            (clean-setup! {:included_hlgroups [:Red]
+                           :relinker presets.relinker.trim_colors_name_prefix})
+            (vim.cmd "ExColors | update")
+            (assert/buf-contains-no-pattern "GruvboxRed")
+            (assert/buf-contains-pattern "Red")))))
     (describe* "with the recommended preset"
       (before_each (fn []
                      (clean-setup! {:relinker presets.recommended.relinker})))

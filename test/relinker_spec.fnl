@@ -96,4 +96,20 @@
                                                             _ hl-name))})
                                (vim.cmd "ExColors | update")))
                 (it* "TSBoolean will not appear in the output"
-                  (assert/buf-contains-no-pattern :TSBoolean))))))))))
+                  (assert/buf-contains-no-pattern :TSBoolean))))))))
+    (describe* "is applied before any other filters;"
+      (describe* "thus, given 'Foo' and relinker converts it 'Bar',"
+        (before_each (fn []
+                       (vim.api.nvim_set_hl 0 "Foo" {:fg :Red})))
+        (it* "included_hlgroups={'Foo'} outputs neither 'Foo' nor 'Bar'."
+          (clean-setup! {:included_hlgroups ["Foo"]
+                         :relinker #:Bar})
+          (vim.cmd "ExColors | update")
+          (assert/buf-contains-no-pattern "Foo")
+          (assert/buf-contains-no-pattern "Bar"))
+        (it* "included_hlgroups={'Bar'} only outputs 'Bar' without 'Foo'."
+          (clean-setup! {:included_hlgroups ["Bar"]
+                         :relinker #:Bar})
+          (vim.cmd "ExColors | update")
+          (assert/buf-contains-no-pattern "Foo")
+          (assert/buf-contains-pattern "Bar"))))))

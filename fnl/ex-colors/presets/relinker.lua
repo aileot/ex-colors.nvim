@@ -222,6 +222,23 @@ M.no_TS_prefixed = new_addable_relinker(function(hl_name)
   return hl_name
 end)
 
+--- Trim colors_name prefix, e.g., relink GruvboxRed, GruvboxGreen, ..., to
+--- Red, Green, ...
+M.trim_colors_name_prefix = new_addable_relinker(function(hl_name)
+  if hl_name == false then
+    return false
+  end
+  local colors_name = vim.g.colors_name
+  if colors_name == nil then
+    -- i.e., the "default" colorscheme.
+    return hl_name
+  end
+  if hl_name:lower():find("^" .. colors_name .. "%a") then
+    return hl_name:sub(#colors_name + 1)
+  end
+  return hl_name
+end)
+
 M.recommended = new_addable_relinker(
   M.no_typo
     + M.no_superseded
@@ -229,6 +246,7 @@ M.recommended = new_addable_relinker(
     -- lsp-semantic-highlight.
     -- + M.no_lsp_semantic_highlight
     + M.no_TS_prefixed
+    + M.trim_colors_name_prefix
 )
 
 return mt_utils.new_readonly(M)
