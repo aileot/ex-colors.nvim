@@ -6,6 +6,12 @@
        (require :ex-colors.utils.general))
 
 (local config (require :ex-colors.config))
+
+(local {: filter-by-included-patterns
+        : filter-by-included-hlgroups
+        : filter-out-excluded-patterns
+        : filter-out-excluded-hlgroups} (require :ex-colors.filter))
+
 (local {: rename-hl-group : remap-hl-opts} (require :ex-colors.remap))
 
 (local default-colors (require :ex-colors.default-colors))
@@ -24,41 +30,6 @@
   ;; at https://gitspartv.github.io/LuaJIT-Benchmarks/#test3
   (let [cmd-template "vim.api.nvim_set_hl(0,%q,%s)"]
     (cmd-template:format hl-name (->oneliner opts-to-be-lua-string))))
-
-(fn filter-by-included-patterns [old-output-list included-patterns]
-  (let [new-output-list []]
-    (each [_ name (ipairs old-output-list)]
-      (when (accumulate [match? nil ;
-                         _ ex-pattern (ipairs included-patterns) &until match?]
-              (name:find ex-pattern))
-        (table.insert new-output-list name)))
-    new-output-list))
-
-(fn filter-by-included-hlgroups [old-output-list]
-  (let [new-output-list []]
-    (each [_ name (ipairs config.included_hlgroups)]
-      (when (vim.list_contains old-output-list name)
-        (table.insert new-output-list name)))
-    new-output-list))
-
-(fn filter-out-excluded-patterns [old-output-list]
-  (let [new-output-list []
-        excluded-patterns config.excluded_patterns]
-    (each [_ name (ipairs old-output-list)]
-      (when-not (accumulate [match? nil ;
-                             _ ex-pattern (ipairs excluded-patterns)
-                             &until match?]
-                  (name:find ex-pattern))
-        (table.insert new-output-list name)))
-    new-output-list))
-
-(fn filter-out-excluded-hlgroups [old-output-list]
-  (let [new-output-list []
-        excluded-hlgroups config.excluded_hlgroups]
-    (each [_ name (ipairs old-output-list)]
-      (when-not (vim.list_contains excluded-hlgroups name)
-        (table.insert new-output-list name)))
-    new-output-list))
 
 (fn compose-autocmd-lines [highlights]
   (let [autocmd-patterns config.autocmd_patterns

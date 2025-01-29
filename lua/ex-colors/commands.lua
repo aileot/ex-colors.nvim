@@ -5,9 +5,14 @@ local __3eoneliner = _local_1_["->oneliner"]
 local ensure_dir_21 = _local_1_["ensure-dir!"]
 local lines__3ecomment_lines = _local_1_["lines->comment-lines"]
 local config = require("ex-colors.config")
-local _local_2_ = require("ex-colors.remap")
-local rename_hl_group = _local_2_["rename-hl-group"]
-local remap_hl_opts = _local_2_["remap-hl-opts"]
+local _local_2_ = require("ex-colors.filter")
+local filter_by_included_patterns = _local_2_["filter-by-included-patterns"]
+local filter_by_included_hlgroups = _local_2_["filter-by-included-hlgroups"]
+local filter_out_excluded_patterns = _local_2_["filter-out-excluded-patterns"]
+local filter_out_excluded_hlgroups = _local_2_["filter-out-excluded-hlgroups"]
+local _local_3_ = require("ex-colors.remap")
+local rename_hl_group = _local_3_["rename-hl-group"]
+local remap_hl_opts = _local_3_["remap-hl-opts"]
 local default_colors = require("ex-colors.default-colors")
 local function collect_defined_highlights()
   local output = vim.fn.execute("highlight")
@@ -26,66 +31,6 @@ end
 local function format_nvim_set_hl(hl_name, opts_to_be_lua_string)
   local cmd_template = "vim.api.nvim_set_hl(0,%q,%s)"
   return cmd_template:format(hl_name, __3eoneliner(opts_to_be_lua_string))
-end
-local function filter_by_included_patterns(old_output_list, included_patterns)
-  local new_output_list = {}
-  for _, name in ipairs(old_output_list) do
-    local _4_
-    do
-      local match_3f = nil
-      for _0, ex_pattern in ipairs(included_patterns) do
-        if match_3f then break end
-        match_3f = name:find(ex_pattern)
-      end
-      _4_ = match_3f
-    end
-    if _4_ then
-      table.insert(new_output_list, name)
-    else
-    end
-  end
-  return new_output_list
-end
-local function filter_by_included_hlgroups(old_output_list)
-  local new_output_list = {}
-  for _, name in ipairs(config.included_hlgroups) do
-    if vim.list_contains(old_output_list, name) then
-      table.insert(new_output_list, name)
-    else
-    end
-  end
-  return new_output_list
-end
-local function filter_out_excluded_patterns(old_output_list)
-  local new_output_list = {}
-  local excluded_patterns = config.excluded_patterns
-  for _, name in ipairs(old_output_list) do
-    local _7_
-    do
-      local match_3f = nil
-      for _0, ex_pattern in ipairs(excluded_patterns) do
-        if match_3f then break end
-        match_3f = name:find(ex_pattern)
-      end
-      _7_ = match_3f
-    end
-    if not _7_ then
-      table.insert(new_output_list, name)
-    else
-    end
-  end
-  return new_output_list
-end
-local function filter_out_excluded_hlgroups(old_output_list)
-  local new_output_list = {}
-  local excluded_hlgroups = config.excluded_hlgroups
-  for _, name in ipairs(old_output_list) do
-    if not vim.list_contains(excluded_hlgroups, name) then
-      table.insert(new_output_list, name)
-    else
-    end
-  end
-  return new_output_list
 end
 local function compose_autocmd_lines(highlights)
   local autocmd_patterns = config.autocmd_patterns
@@ -140,18 +85,18 @@ local function compose_autocmd_lines(highlights)
         local pattern_line = ("  pattern = %s,"):format(__3eoneliner(au_pattern))
         au_opt_lines = flatten({pattern_line, callback_lines})
       end
-      local _let_14_ = vim.deepcopy(autocmd_template_lines)
-      local first_line = _let_14_[1]
-      local lines = _let_14_
+      local _let_9_ = vim.deepcopy(autocmd_template_lines)
+      local first_line = _let_9_[1]
+      local lines = _let_9_
       local event_arg
       do
-        local _15_ = type(au_event)
-        if (_15_ == "string") then
+        local _10_ = type(au_event)
+        if (_10_ == "string") then
           event_arg = ("%q"):format(au_event)
-        elseif (_15_ == "table") then
+        elseif (_10_ == "table") then
           event_arg = au_event
-        elseif (nil ~= _15_) then
-          local _else = _15_
+        elseif (nil ~= _10_) then
+          local _else = _10_
           event_arg = error(("expected string or table, got " .. _else))
         else
           event_arg = nil
@@ -163,12 +108,12 @@ local function compose_autocmd_lines(highlights)
     end
   end
   do
-    local function _19_(_17_, _18_)
-      local cmd_line1 = _17_[1]
-      local cmd_line2 = _18_[1]
+    local function _14_(_12_, _13_)
+      local cmd_line1 = _12_[1]
+      local cmd_line2 = _13_[1]
       return (cmd_line1 < cmd_line2)
     end
-    table.sort(autocmd_list, _19_)
+    table.sort(autocmd_list, _14_)
   end
   return flatten(autocmd_list)
 end
@@ -178,10 +123,10 @@ local function compose_hi_cmd_lines(highlights, dump_all_3f)
   local ignore_default_colors_3f = config.ignore_default_colors
   local ignore_clear_3f = config.ignore_clear
   local ignored_definition_3f
-  local function _20_(hl_name, hl_map)
+  local function _15_(hl_name, hl_map)
     return ((ignore_default_colors_3f and vim.deep_equal(hl_map, default_colors[hl_name])) or (ignore_clear_3f and not next(hl_map)))
   end
-  ignored_definition_3f = _20_
+  ignored_definition_3f = _15_
   local filtered_hl_maps
   if dump_all_3f then
     local tbl_16_auto = {}
@@ -227,7 +172,7 @@ local function compose_hi_cmd_lines(highlights, dump_all_3f)
     filtered_hl_maps = tbl_16_auto
   end
   local cmd_list
-  local function _26_()
+  local function _21_()
     local tbl_21_auto = {}
     local i_22_auto = 0
     for hl_name, hl_map in pairs(filtered_hl_maps) do
@@ -240,7 +185,7 @@ local function compose_hi_cmd_lines(highlights, dump_all_3f)
     end
     return tbl_21_auto
   end
-  cmd_list = flatten(_26_())
+  cmd_list = flatten(_21_())
   table.sort(cmd_list)
   return cmd_list
 end
@@ -310,9 +255,9 @@ local function compose_vim_options_cmd_lines_21()
     for _, vim_option_name in ipairs(vim_options) do
       local k_17_auto, v_18_auto = nil, nil
       do
-        local _34_ = vim.api.nvim_get_option_value(vim_option_name, {scope = "global"})
-        if (nil ~= _34_) then
-          local val = _34_
+        local _29_ = vim.api.nvim_get_option_value(vim_option_name, {scope = "global"})
+        if (nil ~= _29_) then
+          local val = _29_
           if (vim.api.nvim_get_option_info2(vim_option_name, {}).default ~= val) then
             k_17_auto, v_18_auto = vim_option_name, val
           else
@@ -370,9 +315,9 @@ local function generate_hi_cmds(dump_all_3f)
       for _, hl_name in ipairs(highlights) do
         local k_17_auto, v_18_auto = nil, nil
         do
-          local _39_ = (rename_hl_group(hl_name) or nil)
-          if (nil ~= _39_) then
-            local new_hl_name = _39_
+          local _34_ = (rename_hl_group(hl_name) or nil)
+          if (nil ~= _34_) then
+            local new_hl_name = _34_
             k_17_auto, v_18_auto = new_hl_name, vim.api.nvim_get_hl(0, {name = hl_name})
           else
             k_17_auto, v_18_auto = nil
@@ -426,10 +371,10 @@ local function define_filetype_specific_hlgroups_21()
   end
 end
 local function define_commands_21()
-  local function _46_(a)
+  local function _41_(a)
     define_filetype_specific_hlgroups_21()
     return generate_hi_cmds(a.bang)
   end
-  return vim.api.nvim_create_user_command("ExColors", _46_, {bang = true, bar = true, desc = "Extract highlight groups from current colorscheme"})
+  return vim.api.nvim_create_user_command("ExColors", _41_, {bang = true, bar = true, desc = "Extract highlight groups from current colorscheme"})
 end
 return {["define-commands!"] = define_commands_21}
