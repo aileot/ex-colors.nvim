@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         nvim_version:
-          - v0.9.5
+          - v0.10.3
           - stable
           - nightly
     steps:
