@@ -85,43 +85,35 @@ highlight definition name.
 It helps you eliminate obsolete, or deprecated, highlight definitions
 in the output.
 
-The [Cookbook](./cookbook.md) shows demonstrations.
-
 ### included_hlgroups
 
 (type: `string[]`; default: `require("ex-colors.presets").recommended.included_hlgroups`)
 
 Highlight group names which should be included in the output.
-The [Cookbook](./cookbook.md) shows demonstrations.
 
 ### excluded_hlgroups
 
 (type: `string[]`; default: `require("ex-colors.presets").recommended.excluded_hlgroups`)
 
 Highlight group names which should be excluded in the output.
-The [Cookbook](./cookbook.md) shows demonstrations.
 
 ### included_patterns
 
 (type: `string[]`; default: `require("ex-colors.presets").recommended.excluded_hlgroups`)
 
 Highlight group name Lua patterns which should be included in the output.
-The [Cookbook](./cookbook.md) shows demonstrations.
 
 ### excluded_patterns
 
 (type: `string[]`; default: `require("ex-colors.presets").recommended.excluded_patterns`)
 
 Highlight group name patterns which should be excluded in the output.
-The [Cookbook](./cookbook.md) shows demonstrations.
 
 ### autocmd_patterns
 
 (type: `string[]`; default: `{}`)
 
 Generate matched highlight definitions only on the autocmd event.
-
-The [Cookbook](./cookbook.md) shows demonstrations.
 
 ### embedded_global_options
 

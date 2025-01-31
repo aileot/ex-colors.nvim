@@ -14,7 +14,7 @@ _Happy coding!!!_
 ## Setup
 
 Change option values via `require("ex-colors").setup()`.
-Visit the [Reference](./docs/reference.md) & [Cookbook](./docs/cookbook.md)
+Visit the [Reference](./docs/reference.md).
 for more details.
 The following snippet sets up the options with the default values:
 
