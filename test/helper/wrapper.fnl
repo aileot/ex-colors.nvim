@@ -11,6 +11,8 @@ in each specs in spite of the default values for users."
   (reset!)
   (let [default-opts {:colors_dir output-colors-dir
                       :relinker #$
+                      :clear_highlight false
+                      :reset_syntax false
                       :ignore_default_colors false
                       :ignore_clear false
                       :included_hlgroups []
