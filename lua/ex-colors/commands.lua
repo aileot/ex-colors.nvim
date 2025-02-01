@@ -14,7 +14,7 @@ local compose_gvar_cmd_lines = _local_3_["compose-gvar-cmd-lines"]
 local compose_vim_options_cmd_lines_21 = _local_3_["compose-vim-options-cmd-lines!"]
 local _local_4_ = require("ex-colors.remap")
 local rename_hl_group = _local_4_["rename-hl-group"]
-local function compose_colors_names()
+local function determine_colors_names()
   local ex_prefix = "ex-"
   local ex_prefix_length = #ex_prefix
   local raw_colors_name = vim.fn.execute("colorscheme"):gsub("\n", "")
@@ -53,7 +53,7 @@ end
 local function generate_hi_cmds(dump_all_3f)
   local file_ext = "lua"
   local dir = config.colors_dir
-  local ex_colors_name, original_colors_name = compose_colors_names()
+  local ex_colors_name, original_colors_name = determine_colors_names()
   local output_path = Path.join(dir, (ex_colors_name .. "." .. file_ext))
   ensure_dir_21(dir)
   vim.cmd("syntax off")
