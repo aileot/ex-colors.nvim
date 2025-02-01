@@ -48,11 +48,15 @@ With [lazy.nvim][],
 
 ### Setup
 
-Change option values via `require("ex-colors").setup()`.
+Change option values via `require("ex-colors").setup()`.\
+Please see
+[Setup Example with Sane Default Settings](#setup-example-with-sane-default-settings)
+for the details.
 
 #### Presets
 
-Some sane presets are provided. Please visit the preset modules:
+Some sensible presets are provided.
+Please follow the links to the preset modules:
 
 - The [recommended](./lua/ex-colors/presets/init.lua) presets
 - The [hlgroup](./lua/ex-colors/presets/hlgroup.lua) presets
@@ -72,7 +76,7 @@ require("ex-colors.presets").recommended.included_patterns + { "Foo", "Bar" }
 
 #### Setup Example with Sane Default Settings
 
-The following snippet sets up the options with the sane default values:
+The following snippet sets up the options with the default values:
 
 ```lua
 require("ex-colors").setup({
