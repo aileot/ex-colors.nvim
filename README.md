@@ -49,6 +49,35 @@ With [lazy.nvim][],
 ### Setup
 
 Change option values via `require("ex-colors").setup()`.\
+Please see
+[Setup Example with Sane Default Settings](#setup-example-with-sane-default-settings)
+and
+[Recommended Settings](#recommended-settings)
+for the details.
+
+#### Presets
+
+Some sensible presets are provided.
+Please follow the links to the preset modules:
+
+- The [recommended](./lua/ex-colors/presets/init.lua) presets
+- The [hlgroup](./lua/ex-colors/presets/hlgroup.lua) presets
+- The [parttern](./lua/ex-colors/presets/pattern.lua) presets
+- The [relinker](./lua/ex-colors/presets/relinker.lua) presets
+
+You can import them like `require("ex-colors.presets").recommended`.
+
+**NOTE:**
+The defined presets including `recommended` can be easily extended with `+`
+operator.
+For example,
+
+```lua
+require("ex-colors.presets").recommended.included_patterns + { "Foo", "Bar" }
+```
+
+#### Setup Example with Sane Default Settings
+
 The following snippet sets up the options with the default values:
 
 ```lua
@@ -80,6 +109,8 @@ require("ex-colors").setup({
   --- syntax highlight groups are defined before collecting them.
   ---@type string[]
   required_syntaxes = {
+    "diff", -- "diffAdded", "diffRemoved", "diffChanged"
+    "html",
     "markdown",
   },
   --- Highlight group names which should be included in the output.
