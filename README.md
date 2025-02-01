@@ -36,11 +36,15 @@ With [lazy.nvim][],
 
 ### Steps
 
-1. Load `require("ex-colors").setup()`.
+1. Put `vim.cmd("colorscheme foobar")` in your init.lua.
+2. Restart nvim to refresh highlight definitions.
+3. Load `require("ex-colors").setup()`.
    See [Setup](#setup) section for the details.
-2. Run `:ExColors` in Command-line mode.
+4. Run `:ExColors` in Command-line mode.
    See [:ExColors](#excolors) section for the details.
-3. Confirm the output in a new tab with `:write` or `:update`.
+5. Confirm the output with `:write` or `:update`.
+6. Insert `ex-` to your colorscheme name: `vim.cmd("colorscheme ex-foobar")`
+7. Done!
 
 ### Setup
 
