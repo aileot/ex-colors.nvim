@@ -14,6 +14,22 @@ Happy coding!!!_
 
 </div>
 
+> For example on my local machine,
+>
+> - catppuccin -> ex-catppuccin: (001.379) -> (000.677) -- 2.04x faster!
+> - everforest -> ex-everforest: (003.097) -> (000.432) -- 7.17x faster!
+> - gruvbox -> ex-gruvbox: (002.417) -> (000.427) -- 5.66x faster!
+> - kanagawa -> ex-kanagawa: (001.783) -> (000.406) -- 4.39x faster!
+> - tokyonight -> ex-tokyonight: (002.147) -> (000.316) -- 6.79x faster!
+
+<small>
+
+(The load times of the original ones in the examples above are,
+of course,
+cached ones if available.)
+
+</small>
+
 ## Features
 
 First off, `ex-colors` is only **a colorscheme generator**;
