@@ -11,6 +11,22 @@
 
 (local default-colors (require :ex-colors.default-colors))
 
+(fn extend-sequence! [dst ...]
+  "Extend `dst` sequence with any number of the following sequences.
+Any `nil`s are ignored.
+@param dst sequence
+@param ... sequence
+@return sequence"
+  ;; NOTE: `ipairs does not handle table containing `nil` well.
+  (each [i ?list (pairs [...])]
+    (assert (= :number (type i)) (.. "expected number, got " i))
+    (when ?list
+      (each [j ?item (pairs ?list)]
+        (assert (= :number (type j)) (.. "expected number, got " j))
+        (when ?item
+          (table.insert dst ?item)))))
+  dst)
+
 (fn format-nvim-set-hl [hl-name opts-to-be-lua-string]
   "Generate `vim.api.nvim_set_hl(0, hl-name, opts-to-be-lua-string)` line.
 @param hl-name string
@@ -20,6 +36,34 @@
   ;; at https://gitspartv.github.io/LuaJIT-Benchmarks/#test3
   (let [cmd-template "vim.api.nvim_set_hl(0,%q,%s)"]
     (cmd-template:format hl-name (->oneliner opts-to-be-lua-string))))
+
+(fn format-vim-cmd [command]
+  (-> "vim.api.nvim_command(%q)"
+      (: :format command)))
+
+(fn compose-?highlight-reset-cmds []
+  "Generate lines for `highlight clear` and `syntax clear` if the
+corresponding options are enabled.
+@return string[]|nil"
+  (let [cmds []
+        indent "  "]
+    (when config.clear_highlight
+      (let [line (.. indent (format-vim-cmd "highlight clear"))]
+        (table.insert cmds line)))
+    (when config.reset_syntax
+      (let [line (.. indent (format-vim-cmd "syntax reset"))]
+        (table.insert cmds line)))
+    (when (next cmds)
+      (let [;; NOTE: vim._getvar is undocumented, or vim.g.foobar?
+            ;; NOTE: Both `:highlight-clear` and `:syntax-reset` only make
+            ;; sense when `g:colors_name` is set.
+            colors_name-getter (-> "pcall(vim.api.nvim_get_var,%q)"
+                                   (: :format "colors_name"))
+            new-lines (extend-sequence! [(-> "if %s then"
+                                             (: :format colors_name-getter))]
+                                        cmds ;
+                                        ["end"])]
+        new-lines))))
 
 (fn compose-autocmd-lines [highlights]
   (let [autocmd-patterns config.autocmd_patterns
@@ -136,6 +180,22 @@ performance.
                     (template:format option-name (->oneliner val)))]
     cmd-lines))
 
+(fn extend-sequence! [dst ...]
+  "Extend `dst` sequence with any number of the following sequences.
+Any `nil`s are ignored.
+@param dst sequence
+@param ... sequence
+@return sequence"
+  ;; NOTE: `ipairs does not handle table containing `nil` well.
+  (each [i ?list (pairs [...])]
+    (assert (= :number (type i)) (.. "expected number, got " i))
+    (when ?list
+      (each [j ?item (pairs ?list)]
+        (assert (= :number (type j)) (.. "expected number, got " j))
+        (when ?item
+          (table.insert dst ?item)))))
+  dst)
+
 (fn compose-lines [ex-colors-name highlights dump-all?]
   "Compose cmd lines for `ex-colors-name` and `highlights`.
 @param ex-colors-name string
@@ -145,11 +205,12 @@ performance.
         vim-option-cmd-lines (compose-vim-options-cmd-lines)
         hi-cmd-lines (compose-hi-cmd-lines highlights dump-all?)
         au-cmd-lines (compose-autocmd-lines highlights)
-        cmd-lines (-> [gvar-cmd-lines
-                       vim-option-cmd-lines
-                       hi-cmd-lines
-                       au-cmd-lines]
-                      (flatten))]
+        cmd-lines (extend-sequence! [] ;
+                                    (compose-?highlight-reset-cmds)
+                                    gvar-cmd-lines ;
+                                    vim-option-cmd-lines ;
+                                    hi-cmd-lines ;
+                                    au-cmd-lines)]
     cmd-lines))
 
 {: compose-lines}

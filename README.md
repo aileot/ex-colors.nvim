@@ -57,6 +57,12 @@ require("ex-colors").setup({
   --- path included in `&runtimepath`.
   ---@type string
   colors_dir = vim.fn.stdpath("config") .. "/colors",
+  --- If true, outputs will contains `:highlight-clear`.
+  ---@type boolean
+  clear_highlight = false,
+  --- If true, outputs will contains `:syntax-reset`.
+  ---@type boolean
+  reset_syntax = false,
   --- If true, highlight definitions cleared by `:highlight clear` will not be
   --- included in the output. See `:h highlight-clear` for details.
   ---@type boolean

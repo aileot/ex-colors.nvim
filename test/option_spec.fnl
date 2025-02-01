@@ -52,6 +52,21 @@
   (after-each (fn []
                 (vim.cmd "%delete _")
                 (vim.cmd :update)))
+  (describe* "clear_highlight"
+    (it* "embeds `highlight clear`"
+      (clean-setup! {:clear_highlight true})
+      (vim.cmd "ExColors | update")
+      (assert/buf-contains-pattern "highlight clear")))
+  (describe* "reset_syntax"
+    (it* "embeds `syntax reset`"
+      (clean-setup! {:reset_syntax true})
+      (vim.cmd "ExColors | update")
+      (assert/buf-contains-pattern "syntax reset"))
+    (it* "can be used with `clear_highlight` option enabled"
+      (clean-setup! {:clear_highlight true :reset_syntax true})
+      (vim.cmd "ExColors | update")
+      (assert/buf-contains-pattern "highlight clear")
+      (assert/buf-contains-pattern "syntax reset")))
   (describe* "ignore_default_colors"
     (describe* "excludes the same definitions as those defined in require('ex-colors.default-colors);"
       (describe* "thus, when using \"habamax\" colorscheme,"
