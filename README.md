@@ -14,6 +14,10 @@ Happy coding!!!_
 
 </div>
 
+## Requirements
+
+- Neovim >= 0.10.4
+
 ## Usage
 
 ### Steps
@@ -188,4 +192,5 @@ Because of the backgrounds above,
   They are only overheads on nvim startup.
 
 [gitsigns.nvim]: https://github.com/lewis6991/gitsigns.nvim
+[lazy.nvim]: https://github.com/folke/lazy.nvim
 [vim-fugitive]: https://github/tpope/vim-fugitive
