@@ -136,7 +136,16 @@ performance.
                     (template:format option-name (->oneliner val)))]
     cmd-lines))
 
-{: compose-autocmd-lines
- : compose-hi-cmd-lines
- : compose-gvar-cmd-lines
- : compose-vim-options-cmd-lines!}
+(fn compose-lines [ex-colors-name filtered-highlights dump-all?]
+  (let [gvar-cmd-lines (compose-gvar-cmd-lines ex-colors-name)
+        vim-option-cmd-lines (compose-vim-options-cmd-lines!)
+        hi-cmd-lines (compose-hi-cmd-lines filtered-highlights dump-all?)
+        au-cmd-lines (compose-autocmd-lines filtered-highlights)
+        cmd-lines (-> [gvar-cmd-lines
+                       vim-option-cmd-lines
+                       hi-cmd-lines
+                       au-cmd-lines]
+                      (flatten))]
+    cmd-lines))
+
+{: compose-lines}
