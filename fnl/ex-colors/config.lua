@@ -9,6 +9,12 @@ local default_opts = {
   --- path included in `&runtimepath`.
   ---@type string
   colors_dir = Path.join(vim.fn.stdpath("config"), "colors"),
+  --- If true, outputs will contains `:highlight-clear`.
+  ---@type boolean
+  clear_highlight = false,
+  --- If true, outputs will contains `:syntax-reset`.
+  ---@type boolean
+  reset_syntax = false,
   --- If true, exclude highlight group definitions that are the same as those
   --- defined by the "default" colorscheme from the output regardless of the
   --- other filter options.
