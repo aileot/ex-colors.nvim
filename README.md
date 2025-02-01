@@ -82,7 +82,6 @@ require("ex-colors").setup({
   ---@type string[]
   excluded_hlgroups = require("ex-colors.presets").recommended.excluded_hlgroups,
   --- Highlight group name patterns which should be excluded in the output.
-  --- You can join presets with `+`, e.g.,
   ---@type string[]
   excluded_patterns = require("ex-colors.presets").recommended.excluded_patterns,
   --- Highlight group name patterns which should be only defined on the
