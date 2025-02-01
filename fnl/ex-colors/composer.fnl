@@ -11,6 +11,22 @@
 
 (local default-colors (require :ex-colors.default-colors))
 
+(fn extend-sequence! [dst ...]
+  "Extend `dst` sequence with any number of the following sequences.
+Any `nil`s are ignored.
+@param dst sequence
+@param ... sequence
+@return sequence"
+  ;; NOTE: `ipairs does not handle table containing `nil` well.
+  (each [i ?list (pairs [...])]
+    (assert (= :number (type i)) (.. "expected number, got " i))
+    (when ?list
+      (each [j ?item (pairs ?list)]
+        (assert (= :number (type j)) (.. "expected number, got " j))
+        (when ?item
+          (table.insert dst ?item)))))
+  dst)
+
 (fn format-nvim-set-hl [hl-name opts-to-be-lua-string]
   "Generate `vim.api.nvim_set_hl(0, hl-name, opts-to-be-lua-string)` line.
 @param hl-name string
@@ -160,6 +176,22 @@ performance.
         cmd-lines (icollect [option-name val (pairs option->value)]
                     (template:format option-name (->oneliner val)))]
     cmd-lines))
+
+(fn extend-sequence! [dst ...]
+  "Extend `dst` sequence with any number of the following sequences.
+Any `nil`s are ignored.
+@param dst sequence
+@param ... sequence
+@return sequence"
+  ;; NOTE: `ipairs does not handle table containing `nil` well.
+  (each [i ?list (pairs [...])]
+    (assert (= :number (type i)) (.. "expected number, got " i))
+    (when ?list
+      (each [j ?item (pairs ?list)]
+        (assert (= :number (type j)) (.. "expected number, got " j))
+        (when ?item
+          (table.insert dst ?item)))))
+  dst)
 
 (fn compose-lines [ex-colors-name highlights dump-all?]
   "Compose cmd lines for `ex-colors-name` and `highlights`.

@@ -8,6 +8,22 @@ local filter_by_included_hlgroups = _local_2_["filter-by-included-hlgroups"]
 local _local_3_ = require("ex-colors.remap")
 local remap_hl_opts = _local_3_["remap-hl-opts"]
 local default_colors = require("ex-colors.default-colors")
+local function extend_sequence_21(dst, ...)
+  for i, _3flist in pairs({...}) do
+    assert(("number" == type(i)), ("expected number, got " .. i))
+    if _3flist then
+      for j, _3fitem in pairs(_3flist) do
+        assert(("number" == type(j)), ("expected number, got " .. j))
+        if _3fitem then
+          table.insert(dst, _3fitem)
+        else
+        end
+      end
+    else
+    end
+  end
+  return dst
+end
 local function format_nvim_set_hl(hl_name, opts_to_be_lua_string)
   local cmd_template = "vim.api.nvim_set_hl(0,%q,%s)"
   return cmd_template:format(hl_name, __3eoneliner(opts_to_be_lua_string))
@@ -89,18 +105,18 @@ local function compose_autocmd_lines(highlights)
         local pattern_line = ("  pattern = %s,"):format(__3eoneliner(au_pattern))
         au_opt_lines = flatten({pattern_line, callback_lines})
       end
-      local _let_11_ = vim.deepcopy(autocmd_template_lines)
-      local first_line = _let_11_[1]
-      local lines = _let_11_
+      local _let_13_ = vim.deepcopy(autocmd_template_lines)
+      local first_line = _let_13_[1]
+      local lines = _let_13_
       local event_arg
       do
-        local _12_ = type(au_event)
-        if (_12_ == "string") then
+        local _14_ = type(au_event)
+        if (_14_ == "string") then
           event_arg = ("%q"):format(au_event)
-        elseif (_12_ == "table") then
+        elseif (_14_ == "table") then
           event_arg = au_event
-        elseif (nil ~= _12_) then
-          local _else = _12_
+        elseif (nil ~= _14_) then
+          local _else = _14_
           event_arg = error(("expected string or table, got " .. _else))
         else
           event_arg = nil
@@ -112,12 +128,12 @@ local function compose_autocmd_lines(highlights)
     end
   end
   do
-    local function _16_(_14_, _15_)
-      local cmd_line1 = _14_[1]
-      local cmd_line2 = _15_[1]
+    local function _18_(_16_, _17_)
+      local cmd_line1 = _16_[1]
+      local cmd_line2 = _17_[1]
       return (cmd_line1 < cmd_line2)
     end
-    table.sort(autocmd_list, _16_)
+    table.sort(autocmd_list, _18_)
   end
   return flatten(autocmd_list)
 end
@@ -127,10 +143,10 @@ local function compose_hi_cmd_lines(highlights, dump_all_3f)
   local ignore_default_colors_3f = config.ignore_default_colors
   local ignore_clear_3f = config.ignore_clear
   local ignored_definition_3f
-  local function _17_(hl_name, hl_map)
+  local function _19_(hl_name, hl_map)
     return ((ignore_default_colors_3f and vim.deep_equal(hl_map, default_colors[hl_name])) or (ignore_clear_3f and not next(hl_map)))
   end
-  ignored_definition_3f = _17_
+  ignored_definition_3f = _19_
   local filtered_hl_maps
   if dump_all_3f then
     local tbl_16_auto = {}
@@ -176,7 +192,7 @@ local function compose_hi_cmd_lines(highlights, dump_all_3f)
     filtered_hl_maps = tbl_16_auto
   end
   local cmd_list
-  local function _23_()
+  local function _25_()
     local tbl_21_auto = {}
     local i_22_auto = 0
     for hl_name, hl_map in pairs(filtered_hl_maps) do
@@ -189,7 +205,7 @@ local function compose_hi_cmd_lines(highlights, dump_all_3f)
     end
     return tbl_21_auto
   end
-  cmd_list = flatten(_23_())
+  cmd_list = flatten(_25_())
   table.sort(cmd_list)
   return cmd_list
 end
@@ -242,9 +258,9 @@ local function compose_vim_options_cmd_lines()
     for _, vim_option_name in ipairs(vim_options) do
       local k_17_auto, v_18_auto = nil, nil
       do
-        local _29_ = vim.api.nvim_get_option_value(vim_option_name, {scope = "global"})
-        if (nil ~= _29_) then
-          local val = _29_
+        local _31_ = vim.api.nvim_get_option_value(vim_option_name, {scope = "global"})
+        if (nil ~= _31_) then
+          local val = _31_
           if (vim.api.nvim_get_option_info2(vim_option_name, {}).default ~= val) then
             k_17_auto, v_18_auto = vim_option_name, val
           else
@@ -276,6 +292,22 @@ local function compose_vim_options_cmd_lines()
     cmd_lines = tbl_21_auto
   end
   return cmd_lines
+end
+local function extend_sequence_21(dst, ...)
+  for i, _3flist in pairs({...}) do
+    assert(("number" == type(i)), ("expected number, got " .. i))
+    if _3flist then
+      for j, _3fitem in pairs(_3flist) do
+        assert(("number" == type(j)), ("expected number, got " .. j))
+        if _3fitem then
+          table.insert(dst, _3fitem)
+        else
+        end
+      end
+    else
+    end
+  end
+  return dst
 end
 local function compose_lines(ex_colors_name, highlights, dump_all_3f)
   local gvar_cmd_lines = compose_gvar_cmd_lines(ex_colors_name)
