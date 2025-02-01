@@ -265,6 +265,86 @@ a single `g:colors_name`:
    not _ex-foobar-dark_,
    but _ex-foobar_.
 
+## FAQ
+
+### Q. Is it considered misappropriating this plugin to create standalone `ex-foobar`repositories?
+
+**A.** Not at all.
+You can create hard forks of your favorite colorschemes
+with this plugin -- no permissions from _me_ is required;
+however, the forks **could** be misappropriating the original colorscheme
+of _the authors and maintainers_.
+Remember to pay due respects to their efforts.
+The credits would go to them.\
+<small>
+And it's simply a mess that GitHub is flooded with `ex-this` and `ex-that`.
+</small>
+
+### Q. Why don't you support byte-compile?
+
+**A.** Since I'd once attempted byte-complie
+but `vim.loader` did not seem to care about it:
+no performance changes, or negligible.
+Leave it to `vim.loader`.
+
+### Q. Why don't you support this colorscheme or that colorscheme?
+
+**A.** `ex-colors` supports any colorschemes by nature.
+Please note that this plugin is only **a colorscheme generator**,
+and **NOT** contains any colorscheme in this repository itself.
+If you find `ex-colors` lacking for some reasonable, internal definitions in
+the [`presets`](#presets) with the default settings,
+feel free to [open issue](https://github.com/aileot/ex-colors.nvim/issues)!
+
+### Q. Is it worth applying `:ExColors` to colorschemes which support `cache` option?
+
+<details>
+<summary><b>A.</b> TL;DR, yes. (Please click this line for the details.)</summary>
+
+#### Details
+
+AFAIK, what their cache options do is
+dumping to their highlight definitions and some relevant tasks
+into a binary file for Lua.
+
+The reason of saving their caches in binary is
+not only that binary can cut down the load time,
+but also that binary is,
+by the nature of Lua, the as-is format of a dump from memory.
+
+If you enable `vim.loader`,
+your nvim will not load the binary cache directly,
+but instead load the cache additionally created by `vim.loader`.
+In other words,
+it does not so matter whether Lua cache is saved in binary or not,
+with `vim.loader` enabled.
+
+And, as far as the cache is loaded apart from `colors/` directory,
+nvim will take extra times to load a colorscheme: a file in `colors/`,
+some plugin's Lua modules to load the cached module,
+and the binary cache itself.
+
+It should be well known that it takes a time to find and load additional files.
+(I assume the bottleneck is IO...)
+
+Since your `ex-`colorscheme is generated into a single file,
+and `vim.loader` is responsible for handling binary cache,
+the original one could not be faster both theoretically and practically
+than `ex-`one.
+
+</details>
+
+### Q. Can we get a dump of all the available highlight definitions without any filters?
+
+**A.** Execute `:ExColors!` in Command-line mode.
+Make sure that `!` is appended.
+See [:ExColors](#excolors) for the details.
+
+### Q. Why don't you add option to resolve `link`ed highlight groups, dropping internal highlight definitions like `hl-RedBold`?
+
+**A.** As once tested,
+it seems to be slower to define every highlight groups each with resolved `fg`, `bg`, `italic`, and so on.
+
 ## Not in Plan
 
 Unlike general colorscheme plugins,
@@ -288,6 +368,8 @@ Because of the backgrounds above,
   Please enable `vim.loader`. It does instead.
 - `:highlight clear` and `:syntax reset` in the outputs\
   They are only overheads on nvim startup.
+
+Please scan the [FAQ](#faq) above at first when you have questions.
 
 [gitsigns.nvim]: https://github.com/lewis6991/gitsigns.nvim
 [lazy.nvim]: https://github.com/folke/lazy.nvim
