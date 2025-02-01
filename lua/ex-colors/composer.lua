@@ -46,7 +46,7 @@ local function compose__3fhighlight_reset_cmds()
   end
   if next(cmds) then
     local colors_name_getter = ("pcall(vim.api.nvim_get_var,%q)"):format("colors_name")
-    local new_lines = {("if %s then"):format(colors_name_getter), cmds, "end"}
+    local new_lines = extend_sequence_21({("if %s then"):format(colors_name_getter)}, cmds, {"end"})
     return new_lines
   else
     return nil
@@ -293,7 +293,7 @@ local function compose_vim_options_cmd_lines()
   end
   return cmd_lines
 end
-local function extend_sequence_21(dst, ...)
+local function extend_sequence_210(dst, ...)
   for i, _3flist in pairs({...}) do
     assert(("number" == type(i)), ("expected number, got " .. i))
     if _3flist then
@@ -314,7 +314,7 @@ local function compose_lines(ex_colors_name, highlights, dump_all_3f)
   local vim_option_cmd_lines = compose_vim_options_cmd_lines()
   local hi_cmd_lines = compose_hi_cmd_lines(highlights, dump_all_3f)
   local au_cmd_lines = compose_autocmd_lines(highlights)
-  local cmd_lines = extend_sequence_21({}, gvar_cmd_lines, compose__3fhighlight_reset_cmds(), vim_option_cmd_lines, hi_cmd_lines, au_cmd_lines)
+  local cmd_lines = extend_sequence_210({}, gvar_cmd_lines, compose__3fhighlight_reset_cmds(), vim_option_cmd_lines, hi_cmd_lines, au_cmd_lines)
   return cmd_lines
 end
 return {["compose-lines"] = compose_lines}

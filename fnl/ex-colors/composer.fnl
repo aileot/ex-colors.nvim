@@ -57,9 +57,10 @@ corresponding options are enabled.
       (let [;; NOTE: vim._getvar is undocumented, or vim.g.foobar?
             colors_name-getter (-> "pcall(vim.api.nvim_get_var,%q)"
                                    (: :format "colors_name"))
-            new-lines (-> [(-> "if %s then" (: :format colors_name-getter))
-                           cmds
-                           "end"])]
+            new-lines (extend-sequence! [(-> "if %s then"
+                                             (: :format colors_name-getter))]
+                                        cmds ;
+                                        ["end"])]
         new-lines))))
 
 (fn compose-autocmd-lines [highlights]
