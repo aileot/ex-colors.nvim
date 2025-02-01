@@ -202,11 +202,11 @@ Any `nil`s are ignored.
         vim-option-cmd-lines (compose-vim-options-cmd-lines)
         hi-cmd-lines (compose-hi-cmd-lines highlights dump-all?)
         au-cmd-lines (compose-autocmd-lines highlights)
-        cmd-lines (-> [gvar-cmd-lines
-                       vim-option-cmd-lines
-                       hi-cmd-lines
-                       au-cmd-lines]
-                      (flatten))]
+        cmd-lines (extend-sequence! [] ;
+                                    gvar-cmd-lines ;
+                                    vim-option-cmd-lines ;
+                                    hi-cmd-lines ;
+                                    au-cmd-lines)]
     cmd-lines))
 
 {: compose-lines}
