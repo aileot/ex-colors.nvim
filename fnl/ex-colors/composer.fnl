@@ -21,6 +21,31 @@
   (let [cmd-template "vim.api.nvim_set_hl(0,%q,%s)"]
     (cmd-template:format hl-name (->oneliner opts-to-be-lua-string))))
 
+(fn format-vim-cmd [command]
+  (-> "vim.api.nvim_command(%q)"
+      (: :format command)))
+
+(fn compose-?highlight-reset-cmds []
+  "Generate lines for `highlight clear` and `syntax clear` if the
+corresponding options are enabled.
+@return string[]|nil"
+  (let [cmds []
+        indent "  "]
+    (when config.clear_highlight
+      (let [line (.. indent (format-vim-cmd "highlight clear"))]
+        (table.insert cmds line)))
+    (when config.reset_syntax
+      (let [line (.. indent (format-vim-cmd "syntax reset"))]
+        (table.insert cmds line)))
+    (when (next cmds)
+      (let [;; NOTE: vim._getvar is undocumented, or vim.g.foobar?
+            colors_name-getter (-> "pcall(vim.api.nvim_get_var,%q)"
+                                   (: :format "colors_name"))
+            new-lines (-> [(-> "if %s then" (: :format colors_name-getter))
+                           cmds
+                           "end"])]
+        new-lines))))
+
 (fn compose-autocmd-lines [highlights]
   (let [autocmd-patterns config.autocmd_patterns
         indent-size 2

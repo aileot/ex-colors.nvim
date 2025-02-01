@@ -12,6 +12,30 @@ local function format_nvim_set_hl(hl_name, opts_to_be_lua_string)
   local cmd_template = "vim.api.nvim_set_hl(0,%q,%s)"
   return cmd_template:format(hl_name, __3eoneliner(opts_to_be_lua_string))
 end
+local function format_vim_cmd(command)
+  return ("vim.api.nvim_command(%q)"):format(command)
+end
+local function compose__3fhighlight_reset_cmds()
+  local cmds = {}
+  local indent = "  "
+  if config.clear_highlight then
+    local line = (indent .. format_vim_cmd("highlight clear"))
+    table.insert(cmds, line)
+  else
+  end
+  if config.reset_syntax then
+    local line = (indent .. format_vim_cmd("syntax reset"))
+    table.insert(cmds, line)
+  else
+  end
+  if next(cmds) then
+    local colors_name_getter = ("pcall(vim.api.nvim_get_var,%q)"):format("colors_name")
+    local new_lines = {("if %s then"):format(colors_name_getter), cmds, "end"}
+    return new_lines
+  else
+    return nil
+  end
+end
 local function compose_autocmd_lines(highlights)
   local autocmd_patterns = config.autocmd_patterns
   local indent_size = 2
@@ -65,18 +89,18 @@ local function compose_autocmd_lines(highlights)
         local pattern_line = ("  pattern = %s,"):format(__3eoneliner(au_pattern))
         au_opt_lines = flatten({pattern_line, callback_lines})
       end
-      local _let_8_ = vim.deepcopy(autocmd_template_lines)
-      local first_line = _let_8_[1]
-      local lines = _let_8_
+      local _let_11_ = vim.deepcopy(autocmd_template_lines)
+      local first_line = _let_11_[1]
+      local lines = _let_11_
       local event_arg
       do
-        local _9_ = type(au_event)
-        if (_9_ == "string") then
+        local _12_ = type(au_event)
+        if (_12_ == "string") then
           event_arg = ("%q"):format(au_event)
-        elseif (_9_ == "table") then
+        elseif (_12_ == "table") then
           event_arg = au_event
-        elseif (nil ~= _9_) then
-          local _else = _9_
+        elseif (nil ~= _12_) then
+          local _else = _12_
           event_arg = error(("expected string or table, got " .. _else))
         else
           event_arg = nil
@@ -88,12 +112,12 @@ local function compose_autocmd_lines(highlights)
     end
   end
   do
-    local function _13_(_11_, _12_)
-      local cmd_line1 = _11_[1]
-      local cmd_line2 = _12_[1]
+    local function _16_(_14_, _15_)
+      local cmd_line1 = _14_[1]
+      local cmd_line2 = _15_[1]
       return (cmd_line1 < cmd_line2)
     end
-    table.sort(autocmd_list, _13_)
+    table.sort(autocmd_list, _16_)
   end
   return flatten(autocmd_list)
 end
@@ -103,10 +127,10 @@ local function compose_hi_cmd_lines(highlights, dump_all_3f)
   local ignore_default_colors_3f = config.ignore_default_colors
   local ignore_clear_3f = config.ignore_clear
   local ignored_definition_3f
-  local function _14_(hl_name, hl_map)
+  local function _17_(hl_name, hl_map)
     return ((ignore_default_colors_3f and vim.deep_equal(hl_map, default_colors[hl_name])) or (ignore_clear_3f and not next(hl_map)))
   end
-  ignored_definition_3f = _14_
+  ignored_definition_3f = _17_
   local filtered_hl_maps
   if dump_all_3f then
     local tbl_16_auto = {}
@@ -152,7 +176,7 @@ local function compose_hi_cmd_lines(highlights, dump_all_3f)
     filtered_hl_maps = tbl_16_auto
   end
   local cmd_list
-  local function _20_()
+  local function _23_()
     local tbl_21_auto = {}
     local i_22_auto = 0
     for hl_name, hl_map in pairs(filtered_hl_maps) do
@@ -165,7 +189,7 @@ local function compose_hi_cmd_lines(highlights, dump_all_3f)
     end
     return tbl_21_auto
   end
-  cmd_list = flatten(_20_())
+  cmd_list = flatten(_23_())
   table.sort(cmd_list)
   return cmd_list
 end
@@ -218,9 +242,9 @@ local function compose_vim_options_cmd_lines()
     for _, vim_option_name in ipairs(vim_options) do
       local k_17_auto, v_18_auto = nil, nil
       do
-        local _26_ = vim.api.nvim_get_option_value(vim_option_name, {scope = "global"})
-        if (nil ~= _26_) then
-          local val = _26_
+        local _29_ = vim.api.nvim_get_option_value(vim_option_name, {scope = "global"})
+        if (nil ~= _29_) then
+          local val = _29_
           if (vim.api.nvim_get_option_info2(vim_option_name, {}).default ~= val) then
             k_17_auto, v_18_auto = vim_option_name, val
           else
