@@ -314,7 +314,7 @@ local function compose_lines(ex_colors_name, highlights, dump_all_3f)
   local vim_option_cmd_lines = compose_vim_options_cmd_lines()
   local hi_cmd_lines = compose_hi_cmd_lines(highlights, dump_all_3f)
   local au_cmd_lines = compose_autocmd_lines(highlights)
-  local cmd_lines = extend_sequence_21({}, gvar_cmd_lines, vim_option_cmd_lines, hi_cmd_lines, au_cmd_lines)
+  local cmd_lines = extend_sequence_21({}, gvar_cmd_lines, compose__3fhighlight_reset_cmds(), vim_option_cmd_lines, hi_cmd_lines, au_cmd_lines)
   return cmd_lines
 end
 return {["compose-lines"] = compose_lines}
