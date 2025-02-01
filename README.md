@@ -80,6 +80,8 @@ require("ex-colors").setup({
   --- syntax highlight groups are defined before collecting them.
   ---@type string[]
   required_syntaxes = {
+    "diff", -- "diffAdded", "diffRemoved", "diffChanged"
+    "html",
     "markdown",
   },
   --- Highlight group names which should be included in the output.
