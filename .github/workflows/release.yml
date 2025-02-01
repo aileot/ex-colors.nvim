@@ -11,6 +11,9 @@ jobs:
   vimdoc:
     runs-on: ubuntu-22.04
     if: ${{ github.ref == 'refs/heads/main' && github.event.workflow_run.conclusion == 'success' }}
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@v4
       - name: Generate vimdoc (readme)
@@ -40,6 +43,9 @@ jobs:
   release-pr:
     needs: vimdoc
     runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - uses: google-github-actions/release-please-action@v4
         with:
