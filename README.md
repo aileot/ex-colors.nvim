@@ -51,6 +51,8 @@ With [lazy.nvim][],
 Change option values via `require("ex-colors").setup()`.\
 Please see
 [Setup Example with Sane Default Settings](#setup-example-with-sane-default-settings)
+and
+[Recommended Settings](#recommended-settings)
 for the details.
 
 #### Presets
