@@ -206,8 +206,8 @@ Any `nil`s are ignored.
         hi-cmd-lines (compose-hi-cmd-lines highlights dump-all?)
         au-cmd-lines (compose-autocmd-lines highlights)
         cmd-lines (extend-sequence! [] ;
-                                    gvar-cmd-lines ;
                                     (compose-?highlight-reset-cmds)
+                                    gvar-cmd-lines ;
                                     vim-option-cmd-lines ;
                                     hi-cmd-lines ;
                                     au-cmd-lines)]
