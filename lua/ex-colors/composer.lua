@@ -203,7 +203,7 @@ local function compose_gvar_cmd_lines(ex_colors_name)
   local cmd_lines0 = flatten({colors_name_line, cmd_lines})
   return cmd_lines0
 end
-local function compose_vim_options_cmd_lines_21()
+local function compose_vim_options_cmd_lines()
   local file_ext = "lua"
   local vim_options = config.embedded_global_options
   local template
@@ -255,7 +255,7 @@ local function compose_vim_options_cmd_lines_21()
 end
 local function compose_lines(ex_colors_name, highlights, dump_all_3f)
   local gvar_cmd_lines = compose_gvar_cmd_lines(ex_colors_name)
-  local vim_option_cmd_lines = compose_vim_options_cmd_lines_21()
+  local vim_option_cmd_lines = compose_vim_options_cmd_lines()
   local hi_cmd_lines = compose_hi_cmd_lines(highlights, dump_all_3f)
   local au_cmd_lines = compose_autocmd_lines(highlights)
   local cmd_lines = flatten({gvar_cmd_lines, vim_option_cmd_lines, hi_cmd_lines, au_cmd_lines})

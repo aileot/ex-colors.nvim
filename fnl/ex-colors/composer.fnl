@@ -116,7 +116,7 @@
                       (flatten))]
     cmd-lines))
 
-(fn compose-vim-options-cmd-lines! []
+(fn compose-vim-options-cmd-lines []
   "Compose `vim.go`-related cmd lines. Default values are ignored for
 performance.
 @return string[]"
@@ -142,7 +142,7 @@ performance.
 @param highlights string[]
 @param dump-all? boolean"
   (let [gvar-cmd-lines (compose-gvar-cmd-lines ex-colors-name)
-        vim-option-cmd-lines (compose-vim-options-cmd-lines!)
+        vim-option-cmd-lines (compose-vim-options-cmd-lines)
         hi-cmd-lines (compose-hi-cmd-lines highlights dump-all?)
         au-cmd-lines (compose-autocmd-lines highlights)
         cmd-lines (-> [gvar-cmd-lines
