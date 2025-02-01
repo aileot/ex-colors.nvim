@@ -8,7 +8,8 @@ now **no longer a reason** to give it up!\
 ~~Why don't you buy a higher-end PC?~~
 Happy coding!!!_
 
-<!-- TODO: Screenshot -->
+![Demo Screenshot](https://github.com/user-attachments/assets/c46f4e41-4db7-4244-9c0d-47ed8f5055dd)
+
 </div>
 
 ## Usage
