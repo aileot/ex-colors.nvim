@@ -18,7 +18,7 @@ _Happy coding!!!_
 1. Load `require("ex-colors").setup()`.
    See [Setup](#setup) section for the details.
 2. Run `:ExColors` in Command-line mode.
-   See [:ExColors](#:excolors!) section for the details.
+   See [:ExColors](#excolors) section for the details.
 3. Confirm the output in a new tab with `:write` or `:update`.
 
 ### Setup
