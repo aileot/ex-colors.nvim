@@ -133,7 +133,7 @@ RECOMMENDED SETTINGS
 >lua
     -- Please arrange the patterns for your favorite plugins by yourself.
     require("ex-colors").setup({
-      -- included_patterns = require("ex-colors").presets.recommended.included_patterns + {
+      -- included_patterns = require("ex-colors.presets").recommended.included_patterns + {
       --   "^Cmp%u", -- hrsh7th/nvim-cmp
       --   '^GitSigns%u', -- lewis6991/gitsigns.nvim
       --   '^RainbowDelimiter%u', -- HiPhish/rainbow-delimiters.nvim
