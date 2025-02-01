@@ -1,4 +1,5 @@
 local config = require("ex-colors.config")
+local presets = require("ex-colors.presets")
 local _local_1_ = require("ex-colors.commands")
 local define_commands_21 = _local_1_["define-commands!"]
 
@@ -18,4 +19,4 @@ end
 local function reset()
   return config.reset()
 end
-return {setup = setup, reset = reset}
+return {setup = setup, reset = reset, presets = presets}

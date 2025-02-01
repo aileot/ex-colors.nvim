@@ -1,4 +1,5 @@
 (local config (require :ex-colors.config))
+(local presets (require :ex-colors.presets))
 (local {: define-commands!} (require :ex-colors.commands))
 
 (lua "
@@ -18,4 +19,4 @@
 (fn reset []
   (config.reset))
 
-{: setup : reset}
+{: setup : reset : presets}
