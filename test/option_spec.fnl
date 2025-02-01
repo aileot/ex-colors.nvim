@@ -61,6 +61,11 @@
     (it* "embeds `syntax reset`"
       (clean-setup! {:reset_syntax true})
       (vim.cmd "ExColors | update")
+      (assert/buf-contains-pattern "syntax reset"))
+    (it* "can be used with `clear_highlight` option enabled"
+      (clean-setup! {:clear_highlight true :reset_syntax true})
+      (vim.cmd "ExColors | update")
+      (assert/buf-contains-pattern "highlight clear")
       (assert/buf-contains-pattern "syntax reset")))
   (describe* "ignore_default_colors"
     (describe* "excludes the same definitions as those defined in require('ex-colors.default-colors);"
