@@ -18,6 +18,20 @@ Happy coding!!!_
 
 - Neovim >= 0.10.4
 
+## Installation
+
+With [lazy.nvim][],
+
+```lua
+{
+    "aileot/ex-colors.nvim",
+    lazy = true,
+    cmd = "ExColors",
+    ---@type ExColors.Config
+    opts = {},
+}
+```
+
 ## Usage
 
 ### Steps
