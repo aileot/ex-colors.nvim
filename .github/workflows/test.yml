@@ -10,24 +10,45 @@ jobs:
     strategy:
       matrix:
         nvim_version:
-          - v0.9.5
+          - v0.10.4
           - stable
           - nightly
     steps:
       - uses: actions/checkout@v4
+      - run: date +%F > today
+      - name: Restore test dependencies if available
+        uses: actions/cache/restore@v4
+        id: cache-nvim-restore
+        with:
+          path: |
+            ${{ runner.temp }}/nvim
+            ~/.luarocks
+          key: ${{ runner.os }}-nvim-${{ matrix.nvim_version }}-${{ hashFiles('today') }}
+      - name: Install nvim
+        if: steps.cache-nvim-restore.outputs.cache-hit != 'true'
+        shell: bash
+        run: |
+          curl -L "https://github.com/neovim/neovim/releases/download/${{ matrix.nvim_version }}/nvim-linux-x86_64.appimage" -o ${{ runner.temp }}/nvim.appimage
+          chmod a+x ${{ runner.temp }}/nvim.appimage
+          ${{ runner.temp }}/nvim.appimage --appimage-extract
+          mv ./squashfs-root ${{ runner.temp }}/nvim
       - uses: leafo/gh-actions-lua@v10
         with:
           luaVersion: "luajit-openresty"
       - uses: leafo/gh-actions-luarocks@v4
       - name: Install test dependencies in Luarocks
+        if: steps.cache-nvim-restore.outputs.cache-hit != 'true'
         run: |
           luarocks --lua-version=5.1 install fennel
           luarocks --lua-version=5.1 install vusted
-      - uses: rhysd/action-setup-vim@v1
-        id: vim
+      - name: Cache test dependencies
+        uses: actions/cache/save@v4
+        if: steps.cache-nvim-restore.outputs.cache-hit != 'true'
         with:
-          neovim: true
-          version: ${{ matrix.nvim_version }}
+          path: ${{ runner.temp }}/nvim
+          key: ${{ steps.cache-nvim-restore.outputs.cache-primary-key }}
       - name: Run tests
+        env:
+          VUSTED_NVIM: ${{ runner.temp }}/nvim/usr/bin/nvim
         run: make test
         timeout-minutes: 5
