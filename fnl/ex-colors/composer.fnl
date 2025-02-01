@@ -137,6 +137,10 @@ performance.
     cmd-lines))
 
 (fn compose-lines [ex-colors-name filtered-highlights dump-all?]
+  "Compose cmd lines for `ex-colors-name` and `highlights`.
+@param ex-colors-name string
+@param filtered-highlights string[]
+@param dump-all? boolean"
   (let [gvar-cmd-lines (compose-gvar-cmd-lines ex-colors-name)
         vim-option-cmd-lines (compose-vim-options-cmd-lines!)
         hi-cmd-lines (compose-hi-cmd-lines filtered-highlights dump-all?)
