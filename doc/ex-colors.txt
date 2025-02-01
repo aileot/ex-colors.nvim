@@ -3,10 +3,31 @@
 ==============================================================================
 Table of Contents                                *ex-colors-table-of-contents*
 
+  - Features                                              |ex-colors-features|
   - Requirements                                      |ex-colors-requirements|
   - Installation                                      |ex-colors-installation|
   - Usage                                                    |ex-colors-usage|
   - Not in Plan                                        |ex-colors-not-in-plan|
+
+
+FEATURES                                                  *ex-colors-features*
+
+With executing a single command |ex-colors-`:excolors`| in Command-line mode,
+
+- **Filter off** unnecessary highlight definitions for your use of nvim.
+    _(Our colorscheme owners mercifully support a number of plugin-specific highlight groups. Although We appreciate the efforts for the maintainance, more than half of the defnitions are just overheads for individual users.)_
+- **Relink** the `link`ed highlight groups in the output,
+    and help **omit** redundant ones.
+    For example, outputs can _redirect_ any definitions linked to the previous
+    `hl-TSMethod` to `hl-@function.method`,
+    and will _not define_ `TSMethod`
+    in the output in favor of `@function.method`.
+- **Embed** your local adjustments for highlights into `ex-`colorscheme
+    **without performance overheads.**
+
+And more! Please check out the available options in |ex-colors-setup| section.
+
+**NOTE:** _A sane default is already provided._
 
 
 REQUIREMENTS                                          *ex-colors-requirements*
@@ -47,8 +68,34 @@ See |ex-colors-:excolors| section for the details.
 
 SETUP ~
 
-Change option values via `require("ex-colors").setup()`. The following snippet
-sets up the options with the default values:
+Change option values via `require("ex-colors").setup()`. Please see
+|ex-colors-setup-example-with-sane-default-settings| and
+|ex-colors-recommended-settings| for the details.
+
+
+PRESETS
+
+Some sensible presets are provided. Please follow the links to the preset
+modules:
+
+- The recommended <./lua/ex-colors/presets/init.lua> presets
+- The hlgroup <./lua/ex-colors/presets/hlgroup.lua> presets
+- The parttern <./lua/ex-colors/presets/pattern.lua> presets
+- The relinker <./lua/ex-colors/presets/relinker.lua> presets
+
+You can import them like `require("ex-colors.presets").recommended`.
+
+**NOTE:** The defined presets including `recommended` can be easily extended
+with `+` operator. For example,
+
+>lua
+    require("ex-colors.presets").recommended.included_patterns + { "Foo", "Bar" }
+<
+
+
+SETUP EXAMPLE WITH SANE DEFAULT SETTINGS
+
+The following snippet sets up the options with the default values:
 
 >lua
     require("ex-colors").setup({
@@ -79,6 +126,8 @@ sets up the options with the default values:
       --- syntax highlight groups are defined before collecting them.
       ---@type string[]
       required_syntaxes = {
+        "diff", -- "diffAdded", "diffRemoved", "diffChanged"
+        "html",
         "markdown",
       },
       --- Highlight group names which should be included in the output.
