@@ -55,6 +55,8 @@ corresponding options are enabled.
         (table.insert cmds line)))
     (when (next cmds)
       (let [;; NOTE: vim._getvar is undocumented, or vim.g.foobar?
+            ;; NOTE: Both `:highlight-clear` and `:syntax-reset` only make
+            ;; sense when `g:colors_name` is set.
             colors_name-getter (-> "pcall(vim.api.nvim_get_var,%q)"
                                    (: :format "colors_name"))
             new-lines (extend-sequence! [(-> "if %s then"
