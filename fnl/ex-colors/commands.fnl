@@ -41,7 +41,7 @@
     (vim.cmd "syntax off")
     ;; NOTE: The `syntax-off` above prevents extra filetype-specific highlight
     ;; definitions on the output buffer creation.
-    (vim.cmd (.. "tab drop " output-path))
+    (vim.cmd (.. "edit " output-path))
     (vim.cmd "syntax enable")
     (let [highlights (collect-defined-highlights)
           filtered-highlights (if dump-all?
