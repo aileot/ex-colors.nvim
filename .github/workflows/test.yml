@@ -16,12 +16,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: date +%F > today
-      # - name: Restore test dependencies if available
-      #   uses: actions/cache/restore@v4
-      #   id: cache-nvim-restore
-      #   with:
-      #     path: ${{ runner.temp }}/nvim
-      #     key: ${{ runner.os }}-nvim-${{ matrix.nvim_version }}-${{ hashFiles('today') }}
+      - name: Restore test dependencies if available
+        uses: actions/cache/restore@v4
+        id: cache-nvim-restore
+        with:
+          path: ${{ runner.temp }}/nvim
+          key: ${{ runner.os }}-nvim-${{ matrix.nvim_version }}-${{ hashFiles('today') }}
+      - name: Install nvim
+        if: steps.cache-nvim-restore.outputs.cache-hit != 'true'
+        shell: bash
+        run: |
+          curl -L "https://github.com/neovim/neovim/releases/download/${{ matrix.nvim_version }}/nvim-linux-x86_64.appimage" -o ${{ runner.temp }}/nvim.appimage
+          chmod a+x ${{ runner.temp }}/nvim.appimage
+          ${{ runner.temp }}/nvim.appimage --appimage-extract
+          mv ./squashfs-root ${{ runner.temp }}/nvim
       - uses: leafo/gh-actions-lua@v10
         with:
           luaVersion: "luajit-openresty"
@@ -30,16 +38,6 @@ jobs:
         run: |
           luarocks --lua-version=5.1 install fennel
           luarocks --lua-version=5.1 install vusted
-      - name: Install nvim
-        if: steps.cache-nvim-restore.outputs.cache-hit != 'true'
-        shell: bash
-        run: |
-          curl -L "https://github.com/neovim/neovim/releases/download/${{ matrix.nvim_version }}/nvim-linux-x86_64.appimage" -o ${{ runner.temp }}/nvim.appimage
-          mkdir -p ${{ runner.temp }}/nvim
-          cd ${{ runner.temp }}/nvim
-          chmod a+x ${{ runner.temp }}/nvim.appimage
-          ${{ runner.temp }}/nvim.appimage --appimage-extract
-          mv ${{ runner.temp }}/squashfs-root ${{ runner.temp }}/nvim
       - name: Cache test dependencies
         uses: actions/cache/save@v4
         if: steps.cache-nvim-restore.outputs.cache-hit != 'true'
