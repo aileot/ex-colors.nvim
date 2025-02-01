@@ -136,15 +136,15 @@ performance.
                     (template:format option-name (->oneliner val)))]
     cmd-lines))
 
-(fn compose-lines [ex-colors-name filtered-highlights dump-all?]
+(fn compose-lines [ex-colors-name highlights dump-all?]
   "Compose cmd lines for `ex-colors-name` and `highlights`.
 @param ex-colors-name string
-@param filtered-highlights string[]
+@param highlights string[]
 @param dump-all? boolean"
   (let [gvar-cmd-lines (compose-gvar-cmd-lines ex-colors-name)
         vim-option-cmd-lines (compose-vim-options-cmd-lines!)
-        hi-cmd-lines (compose-hi-cmd-lines filtered-highlights dump-all?)
-        au-cmd-lines (compose-autocmd-lines filtered-highlights)
+        hi-cmd-lines (compose-hi-cmd-lines highlights dump-all?)
+        au-cmd-lines (compose-autocmd-lines highlights)
         cmd-lines (-> [gvar-cmd-lines
                        vim-option-cmd-lines
                        hi-cmd-lines

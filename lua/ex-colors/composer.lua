@@ -253,11 +253,11 @@ local function compose_vim_options_cmd_lines_21()
   end
   return cmd_lines
 end
-local function compose_lines(ex_colors_name, filtered_highlights, dump_all_3f)
+local function compose_lines(ex_colors_name, highlights, dump_all_3f)
   local gvar_cmd_lines = compose_gvar_cmd_lines(ex_colors_name)
   local vim_option_cmd_lines = compose_vim_options_cmd_lines_21()
-  local hi_cmd_lines = compose_hi_cmd_lines(filtered_highlights, dump_all_3f)
-  local au_cmd_lines = compose_autocmd_lines(filtered_highlights)
+  local hi_cmd_lines = compose_hi_cmd_lines(highlights, dump_all_3f)
+  local au_cmd_lines = compose_autocmd_lines(highlights)
   local cmd_lines = flatten({gvar_cmd_lines, vim_option_cmd_lines, hi_cmd_lines, au_cmd_lines})
   return cmd_lines
 end
