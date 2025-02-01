@@ -14,6 +14,29 @@ Happy coding!!!_
 
 </div>
 
+## Features
+
+With executing a single command [`:ExColors`](#excolors) in Command-line mode,
+
+- **Filter off** unnecessary highlight definitions for your use of nvim.\
+  _(Our colorscheme owners mercifully support
+  a number of plugin-specific highlight groups.
+  Although We appreciate the efforts for the maintainance,
+  more than half of the defnitions are just overheads for individual users.)_
+- **Relink** the `link`ed highlight groups in the output,
+  and help **omit** redundant ones.\
+  For example, outputs can _redirect_ any definitions linked to the previous
+  `hl-TSMethod` to `hl-@function.method`,
+  and will _not define_ `TSMethod`
+  in the output in favor of `@function.method`.
+- **Embed** your local adjustments for highlights into `ex-`colorscheme
+  **_without performance overheads_.**
+
+And more!
+Please check out the available options in [Setup](#setup) section.
+
+**NOTE:** _A sane default is already provided._
+
 ## Requirements
 
 - Neovim >= 0.10.4
