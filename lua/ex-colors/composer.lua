@@ -12,23 +12,6 @@ local function format_nvim_set_hl(hl_name, opts_to_be_lua_string)
   local cmd_template = "vim.api.nvim_set_hl(0,%q,%s)"
   return cmd_template:format(hl_name, __3eoneliner(opts_to_be_lua_string))
 end
-local function compose_colors_names()
-  local ex_prefix = "ex-"
-  local ex_prefix_length = #ex_prefix
-  local raw_colors_name = vim.fn.execute("colorscheme"):gsub("\n", "")
-  local raw_prefix
-  if ("" == ex_prefix) then
-    raw_prefix = ""
-  else
-    raw_prefix = raw_colors_name:sub(1, ex_prefix_length)
-  end
-  local already_extracted_3f = (raw_prefix == ex_prefix)
-  if already_extracted_3f then
-    return raw_colors_name, raw_colors_name:sub((1 + ex_prefix_length))
-  else
-    return (ex_prefix .. raw_colors_name), raw_colors_name
-  end
-end
 local function compose_autocmd_lines(highlights)
   local autocmd_patterns = config.autocmd_patterns
   local indent_size = 2
@@ -82,18 +65,18 @@ local function compose_autocmd_lines(highlights)
         local pattern_line = ("  pattern = %s,"):format(__3eoneliner(au_pattern))
         au_opt_lines = flatten({pattern_line, callback_lines})
       end
-      local _let_10_ = vim.deepcopy(autocmd_template_lines)
-      local first_line = _let_10_[1]
-      local lines = _let_10_
+      local _let_8_ = vim.deepcopy(autocmd_template_lines)
+      local first_line = _let_8_[1]
+      local lines = _let_8_
       local event_arg
       do
-        local _11_ = type(au_event)
-        if (_11_ == "string") then
+        local _9_ = type(au_event)
+        if (_9_ == "string") then
           event_arg = ("%q"):format(au_event)
-        elseif (_11_ == "table") then
+        elseif (_9_ == "table") then
           event_arg = au_event
-        elseif (nil ~= _11_) then
-          local _else = _11_
+        elseif (nil ~= _9_) then
+          local _else = _9_
           event_arg = error(("expected string or table, got " .. _else))
         else
           event_arg = nil
@@ -105,12 +88,12 @@ local function compose_autocmd_lines(highlights)
     end
   end
   do
-    local function _15_(_13_, _14_)
-      local cmd_line1 = _13_[1]
-      local cmd_line2 = _14_[1]
+    local function _13_(_11_, _12_)
+      local cmd_line1 = _11_[1]
+      local cmd_line2 = _12_[1]
       return (cmd_line1 < cmd_line2)
     end
-    table.sort(autocmd_list, _15_)
+    table.sort(autocmd_list, _13_)
   end
   return flatten(autocmd_list)
 end
@@ -120,10 +103,10 @@ local function compose_hi_cmd_lines(highlights, dump_all_3f)
   local ignore_default_colors_3f = config.ignore_default_colors
   local ignore_clear_3f = config.ignore_clear
   local ignored_definition_3f
-  local function _16_(hl_name, hl_map)
+  local function _14_(hl_name, hl_map)
     return ((ignore_default_colors_3f and vim.deep_equal(hl_map, default_colors[hl_name])) or (ignore_clear_3f and not next(hl_map)))
   end
-  ignored_definition_3f = _16_
+  ignored_definition_3f = _14_
   local filtered_hl_maps
   if dump_all_3f then
     local tbl_16_auto = {}
@@ -169,7 +152,7 @@ local function compose_hi_cmd_lines(highlights, dump_all_3f)
     filtered_hl_maps = tbl_16_auto
   end
   local cmd_list
-  local function _22_()
+  local function _20_()
     local tbl_21_auto = {}
     local i_22_auto = 0
     for hl_name, hl_map in pairs(filtered_hl_maps) do
@@ -182,7 +165,7 @@ local function compose_hi_cmd_lines(highlights, dump_all_3f)
     end
     return tbl_21_auto
   end
-  cmd_list = flatten(_22_())
+  cmd_list = flatten(_20_())
   table.sort(cmd_list)
   return cmd_list
 end
@@ -235,9 +218,9 @@ local function compose_vim_options_cmd_lines_21()
     for _, vim_option_name in ipairs(vim_options) do
       local k_17_auto, v_18_auto = nil, nil
       do
-        local _28_ = vim.api.nvim_get_option_value(vim_option_name, {scope = "global"})
-        if (nil ~= _28_) then
-          local val = _28_
+        local _26_ = vim.api.nvim_get_option_value(vim_option_name, {scope = "global"})
+        if (nil ~= _26_) then
+          local val = _26_
           if (vim.api.nvim_get_option_info2(vim_option_name, {}).default ~= val) then
             k_17_auto, v_18_auto = vim_option_name, val
           else
@@ -270,4 +253,4 @@ local function compose_vim_options_cmd_lines_21()
   end
   return cmd_lines
 end
-return {["compose-autocmd-lines"] = compose_autocmd_lines, ["compose-hi-cmd-lines"] = compose_hi_cmd_lines, ["compose-colors-names"] = compose_colors_names, ["compose-gvar-cmd-lines"] = compose_gvar_cmd_lines, ["compose-vim-options-cmd-lines!"] = compose_vim_options_cmd_lines_21}
+return {["compose-autocmd-lines"] = compose_autocmd_lines, ["compose-hi-cmd-lines"] = compose_hi_cmd_lines, ["compose-gvar-cmd-lines"] = compose_gvar_cmd_lines, ["compose-vim-options-cmd-lines!"] = compose_vim_options_cmd_lines_21}

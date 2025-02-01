@@ -10,11 +10,27 @@ local filter_out_excluded_hlgroups = _local_2_["filter-out-excluded-hlgroups"]
 local _local_3_ = require("ex-colors.composer")
 local compose_autocmd_lines = _local_3_["compose-autocmd-lines"]
 local compose_hi_cmd_lines = _local_3_["compose-hi-cmd-lines"]
-local compose_colors_names = _local_3_["compose-colors-names"]
 local compose_gvar_cmd_lines = _local_3_["compose-gvar-cmd-lines"]
 local compose_vim_options_cmd_lines_21 = _local_3_["compose-vim-options-cmd-lines!"]
 local _local_4_ = require("ex-colors.remap")
 local rename_hl_group = _local_4_["rename-hl-group"]
+local function compose_colors_names()
+  local ex_prefix = "ex-"
+  local ex_prefix_length = #ex_prefix
+  local raw_colors_name = vim.fn.execute("colorscheme"):gsub("\n", "")
+  local raw_prefix
+  if ("" == ex_prefix) then
+    raw_prefix = ""
+  else
+    raw_prefix = raw_colors_name:sub(1, ex_prefix_length)
+  end
+  local already_extracted_3f = (raw_prefix == ex_prefix)
+  if already_extracted_3f then
+    return raw_colors_name, raw_colors_name:sub((1 + ex_prefix_length))
+  else
+    return (ex_prefix .. raw_colors_name), raw_colors_name
+  end
+end
 local function collect_defined_highlights()
   local output = vim.fn.execute("highlight")
   local tbl_21_auto = {}
@@ -54,9 +70,9 @@ local function generate_hi_cmds(dump_all_3f)
       for _, hl_name in ipairs(highlights) do
         local k_17_auto, v_18_auto = nil, nil
         do
-          local _6_ = (rename_hl_group(hl_name) or nil)
-          if (nil ~= _6_) then
-            local new_hl_name = _6_
+          local _8_ = (rename_hl_group(hl_name) or nil)
+          if (nil ~= _8_) then
+            local new_hl_name = _8_
             k_17_auto, v_18_auto = new_hl_name, vim.api.nvim_get_hl(0, {name = hl_name})
           else
             k_17_auto, v_18_auto = nil
@@ -110,10 +126,10 @@ local function define_filetype_specific_hlgroups_21()
   end
 end
 local function define_commands_21()
-  local function _13_(a)
+  local function _15_(a)
     define_filetype_specific_hlgroups_21()
     return generate_hi_cmds(a.bang)
   end
-  return vim.api.nvim_create_user_command("ExColors", _13_, {bang = true, bar = true, desc = "Extract highlight groups from current colorscheme"})
+  return vim.api.nvim_create_user_command("ExColors", _15_, {bang = true, bar = true, desc = "Extract highlight groups from current colorscheme"})
 end
 return {["define-commands!"] = define_commands_21}
