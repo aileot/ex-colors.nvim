@@ -169,23 +169,6 @@ local function compose_hi_cmd_lines(highlights, dump_all_3f)
   table.sort(cmd_list)
   return cmd_list
 end
-local function compose_colors_names()
-  local ex_prefix = "ex-"
-  local ex_prefix_length = #ex_prefix
-  local raw_colors_name = vim.fn.execute("colorscheme"):gsub("\n", "")
-  local raw_prefix
-  if ("" == ex_prefix) then
-    raw_prefix = ""
-  else
-    raw_prefix = raw_colors_name:sub(1, ex_prefix_length)
-  end
-  local already_extracted_3f = (raw_prefix == ex_prefix)
-  if already_extracted_3f then
-    return raw_colors_name, raw_colors_name:sub((1 + ex_prefix_length))
-  else
-    return (ex_prefix .. raw_colors_name), raw_colors_name
-  end
-end
 local function compose_gvar_cmd_lines(ex_colors_name)
   local file_ext = "lua"
   local embedded_vars = config.embedded_global_variables
@@ -220,7 +203,7 @@ local function compose_gvar_cmd_lines(ex_colors_name)
   local cmd_lines0 = flatten({colors_name_line, cmd_lines})
   return cmd_lines0
 end
-local function compose_vim_options_cmd_lines_21()
+local function compose_vim_options_cmd_lines()
   local file_ext = "lua"
   local vim_options = config.embedded_global_options
   local template
@@ -235,9 +218,9 @@ local function compose_vim_options_cmd_lines_21()
     for _, vim_option_name in ipairs(vim_options) do
       local k_17_auto, v_18_auto = nil, nil
       do
-        local _28_ = vim.api.nvim_get_option_value(vim_option_name, {scope = "global"})
-        if (nil ~= _28_) then
-          local val = _28_
+        local _26_ = vim.api.nvim_get_option_value(vim_option_name, {scope = "global"})
+        if (nil ~= _26_) then
+          local val = _26_
           if (vim.api.nvim_get_option_info2(vim_option_name, {}).default ~= val) then
             k_17_auto, v_18_auto = vim_option_name, val
           else
@@ -270,4 +253,12 @@ local function compose_vim_options_cmd_lines_21()
   end
   return cmd_lines
 end
-return {["compose-autocmd-lines"] = compose_autocmd_lines, ["compose-hi-cmd-lines"] = compose_hi_cmd_lines, ["compose-colors-names"] = compose_colors_names, ["compose-gvar-cmd-lines"] = compose_gvar_cmd_lines, ["compose-vim-options-cmd-lines!"] = compose_vim_options_cmd_lines_21}
+local function compose_lines(ex_colors_name, highlights, dump_all_3f)
+  local gvar_cmd_lines = compose_gvar_cmd_lines(ex_colors_name)
+  local vim_option_cmd_lines = compose_vim_options_cmd_lines()
+  local hi_cmd_lines = compose_hi_cmd_lines(highlights, dump_all_3f)
+  local au_cmd_lines = compose_autocmd_lines(highlights)
+  local cmd_lines = flatten({gvar_cmd_lines, vim_option_cmd_lines, hi_cmd_lines, au_cmd_lines})
+  return cmd_lines
+end
+return {["compose-lines"] = compose_lines}
