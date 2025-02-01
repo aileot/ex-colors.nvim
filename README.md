@@ -16,6 +16,10 @@ Happy coding!!!_
 
 ## Features
 
+First off, `ex-colors` is only **a colorscheme generator**;
+this plugin itself does **NOT** contain any `ex-`colorschemes.
+Please generate your own with [`:ExColors`](#excolors) by yourself.
+
 With executing a single command [`:ExColors`](#excolors) in Command-line mode,
 
 - **Filter off** unnecessary highlight definitions for your use of nvim.\
