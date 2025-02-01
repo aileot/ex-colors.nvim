@@ -101,7 +101,13 @@ require("ex-colors").setup({
 #### Recommended Settings
 
 ```lua
+-- Please arrange the patterns for your favorite plugins by yourself.
 require("ex-colors").setup({
+  -- included_patterns = require("ex-colors").presets.recommended.included_patterns + {
+  --   "^Cmp%u", -- hrsh7th/nvim-cmp
+  --   '^GitSigns%u', -- lewis6991/gitsigns.nvim
+  --   '^RainbowDelimiter%u', -- HiPhish/rainbow-delimiters.nvim
+  -- },
   autocmd_patterns = {
     CmdlineEnter = {
       ["*"] = {
@@ -109,6 +115,11 @@ require("ex-colors").setup({
         "^health%u",
       },
     },
+    -- FileType = {
+    --   ['Telescope*'] = {
+    --     '^Telescope%u', -- nvim-telescope/telescope.nvim
+    --   },
+    -- },
   },
 })
 ```
@@ -123,7 +134,9 @@ and open the file in a new tab.
 The name will be determined as the current value of `g:colors_name` prefixed
 by _ex-_, e.g., _ex-habamax_ for _habamax_.
 
-With `!` appended, overwrite the file `ex-{g:colors_name}.lua`,
+With `!` appended,
+it will dump all the highlight definitions to the file
+`ex-{g:colors_name}.lua` (not saved),
 ignoring all the filter and modifier options.
 It is useful to know what you can get primarily,
 and, once committed in git, to know
