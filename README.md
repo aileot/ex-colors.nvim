@@ -150,7 +150,8 @@ require("ex-colors").setup({
 
 Generate a new colorscheme to the directory
 set in `colors_dir` option,
-and open the file in a new tab.
+and start `:edit`ing the output file for preview.
+
 The name will be determined as the current value of `g:colors_name` prefixed
 by _ex-_, e.g., _ex-habamax_ for _habamax_.
 
