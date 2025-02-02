@@ -84,7 +84,7 @@ With executing a single command [`:ExColors`](#excolors) in Command-line mode,
   **_without performance overheads_.**
 
 And more!
-Please check out the available options in [Setup](#-setup) section.
+Please check out the available options in [Setup](#%EF%B8%8F-setup) section.
 Also see [FAQ](#-faq) at first if you are missing some options.
 
 **NOTE:** _A sane default is already provided._
@@ -120,7 +120,7 @@ With [lazy.nvim][],
 1. Put `vim.cmd("colorscheme foobar")` in your init.lua.
 2. Restart nvim to refresh highlight definitions.
 3. Load `require("ex-colors").setup()`.
-   See [Setup](#-setup) section for the details.
+   See [Setup](#%EF%B8%8F-setup) section for the details.
 4. Run `:ExColors` in Command-line mode.
    See [:ExColors](#excolors) section for the details.
 5. Confirm the output with `:write` or `:update`.
