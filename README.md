@@ -390,32 +390,6 @@ See [:ExColors](#excolors) for the details.
 **A.** As once tested,
 it seems to be slower to define every highlight groups each with resolved `fg`, `bg`, `italic`, and so on.
 
-## ⛔ Not in Plan
-
-Unlike general colorscheme plugins,
-the generated colorschemes expect the following usages:
-
-- NOT to be loaded after any other colorschemes,
-- NOT to be independent plugin repositories,
-
-however,
-
-- to be **loaded first** on your nvim startup.
-- to be **managed by yourself** in your dotfiles
-  or any other repository for yourself.
-
-Because of the backgrounds above,
-`ex-colors.nvim` will NOT support the following features:
-
-- Byte-Compile\
-  To manage the output in version control system,
-  byte codes are bad for human to compare diffs.\
-  Please enable `vim.loader`. It does instead.
-- `:highlight clear` and `:syntax reset` in the outputs\
-  They are only overheads on nvim startup.
-
-Please scan the [FAQ](#-faq) above at first when you have questions.
-
 [gitsigns.nvim]: https://github.com/lewis6991/gitsigns.nvim
 [lazy.nvim]: https://github.com/folke/lazy.nvim
 [vim-fugitive]: https://github/tpope/vim-fugitive
