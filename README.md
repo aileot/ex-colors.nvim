@@ -303,7 +303,7 @@ If you find `ex-colors` lacking for some reasonable, internal definitions in
 the [`presets`](#presets) with the default settings,
 feel free to [open issue](https://github.com/aileot/ex-colors.nvim/issues)!
 
-### Are there any other dependencies?
+### Q. Are there any other dependencies?
 
 **A.** No external dependencies to execute `:ExColors`,
 and outputs are independent from the plugin.
