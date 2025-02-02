@@ -2,6 +2,37 @@
 
 # 🌈 Ex-Colors
 
+<h4>
+<a href="#-usage">
+Usage
+</a>
+·
+<a href="https://github.com/aileot/ex-colors.nvim/discussions">
+Discuss
+</a>
+·
+<a href="#-faq">
+FAQ
+</a>
+</h4>
+
+[![badge/test][]][url/to/workflow/test]
+[![badge/semver][]][url/to/semver]
+[![badge/license][]][url/to/license]\
+[![badge/lua][]][url/to/lua]
+[![badge/fennel][]][url/to/fennel]
+
+[badge/license]: https://img.shields.io/github/license/aileot/ex-colors.nvim?style=for-the-badge&logoColor=D9E0EE&labelColor=302D41&color=99d6ff
+[badge/test]: https://img.shields.io/github/actions/workflow/status/aileot/ex-colors.nvim/test.yml?branch=main&label=Test&logo=github&style=for-the-badge&logo=neovim&logoColor=D9E0EE&labelColor=302D41&color=9fdf9f
+[badge/semver]: https://img.shields.io/github/v/release/aileot/ex-colors.nvim?style=for-the-badge&logo=starship&logoColor=D9E0EE&labelColor=302D41&&color=d9b3ff&include_prerelease&sort=semver
+[badge/lua]: https://img.shields.io/badge/Powered_by_Lua-030281?&style=for-the-badge&logo=lua&logoColor=D9E0EE&label=Lua&labelColor=302D41&color=b3b3ff
+[badge/fennel]: https://img.shields.io/badge/&_Fennel-030281?&style=for-the-badge&logo=lua&logoColor=D9E0EE&label=Lua&labelColor=302D41&color=b3b3ff
+[url/to/workflow/test]: https://github.com/aileot/ex-colors.nvim/actions/workflows/test.yml
+[url/to/license]: ./LICENSE
+[url/to/semver]: https://github.com/aileot/ex-colors.nvim/releases/latest
+[url/to/lua]: https://www.lua.org/
+[url/to/fennel]: https://fennel-lang.org/
+
 Extract current highlight definitions, and generate your own new colorscheme.\
 _"But the colorscheme is not well tuned for startup" is
 now **no longer a reason** to give it up!\
@@ -30,7 +61,7 @@ cached ones if available.)
 
 </small>
 
-## Features
+## ✨ Features
 
 First off, `ex-colors` is only **a colorscheme generator**;
 this plugin itself does **NOT** contain any `ex-`colorschemes.
@@ -53,12 +84,12 @@ With executing a single command [`:ExColors`](#excolors) in Command-line mode,
   **_without performance overheads_.**
 
 And more!
-Please check out the available options in [Setup](#setup) section.
-Also see [FAQ](#faq) at first if you are missing some options.
+Please check out the available options in [Setup](#%EF%B8%8F-setup) section.
+Also see [FAQ](#-faq) at first if you are missing some options.
 
 **NOTE:** _A sane default is already provided._
 
-## Requirements
+## ✔️ Requirements
 
 - Neovim >= 0.10.4
 
@@ -68,7 +99,7 @@ The outputs are completely independent
 from `ex-colors` and the original colorschemes,
 which are only required in executing `:ExColors`.
 
-## Installation
+## 📦 Installation
 
 With [lazy.nvim][],
 
@@ -82,30 +113,30 @@ With [lazy.nvim][],
 }
 ```
 
-## Usage
+## 🚀 Usage
 
-### Steps
+### 👣 Steps
 
 1. Put `vim.cmd("colorscheme foobar")` in your init.lua.
 2. Restart nvim to refresh highlight definitions.
 3. Load `require("ex-colors").setup()`.
-   See [Setup](#setup) section for the details.
+   See [Setup](#%EF%B8%8F-setup) section for the details.
 4. Run `:ExColors` in Command-line mode.
    See [:ExColors](#excolors) section for the details.
 5. Confirm the output with `:write` or `:update`.
 6. Insert `ex-` to your colorscheme name: `vim.cmd("colorscheme ex-foobar")`
 7. Done!
 
-### Setup
+### ⚙️ Setup
 
 Change option values via `require("ex-colors").setup()`.\
 Please see
-[Setup Example with Sane Default Settings](#setup-example-with-sane-default-settings)
+[Setup Example with Sane Default Settings](#-setup-example-with-sane-default-settings)
 and
-[Recommended Settings](#recommended-settings)
+[Recommended Settings](#-recommended-settings)
 for the details.
 
-#### Presets
+#### 🎨 Presets
 
 Some sensible presets are provided.
 Please follow the links to the preset modules:
@@ -126,7 +157,7 @@ For example,
 require("ex-colors.presets").recommended.included_patterns + { "Foo", "Bar" }
 ```
 
-#### Setup Example with Sane Default Settings
+#### 🔥 Setup Example with Sane Default Settings
 
 The following snippet sets up the options with the default values:
 
@@ -209,7 +240,7 @@ require("ex-colors").setup({
 })
 ```
 
-#### Recommended Settings
+#### ⭐ Recommended Settings
 
 ```lua
 -- Please arrange the patterns for your favorite plugins by yourself.
@@ -235,7 +266,7 @@ require("ex-colors").setup({
 })
 ```
 
-### Commands
+### 💪 Commands
 
 #### :ExColors[!]
 
@@ -272,7 +303,7 @@ a single `g:colors_name`:
    not _ex-foobar-dark_,
    but _ex-foobar_.
 
-## FAQ
+## ❓ FAQ
 
 ### Q. Is it considered misappropriating this plugin to create standalone `ex-foobar`repositories?
 
@@ -300,10 +331,10 @@ Leave it to `vim.loader`.
 Please note that this plugin is only **a colorscheme generator**,
 and **NOT** contains any colorscheme in this repository itself.
 If you find `ex-colors` lacking for some reasonable, internal definitions in
-the [`presets`](#presets) with the default settings,
+the [`presets`](#-presets) with the default settings,
 feel free to [open issue](https://github.com/aileot/ex-colors.nvim/issues)!
 
-### Are there any other dependencies?
+### Q. Are there any other dependencies?
 
 **A.** No external dependencies to execute `:ExColors`,
 and outputs are independent from the plugin.
@@ -359,7 +390,7 @@ See [:ExColors](#excolors) for the details.
 **A.** As once tested,
 it seems to be slower to define every highlight groups each with resolved `fg`, `bg`, `italic`, and so on.
 
-## Not in Plan
+## ⛔ Not in Plan
 
 Unlike general colorscheme plugins,
 the generated colorschemes expect the following usages:
@@ -383,7 +414,7 @@ Because of the backgrounds above,
 - `:highlight clear` and `:syntax reset` in the outputs\
   They are only overheads on nvim startup.
 
-Please scan the [FAQ](#faq) above at first when you have questions.
+Please scan the [FAQ](#-faq) above at first when you have questions.
 
 [gitsigns.nvim]: https://github.com/lewis6991/gitsigns.nvim
 [lazy.nvim]: https://github.com/folke/lazy.nvim
