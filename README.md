@@ -16,18 +16,18 @@ FAQ
 </a>
 </h4>
 
-[![badge/test][]][workflow/test]
-[![badge/semver][]][path/to/semver]
-[![badge/license][]][path/to/license]\
+[![badge/test][]][url/to/workflow/test]
+[![badge/semver][]][url/to/semver]
+[![badge/license][]][url/to/license]\
 [![badge/lua][]][url/to/lua]
 [![badge/fennel][]][url/to/fennel]
 
 [badge/license]: https://img.shields.io/github/license/aileot/ex-colors.nvim?style=for-the-badge&logoColor=D9E0EE&labelColor=302D41&color=99d6ff
 [badge/test]: https://img.shields.io/github/actions/workflow/status/aileot/ex-colors.nvim/test.yml?branch=main&label=Test&logo=github&style=for-the-badge&logo=neovim&logoColor=D9E0EE&labelColor=302D41&color=9fdf9f
 [badge/semver]: https://img.shields.io/github/v/release/aileot/ex-colors.nvim?style=for-the-badge&logo=starship&logoColor=D9E0EE&labelColor=302D41&&color=d9b3ff&include_prerelease&sort=semver
-[workflow/test]: https://github.com/aileot/ex-colors.nvim/actions/workflows/test.yml
-[path/to/license]: ./LICENSE
-[path/to/semver]: https://github.com/aileot/ex-colors.nvim/releases/latest
+[url/to/workflow/test]: https://github.com/aileot/ex-colors.nvim/actions/workflows/test.yml
+[url/to/license]: ./LICENSE
+[url/to/semver]: https://github.com/aileot/ex-colors.nvim/releases/latest
 [url/to/lua]: https://www.lua.org/
 [url/to/fennel]: https://fennel-lang.org/
 [badge/lua]: https://img.shields.io/badge/Powered_by_Lua-030281?&style=for-the-badge&logo=lua&logoColor=D9E0EE&label=Lua&labelColor=302D41&color=b3b3ff
