@@ -315,7 +315,7 @@ of _the authors and maintainers_.
 Remember to pay due respects to their efforts.
 The credits would go to them.\
 <small>
-And it's simply a mess that GitHub is flooded with `ex-this` and `ex-that`.
+(And it would simply a mess that GitHub is flooded with `ex-this` and `ex-that`.)
 </small>
 
 ### Q. Why don't you support byte-compile?
