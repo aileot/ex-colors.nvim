@@ -3,7 +3,7 @@
 # 🌈 Ex-Colors
 
 <h4>
-<a href="#usage">
+<a href="#-usage">
 Usage
 </a>
 ·
@@ -11,7 +11,7 @@ Usage
 Discuss
 </a>
 ·
-<a href="#faq">
+<a href="#-faq">
 FAQ
 </a>
 </h4>
@@ -84,8 +84,8 @@ With executing a single command [`:ExColors`](#excolors) in Command-line mode,
   **_without performance overheads_.**
 
 And more!
-Please check out the available options in [Setup](#setup) section.
-Also see [FAQ](#faq) at first if you are missing some options.
+Please check out the available options in [Setup](#-setup) section.
+Also see [FAQ](#-faq) at first if you are missing some options.
 
 **NOTE:** _A sane default is already provided._
 
@@ -120,7 +120,7 @@ With [lazy.nvim][],
 1. Put `vim.cmd("colorscheme foobar")` in your init.lua.
 2. Restart nvim to refresh highlight definitions.
 3. Load `require("ex-colors").setup()`.
-   See [Setup](#setup) section for the details.
+   See [Setup](#-setup) section for the details.
 4. Run `:ExColors` in Command-line mode.
    See [:ExColors](#excolors) section for the details.
 5. Confirm the output with `:write` or `:update`.
@@ -131,9 +131,9 @@ With [lazy.nvim][],
 
 Change option values via `require("ex-colors").setup()`.\
 Please see
-[Setup Example with Sane Default Settings](#setup-example-with-sane-default-settings)
+[Setup Example with Sane Default Settings](#-setup-example-with-sane-default-settings)
 and
-[Recommended Settings](#recommended-settings)
+[Recommended Settings](#-recommended-settings)
 for the details.
 
 #### 🎨 Presets
@@ -331,7 +331,7 @@ Leave it to `vim.loader`.
 Please note that this plugin is only **a colorscheme generator**,
 and **NOT** contains any colorscheme in this repository itself.
 If you find `ex-colors` lacking for some reasonable, internal definitions in
-the [`presets`](#presets) with the default settings,
+the [`presets`](#-presets) with the default settings,
 feel free to [open issue](https://github.com/aileot/ex-colors.nvim/issues)!
 
 ### Q. Are there any other dependencies?
@@ -414,7 +414,7 @@ Because of the backgrounds above,
 - `:highlight clear` and `:syntax reset` in the outputs\
   They are only overheads on nvim startup.
 
-Please scan the [FAQ](#faq) above at first when you have questions.
+Please scan the [FAQ](#-faq) above at first when you have questions.
 
 [gitsigns.nvim]: https://github.com/lewis6991/gitsigns.nvim
 [lazy.nvim]: https://github.com/folke/lazy.nvim
