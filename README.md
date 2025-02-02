@@ -168,9 +168,17 @@ require("ex-colors").setup({
   ---@type string
   colors_dir = vim.fn.stdpath("config") .. "/colors",
   --- If true, outputs will contains `:highlight-clear`.
+  --- If you change multiple colorschemes during an nvim session, you should
+  --- enable this option to override all the definitions previously applied
+  --- colorscheme; otherwise, some highlights might be strangely mixed up.
+  --- See also `reset_syntax` option.
   ---@type boolean
   clear_highlight = false,
   --- If true, outputs will contains `:syntax-reset`.
+  --- If you change multiple colorschemes during an nvim session, you should
+  --- enable this option to override all the definitions previously applied
+  --- colorscheme; otherwise, some highlights might be strangely mixed up.
+  --- See also `clear_highlight` option.
   ---@type boolean
   reset_syntax = false,
   --- If true, highlight definitions cleared by `:highlight clear` will not be
@@ -390,31 +398,12 @@ See [:ExColors](#excolors) for the details.
 **A.** As once tested,
 it seems to be slower to define every highlight groups each with resolved `fg`, `bg`, `italic`, and so on.
 
-## ⛔ Not in Plan
+### Q. Some highlights are oddly applied when when I load `ex-`colorscheme after loading another in an nvim session
 
-Unlike general colorscheme plugins,
-the generated colorschemes expect the following usages:
-
-- NOT to be loaded after any other colorschemes,
-- NOT to be independent plugin repositories,
-
-however,
-
-- to be **loaded first** on your nvim startup.
-- to be **managed by yourself** in your dotfiles
-  or any other repository for yourself.
-
-Because of the backgrounds above,
-`ex-colors.nvim` will NOT support the following features:
-
-- Byte-Compile\
-  To manage the output in version control system,
-  byte codes are bad for human to compare diffs.\
-  Please enable `vim.loader`. It does instead.
-- `:highlight clear` and `:syntax reset` in the outputs\
-  They are only overheads on nvim startup.
-
-Please scan the [FAQ](#-faq) above at first when you have questions.
+**A.** Please enable `clear_highlight` and `reset_syntax` options as your needs.
+See [Setup Example with Sane Default Settings](#-setup-example-with-sane-default-settings)
+for the details.
+The options are disabled by default for the runtime performance reasons.
 
 [gitsigns.nvim]: https://github.com/lewis6991/gitsigns.nvim
 [lazy.nvim]: https://github.com/folke/lazy.nvim
