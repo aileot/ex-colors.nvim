@@ -390,6 +390,13 @@ See [:ExColors](#excolors) for the details.
 **A.** As once tested,
 it seems to be slower to define every highlight groups each with resolved `fg`, `bg`, `italic`, and so on.
 
+### Q. Some highlights are oddly applied when when I load `ex-`colorscheme after loading another in an nvim session
+
+**A.** Please enable `clear_highlight` and `reset_syntax` options as your needs.
+See [Setup Example with Sane Default Settings](#-setup-example-with-sane-default-settings)
+for the details.
+The options are disabled by default for the runtime performance reasons.
+
 [gitsigns.nvim]: https://github.com/lewis6991/gitsigns.nvim
 [lazy.nvim]: https://github.com/folke/lazy.nvim
 [vim-fugitive]: https://github/tpope/vim-fugitive
