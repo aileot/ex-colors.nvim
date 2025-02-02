@@ -54,6 +54,7 @@ With executing a single command [`:ExColors`](#excolors) in Command-line mode,
 
 And more!
 Please check out the available options in [Setup](#setup) section.
+Also see [FAQ](#faq) at first if you are missing some options.
 
 **NOTE:** _A sane default is already provided._
 
