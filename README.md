@@ -309,13 +309,13 @@ a single `g:colors_name`:
 
 **A.** Not at all.
 You can create hard forks of your favorite colorschemes
-with this plugin -- no permissions from _me_ is required;
+with this plugin -- you don't need _my_ permissions;
 however, the forks **could** be misappropriating the original colorscheme
 of _the authors and maintainers_.
 Remember to pay due respects to their efforts.
 The credits would go to them.\
 <small>
-And it's simply a mess that GitHub is flooded with `ex-this` and `ex-that`.
+(And it would simply a mess that GitHub is flooded with `ex-this` and `ex-that`.)
 </small>
 
 ### Q. Why don't you support byte-compile?
