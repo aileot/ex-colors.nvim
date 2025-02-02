@@ -62,6 +62,12 @@ Also see [FAQ](#faq) at first if you are missing some options.
 
 - Neovim >= 0.10.4
 
+and no other dependencies.
+
+The outputs are completely independent
+from `ex-colors` and the original colorschemes,
+which are only required in executing `:ExColors`.
+
 ## Installation
 
 With [lazy.nvim][],
