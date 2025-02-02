@@ -51,7 +51,7 @@ Happy coding!!!_
 > - everforest -> ex-everforest: (003.097) -> (000.432) -- 7.17x faster!
 > - gruvbox -> ex-gruvbox: (002.417) -> (000.427) -- 5.66x faster!
 > - kanagawa -> ex-kanagawa: (001.783) -> (000.406) -- 4.39x faster!
-> - tokyonight -> ex-tokyonight: (002.147) -> (000.316) -- 6.79x faster!
+> - tokyonight -> ex-tokyonight: (001.465) -> (000.316) -- 4.64x faster!
 
 <small>
 
