@@ -154,9 +154,9 @@ end
 
 return setmetatable(M, {
   __index = function(_, k)
-  return current_config[k]
+    return current_config[k]
   end,
   __newindex = function()
-  error("config is read-only")
+    error("config is read-only")
   end,
 })
