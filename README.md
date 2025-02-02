@@ -168,9 +168,17 @@ require("ex-colors").setup({
   ---@type string
   colors_dir = vim.fn.stdpath("config") .. "/colors",
   --- If true, outputs will contains `:highlight-clear`.
+  --- If you change multiple colorschemes during an nvim session, you should
+  --- enable this option to override all the definitions previously applied
+  --- colorscheme; otherwise, some highlights might be strangely mixed up.
+  --- See also `reset_syntax` option.
   ---@type boolean
   clear_highlight = false,
   --- If true, outputs will contains `:syntax-reset`.
+  --- If you change multiple colorschemes during an nvim session, you should
+  --- enable this option to override all the definitions previously applied
+  --- colorscheme; otherwise, some highlights might be strangely mixed up.
+  --- See also `clear_highlight` option.
   ---@type boolean
   reset_syntax = false,
   --- If true, highlight definitions cleared by `:highlight clear` will not be
