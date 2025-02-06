@@ -15,12 +15,12 @@
 
 (fn ensure-dir! [dir-path]
   "Ensure `dir-path` exists in file system. If not existed, ask to create it.
-  @param dir-path string"
+@param dir-path string"
   (assert-is-full-path dir-path (.. "expected absolute path, got " dir-path))
   (when-not (directory? dir-path)
     (case (vim.fn.confirm (.. "Missing " dir-path ", create?") "&No\n&yes" 1
                           :Warning)
-      2 (vim.mkdir dir-path :p)
+      2 (vim.fn.mkdir dir-path :p)
       _ (error (.. "Abort due to missing " dir-path)))))
 
 (fn lines->comment-lines [lines]
