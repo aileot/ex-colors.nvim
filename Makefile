@@ -54,8 +54,15 @@ help: ## Show this help
 	@echo Targets:
 	@egrep -h '^\S+: .*## \S+' $(MAKEFILE_LIST) | sed 's/: .*##/:/' | column -t -s ':' | sed 's/^/  /'
 
-.envrc: ## Generate .envrc
+.PHONY: init
+init: .envrc githooks ## Setup for project contribution
+
+.envrc: # Generate .envrc
 	@echo "use flake" > .envrc
+
+.PHONY: githooks
+githooks: # Enable project githooks to automate build on each git-commit.
+	@git config --local core.hooksPath .githooks
 
 lua/%/:
 	@mkdir -p $@
