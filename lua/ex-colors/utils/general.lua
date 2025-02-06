@@ -14,7 +14,7 @@ local function ensure_dir_21(dir_path)
   if not (1 == vim.fn.isdirectory(dir_path)) then
     local _3_ = vim.fn.confirm(("Missing " .. dir_path .. ", create?"), "&No\n&yes", 1, "Warning")
     if (_3_ == 2) then
-      return vim.mkdir(dir_path, "p")
+      return vim.fn.mkdir(dir_path, "p")
     else
       local _ = _3_
       return error(("Abort due to missing " .. dir_path))
