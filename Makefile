@@ -54,6 +54,9 @@ help: ## Show this help
 	@echo Targets:
 	@egrep -h '^\S+: .*## \S+' $(MAKEFILE_LIST) | sed 's/: .*##/:/' | column -t -s ':' | sed 's/^/  /'
 
+.envrc: ## Generate .envrc
+	@echo "use flake" > .envrc
+
 lua/%/:
 	@mkdir -p $@
 
