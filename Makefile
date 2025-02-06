@@ -22,6 +22,7 @@ VUSTED_FLAGS ?= --shuffle --output=utfTerminal $(VUSTED_EXTRA_FLAGS)
 
 REPO_ROOT:=$(abspath $(dir $(lastword $(MAKEFILE_LIST))))
 TEST_ROOT:=$(REPO_ROOT)/test
+TEST_CTX_HOME:=$(REPO_ROOT)/test/context
 
 FNL_SRC:=$(wildcard fnl/*/*.fnl)
 FNL_SRC+=$(wildcard fnl/*/*/*.fnl)
@@ -84,6 +85,7 @@ lua/%.lua: fnl/%.lua
 clean: ## Remove generated files
 	@rm -rf lua/
 	@rm -f $(LUA_SPECS)
+	@rm -rf $(TEST_CTX_HOME)
 
 .PHONY: build
 build: $(LUA_RES_DIRS) $(LUA_RES) ## Compile fennel files from fnl/ into lua/
@@ -113,6 +115,7 @@ default-colors: $(REPO_FNL_DIR)/$(PLUGIN_NAME) ## Dump default-colors definition
 test: build $(LUA_SPECS) ## Run test
 	@nvim --version
 	@TEST_ROOT=$(TEST_ROOT) \
+		XDG_CONFIG_HOME=$(TEST_CTX_HOME)/.config \
 		VUSTED_ARGS=$(VUSTED_ARGS) \
 	  $(VUSTED) \
 		$(VUSTED_FLAGS) \
