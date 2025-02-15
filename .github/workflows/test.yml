@@ -50,5 +50,7 @@ jobs:
       - name: Run tests
         env:
           VUSTED_NVIM: ${{ runner.temp }}/nvim/usr/bin/nvim
-        run: make test
+        run: make clean test
         timeout-minutes: 5
+      - name: Make sure no files under lua/ are modified since the last commit
+        run: git diff-index --quiet HEAD -- lua/
