@@ -38,9 +38,11 @@ See also the section:
 
 This command will setup the project:
 
-1. Activate `.githooks/`.\
-    This helps automatically keep the files under `lua/` up-to-date on every
+1. Activate [`.githooks/`](./.githooks).\
+   This helps automatically keep the files under `lua/` up-to-date on every
    `git-commit`.
+   Note that you cannot stage unrelated Lua files under `lua/`
+   if there are no corresponding files staged under `fnl/`.
    It also helps you resolve conflicts in the generated files under `lua/`.
    Follow the [section](#how-to-resolve-conflicts-in-lua) below
    for the details.
