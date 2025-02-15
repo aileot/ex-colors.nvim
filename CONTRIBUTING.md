@@ -17,6 +17,19 @@ please open an issue first to avoid duplicate work.
 
 ## Building
 
+### `make build`
+
+This command will does two things:
+
+1. Transpile all the updated **Fennel** files under `fnl/` to `lua/` directory.
+2. Copy all the updated **Lua** files under `fnl/` to `lua/` directory.
+
+This command is also executed automatically on [`make test`](#testing)
+and (once you run `make init`) on `git-commit`.
+
+See also the section:
+[How to resolve conflicts in `lua/`](#how-to-resolve-conflicts-in-lua).
+
 ### `make init`
 
 This command will setup the project:
