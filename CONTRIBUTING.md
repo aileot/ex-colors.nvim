@@ -19,12 +19,14 @@ please open an issue first to avoid duplicate work.
 
 ### `make init`
 
-This helps automatically keep the files under `lua/` up-to-date on every
-`git-commit`:
+This command will setup the project:
 
 1. Activate `.githooks/`.\
-   This helps automatically keep the files under `lua/` up-to-date on every
+    This helps automatically keep the files under `lua/` up-to-date on every
    `git-commit`.
+   It also helps you resolve conflicts in the generated files under `lua/`.
+   Follow the [section](#how-to-resolve-conflicts-in-lua) below
+   for the details.
 
 2. Generate `.envrc` for nix users.\
    It only helps if you have `nix` and `direnv` installed.
