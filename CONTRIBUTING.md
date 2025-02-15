@@ -53,12 +53,12 @@ This command will setup the project:
 
 ### How to resolve conflicts in `lua/`
 
+(Please make sure you have already run [`make init`](#make-init).)
+
 1. Resolve all conflicts in `fnl/` at the commit.
 2. Run `make clean build`.
 3. Done!
-   All the Lua files are transpiled, or copied,
-   from the latest files under `fnl/`,
-   and the conflicts should be resolved in `lua/` now.
+   All the Lua files should be up-to-date without any conflicts.
 
 ### Architecture
 
