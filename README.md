@@ -41,7 +41,7 @@ Happy coding!!!_
 
 ## Demo
 
-![Demo Screenshot](https://github.com/user-attachments/assets/c46f4e41-4db7-4244-9c0d-47ed8f5055dd)
+![Demo Screenshot](https://github.com/user-attachments/assets/7a085461-7b50-432a-98df-d1e508d224a7)
 
 </div>
 
