@@ -101,7 +101,7 @@ build: $(LUA_RES_DIRS) $(LUA_RES) ## Compile fennel files from fnl/ into lua/
 default-colors: $(REPO_FNL_DIR)/$(PLUGIN_NAME) ## Dump default-colors definitions
 	@OUTPUT_PATH="$(REPO_FNL_DIR)/ex-colors/default-colors.lua"
 	@echo "return" > "$${OUTPUT_PATH}"
-	@nvim --clean -u NONE --headless -Es \
+	@nvim --clean -u NONE --headless \
 		-c 'set rtp+=$(REPO_ROOT)' \
 		-c 'call ex_colors#load_syntaxes()' \
 		-c "redir! >> $${OUTPUT_PATH}" \
