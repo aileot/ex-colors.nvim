@@ -140,6 +140,28 @@ return
   ["@markup.heading"] = {
     link = "Title"
   },
+  ["@markup.heading.1.delimiter.vimdoc"] = {
+    bg = 1316379,
+    cterm = {
+      nocombine = true,
+      underdouble = true
+    },
+    fg = 1316379,
+    nocombine = true,
+    sp = 14738154,
+    underdouble = true
+  },
+  ["@markup.heading.2.delimiter.vimdoc"] = {
+    bg = 1316379,
+    cterm = {
+      nocombine = true,
+      underline = true
+    },
+    fg = 1316379,
+    nocombine = true,
+    sp = 14738154,
+    underline = true
+  },
   ["@markup.italic"] = {
     cterm = {
       italic = true
@@ -387,10 +409,8 @@ return
   Comment = {
     fg = 10198692
   },
-  Conceal = {
-    ctermfg = 12,
-    fg = 255
-  },
+  ComplMatchIns = {},
+  Conceal = {},
   Conditional = {
     link = "Statement"
   },
@@ -545,6 +565,21 @@ return
   },
   DiagnosticUnnecessary = {
     link = "Comment"
+  },
+  DiagnosticVirtualLinesError = {
+    link = "DiagnosticError"
+  },
+  DiagnosticVirtualLinesHint = {
+    link = "DiagnosticHint"
+  },
+  DiagnosticVirtualLinesInfo = {
+    link = "DiagnosticInfo"
+  },
+  DiagnosticVirtualLinesOk = {
+    link = "DiagnosticOk"
+  },
+  DiagnosticVirtualLinesWarn = {
+    link = "DiagnosticWarn"
   },
   DiagnosticVirtualTextError = {
     link = "DiagnosticError"
@@ -710,7 +745,7 @@ return
     link = "SignColumn"
   },
   Folded = {
-    bg = 2895411,
+    bg = 460813,
     fg = 10198692
   },
   Function = {
@@ -1019,6 +1054,9 @@ return
     link = "NonText"
   },
   LspReferenceRead = {
+    link = "LspReferenceText"
+  },
+  LspReferenceTarget = {
     link = "LspReferenceText"
   },
   LspReferenceText = {
@@ -1529,17 +1567,28 @@ return
   PmenuKindSel = {
     link = "PmenuSel"
   },
+  PmenuMatch = {
+    bold = true,
+    cterm = {
+      bold = true
+    }
+  },
+  PmenuMatchSel = {
+    bold = true,
+    cterm = {
+      bold = true
+    }
+  },
   PmenuSbar = {
     link = "Pmenu"
   },
   PmenuSel = {
-    bg = 14738154,
     blend = 0,
     cterm = {
       reverse = true,
       underline = true
     },
-    fg = 2895411
+    reverse = true
   },
   PmenuThumb = {
     bg = 5198424
@@ -1558,6 +1607,9 @@ return
   },
   Preformatted = {
     link = "Identifier"
+  },
+  ProgressBlockComment = {
+    link = "ProgressComment"
   },
   ProgressByte = {
     link = "Number"
@@ -1591,6 +1643,9 @@ return
   },
   ProgressInclude = {
     link = "Include"
+  },
+  ProgressLineComment = {
+    link = "ProgressComment"
   },
   ProgressMatrixDelimiter = {
     link = "Identifier"
@@ -1853,12 +1908,18 @@ return
     fg = 2895411
   },
   StatusLineNC = {
-    bg = 2895411,
+    bg = 5198424,
     cterm = {
       bold = true,
       underline = true
     },
-    fg = 12895949
+    fg = 14738154
+  },
+  StatusLineTerm = {
+    link = "StatusLine"
+  },
+  StatusLineTermNC = {
+    link = "StatusLineNC"
   },
   StorageClass = {
     link = "Type"
@@ -1887,10 +1948,7 @@ return
     link = "TabLine"
   },
   TabLineSel = {
-    bold = true,
-    cterm = {
-      bold = true
-    }
+    bold = true
   },
   Tag = {
     link = "Special"
@@ -1901,7 +1959,6 @@ return
     },
     reverse = true
   },
-  TermCursorNC = {},
   Title = {
     bold = true,
     cterm = {
@@ -2313,6 +2370,27 @@ return
   abelTypeIdEnd = {
     link = "abelSpecial"
   },
+  abnfComment = {
+    link = "Comment"
+  },
+  abnfError = {
+    link = "Error"
+  },
+  abnfNumVal = {
+    link = "Number"
+  },
+  abnfOption = {
+    link = "PreProc"
+  },
+  abnfProse = {
+    link = "String"
+  },
+  abnfRepeat = {
+    link = "Repeat"
+  },
+  abnfString = {
+    link = "String"
+  },
   acedbBlock = {
     link = "ModeMsg"
   },
@@ -2514,12 +2592,6 @@ return
   ahdlTodo = {
     link = "Todo"
   },
-  aidlKeyword = {
-    link = "Keyword"
-  },
-  aidlParamDir = {
-    link = "StorageClass"
-  },
   algoholFunction = {
     link = "Function"
   },
@@ -2678,6 +2750,21 @@ return
   },
   antElement = {
     link = "Statement"
+  },
+  antlr4Comment = {
+    link = "Comment"
+  },
+  antlr4Exceptions = {
+    link = "Structure"
+  },
+  antlr4Include = {
+    link = "Include"
+  },
+  antlr4Statement = {
+    link = "Statement"
+  },
+  antlr4Structure = {
+    link = "Structure"
   },
   antlrPackages = {
     link = "Statement"
@@ -3481,6 +3568,99 @@ return
   },
   astroFence = {
     link = "Comment"
+  },
+  asyBracketError = {
+    link = "asyError"
+  },
+  asyCSpecial = {
+    link = "SpecialChar"
+  },
+  asyCString = {
+    link = "String"
+  },
+  asyComment = {
+    link = "Comment"
+  },
+  asyCommentCString = {
+    link = "asyString"
+  },
+  asyCommentError = {
+    link = "asyError"
+  },
+  asyCommentL = {
+    link = "asyComment"
+  },
+  asyCommentLCString = {
+    link = "asyString"
+  },
+  asyCommentLString = {
+    link = "asyString"
+  },
+  asyCommentSkip = {
+    link = "asyComment"
+  },
+  asyCommentStartError = {
+    link = "asyError"
+  },
+  asyCommentString = {
+    link = "asyString"
+  },
+  asyConditional = {
+    link = "Conditional"
+  },
+  asyConstant = {
+    link = "Constant"
+  },
+  asyCurlyError = {
+    link = "asyError"
+  },
+  asyDefine = {
+    link = "Macro"
+  },
+  asyError = {
+    link = "Error"
+  },
+  asyExternal = {
+    link = "Include"
+  },
+  asyNumber = {
+    link = "Number"
+  },
+  asyNumberError = {
+    link = "asyError"
+  },
+  asyOperator = {
+    link = "Operator"
+  },
+  asyParenError = {
+    link = "asyError"
+  },
+  asyPathSpec = {
+    link = "Statement"
+  },
+  asyRepeat = {
+    link = "Repeat"
+  },
+  asySpecial = {
+    link = "SpecialChar"
+  },
+  asyStatement = {
+    link = "Statement"
+  },
+  asyStorageClass = {
+    link = "StorageClass"
+  },
+  asyString = {
+    link = "String"
+  },
+  asyStructure = {
+    link = "Structure"
+  },
+  asyTodo = {
+    link = "Todo"
+  },
+  asyType = {
+    link = "Type"
   },
   atlasBinNumber = {
     link = "Number"
@@ -6297,6 +6477,51 @@ return
   clojureVariable = {
     link = "Identifier"
   },
+  cmacroComment = {
+    link = "Comment"
+  },
+  cmacroCommentError = {
+    link = "Error"
+  },
+  cmacroCppInElse2 = {
+    link = "cmacroCppOutIf2"
+  },
+  cmacroCppInWrapper = {
+    link = "cmacroCppOutWrapper"
+  },
+  cmacroCppOut = {
+    link = "Comment"
+  },
+  cmacroCppOutIf2 = {
+    link = "cmacroCppOut"
+  },
+  cmacroCppOutSkip = {
+    link = "cmacroCppOutIf2"
+  },
+  cmacroCppOutWrapper = {
+    link = "cmacroPreCondit"
+  },
+  cmacroDefine = {
+    link = "Macro"
+  },
+  cmacroInclude = {
+    link = "Include"
+  },
+  cmacroIncluded = {
+    link = "cmacroString"
+  },
+  cmacroPreCondit = {
+    link = "PreCondit"
+  },
+  cmacroPreConditMatch = {
+    link = "cmacroPreCondit"
+  },
+  cmacroPreProc = {
+    link = "PreProc"
+  },
+  cmacroTodo = {
+    link = "Todo"
+  },
   cmakeBracketArgument = {
     link = "String"
   },
@@ -7916,6 +8141,30 @@ return
   csInterVerbString = {
     link = "String"
   },
+  csInterpolatedRawString1 = {
+    link = "csRawString"
+  },
+  csInterpolatedRawString2 = {
+    link = "csRawString"
+  },
+  csInterpolatedRawString3 = {
+    link = "csRawString"
+  },
+  csInterpolatedRawString4 = {
+    link = "csRawString"
+  },
+  csInterpolatedRawString5 = {
+    link = "csRawString"
+  },
+  csInterpolatedRawString6 = {
+    link = "csRawString"
+  },
+  csInterpolatedRawString7 = {
+    link = "csRawString"
+  },
+  csInterpolatedRawString8 = {
+    link = "csRawString"
+  },
   csInterpolatedString = {
     link = "String"
   },
@@ -7924,6 +8173,30 @@ return
   },
   csInterpolationDelimiter = {
     link = "Delimiter"
+  },
+  csInterpolationDelimiterError1 = {
+    link = "Error"
+  },
+  csInterpolationDelimiterError2 = {
+    link = "Error"
+  },
+  csInterpolationDelimiterError3 = {
+    link = "Error"
+  },
+  csInterpolationDelimiterError4 = {
+    link = "Error"
+  },
+  csInterpolationDelimiterError5 = {
+    link = "Error"
+  },
+  csInterpolationDelimiterError6 = {
+    link = "Error"
+  },
+  csInterpolationDelimiterError7 = {
+    link = "Error"
+  },
+  csInterpolationDelimiterError8 = {
+    link = "Error"
   },
   csInterpolationFormat = {
     link = "csInterpolationDelimiter"
@@ -7996,6 +8269,48 @@ return
   },
   csQuote = {
     link = "String"
+  },
+  csRawString = {
+    link = "csString"
+  },
+  csRawString3 = {
+    link = "csString"
+  },
+  csRawString4 = {
+    link = "csString"
+  },
+  csRawString5 = {
+    link = "csString"
+  },
+  csRawString6 = {
+    link = "csString"
+  },
+  csRawString7 = {
+    link = "csString"
+  },
+  csRawString8 = {
+    link = "csString"
+  },
+  csRawStringError = {
+    link = "Error"
+  },
+  csRawStringError3 = {
+    link = "Error"
+  },
+  csRawStringError4 = {
+    link = "Error"
+  },
+  csRawStringError5 = {
+    link = "Error"
+  },
+  csRawStringError6 = {
+    link = "Error"
+  },
+  csRawStringError7 = {
+    link = "Error"
+  },
+  csRawStringError8 = {
+    link = "Error"
   },
   csReal = {
     link = "Float"
@@ -8687,6 +9002,30 @@ return
     link = "Number"
   },
   cssVendor = {
+    link = "Comment"
+  },
+  csvCol1 = {
+    link = "Statement"
+  },
+  csvCol2 = {
+    link = "Constant"
+  },
+  csvCol3 = {
+    link = "Type"
+  },
+  csvCol4 = {
+    link = "PreProc"
+  },
+  csvCol5 = {
+    link = "Identifier"
+  },
+  csvCol6 = {
+    link = "Special"
+  },
+  csvCol7 = {
+    link = "String"
+  },
+  csvCol8 = {
     link = "Comment"
   },
   ctermCharacter = {
@@ -11216,6 +11555,30 @@ return
   erubyDelimiter = {
     link = "PreProc"
   },
+  escCsvCol1 = {
+    link = "csvCol1"
+  },
+  escCsvCol2 = {
+    link = "csvCol2"
+  },
+  escCsvCol3 = {
+    link = "csvCol3"
+  },
+  escCsvCol4 = {
+    link = "csvCol4"
+  },
+  escCsvCol5 = {
+    link = "csvCol5"
+  },
+  escCsvCol6 = {
+    link = "csvCol6"
+  },
+  escCsvCol7 = {
+    link = "csvCol7"
+  },
+  escCsvCol8 = {
+    link = "csvCol8"
+  },
   esmtprcAddress = {
     link = "Type"
   },
@@ -13223,7 +13586,16 @@ return
   fsOptionsOcfs2ResvLevel = {
     link = "Number"
   },
+  fsOptionsOverlayBool = {
+    link = "Boolean"
+  },
+  fsOptionsOverlayDir = {
+    link = "String"
+  },
   fsOptionsOverlayRedirectDir = {
+    link = "String"
+  },
+  fsOptionsOverlayXino = {
     link = "String"
   },
   fsOptionsQnx4Bitmap = {
@@ -13693,6 +14065,12 @@ return
   },
   gedcom_surname = {
     link = "Identifier"
+  },
+  gelModifier = {
+    link = "Type"
+  },
+  gelStatement = {
+    link = "Statement"
   },
   ghosttyConfigComment = {
     link = "Comment"
@@ -14201,6 +14579,90 @@ return
   globalVariables = {
     link = "Special"
   },
+  glslBoolean = {
+    link = "Boolean"
+  },
+  glslBuiltinConstant = {
+    link = "Constant"
+  },
+  glslBuiltinFunction = {
+    link = "Function"
+  },
+  glslBuiltinVariable = {
+    link = "Identifier"
+  },
+  glslComment = {
+    link = "Comment"
+  },
+  glslCommentL = {
+    link = "glslComment"
+  },
+  glslCommentStart = {
+    link = "glslComment"
+  },
+  glslConditional = {
+    link = "Conditional"
+  },
+  glslDecimalInt = {
+    link = "glslInteger"
+  },
+  glslDefine = {
+    link = "Define"
+  },
+  glslFloat = {
+    link = "Float"
+  },
+  glslHexInt = {
+    link = "glslInteger"
+  },
+  glslIdentifier = {
+    link = "Identifier"
+  },
+  glslIdentifierPrime = {
+    link = "glslIdentifier"
+  },
+  glslInclude = {
+    link = "Include"
+  },
+  glslInteger = {
+    link = "Number"
+  },
+  glslOctalInt = {
+    link = "glslInteger"
+  },
+  glslPreCondit = {
+    link = "PreCondit"
+  },
+  glslPreProc = {
+    link = "PreProc"
+  },
+  glslPredefinedMacro = {
+    link = "Macro"
+  },
+  glslQualifier = {
+    link = "StorageClass"
+  },
+  glslRepeat = {
+    link = "Repeat"
+  },
+  glslStatement = {
+    link = "Statement"
+  },
+  glslStructure = {
+    link = "Structure"
+  },
+  glslSwizzle = {
+    link = "Identifier"
+  },
+  glslTodo = {
+    link = "Todo"
+  },
+  glslTokenConcat = {
+    link = "glslPreProc"
+  },
+  glslType = {
+    link = "Type"
+  },
   gnuplotComment = {
     link = "Comment"
   },
@@ -14432,6 +14894,21 @@ return
   goVar = {
     link = "Keyword"
   },
+  goaccessComment = {
+    link = "Comment"
+  },
+  goaccessKeyword = {
+    link = "Keyword"
+  },
+  goaccessSettingName = {
+    link = "Type"
+  },
+  goaccessSettingValue = {
+    link = "String"
+  },
+  goaccessTodo = {
+    link = "Todo"
+  },
   godocTitle = {
     link = "Title"
   },
@@ -14575,6 +15052,51 @@ return
   },
   gradsglobalVariables = {
     link = "Special"
+  },
+  graphqlBoolean = {
+    link = "Boolean"
+  },
+  graphqlBraces = {
+    link = "Delimiter"
+  },
+  graphqlComment = {
+    link = "Comment"
+  },
+  graphqlDirective = {
+    link = "PreProc"
+  },
+  graphqlDirectiveLocation = {
+    link = "Special"
+  },
+  graphqlKeyword = {
+    link = "Keyword"
+  },
+  graphqlMetaFields = {
+    link = "Special"
+  },
+  graphqlName = {
+    link = "Identifier"
+  },
+  graphqlNull = {
+    link = "Keyword"
+  },
+  graphqlNumber = {
+    link = "Number"
+  },
+  graphqlOperator = {
+    link = "Operator"
+  },
+  graphqlString = {
+    link = "String"
+  },
+  graphqlStructure = {
+    link = "Structure"
+  },
+  graphqlType = {
+    link = "Type"
+  },
+  graphqlVariable = {
+    link = "Identifier"
   },
   groovyAssert = {
     link = "Statement"
@@ -15083,30 +15605,31 @@ return
     link = "String"
   },
   hareAttribute = {
-    link = "Keyword"
+    link = "PreProc"
   },
   hareBoolean = {
     link = "Boolean"
   },
   hareBuiltin = {
-    link = "Function"
+    link = "Operator"
   },
   hareComment = {
     link = "Comment"
   },
-  hareCommentDoc = {
-    link = "SpecialComment"
-  },
   hareConditional = {
     link = "Conditional"
   },
-  hareErrorAssertion = {
-    bold = true,
-    cterm = {
-      bold = true
-    },
-    ctermfg = 9,
-    fg = 16711680
+  hareConstant = {
+    link = "Constant"
+  },
+  hareDefine = {
+    link = "Define"
+  },
+  hareDelimiter = {
+    link = "Delimiter"
+  },
+  hareErrorTest = {
+    link = "Special"
   },
   hareEscape = {
     link = "SpecialChar"
@@ -15117,23 +15640,20 @@ return
   hareFormat = {
     link = "SpecialChar"
   },
+  hareInclude = {
+    link = "Include"
+  },
   hareKeyword = {
     link = "Keyword"
   },
   hareLabel = {
-    link = "Label"
-  },
-  hareNull = {
-    link = "Constant"
+    link = "Special"
   },
   hareNumber = {
     link = "Number"
   },
   hareOperator = {
     link = "Operator"
-  },
-  hareQuestionMark = {
-    link = "Special"
   },
   hareRepeat = {
     link = "Repeat"
@@ -15162,8 +15682,17 @@ return
   hareTypedef = {
     link = "Typedef"
   },
-  hareUse = {
-    link = "PreProc"
+  haredocCodeSample = {
+    link = "Comment"
+  },
+  haredocRef = {
+    link = "Error"
+  },
+  haredocRefValid = {
+    link = "SpecialComment"
+  },
+  haredocTodo = {
+    link = "Todo"
   },
   hasteAttribute = {
     link = "Type"
@@ -15242,6 +15771,48 @@ return
   },
   hastepreprocVar = {
     link = "Special"
+  },
+  hclAttributeName = {
+    link = "Identifier"
+  },
+  hclBlockType = {
+    link = "Type"
+  },
+  hclBraces = {
+    link = "Delimiter"
+  },
+  hclComment = {
+    link = "Comment"
+  },
+  hclConditional = {
+    link = "Conditional"
+  },
+  hclFunction = {
+    link = "Function"
+  },
+  hclHereDocText = {
+    link = "String"
+  },
+  hclRepeat = {
+    link = "Repeat"
+  },
+  hclTodo = {
+    link = "Todo"
+  },
+  hclValueBool = {
+    link = "Boolean"
+  },
+  hclValueDec = {
+    link = "Number"
+  },
+  hclValueHexaDec = {
+    link = "Number"
+  },
+  hclValueNull = {
+    link = "Constant"
+  },
+  hclValueString = {
+    link = "String"
   },
   helpBacktick = {
     link = "Ignore"
@@ -15355,7 +15926,10 @@ return
     link = "Repeat"
   },
   helpSectionDelim = {
-    link = "PreProc"
+    cterm = {
+      reverse = true
+    },
+    reverse = true
   },
   helpSpecial = {
     link = "Special"
@@ -15803,6 +16377,12 @@ return
   htmlArg = {
     link = "Type"
   },
+  htmlBadArg = {
+    link = "htmlError"
+  },
+  htmlBadTag = {
+    link = "htmlError"
+  },
   htmlBold = {
     bold = true,
     cterm = {
@@ -15849,6 +16429,9 @@ return
   },
   htmlCommentPart = {
     link = "Special"
+  },
+  htmlConstant = {
+    link = "Constant"
   },
   htmlCssDefinition = {
     link = "Special"
@@ -15913,6 +16496,9 @@ return
   htmlMathTagName = {
     link = "htmlTagName"
   },
+  htmlPre = {
+    link = "wikiPre"
+  },
   htmlPreAttr = {
     link = "String"
   },
@@ -15930,6 +16516,9 @@ return
   },
   htmlPreStmt = {
     link = "PreProc"
+  },
+  htmlSpecial = {
+    link = "Special"
   },
   htmlSpecialChar = {
     link = "Special"
@@ -16133,6 +16722,36 @@ return
   },
   hwUserFunction = {
     link = "Function"
+  },
+  hyprBoolean = {
+    link = "Boolean"
+  },
+  hyprCategoryD = {
+    link = "Special"
+  },
+  hyprColor = {
+    link = "Structure"
+  },
+  hyprCommand = {
+    link = "Keyword"
+  },
+  hyprComment = {
+    link = "Comment"
+  },
+  hyprFloat = {
+    link = "hyprNumber"
+  },
+  hyprModifier = {
+    link = "Constant"
+  },
+  hyprNumber = {
+    link = "Constant"
+  },
+  hyprString = {
+    link = "String"
+  },
+  hyprVariable = {
+    link = "Identifier"
   },
   i3ConfigActionKeyword = {
     link = "i3ConfigCommand"
@@ -16806,6 +17425,99 @@ return
   idlangTodo = {
     link = "Todo"
   },
+  idris2Annotation = {
+    link = "Statement"
+  },
+  idris2Backtick = {
+    link = "Operator"
+  },
+  idris2Block = {
+    link = "Statement"
+  },
+  idris2BlockComment = {
+    link = "Comment"
+  },
+  idris2Char = {
+    link = "String"
+  },
+  idris2Conditional = {
+    link = "Conditional"
+  },
+  idris2DSL = {
+    link = "Statement"
+  },
+  idris2DataOpt = {
+    link = "Statement"
+  },
+  idris2Delimiter = {
+    link = "Delimiter"
+  },
+  idris2Deprecated = {
+    link = "Error"
+  },
+  idris2DocComment = {
+    link = "Comment"
+  },
+  idris2Float = {
+    link = "Float"
+  },
+  idris2Forall = {
+    link = "Structure"
+  },
+  idris2Identifier = {
+    link = "Identifier"
+  },
+  idris2Import = {
+    link = "Structure"
+  },
+  idris2Infix = {
+    link = "PreProc"
+  },
+  idris2Let = {
+    link = "Structure"
+  },
+  idris2LineComment = {
+    link = "Comment"
+  },
+  idris2MetaVar = {
+    link = "Macro"
+  },
+  idris2Module = {
+    link = "Structure"
+  },
+  idris2Number = {
+    link = "Number"
+  },
+  idris2Operators = {
+    link = "Operator"
+  },
+  idris2Pragma = {
+    link = "Statement"
+  },
+  idris2Statement = {
+    link = "Statement"
+  },
+  idris2String = {
+    link = "String"
+  },
+  idris2Structure = {
+    link = "Structure"
+  },
+  idris2Todo = {
+    link = "Todo"
+  },
+  idris2Totality = {
+    link = "Statement"
+  },
+  idris2Type = {
+    link = "Include"
+  },
+  idris2Visibility = {
+    link = "Statement"
+  },
+  idris2Where = {
+    link = "Structure"
+  },
   indentComment = {
     link = "Comment"
   },
@@ -17249,6 +17961,24 @@ return
   },
   ipfTodo = {
     link = "Todo"
+  },
+  ipkgComment = {
+    link = "Comment"
+  },
+  ipkgKey = {
+    link = "Statement"
+  },
+  ipkgName = {
+    link = "Identifier"
+  },
+  ipkgOperator = {
+    link = "Operator"
+  },
+  ipkgString = {
+    link = "String"
+  },
+  ipkgVersion = {
+    link = "Number"
   },
   ishdComment = {
     link = "Comment"
@@ -17763,14 +18493,14 @@ return
   javaAnnotation = {
     link = "PreProc"
   },
+  javaAnnotationStart = {
+    link = "javaAnnotation"
+  },
   javaAssert = {
     link = "Statement"
   },
   javaBoolean = {
     link = "Boolean"
-  },
-  javaBraces = {
-    link = "Function"
   },
   javaBranch = {
     link = "Conditional"
@@ -17794,7 +18524,7 @@ return
     link = "javaError"
   },
   javaCommentMarkupTagAttr = {
-    link = "htmlArg"
+    link = "javaHtmlArg"
   },
   javaCommentStar = {
     link = "javaComment"
@@ -17809,7 +18539,7 @@ return
     link = "SpecialComment"
   },
   javaConceptKind = {
-    link = "NonText"
+    link = "javaStorageClass"
   },
   javaConditional = {
     link = "Conditional"
@@ -17817,22 +18547,97 @@ return
   javaConstant = {
     link = "Constant"
   },
+  javaDocAuthorTag = {
+    link = "Special"
+  },
   javaDocCodeTag = {
     link = "Special"
   },
   javaDocComment = {
     link = "Comment"
   },
+  javaDocDeprecatedTag = {
+    link = "Special"
+  },
+  javaDocDocRootTag = {
+    link = "Special"
+  },
+  javaDocExceptionTag = {
+    link = "Special"
+  },
+  javaDocHiddenTag = {
+    link = "Special"
+  },
+  javaDocIndexTag = {
+    link = "Special"
+  },
+  javaDocInheritDocTag = {
+    link = "Special"
+  },
+  javaDocLinkTag = {
+    link = "Special"
+  },
+  javaDocLinkplainTag = {
+    link = "Special"
+  },
+  javaDocLiteralTag = {
+    link = "Special"
+  },
   javaDocParam = {
     link = "Function"
   },
-  javaDocSeeTagParam = {
+  javaDocParamTag = {
+    link = "Special"
+  },
+  javaDocReturnTag = {
+    link = "Special"
+  },
+  javaDocSeeTag = {
+    link = "Special"
+  },
+  javaDocSeeTag1 = {
+    link = "String"
+  },
+  javaDocSeeTag2 = {
+    link = "Special"
+  },
+  javaDocSeeTag3 = {
     link = "Function"
+  },
+  javaDocSeeTagSlash = {
+    link = "javaMarkdownComment"
+  },
+  javaDocSeeTagStar = {
+    link = "javaDocComment"
+  },
+  javaDocSerialDataTag = {
+    link = "Special"
+  },
+  javaDocSerialFieldTag = {
+    link = "Special"
+  },
+  javaDocSerialTag = {
+    link = "Special"
+  },
+  javaDocSinceTag = {
+    link = "Special"
   },
   javaDocSnippetTag = {
     link = "Special"
   },
-  javaDocTags = {
+  javaDocSpecTag = {
+    link = "Special"
+  },
+  javaDocSystemPropertyTag = {
+    link = "Special"
+  },
+  javaDocThrowsTag = {
+    link = "Special"
+  },
+  javaDocValueTag = {
+    link = "Special"
+  },
+  javaDocVersionTag = {
     link = "Special"
   },
   javaError = {
@@ -17847,8 +18652,11 @@ return
   javaExternal = {
     link = "Include"
   },
-  javaFuncDef = {
-    link = "Function"
+  javaHtmlArg = {
+    link = "Type"
+  },
+  javaHtmlString = {
+    link = "String"
   },
   javaLabel = {
     link = "Label"
@@ -17865,11 +18673,20 @@ return
   javaLabelVarType = {
     link = "javaOperator"
   },
-  javaLambdaDef = {
-    link = "Function"
-  },
   javaLineComment = {
     link = "Comment"
+  },
+  javaMarkdownComment = {
+    link = "Comment"
+  },
+  javaMarkdownCommentMask = {
+    link = "javaMarkdownComment"
+  },
+  javaMarkdownCommentTitle = {
+    link = "SpecialComment"
+  },
+  javaMarkdownShortcutLink = {
+    link = "htmlLink"
   },
   javaMethodDecl = {
     link = "javaStorageClass"
@@ -17938,7 +18755,7 @@ return
     link = "javaScript"
   },
   javaScriptFunction = {
-    link = "Function"
+    link = "Keyword"
   },
   javaScriptGlobal = {
     link = "Keyword"
@@ -17957,6 +18774,9 @@ return
   },
   javaScriptMessage = {
     link = "Keyword"
+  },
+  javaScriptModifier = {
+    link = "StorageClass"
   },
   javaScriptNull = {
     link = "Keyword"
@@ -17997,9 +18817,6 @@ return
   javaScriptType = {
     link = "Type"
   },
-  javaSpaceError = {
-    link = "Error"
-  },
   javaSpecial = {
     link = "Special"
   },
@@ -18017,9 +18834,6 @@ return
   },
   javaStorageClass = {
     link = "StorageClass"
-  },
-  javaStrTempl = {
-    link = "Macro"
   },
   javaString = {
     link = "String"
@@ -18119,6 +18933,63 @@ return
   },
   jgraphType = {
     link = "Type"
+  },
+  jinjaAttribute = {
+    link = "jinjaVariable"
+  },
+  jinjaBlockName = {
+    link = "Function"
+  },
+  jinjaComment = {
+    link = "Comment"
+  },
+  jinjaCommentDelim = {
+    link = "jinjaComment"
+  },
+  jinjaFilter = {
+    link = "Function"
+  },
+  jinjaFunction = {
+    link = "jinjaFilter"
+  },
+  jinjaNumber = {
+    link = "Constant"
+  },
+  jinjaOperator = {
+    link = "Normal"
+  },
+  jinjaPunctuation = {
+    link = "jinjaOperator"
+  },
+  jinjaRaw = {
+    link = "Normal"
+  },
+  jinjaRawDelim = {
+    link = "jinja"
+  },
+  jinjaSpecial = {
+    link = "Special"
+  },
+  jinjaStatement = {
+    link = "Statement"
+  },
+  jinjaString = {
+    link = "Constant"
+  },
+  jinjaTagBlock = {
+    link = "PreProc"
+  },
+  jinjaTagDelim = {
+    link = "jinjaTagBlock"
+  },
+  jinjaVarBlock = {
+    link = "PreProc"
+  },
+  jinjaVarDelim = {
+    link = "jinjaVarBlock"
+  },
+  jinjaVariable = {
+    link = "Identifier"
   },
   jjAdded = {
     link = "Added"
@@ -18741,6 +19612,276 @@ return
   juliavString = {
     link = "juliaString"
   },
+  justAlias = {
+    link = "Statement"
+  },
+  justAssignmentOperator = {
+    link = "Operator"
+  },
+  justBacktick = {
+    link = "Special"
+  },
+  justBadCurlyBraces = {
+    link = "Error"
+  },
+  justBody = {
+    link = "Number"
+  },
+  justBoolean = {
+    link = "Boolean"
+  },
+  justBuiltInFunction = {
+    link = "Function"
+  },
+  justComment = {
+    link = "Comment"
+  },
+  justCommentInBody = {
+    link = "Comment"
+  },
+  justCommentTodo = {
+    link = "Todo"
+  },
+  justConditional = {
+    link = "Conditional"
+  },
+  justConditionalOperator = {
+    link = "Conditional"
+  },
+  justConstant = {
+    link = "Constant"
+  },
+  justCurlyBraces = {
+    link = "Special"
+  },
+  justDollarEscape = {
+    link = "Special"
+  },
+  justDollarEscapeSplit = {
+    link = "Special"
+  },
+  justExport = {
+    link = "Statement"
+  },
+  justFunction = {
+    link = "Function"
+  },
+  justImportStatement = {
+    link = "Include"
+  },
+  justIndentError = {
+    link = "Error"
+  },
+  justInterpError = {
+    link = "Error"
+  },
+  justInterpolation = {
+    link = "Normal"
+  },
+  justInterpolationDelim = {
+    link = "Delimiter"
+  },
+  justInvalidAttrValue = {
+    link = "Error"
+  },
+  justLineContinuation = {
+    link = "Special"
+  },
+  justLineLeadingSymbol = {
+    link = "Special"
+  },
+  justModStatement = {
+    link = "Keyword"
+  },
+  justName = {
+    link = "Identifier"
+  },
+  justOldInclude = {
+    link = "Error"
+  },
+  justOperator = {
+    link = "Operator"
+  },
+  justOptionalFile = {
+    link = "Conditional"
+  },
+  justParamExport = {
+    link = "Statement"
+  },
+  justParameterError = {
+    link = "Error"
+  },
+  justParameterOperator = {
+    link = "Operator"
+  },
+  justRawStrRegexRepl = {
+    link = "String"
+  },
+  justRawString = {
+    link = "String"
+  },
+  justRecipeAt = {
+    link = "Special"
+  },
+  justRecipeAttr = {
+    link = "Type"
+  },
+  justRecipeAttrArgError = {
+    link = "Error"
+  },
+  justRecipeAttrSep = {
+    link = "Operator"
+  },
+  justRecipeAttrValueColon = {
+    link = "Operator"
+  },
+  justRecipeColon = {
+    link = "Operator"
+  },
+  justRecipeDepParamsParen = {
+    link = "Delimiter"
+  },
+  justRecipeSubsequentDeps = {
+    link = "Delimiter"
+  },
+  justRegexCapture = {
+    link = "Identifier"
+  },
+  justSet = {
+    link = "Statement"
+  },
+  justSetDeprecatedKeywords = {
+    link = "Underlined"
+  },
+  justSetKeywords = {
+    link = "Keyword"
+  },
+  justShebang = {
+    link = "SpecialComment"
+  },
+  justShebangBody = {
+    link = "Number"
+  },
+  justShebangIndentError = {
+    link = "Error"
+  },
+  justShellExpandDefault = {
+    link = "Character"
+  },
+  justShellExpandDefaultDelimiter = {
+    link = "Operator"
+  },
+  justShellExpandRawDefaultDelimiter = {
+    link = "Operator"
+  },
+  justShellExpandRawDefaultValue = {
+    link = "Character"
+  },
+  justShellExpandRawString = {
+    link = "String"
+  },
+  justShellExpandString = {
+    link = "String"
+  },
+  justShellExpandVar = {
+    link = "PreProc"
+  },
+  justShellExpandVarRaw = {
+    link = "PreProc"
+  },
+  justShellSetError = {
+    link = "Error"
+  },
+  justString = {
+    link = "String"
+  },
+  justStringEscapeError = {
+    link = "Error"
+  },
+  justStringEscapeSequence = {
+    link = "Special"
+  },
+  justStringInShebangBody = {
+    link = "String"
+  },
+  justStringInsideBody = {
+    link = "String"
+  },
+  justStringRegexRepl = {
+    link = "String"
+  },
+  justStringUEscapeSequence = {
+    link = "Special"
+  },
+  justUnexport = {
+    link = "Statement"
+  },
+  justUserDefinedError = {
+    link = "Exception"
+  },
+  justVariadicPrefix = {
+    link = "Statement"
+  },
+  justVariadicPrefixError = {
+    link = "Error"
+  },
+  karelAction = {
+    link = "Keyword"
+  },
+  karelBoolean = {
+    link = "Boolean"
+  },
+  karelClause = {
+    link = "Keyword"
+  },
+  karelComment = {
+    link = "Comment"
+  },
+  karelConditional = {
+    link = "Conditional"
+  },
+  karelConstant = {
+    link = "Constant"
+  },
+  karelDirective = {
+    link = "PreProc"
+  },
+  karelFunction = {
+    link = "Function"
+  },
+  karelIdentifier = {
+    link = "Identifier"
+  },
+  karelInteger = {
+    link = "Number"
+  },
+  karelKeyword = {
+    link = "Keyword"
+  },
+  karelOperator = {
+    link = "Operator"
+  },
+  karelProcedure = {
+    link = "Function"
+  },
+  karelReal = {
+    link = "Float"
+  },
+  karelRepeat = {
+    link = "Repeat"
+  },
+  karelStatement = {
+    link = "Statement"
+  },
+  karelString = {
+    link = "String"
+  },
+  karelStructure = {
+    link = "Typedef"
+  },
+  karelType = {
+    link = "Type"
+  },
   kconfigComment = {
     link = "Comment"
   },
@@ -18779,6 +19920,24 @@ return
   },
   kconfigType = {
     link = "Type"
+  },
+  kdlBool = {
+    link = "Boolean"
+  },
+  kdlComment = {
+    link = "Comment"
+  },
+  kdlNode = {
+    link = "Statement"
+  },
+  kdlNumber = {
+    link = "Number"
+  },
+  kdlString = {
+    link = "String"
+  },
+  kdlTodo = {
+    link = "Todo"
   },
   kivyAttribute = {
     link = "Label"
@@ -19630,6 +20789,36 @@ return
   lexStartStateCmd = {
     link = "Special"
   },
+  lfComment = {
+    link = "Comment"
+  },
+  lfConstant = {
+    link = "Constant"
+  },
+  lfExternalPatch = {
+    link = "Special"
+  },
+  lfExternalShell = {
+    link = "Normal"
+  },
+  lfIgnore = {
+    link = "Special"
+  },
+  lfKeyword = {
+    link = "Statement"
+  },
+  lfOptions = {
+    link = "Constant"
+  },
+  lfSpecial = {
+    link = "Special"
+  },
+  lfString = {
+    link = "String"
+  },
+  lfVar = {
+    link = "Type"
+  },
   lftpBoolean = {
     link = "Boolean"
   },
@@ -19671,6 +20860,9 @@ return
   },
   libaoTodo = {
     link = "Todo"
+  },
+  lidris2BirdTrack = {
+    link = "Comment"
   },
   lifelinesArithm = {
     link = "Operator"
@@ -20148,6 +21340,57 @@ return
   },
   litestepVariableExpansion = {
     link = "litestepDelimiter"
+  },
+  lnkAttrib = {
+    link = "Type"
+  },
+  lnkFile = {
+    link = "String"
+  },
+  lnkKeyword = {
+    link = "Keyword"
+  },
+  lnkLibFile = {
+    link = "Special"
+  },
+  lnkLibrary = {
+    link = "String"
+  },
+  lnkNumber = {
+    link = "Number"
+  },
+  lnkOption = {
+    link = "Special"
+  },
+  lnkSections = {
+    link = "Macro"
+  },
+  lnkmapAttrib = {
+    link = "Type"
+  },
+  lnkmapFile = {
+    link = "String"
+  },
+  lnkmapHeadline = {
+    link = "Title"
+  },
+  lnkmapLibFile = {
+    link = "Special"
+  },
+  lnkmapNumber = {
+    link = "Number"
+  },
+  lnkmapSectionDelim = {
+    link = "PreProc"
+  },
+  lnkmapSections = {
+    link = "Macro"
+  },
+  lnkmapTableDelim = {
+    link = "PreProc"
+  },
+  lnkmapTime = {
+    link = "Comment"
   },
   loginaccessAllOrigins = {
     link = "Macro"
@@ -20990,6 +22233,21 @@ return
   lynxTodo = {
     link = "Todo"
   },
+  m17ndbCharacter = {
+    link = "Character"
+  },
+  m17ndbComment = {
+    link = "Comment"
+  },
+  m17ndbInteger = {
+    link = "Number"
+  },
+  m17ndbParen = {
+    link = "Delimiter"
+  },
+  m17ndbText = {
+    link = "String"
+  },
   m3buildPredefinedVariable = {
     link = "Identifier"
   },
@@ -21344,6 +22602,9 @@ return
   markdownCode = {
     link = "Special"
   },
+  markdownCodeBlock = {
+    link = "Special"
+  },
   markdownCodeDelimiter = {
     link = "Delimiter"
   },
@@ -21415,6 +22676,9 @@ return
   },
   markdownItalicDelimiter = {
     link = "markdownItalic"
+  },
+  markdownLinkDelimiter = {
+    link = "Comment"
   },
   markdownLinkText = {
     link = "htmlLink"
@@ -23048,6 +24312,18 @@ return
   msqlType = {
     link = "Type"
   },
+  mssComment = {
+    link = "Comment"
+  },
+  mssConstant = {
+    link = "Constant"
+  },
+  mssKeyword = {
+    link = "Keyword"
+  },
+  mssType = {
+    link = "Type"
+  },
   mupadComment = {
     link = "Comment"
   },
@@ -23219,6 +24495,9 @@ return
   muttrcAliasFormatStr = {
     link = "muttrcString"
   },
+  muttrcAliasFormatString = {
+    link = "muttrcString"
+  },
   muttrcAliasGroupDefNL = {
     link = "SpecialChar"
   },
@@ -23252,6 +24531,9 @@ return
   muttrcAttachFormatStr = {
     link = "muttrcString"
   },
+  muttrcAttachFormatString = {
+    link = "muttrcString"
+  },
   muttrcAttachmentsFlag = {
     link = "Type"
   },
@@ -23260,6 +24542,15 @@ return
   },
   muttrcAttachmentsMimeType = {
     link = "String"
+  },
+  muttrcAutocryptFormatConditionals = {
+    link = "muttrcFormatConditionals2"
+  },
+  muttrcAutocryptFormatEscapes = {
+    link = "muttrcEscape"
+  },
+  muttrcAutocryptFormatString = {
+    link = "muttrcString"
   },
   muttrcBackgroundFormatStr = {
     link = "muttrcString"
@@ -23363,6 +24654,12 @@ return
   muttrcComposeFormatStr = {
     link = "muttrcString"
   },
+  muttrcComposeFormatString = {
+    link = "muttrcString"
+  },
+  muttrcDeprecatedCommand = {
+    link = "Error"
+  },
   muttrcEmail = {
     link = "Special"
   },
@@ -23381,6 +24678,9 @@ return
   muttrcFolderFormatStr = {
     link = "muttrcString"
   },
+  muttrcFolderFormatString = {
+    link = "muttrcString"
+  },
   muttrcFormatConditionals2 = {
     link = "Type"
   },
@@ -23390,16 +24690,28 @@ return
   muttrcFunction = {
     link = "Macro"
   },
+  muttrcGreetingFormatConditionals = {
+    link = "muttrcFormatConditionals2"
+  },
+  muttrcGreetingFormatEscapes = {
+    link = "muttrcEscape"
+  },
+  muttrcGreetingFormatString = {
+    link = "muttrcString"
+  },
   muttrcGroupDef = {
     link = "Macro"
   },
   muttrcGroupFlag = {
     link = "Type"
   },
+  muttrcGroupIndexFormatConditionals = {
+    link = "muttrcFormatConditionals2"
+  },
   muttrcGroupIndexFormatEscapes = {
     link = "muttrcEscape"
   },
-  muttrcGroupIndexFormatStr = {
+  muttrcGroupIndexFormatString = {
     link = "muttrcString"
   },
   muttrcGroupKeyword = {
@@ -23410,6 +24722,15 @@ return
   },
   muttrcHeader = {
     link = "Type"
+  },
+  muttrcHistoryFormatConditionals = {
+    link = "muttrcFormatConditionals2"
+  },
+  muttrcHistoryFormatEscapes = {
+    link = "muttrcEscape"
+  },
+  muttrcHistoryFormatString = {
+    link = "muttrcString"
   },
   muttrcHooks = {
     link = "Type"
@@ -23427,6 +24748,9 @@ return
     link = "muttrcCommand"
   },
   muttrcIndexFormatStr = {
+    link = "muttrcString"
+  },
+  muttrcIndexFormatString = {
     link = "muttrcString"
   },
   muttrcKey = {
@@ -23522,16 +24846,37 @@ return
   muttrcPatternFormatEscapes = {
     link = "muttrcEscape"
   },
-  muttrcPatternFormatStr = {
+  muttrcPatternFormatString = {
     link = "muttrcString"
   },
   muttrcPatternNL = {
     link = "SpecialChar"
   },
+  muttrcPgpCommandFormatConditionals = {
+    link = "muttrcFormatConditionals2"
+  },
+  muttrcPgpCommandFormatEscapes = {
+    link = "muttrcEscape"
+  },
+  muttrcPgpCommandFormatString = {
+    link = "muttrcString"
+  },
+  muttrcPgpEntryFormatConditionals = {
+    link = "muttrcFormatConditionals2"
+  },
+  muttrcPgpEntryFormatEscapes = {
+    link = "muttrcEscape"
+  },
+  muttrcPgpEntryFormatString = {
+    link = "muttrcString"
+  },
+  muttrcQueryFormatConditionals = {
+    link = "muttrcFormatConditionals2"
+  },
   muttrcQueryFormatEscapes = {
     link = "muttrcEscape"
   },
-  muttrcQueryFormatStr = {
+  muttrcQueryFormatString = {
     link = "muttrcString"
   },
   muttrcRXChars = {
@@ -23570,10 +24915,13 @@ return
   muttrcShellString = {
     link = "muttrcEscape"
   },
+  muttrcSidebarFormatConditionals = {
+    link = "muttrcFormatConditionals2"
+  },
   muttrcSidebarFormatEscapes = {
     link = "muttrcEscape"
   },
-  muttrcSidebarFormatStr = {
+  muttrcSidebarFormatString = {
     link = "muttrcString"
   },
   muttrcSimplePat = {
@@ -23584,6 +24932,15 @@ return
   },
   muttrcSimplePatString = {
     link = "Macro"
+  },
+  muttrcSmimeCommandFormatConditionals = {
+    link = "muttrcFormatConditionals2"
+  },
+  muttrcSmimeCommandFormatEscapes = {
+    link = "muttrcEscape"
+  },
+  muttrcSmimeCommandFormatString = {
+    link = "muttrcString"
   },
   muttrcSmimeFormatConditionals = {
     link = "muttrcFormatConditionals2"
@@ -23606,10 +24963,16 @@ return
   muttrcStatusFormatStr = {
     link = "muttrcString"
   },
+  muttrcStatusFormatString = {
+    link = "muttrcString"
+  },
   muttrcStrftimeEscapes = {
     link = "Type"
   },
   muttrcStrftimeFormatStr = {
+    link = "muttrcString"
+  },
+  muttrcStrftimeFormatString = {
     link = "muttrcString"
   },
   muttrcString = {
@@ -23657,10 +25020,13 @@ return
   muttrcVarDeprecatedBool = {
     link = "Error"
   },
+  muttrcVarDeprecatedNum = {
+    link = "Error"
+  },
   muttrcVarDeprecatedQuad = {
     link = "Error"
   },
-  muttrcVarDeprecatedStr = {
+  muttrcVarDeprecatedString = {
     link = "Error"
   },
   muttrcVarNum = {
@@ -23670,6 +25036,9 @@ return
     link = "Identifier"
   },
   muttrcVarStr = {
+    link = "Identifier"
+  },
+  muttrcVarString = {
     link = "Identifier"
   },
   muttrcVariableInner = {
@@ -23855,20 +25224,26 @@ return
   mysqlComment = {
     link = "Comment"
   },
-  mysqlFlow = {
-    link = "Statement"
+  mysqlFlowFunction = {
+    link = "Function"
+  },
+  mysqlFlowLabel = {
+    link = "Label"
   },
   mysqlFunction = {
     link = "Function"
   },
   mysqlKeyword = {
-    link = "Statement"
+    link = "Keyword"
   },
   mysqlNumber = {
     link = "Number"
   },
   mysqlOperator = {
-    link = "Statement"
+    link = "Operator"
+  },
+  mysqlOperatorFunction = {
+    link = "Function"
   },
   mysqlSpecial = {
     link = "Special"
@@ -23881,6 +25256,12 @@ return
   },
   mysqlVariable = {
     link = "Identifier"
+  },
+  mysqlWindowFunction = {
+    link = "Function"
+  },
+  mysqlWindowKeyword = {
+    link = "Keyword"
   },
   n1qlBucketSpec = {
     link = "Underlined"
@@ -24169,11 +25550,11 @@ return
   nanorcTodo = {
     link = "Todo"
   },
-  nasmAVXInstruction = {
-    link = "Statement"
+  nasmBcdConst = {
+    link = "Float"
   },
-  nasmAmdInstruction = {
-    link = "Special"
+  nasmBinFloat = {
+    link = "Float"
   },
   nasmBinNumber = {
     link = "Number"
@@ -24205,6 +25586,9 @@ return
   nasmDebugRegister = {
     link = "Debug"
   },
+  nasmDecFloat = {
+    link = "Float"
+  },
   nasmDecNumber = {
     link = "Number"
   },
@@ -24214,17 +25598,11 @@ return
   nasmDirective = {
     link = "Keyword"
   },
-  nasmF16CInstruction = {
-    link = "Statement"
-  },
-  nasmFltNumber = {
-    link = "Float"
-  },
   nasmFmtDirective = {
     link = "Keyword"
   },
-  nasmFpuInstruction = {
-    link = "Statement"
+  nasmHexFloat = {
+    link = "Float"
   },
   nasmHexNumber = {
     link = "Number"
@@ -24271,6 +25649,222 @@ return
   nasmInstrModifier = {
     link = "Operator"
   },
+  nasmInstruction3DNOW = {
+    link = "Statement"
+  },
+  nasmInstructionAES = {
+    link = "Statement"
+  },
+  nasmInstructionAMD_PROFILING = {
+    link = "Statement"
+  },
+  nasmInstructionAMD_SSE4A = {
+    link = "Statement"
+  },
+  nasmInstructionAMX = {
+    link = "Statement"
+  },
+  nasmInstructionAVX = {
+    link = "Statement"
+  },
+  nasmInstructionAVX2 = {
+    link = "Statement"
+  },
+  nasmInstructionAVX512 = {
+    link = "Statement"
+  },
+  nasmInstructionAVX512_BF16 = {
+    link = "Statement"
+  },
+  nasmInstructionAVX512_BITALG = {
+    link = "Statement"
+  },
+  nasmInstructionAVX512_BMI = {
+    link = "Statement"
+  },
+  nasmInstructionAVX512_DP = {
+    link = "Statement"
+  },
+  nasmInstructionAVX512_FMA = {
+    link = "Statement"
+  },
+  nasmInstructionAVX512_FP16 = {
+    link = "Statement"
+  },
+  nasmInstructionAVX512_MASK = {
+    link = "Statement"
+  },
+  nasmInstructionAVX512_MASK_INTERSECT = {
+    link = "Statement"
+  },
+  nasmInstructionAVX512_MASK_REG = {
+    link = "Statement"
+  },
+  nasmInstructionAVX512_VNNI = {
+    link = "Statement"
+  },
+  nasmInstructionAVX_AES = {
+    link = "Statement"
+  },
+  nasmInstructionAVX_IFMA = {
+    link = "Statement"
+  },
+  nasmInstructionAVX_NOEXCEPT = {
+    link = "Statement"
+  },
+  nasmInstructionAVX_VECTOR_NN = {
+    link = "Statement"
+  },
+  nasmInstructionBARCELONA = {
+    link = "Statement"
+  },
+  nasmInstructionBMI_ABM = {
+    link = "Statement"
+  },
+  nasmInstructionCET = {
+    link = "Statement"
+  },
+  nasmInstructionCMPCCXADD = {
+    link = "Statement"
+  },
+  nasmInstructionFRET = {
+    link = "Statement"
+  },
+  nasmInstructionGALOISFIELD = {
+    link = "Statement"
+  },
+  nasmInstructionGEODE_3DNOW = {
+    link = "Statement"
+  },
+  nasmInstructionHINTNOP = {
+    link = "Statement"
+  },
+  nasmInstructionHRESET = {
+    link = "Statement"
+  },
+  nasmInstructionINTEL_AVX_CMUL = {
+    link = "Statement"
+  },
+  nasmInstructionINTEL_CMUL = {
+    link = "Statement"
+  },
+  nasmInstructionINTEL_EXTENSION = {
+    link = "Statement"
+  },
+  nasmInstructionINTEL_EXTENSIONS = {
+    link = "Statement"
+  },
+  nasmInstructionINTEL_FMA = {
+    link = "Statement"
+  },
+  nasmInstructionINTEL_NEW = {
+    link = "Statement"
+  },
+  nasmInstructionINTEL_POST32 = {
+    link = "Statement"
+  },
+  nasmInstructionINTEL_PUB = {
+    link = "Statement"
+  },
+  nasmInstructionMEM = {
+    link = "Statement"
+  },
+  nasmInstructionMMX = {
+    link = "Statement"
+  },
+  nasmInstructionMPE = {
+    link = "Statement"
+  },
+  nasmInstructionNEHALEM = {
+    link = "Statement"
+  },
+  nasmInstructionNMEM = {
+    link = "Statement"
+  },
+  nasmInstructionPENRY = {
+    link = "Statement"
+  },
+  nasmInstructionPRESSCOT = {
+    link = "Statement"
+  },
+  nasmInstructionPROTECTION = {
+    link = "Statement"
+  },
+  nasmInstructionPTVMX = {
+    link = "Statement"
+  },
+  nasmInstructionPTWRITE = {
+    link = "Statement"
+  },
+  nasmInstructionRAO_INT = {
+    link = "Statement"
+  },
+  nasmInstructionRDPID = {
+    link = "Statement"
+  },
+  nasmInstructionSEVSNPAMD = {
+    link = "Statement"
+  },
+  nasmInstructionSGX = {
+    link = "Statement"
+  },
+  nasmInstructionSHA = {
+    link = "Statement"
+  },
+  nasmInstructionSIMD = {
+    link = "Statement"
+  },
+  nasmInstructionSM3 = {
+    link = "Statement"
+  },
+  nasmInstructionSM4 = {
+    link = "Statement"
+  },
+  nasmInstructionSMX = {
+    link = "Statement"
+  },
+  nasmInstructionSSE = {
+    link = "Statement"
+  },
+  nasmInstructionSSE2 = {
+    link = "Statement"
+  },
+  nasmInstructionSUPERVISOR = {
+    link = "Statement"
+  },
+  nasmInstructionStandard = {
+    link = "Statement"
+  },
+  nasmInstructionTEJAS = {
+    link = "Statement"
+  },
+  nasmInstructionTRANSACTIONS = {
+    link = "Statement"
+  },
+  nasmInstructionUSERINT = {
+    link = "Statement"
+  },
+  nasmInstructionVIA_SECURITY = {
+    link = "Statement"
+  },
+  nasmInstructionVMXSVM = {
+    link = "Statement"
+  },
+  nasmInstructionWMMX = {
+    link = "Statement"
+  },
+  nasmInstructionWRMSRNS_MSRLIST = {
+    link = "Statement"
+  },
+  nasmInstructionWSSD = {
+    link = "Statement"
+  },
+  nasmInstructionXOP_FMA4 = {
+    link = "Statement"
+  },
+  nasmInstructionXSAVE = {
+    link = "Statement"
+  },
   nasmInstructnError = {
     link = "Error"
   },
@@ -24292,14 +25886,11 @@ return
   nasmMemRefError = {
     link = "Error"
   },
-  nasmMmxInstruction = {
-    link = "Statement"
-  },
-  nasmNowInstruction = {
-    link = "Statement"
-  },
   nasmNumberError = {
     link = "Error"
+  },
+  nasmOctFloat = {
+    link = "Float"
   },
   nasmOctNumber = {
     link = "Number"
@@ -24322,20 +25913,17 @@ return
   nasmRepeat = {
     link = "Repeat"
   },
+  nasmSpecFloat = {
+    link = "Float"
+  },
   nasmSpecialComment = {
     link = "SpecialComment"
   },
   nasmSpecialLabel = {
     link = "Special"
   },
-  nasmSseInstruction = {
-    link = "Statement"
-  },
   nasmStdDirective = {
     link = "Operator"
-  },
-  nasmStdInstruction = {
-    link = "Statement"
   },
   nasmStorage = {
     link = "StorageClass"
@@ -24352,9 +25940,6 @@ return
   nasmStructureLabel = {
     link = "nasmStructure"
   },
-  nasmSysInstruction = {
-    link = "Statement"
-  },
   nasmTestRegister = {
     link = "Special"
   },
@@ -24363,9 +25948,6 @@ return
   },
   nasmTypeError = {
     link = "Error"
-  },
-  nasmUndInstruction = {
-    link = "Todo"
   },
   nastranBulkData = {
     link = "nastranDmapType"
@@ -24591,6 +26173,93 @@ return
   },
   ncfTimeTypes = {
     link = "Constant"
+  },
+  neolog_banner = {
+    ctermfg = 13,
+    fg = 16711935
+  },
+  neolog_date = {
+    ctermfg = 14,
+    fg = 4259839
+  },
+  neolog_debug1 = {
+    ctermfg = 15,
+    fg = 16777215
+  },
+  neolog_debug1_key = {
+    link = "neolog_debug1"
+  },
+  neolog_debug2 = {
+    ctermfg = 15,
+    fg = 16777215
+  },
+  neolog_debug2_key = {
+    link = "neolog_debug2"
+  },
+  neolog_debug3 = {
+    ctermfg = 248,
+    fg = 12632256
+  },
+  neolog_debug3_key = {
+    link = "neolog_debug3"
+  },
+  neolog_debug4 = {
+    ctermfg = 248,
+    fg = 12632256
+  },
+  neolog_debug4_key = {
+    link = "neolog_debug4"
+  },
+  neolog_debug5 = {
+    ctermfg = 248,
+    fg = 12632256
+  },
+  neolog_debug5_key = {
+    link = "neolog_debug5"
+  },
+  neolog_error = {
+    ctermfg = 9,
+    fg = 16744576
+  },
+  neolog_error_key = {
+    link = "neolog_error"
+  },
+  neolog_function = {
+    bg = 2631720
+  },
+  neolog_message = {
+    ctermfg = 10,
+    fg = 8454016
+  },
+  neolog_message_key = {
+    link = "neolog_message"
+  },
+  neolog_notify = {
+    ctermfg = 248,
+    fg = 12632256
+  },
+  neolog_notify_key = {
+    link = "neolog_notify"
+  },
+  neolog_perror = {
+    ctermfg = 9,
+    fg = 16744576
+  },
+  neolog_perror_key = {
+    link = "neolog_perror"
+  },
+  neolog_version = {
+    cterm = {
+      reverse = true
+    },
+    reverse = true
+  },
+  neolog_warning = {
+    ctermfg = 11,
+    fg = 16777088
+  },
+  neolog_warning_key = {
+    link = "neolog_warning"
   },
   netrcComment = {
     link = "Comment"
@@ -25732,9 +27401,6 @@ return
   obseivionReloadedFunction = {
     link = "Function"
   },
-  ocamlAngle = {
-    link = "ocamlInfixOp"
-  },
   ocamlAnyVar = {
     link = "Keyword"
   },
@@ -25762,9 +27428,6 @@ return
   ocamlComment = {
     link = "Comment"
   },
-  ocamlCommentErr = {
-    link = "Error"
-  },
   ocamlCons = {
     link = "ocamlInfixOp"
   },
@@ -25779,6 +27442,9 @@ return
   },
   ocamlDoneErr = {
     link = "Error"
+  },
+  ocamlEmptyConstructor = {
+    link = "ocamlConstructor"
   },
   ocamlEncl = {
     link = "Keyword"
@@ -25801,8 +27467,14 @@ return
   ocamlFullMod = {
     link = "Include"
   },
+  ocamlFunTypeAnnot = {
+    link = "ocamlTypeCatchAll"
+  },
   ocamlFuncWith = {
     link = "Include"
+  },
+  ocamlFunctor = {
+    link = "Keyword"
   },
   ocamlGenMod = {
     link = "Include"
@@ -25822,14 +27494,11 @@ return
   ocamlKeyword = {
     link = "Keyword"
   },
+  ocamlKwErr = {
+    link = "Error"
+  },
   ocamlLabel = {
     link = "Identifier"
-  },
-  ocamlMPRestr2 = {
-    link = "Keyword"
-  },
-  ocamlMPRestr3 = {
-    link = "Include"
   },
   ocamlMTDef = {
     link = "Include"
@@ -25849,8 +27518,11 @@ return
   ocamlModPreRHS = {
     link = "Keyword"
   },
-  ocamlModType = {
-    link = "Include"
+  ocamlModTypeOf = {
+    link = "Keyword"
+  },
+  ocamlModTypePre = {
+    link = "Keyword"
   },
   ocamlModTypeRestr = {
     link = "Include"
@@ -25882,11 +27554,11 @@ return
   ocamlScript = {
     link = "Include"
   },
+  ocamlShebang = {
+    link = "ocamlComment"
+  },
   ocamlSigEncl = {
     link = "ocamlModule"
-  },
-  ocamlStar = {
-    link = "ocamlInfixOp"
   },
   ocamlString = {
     link = "String"
@@ -25903,8 +27575,96 @@ return
   ocamlTopStop = {
     link = "Keyword"
   },
-  ocamlType = {
+  ocamlTypeAmp = {
+    link = "ocamlTypeKeyChar"
+  },
+  ocamlTypeAnnot = {
+    link = "ocamlTypeCatchAll"
+  },
+  ocamlTypeAnyVar = {},
+  ocamlTypeAs = {
+    link = "ocamlKeyword"
+  },
+  ocamlTypeBlank = {},
+  ocamlTypeBuiltin = {
     link = "Type"
+  },
+  ocamlTypeCatchAll = {
+    link = "Error"
+  },
+  ocamlTypeConstr = {},
+  ocamlTypeDef = {
+    link = "ocamlTypeCatchAll"
+  },
+  ocamlTypeDefAnd = {
+    link = "ocamlKeyword"
+  },
+  ocamlTypeDefDots = {
+    link = "ocamlKeyChar"
+  },
+  ocamlTypeDotlessModPath = {
+    link = "ocamlTypeModPath"
+  },
+  ocamlTypeEq = {
+    link = "ocamlKeyChar"
+  },
+  ocamlTypeKeyChar = {
+    link = "ocamlKeyChar"
+  },
+  ocamlTypeLabel = {
+    link = "ocamlLabel"
+  },
+  ocamlTypeModPath = {
+    link = "ocamlModPath"
+  },
+  ocamlTypeMutable = {
+    link = "ocamlKeyword"
+  },
+  ocamlTypeObject = {
+    link = "ocamlTypeCatchAll"
+  },
+  ocamlTypeObjectAnnot = {
+    link = "ocamlTypeCatchAll"
+  },
+  ocamlTypeObjectDots = {
+    link = "ocamlKeyChar"
+  },
+  ocamlTypePrivate = {
+    link = "ocamlKeyword"
+  },
+  ocamlTypeRecordAnnot = {
+    link = "ocamlTypeCatchAll"
+  },
+  ocamlTypeRecordDecl = {
+    link = "ocamlTypeCatchAll"
+  },
+  ocamlTypeSumAnnot = {
+    link = "ocamlTypeCatchAll"
+  },
+  ocamlTypeSumBar = {
+    link = "ocamlKeyChar"
+  },
+  ocamlTypeSumConstr = {
+    link = "ocamlConstructor"
+  },
+  ocamlTypeSumDecl = {
+    link = "ocamlTypeCatchAll"
+  },
+  ocamlTypeVar = {},
+  ocamlTypeVariance = {
+    link = "ocamlKeyChar"
+  },
+  ocamlTypeVariant = {
+    link = "ocamlTypeCatchAll"
+  },
+  ocamlTypeVariantAnnot = {
+    link = "ocamlTypeCatchAll"
+  },
+  ocamlTypeVariantConstr = {
+    link = "ocamlConstructor"
+  },
+  ocamlTypeVariantKeyChar = {
+    link = "ocamlKeyChar"
   },
   ocamlVal = {
     link = "Keyword"
@@ -26098,9 +27858,6 @@ return
   opamKeyword1 = {
     link = "Keyword"
   },
-  opamKeyword2 = {
-    link = "Keyword"
-  },
   opamOperator = {
     link = "Operator"
   },
@@ -26109,6 +27866,9 @@ return
   },
   opamString = {
     link = "String"
+  },
+  opamUnclosedInterpolate = {
+    link = "Error"
   },
   openroadClass = {
     link = "Type"
@@ -26307,6 +28067,66 @@ return
   },
   oraValue = {
     link = "Identifier"
+  },
+  orgBlockComment = {
+    link = "Comment"
+  },
+  orgBlockCommentDelimiter = {
+    link = "Comment"
+  },
+  orgBold = {
+    link = "markdownBold"
+  },
+  orgBoldDelimiter = {
+    link = "orgBold"
+  },
+  orgCodeBlock = {
+    link = "markdownCodeBlock"
+  },
+  orgCodeBlockDelimiter = {
+    link = "orgCodeBlock"
+  },
+  orgCodeInline = {
+    link = "markdownCodeBlock"
+  },
+  orgCodeInlineDelimiter = {
+    link = "orgCodeInline"
+  },
+  orgHeadline = {
+    link = "Title"
+  },
+  orgItalic = {
+    link = "markdownItalic"
+  },
+  orgItalicDelimiter = {
+    link = "orgItalic"
+  },
+  orgLineComment = {
+    link = "Comment"
+  },
+  orgOrderedListMarker = {
+    link = "markdownOrderedListMarker"
+  },
+  orgStrikethrough = {
+    link = "markdownStrike"
+  },
+  orgStrikethroughDelimiter = {
+    link = "orgStrikethrough"
+  },
+  orgUnorderedListMarker = {
+    link = "markdownOrderedListMarker"
+  },
+  orgVerbatimBlock = {
+    link = "orgCode"
+  },
+  orgVerbatimBlockDelimiter = {
+    link = "orgVerbatimBlock"
+  },
+  orgVerbatimInline = {
+    link = "markdownCodeBlock"
+  },
+  orgVerbatimInlineDelimiter = {
+    link = "orgVerbatimInline"
   },
   pacmanlogDowngraded = {
     link = "pacmanlogRemoved"
@@ -28411,9 +30231,6 @@ return
   poCommentAutomatic = {
     link = "Comment"
   },
-  poCommentDiff = {
-    link = "Comment"
-  },
   poCommentFlags = {
     link = "Special"
   },
@@ -28422,6 +30239,9 @@ return
   },
   poCommentKDEError = {
     link = "Error"
+  },
+  poCommentPrevious = {
+    link = "Comment"
   },
   poCommentSources = {
     link = "PreProc"
@@ -28432,10 +30252,7 @@ return
   poCopyrightUnset = {
     link = "Todo"
   },
-  poDiffNew = {
-    link = "Special"
-  },
-  poDiffOld = {
+  poFlagFormat = {
     link = "Todo"
   },
   poFlagFuzzy = {
@@ -29206,6 +31023,78 @@ return
   protocolsTodo = {
     link = "Todo"
   },
+  prqlAnnotation = {
+    link = "Define"
+  },
+  prqlAnnotationName = {
+    link = "Function"
+  },
+  prqlBoolean = {
+    link = "Boolean"
+  },
+  prqlBuiltin = {
+    link = "Function"
+  },
+  prqlComment = {
+    link = "Comment"
+  },
+  prqlConditional = {
+    link = "Conditional"
+  },
+  prqlDoctest = {
+    link = "Special"
+  },
+  prqlDoctestValue = {
+    link = "Define"
+  },
+  prqlEscape = {
+    link = "Special"
+  },
+  prqlFString = {
+    link = "String"
+  },
+  prqlFunction = {
+    link = "Function"
+  },
+  prqlInclude = {
+    link = "Include"
+  },
+  prqlNumber = {
+    link = "Number"
+  },
+  prqlOperator = {
+    link = "Operator"
+  },
+  prqlQuotes = {
+    link = "String"
+  },
+  prqlRString = {
+    link = "String"
+  },
+  prqlRepeat = {
+    link = "Repeat"
+  },
+  prqlSString = {
+    link = "String"
+  },
+  prqlSelf = {
+    link = "Constant"
+  },
+  prqlStatement = {
+    link = "Statement"
+  },
+  prqlString = {
+    link = "String"
+  },
+  prqlTodo = {
+    link = "Todo"
+  },
+  prqlTripleQuotes = {
+    link = "prqlQuotes"
+  },
+  prqlType = {
+    link = "Type"
+  },
   ps1Block = {
     link = "Block"
   },
@@ -29389,6 +31278,33 @@ return
     link = "Type"
   },
   ptcapString = {},
+  ptxComment = {
+    link = "Comment"
+  },
+  ptxCommentL = {
+    link = "ptxComment"
+  },
+  ptxCommentStart = {
+    link = "ptxComment"
+  },
+  ptxDirective = {
+    link = "Keyword"
+  },
+  ptxFunction = {
+    link = "Function"
+  },
+  ptxOperator = {
+    link = "Operator"
+  },
+  ptxStatement = {
+    link = "Statement"
+  },
+  ptxStorageClass = {
+    link = "StorageClass"
+  },
+  ptxType = {
+    link = "Type"
+  },
   purifyLogABR = {
     link = "purifyLogWarning"
   },
@@ -29649,6 +31565,15 @@ return
   },
   qfLineNr = {
     link = "LineNr"
+  },
+  qfSeparator1 = {
+    link = "Delimiter"
+  },
+  qfSeparator2 = {
+    link = "Delimiter"
+  },
+  qfText = {
+    link = "Normal"
   },
   qmlArrowFunction = {
     link = "Function"
@@ -30885,6 +32810,165 @@ return
   },
   rapidTypeDef = {
     link = "Typedef"
+  },
+  rasiBool = {
+    link = "Boolean"
+  },
+  rasiColorK = {
+    link = "Function"
+  },
+  rasiComment = {
+    link = "Comment"
+  },
+  rasiCommentError = {
+    link = "rasiError"
+  },
+  rasiCommentL = {
+    link = "rasiComment"
+  },
+  rasiCommentStart = {
+    link = "rasiComment"
+  },
+  rasiCursor = {
+    link = "Keyword"
+  },
+  rasiDistanceCalc = {
+    link = "Function"
+  },
+  rasiDistanceCalcOp = {
+    link = "Operator"
+  },
+  rasiDistanceUnit = {
+    link = "Type"
+  },
+  rasiEnv = {
+    link = "Identifier"
+  },
+  rasiEnvRef = {
+    link = "Identifier"
+  },
+  rasiEnvVarK = {
+    link = "Function"
+  },
+  rasiError = {
+    link = "Error"
+  },
+  rasiGlobalImport = {
+    link = "Include"
+  },
+  rasiGlobalMedia = {
+    link = "PreProc"
+  },
+  rasiGlobalSection = {
+    link = "StorageClass"
+  },
+  rasiHexColor = {
+    link = "Number"
+  },
+  rasiImageDirection = {
+    link = "Keyword"
+  },
+  rasiImageK = {
+    link = "Function"
+  },
+  rasiImageScale = {
+    link = "Keyword"
+  },
+  rasiImageUnit = {
+    link = "Type"
+  },
+  rasiInherit = {
+    link = "Identifier"
+  },
+  rasiInvCMYKColor = {
+    link = "rasiInvColor"
+  },
+  rasiInvColor = {
+    link = "rasiError"
+  },
+  rasiInvDistance = {
+    link = "rasiError"
+  },
+  rasiInvEnv = {
+    link = "rasiError"
+  },
+  rasiInvEnvVar = {
+    link = "rasiError"
+  },
+  rasiInvHSLColor = {
+    link = "rasiInvColor"
+  },
+  rasiInvHexColor = {
+    link = "rasiInvColor"
+  },
+  rasiInvImage = {
+    link = "rasiError"
+  },
+  rasiInvMediaBody = {
+    link = "rasiError"
+  },
+  rasiInvProperty = {
+    link = "rasiError"
+  },
+  rasiInvPropertyId = {
+    link = "rasiError"
+  },
+  rasiInvPropertyVal = {
+    link = "rasiError"
+  },
+  rasiInvRGBColor = {
+    link = "rasiInvColor"
+  },
+  rasiInvVarReference = {
+    link = "rasiError"
+  },
+  rasiLineStyle = {
+    link = "Keyword"
+  },
+  rasiMediaK = {
+    link = "Keyword"
+  },
+  rasiNamedColor = {
+    link = "Number"
+  },
+  rasiNumber = {
+    link = "Number"
+  },
+  rasiOrientation = {
+    link = "Keyword"
+  },
+  rasiPosition = {
+    link = "Keyword"
+  },
+  rasiPropertyId = {
+    link = "Identifier"
+  },
+  rasiPropertyIdRef = {
+    link = "Identifier"
+  },
+  rasiReference = {
+    link = "Identifier"
+  },
+  rasiState = {
+    link = "Tag"
+  },
+  rasiString = {
+    link = "String"
+  },
+  rasiTextStyle = {
+    link = "Keyword"
+  },
+  rasiTodo = {
+    link = "Todo"
+  },
+  rasiVarReferenceK = {
+    link = "Function"
+  },
+  rasiVisibleMod = {
+    link = "Type"
+  },
+  rasiWidgetName = {
+    link = "StorageClass"
   },
   ratpoisonBooleanArg = {
     link = "Boolean"
@@ -34391,6 +36475,9 @@ return
   schemeSyntaxSyntax = {
     link = "PreProc"
   },
+  schemeTodo = {
+    link = "Todo"
+  },
   schemeTypeSyntax = {
     link = "Type"
   },
@@ -34556,6 +36643,12 @@ return
   sdcFlags = {
     link = "Special"
   },
+  sdcMiscCommmands = {
+    link = "Operator"
+  },
+  sdcModeConfig = {
+    link = "Operator"
+  },
   sdcNonIdealities = {
     link = "Operator"
   },
@@ -34563,6 +36656,9 @@ return
     link = "Operator"
   },
   sdcObjectsQuery = {
+    link = "Function"
+  },
+  sdcPowerArea = {
     link = "Operator"
   },
   sdlComment = {
@@ -35369,6 +37465,9 @@ return
   shArithmetic = {
     link = "Special"
   },
+  shArrayValue = {
+    link = "shDeref"
+  },
   shAstQuote = {
     link = "shDoubleQuote"
   },
@@ -35387,6 +37486,18 @@ return
   shBkslshSnglQuote = {
     link = "shSingleQuote"
   },
+  shBracketExprDelim = {
+    link = "Delimiter"
+  },
+  shBracketExprInv = {
+    link = "Underlined"
+  },
+  shBracketExprSkipLeftBracket = {
+    link = "shBracketExpr"
+  },
+  shBracketExprSkipRightBracket = {
+    link = "shBracketExpr"
+  },
   shCaseBar = {
     link = "shConditional"
   },
@@ -35402,6 +37513,15 @@ return
   shCaseIn = {
     link = "shConditional"
   },
+  shCaseRangeInv = {
+    link = "Underlined"
+  },
+  shCaseRangeSkipLeftBracket = {
+    link = "shCaseRange"
+  },
+  shCaseRangeSkipRightBracket = {
+    link = "shCaseRange"
+  },
   shCaseSingleQuote = {
     link = "shSingleQuote"
   },
@@ -35413,6 +37533,9 @@ return
   },
   shCmdSubRegion = {
     link = "shShellVariables"
+  },
+  shCollSymb = {
+    link = "shCharClass"
   },
   shColon = {
     link = "shComment"
@@ -35465,6 +37588,15 @@ return
   shDerefPSR = {
     link = "shDerefOp"
   },
+  shDerefPatternInv = {
+    link = "Underlined"
+  },
+  shDerefPatternSkipLeftBracket = {
+    link = "shDerefPattern"
+  },
+  shDerefPatternSkipRightBracket = {
+    link = "shDerefPattern"
+  },
   shDerefSimple = {
     link = "shDeref"
   },
@@ -35497,6 +37629,9 @@ return
   },
   shEmbeddedEcho = {
     link = "shString"
+  },
+  shEqClass = {
+    link = "shCharClass"
   },
   shEsacError = {
     link = "Error"
@@ -35728,6 +37863,54 @@ return
   },
   shWrapLineOperator = {
     link = "shOperator"
+  },
+  shaderslangAnnotation = {
+    link = "PreProc"
+  },
+  shaderslangAttribute = {
+    link = "Statement"
+  },
+  shaderslangEffectFunc = {
+    link = "Statement"
+  },
+  shaderslangEffectGroup = {
+    link = "Type"
+  },
+  shaderslangFunc = {
+    link = "shaderslangStatement"
+  },
+  shaderslangLayoutQual = {
+    link = "shaderslangFunc"
+  },
+  shaderslangProfile = {
+    link = "shaderslangStatement"
+  },
+  shaderslangSemantic = {
+    link = "PreProc"
+  },
+  shaderslangStateGroupArg = {
+    link = "shaderslangStatement"
+  },
+  shaderslangStateGroupVal = {
+    link = "Number"
+  },
+  shaderslangStatement = {
+    link = "Statement"
+  },
+  shaderslangStorageClass = {
+    link = "StorageClass"
+  },
+  shaderslangStructure = {
+    link = "Structure"
+  },
+  shaderslangSwizzle = {
+    link = "SpecialChar"
+  },
+  shaderslangType = {
+    link = "Type"
+  },
+  shaderslangTypeDeprec = {
+    link = "WarningMsg"
   },
   shellbang = {
     link = "Comment"
@@ -37216,6 +39399,12 @@ return
   solContractName = {
     link = "Function"
   },
+  solError = {
+    link = "Type"
+  },
+  solErrorName = {
+    link = "Function"
+  },
   solEvent = {
     link = "Type"
   },
@@ -37255,8 +39444,41 @@ return
   solString = {
     link = "String"
   },
+  soperator = {
+    link = "Operator"
+  },
   soundCommandsFunction = {
     link = "Function"
+  },
+  spajsonBoolean = {
+    link = "Boolean"
+  },
+  spajsonBrace = {
+    link = "Delimiter"
+  },
+  spajsonBracket = {
+    link = "Delimiter"
+  },
+  spajsonComment = {
+    link = "Comment"
+  },
+  spajsonError = {
+    link = "Error"
+  },
+  spajsonEscape = {
+    link = "SpecialChar"
+  },
+  spajsonFloat = {
+    link = "Float"
+  },
+  spajsonInt = {
+    link = "Number"
+  },
+  spajsonNull = {
+    link = "Constant"
+  },
+  spajsonString = {
+    link = "String"
   },
   specBlock = {
     link = "Function"
@@ -38722,9 +40944,6 @@ return
   sudoersNetworkInSpec = {
     link = "Number"
   },
-  sudoersPASSWD = {
-    link = "Special"
-  },
   sudoersParameterListComma = {
     link = "Delimiter"
   },
@@ -38739,6 +40958,9 @@ return
   },
   sudoersStringValue = {
     link = "String"
+  },
+  sudoersTagSpec = {
+    link = "Special"
   },
   sudoersTodo = {
     link = "Todo"
@@ -38816,6 +41038,9 @@ return
     link = "PreProc"
   },
   sudoersUserRunasBegin = {
+    link = "Delimiter"
+  },
+  sudoersUserRunasColon = {
     link = "Delimiter"
   },
   sudoersUserRunasComma = {
@@ -39752,6 +41977,39 @@ return
   tcshWhile = {
     link = "tcshBuiltin"
   },
+  teraBoolean = {
+    link = "Boolean"
+  },
+  teraCommentBlock = {
+    link = "Comment"
+  },
+  teraExpression = {
+    link = "Statement"
+  },
+  teraFilter = {
+    link = "Function"
+  },
+  teraFunction = {
+    link = "Function"
+  },
+  teraIdentifier = {
+    link = "Identifier"
+  },
+  teraKeyword = {
+    link = "Statement"
+  },
+  teraNumber = {
+    link = "Number"
+  },
+  teraOperator = {
+    link = "Operator"
+  },
+  teraStatement = {
+    link = "Statement"
+  },
+  teraString = {
+    link = "String"
+  },
   terminfoBooleans = {
     link = "Type"
   },
@@ -39781,6 +42039,9 @@ return
   },
   terminfoTodo = {
     link = "Todo"
+  },
+  terraType = {
+    link = "Type"
   },
   texAccent = {
     link = "texStatement"
@@ -39846,6 +42107,9 @@ return
   },
   texEmphStyle = {
     link = "texItalStyle"
+  },
+  texEnvArgs = {
+    link = "Number"
   },
   texError = {
     link = "Error"
@@ -40208,6 +42472,87 @@ return
   },
   tfsSpecialComment = {
     link = "Todo"
+  },
+  thriftBasicTypes = {
+    link = "Type"
+  },
+  thriftComment = {
+    link = "Comment"
+  },
+  thriftKeyword = {
+    link = "Special"
+  },
+  thriftNumber = {
+    link = "Number"
+  },
+  thriftSpecial = {
+    link = "Special"
+  },
+  thriftString = {
+    link = "String"
+  },
+  thriftStructure = {
+    link = "StorageClass"
+  },
+  thriftTodo = {
+    link = "Todo"
+  },
+  tiasmBinary = {
+    link = "Number"
+  },
+  tiasmCharacter = {
+    link = "Character"
+  },
+  tiasmCharacterEscape = {
+    link = "Special"
+  },
+  tiasmComment = {
+    link = "Comment"
+  },
+  tiasmCond = {
+    link = "PreCondit"
+  },
+  tiasmDecimal = {
+    link = "Number"
+  },
+  tiasmDirective = {
+    link = "Statement"
+  },
+  tiasmFloat = {
+    link = "Float"
+  },
+  tiasmFunction = {
+    link = "Function"
+  },
+  tiasmHexadecimal = {
+    link = "Number"
+  },
+  tiasmIdentifier = {
+    link = "Identifier"
+  },
+  tiasmInclude = {
+    link = "Include"
+  },
+  tiasmLabel = {
+    link = "Label"
+  },
+  tiasmMacro = {
+    link = "Macro"
+  },
+  tiasmOctal = {
+    link = "Number"
+  },
+  tiasmString = {
+    link = "String"
+  },
+  tiasmStringEscape = {
+    link = "Special"
+  },
+  tiasmTodo = {
+    link = "Todo"
+  },
+  tiasmType = {
+    link = "Type"
   },
   tidyAttributesDelimiter = {
     link = "Special"
@@ -41862,6 +44207,9 @@ return
   typescriptAsyncFuncKeyword = {
     link = "Keyword"
   },
+  typescriptAutoAccessor = {
+    link = "Keyword"
+  },
   typescriptBOM = {
     link = "Structure"
   },
@@ -42150,7 +44498,7 @@ return
   typescriptFrameEvent = {
     link = "Title"
   },
-  typescriptFuncArg = {
+  typescriptFuncCallArg = {
     link = "PreProc"
   },
   typescriptFuncComma = {
@@ -42495,6 +44843,9 @@ return
   typescriptUserDefinedType = {
     link = "Keyword"
   },
+  typescriptUsing = {
+    link = "Identifier"
+  },
   typescriptValueChangeEvent = {
     link = "Title"
   },
@@ -42518,6 +44869,196 @@ return
   },
   typescriptXHRProp = {
     link = "Keyword"
+  },
+  typstCodeBrace = {
+    link = "Noise"
+  },
+  typstCodeBracket = {
+    link = "Noise"
+  },
+  typstCodeConditional = {
+    link = "Conditional"
+  },
+  typstCodeConstant = {
+    link = "Constant"
+  },
+  typstCodeDollar = {
+    link = "Noise"
+  },
+  typstCodeFieldAccess = {
+    link = "Identifier"
+  },
+  typstCodeFunction = {
+    link = "Function"
+  },
+  typstCodeIdentifier = {
+    link = "Identifier"
+  },
+  typstCodeKeyword = {
+    link = "Keyword"
+  },
+  typstCodeLabel = {
+    link = "Structure"
+  },
+  typstCodeNumberAngle = {
+    link = "Number"
+  },
+  typstCodeNumberFloat = {
+    link = "Number"
+  },
+  typstCodeNumberFraction = {
+    link = "Number"
+  },
+  typstCodeNumberInteger = {
+    link = "Number"
+  },
+  typstCodeNumberLength = {
+    link = "Number"
+  },
+  typstCodeNumberRatio = {
+    link = "Number"
+  },
+  typstCodeParen = {
+    link = "Noise"
+  },
+  typstCodeRepeat = {
+    link = "Repeat"
+  },
+  typstCodeStatementWord = {
+    link = "Statement"
+  },
+  typstCodeString = {
+    link = "String"
+  },
+  typstCommentBlock = {
+    link = "Comment"
+  },
+  typstCommentLine = {
+    link = "Comment"
+  },
+  typstCommentTodo = {
+    link = "Todo"
+  },
+  typstHashtagBrace = {
+    link = "Noise"
+  },
+  typstHashtagBracket = {
+    link = "Noise"
+  },
+  typstHashtagConditional = {
+    link = "Conditional"
+  },
+  typstHashtagConstant = {
+    link = "Constant"
+  },
+  typstHashtagDollar = {
+    link = "Noise"
+  },
+  typstHashtagFieldAccess = {
+    link = "Identifier"
+  },
+  typstHashtagFunction = {
+    link = "Function"
+  },
+  typstHashtagIdentifier = {
+    link = "Identifier"
+  },
+  typstHashtagKeyword = {
+    link = "Keyword"
+  },
+  typstHashtagParen = {
+    link = "Noise"
+  },
+  typstHashtagRepeat = {
+    link = "Repeat"
+  },
+  typstHashtagStatementWord = {
+    link = "Statement"
+  },
+  typstMarkupBold = {
+    bold = true,
+    cterm = {
+      bold = true
+    }
+  },
+  typstMarkupBoldItalic = {
+    bold = true,
+    cterm = {
+      bold = true,
+      italic = true
+    },
+    italic = true
+  },
+  typstMarkupBulletList = {
+    link = "Structure"
+  },
+  typstMarkupDash = {
+    link = "Structure"
+  },
+  typstMarkupDollar = {
+    link = "Noise"
+  },
+  typstMarkupEllipsis = {
+    link = "Structure"
+  },
+  typstMarkupEnumList = {
+    link = "Structure"
+  },
+  typstMarkupHeading = {
+    bold = true,
+    cterm = {
+      bold = true,
+      underline = true
+    },
+    underline = true
+  },
+  typstMarkupItalic = {
+    cterm = {
+      italic = true
+    },
+    italic = true
+  },
+  typstMarkupLabel = {
+    link = "Structure"
+  },
+  typstMarkupLinebreak = {
+    link = "Structure"
+  },
+  typstMarkupNonbreakingSpace = {
+    link = "Structure"
+  },
+  typstMarkupRawBlock = {
+    link = "Macro"
+  },
+  typstMarkupRawInline = {
+    link = "Macro"
+  },
+  typstMarkupReference = {
+    link = "Structure"
+  },
+  typstMarkupShy = {
+    link = "Structure"
+  },
+  typstMarkupTermList = {
+    link = "Structure"
+  },
+  typstMarkupUrl = {
+    cterm = {
+      underline = true
+    },
+    underline = true
+  },
+  typstMathFunction = {
+    link = "Statement"
+  },
+  typstMathIdentifier = {
+    link = "Identifier"
+  },
+  typstMathNumber = {
+    link = "Number"
+  },
+  typstMathSymbol = {
+    link = "Statement"
   },
   ucBoolean = {
     link = "Boolean"
@@ -43518,17 +46059,125 @@ return
   vhdlVector = {
     link = "Number"
   },
+  vim9Abstract = {
+    link = "vimCommand"
+  },
+  vim9AbstractDef = {
+    link = "vimCommand"
+  },
+  vim9Boolean = {
+    link = "Boolean"
+  },
+  vim9Class = {
+    link = "vimCommand"
+  },
   vim9Comment = {
     link = "Comment"
+  },
+  vim9CommentError = {
+    link = "vimError"
   },
   vim9CommentTitle = {
     link = "PreProc"
   },
+  vim9Const = {
+    link = "vimCommand"
+  },
+  vim9ConstructorDefParam = {
+    link = "vimVar"
+  },
+  vim9ContinueComment = {
+    link = "vimContinueComment"
+  },
+  vim9Enum = {
+    link = "vimCommand"
+  },
+  vim9Export = {
+    link = "vimCommand"
+  },
+  vim9Extends = {
+    link = "Keyword"
+  },
+  vim9Final = {
+    link = "vimCommand"
+  },
+  vim9For = {
+    link = "vimCommand"
+  },
+  vim9ForInComment = {
+    link = "vim9Comment"
+  },
+  vim9Implements = {
+    link = "Keyword"
+  },
+  vim9Interface = {
+    link = "vimCommand"
+  },
   vim9KeymapLineComment = {
     link = "vimKeymapLineComment"
   },
+  vim9LambdaOperator = {
+    link = "vimOper"
+  },
+  vim9LambdaOperatorComment = {
+    link = "vim9Comment"
+  },
+  vim9LambdaParamsParen = {
+    link = "vimParenSep"
+  },
+  vim9LhsRegister = {
+    link = "vimLetRegister"
+  },
+  vim9LhsVariable = {
+    link = "vimVar"
+  },
   vim9LineComment = {
     link = "vimComment"
+  },
+  vim9MethodDef = {
+    link = "vimCommand"
+  },
+  vim9MethodName = {
+    link = "vimFuncName"
+  },
+  vim9MethodNameError = {
+    link = "vimFunctionError"
+  },
+  vim9Null = {
+    link = "Constant"
+  },
+  vim9Public = {
+    link = "vimCommand"
+  },
+  vim9Search = {
+    link = "vimString"
+  },
+  vim9SearchDelim = {
+    link = "Delimiter"
+  },
+  vim9Static = {
+    link = "vimCommand"
+  },
+  vim9Super = {
+    link = "Identifier"
+  },
+  vim9This = {
+    link = "Identifier"
+  },
+  vim9Type = {
+    link = "vimCommand"
+  },
+  vim9TypeAliasError = {
+    link = "vimError"
+  },
+  vim9TypeEquals = {
+    link = "vimOper"
+  },
+  vim9Var = {
+    link = "vimCommand"
+  },
+  vim9Variable = {
+    link = "vimVar"
   },
   vim9Vim9Script = {
     link = "vimCommand"
@@ -43553,6 +46202,9 @@ return
   },
   vimAutoCmd = {
     link = "vimCommand"
+  },
+  vimAutoCmdBang = {
+    link = "vimBang"
   },
   vimAutoCmdMod = {
     link = "Special"
@@ -43581,6 +46233,12 @@ return
   vimBufnrWarn = {
     link = "vimWarn"
   },
+  vimCall = {
+    link = "vimCommand"
+  },
+  vimCatch = {
+    link = "vimCommand"
+  },
   vimCmplxRepeat = {
     link = "SpecialChar"
   },
@@ -43593,11 +46251,17 @@ return
   vimComment = {
     link = "Comment"
   },
+  vimCommentError = {
+    link = "vimError"
+  },
   vimCommentString = {
     link = "vimString"
   },
   vimCommentTitle = {
     link = "PreProc"
+  },
+  vimCompilerSet = {
+    link = "vimCommand"
   },
   vimCondHL = {
     link = "vimCommand"
@@ -43611,17 +46275,29 @@ return
   vimContinueComment = {
     link = "vimComment"
   },
+  vimCount = {
+    link = "Number"
+  },
   vimCtrlChar = {
     link = "SpecialChar"
   },
+  vimDebuggreedy = {
+    link = "vimCommand"
+  },
   vimDefComment = {
-    link = "vimComment"
+    link = "vim9Comment"
   },
   vimDefKey = {
     link = "vimCommand"
   },
   vimDefParam = {
     link = "vimVar"
+  },
+  vimDelcommand = {
+    link = "vimCommand"
+  },
+  vimDelcommandAttr = {
+    link = "vimUserCmdAttr"
   },
   vimEcho = {
     link = "vimCommand"
@@ -43674,6 +46350,12 @@ return
   vimFor = {
     link = "vimCommand"
   },
+  vimForInContinue = {
+    link = "vimContinue"
+  },
+  vimForInContinueComment = {
+    link = "vimContinueComment"
+  },
   vimFunc = {
     link = "vimError"
   },
@@ -43702,10 +46384,10 @@ return
     link = "vimOper"
   },
   vimFuncSID = {
-    link = "Special"
+    link = "vimNotation"
   },
-  vimFuncVar = {
-    link = "Identifier"
+  vimFuncScope = {
+    link = "vimVar"
   },
   vimFunctionError = {
     link = "vimError"
@@ -43803,6 +46485,9 @@ return
   vimKeymapTailComment = {
     link = "vimComment"
   },
+  vimLambdaOperator = {
+    link = "vimOper"
+  },
   vimLet = {
     link = "vimCommand"
   },
@@ -43821,11 +46506,26 @@ return
   vimLineComment = {
     link = "vimComment"
   },
+  vimLockvar = {
+    link = "vimCommand"
+  },
+  vimLockvarBang = {
+    link = "vimBang"
+  },
+  vimLockvarDepth = {
+    link = "vimNumber"
+  },
   vimMap = {
     link = "vimCommand"
   },
   vimMapBang = {
     link = "vimBang"
+  },
+  vimMapLeader = {
+    link = "vimBracket"
+  },
+  vimMapLeaderKey = {
+    link = "vimNotation"
   },
   vimMapMod = {
     link = "vimBracket"
@@ -43841,6 +46541,15 @@ return
   },
   vimMarkNumber = {
     link = "vimNumber"
+  },
+  vimMatch = {
+    link = "vimCommand"
+  },
+  vimMatchGroup = {
+    link = "vimGroup"
+  },
+  vimMatchNone = {
+    link = "vimGroup"
   },
   vimMenu = {
     link = "vimCommand"
@@ -43872,7 +46581,7 @@ return
   vimMtchComment = {
     link = "vimComment"
   },
-  vimNorm = {
+  vimNormal = {
     link = "vimCommand"
   },
   vimNotFunc = {
@@ -43890,11 +46599,20 @@ return
   vimOper = {
     link = "Operator"
   },
+  vimOperContinue = {
+    link = "vimContinue"
+  },
+  vimOperContinueComment = {
+    link = "vimContinueComment"
+  },
   vimOperError = {
     link = "Error"
   },
   vimOption = {
     link = "PreProc"
+  },
+  vimOptionVar = {
+    link = "Identifier"
   },
   vimParenSep = {
     link = "Delimiter"
@@ -43923,6 +46641,9 @@ return
   vimPlainRegister = {
     link = "vimRegister"
   },
+  vimQuoteEscape = {
+    link = "vimEscape"
+  },
   vimRegister = {
     link = "SpecialChar"
   },
@@ -43933,19 +46654,46 @@ return
     link = "vimString"
   },
   vimSearchDelim = {
-    link = "Statement"
+    link = "Delimiter"
   },
   vimSep = {
     link = "Delimiter"
+  },
+  vimSet = {
+    link = "vimCommand"
+  },
+  vimSetAll = {
+    link = "vimOption"
+  },
+  vimSetBang = {
+    link = "vimBang"
   },
   vimSetMod = {
     link = "vimOption"
   },
   vimSetSep = {
-    link = "Statement"
+    link = "vimSep"
   },
   vimSetString = {
     link = "vimString"
+  },
+  vimSetTermcap = {
+    link = "vimOption"
+  },
+  vimShebang = {
+    link = "PreProc"
+  },
+  vimShebangError = {
+    link = "vimError"
+  },
+  vimSleep = {
+    link = "vimCommand"
+  },
+  vimSleepArg = {
+    link = "Constant"
+  },
+  vimSleepBang = {
+    link = "vimBang"
   },
   vimSpecFile = {
     link = "Identifier"
@@ -44019,6 +46767,12 @@ return
   vimSynKeyOpt = {
     link = "vimSynOption"
   },
+  vimSynMenu = {
+    link = "vimCommand"
+  },
+  vimSynMenuPath = {
+    link = "vimMenuName"
+  },
   vimSynMtchGrp = {
     link = "vimSynOption"
   },
@@ -44070,6 +46824,9 @@ return
   vimSyntax = {
     link = "vimCommand"
   },
+  vimThrow = {
+    link = "vimCommand"
+  },
   vimTodo = {
     link = "Todo"
   },
@@ -44082,34 +46839,46 @@ return
   vimUnletBang = {
     link = "vimBang"
   },
+  vimUnlockvar = {
+    link = "vimCommand"
+  },
   vimUnmap = {
     link = "vimMap"
   },
-  vimUserAttrb = {
-    link = "vimSpecial"
-  },
-  vimUserAttrbCmplt = {
-    link = "vimSpecial"
-  },
-  vimUserAttrbCmpltFunc = {
+  vimUserCmdAttr = {
     link = "Special"
   },
-  vimUserAttrbError = {
+  vimUserCmdAttrAddr = {
+    link = "vimSpecial"
+  },
+  vimUserCmdAttrCmplt = {
+    link = "vimSpecial"
+  },
+  vimUserCmdAttrError = {
     link = "Error"
   },
-  vimUserAttrbKey = {
-    link = "vimOption"
+  vimUserCmdAttrKey = {
+    link = "vimUserCmdAttr"
+  },
+  vimUserCmdAttrNargs = {
+    link = "vimSpecial"
+  },
+  vimUserCmdAttrRange = {
+    link = "vimSpecial"
   },
   vimUserCmdError = {
     link = "Error"
   },
-  vimUserCommand = {
+  vimUserCmdKey = {
     link = "vimCommand"
   },
   vimUserFunc = {
     link = "Normal"
   },
   vimVar = {
+    link = "Normal"
+  },
+  vimVimVar = {
     link = "Identifier"
   },
   vimWarn = {
@@ -44601,6 +47370,75 @@ return
   },
   wgetTodo = {
     link = "Todo"
+  },
+  wikiBold = {
+    link = "htmlBold"
+  },
+  wikiBoldAndItalic = {
+    link = "htmlBoldItalic"
+  },
+  wikiBoldItalic = {
+    link = "htmlBoldItalic"
+  },
+  wikiH1 = {
+    link = "htmlTitle"
+  },
+  wikiH2 = {
+    link = "htmlTitle"
+  },
+  wikiH3 = {
+    link = "htmlTitle"
+  },
+  wikiH4 = {
+    link = "htmlTitle"
+  },
+  wikiH5 = {
+    link = "htmlTitle"
+  },
+  wikiH6 = {
+    link = "htmlTitle"
+  },
+  wikiItalic = {
+    link = "htmlItalic"
+  },
+  wikiItalicBold = {
+    link = "htmlBoldItalic"
+  },
+  wikiLink = {
+    link = "htmlLink"
+  },
+  wikiParaFormatChar = {
+    link = "htmlSpecial"
+  },
+  wikiPre = {
+    link = "htmlConstant"
+  },
+  wikiRef = {
+    link = "htmlComment"
+  },
+  wikiSource = {
+    link = "wikiPre"
+  },
+  wikiSyntaxHL = {
+    link = "wikiPre"
+  },
+  wikiTableFormatEnd = {
+    link = "wikiTableSeparator"
+  },
+  wikiTableHeadingCell = {
+    link = "htmlBold"
+  },
+  wikiTableSeparator = {
+    link = "Statement"
+  },
+  wikiTemplate = {
+    link = "htmlSpecial"
+  },
+  wikiTemplateName = {
+    link = "Type"
+  },
+  wikiTemplateParam = {
+    link = "htmlSpecial"
   },
   winbatchComment = {
     link = "Comment"
