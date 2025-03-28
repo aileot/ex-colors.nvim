@@ -16,6 +16,8 @@ jobs:
         with:
           neovim: true
           version: nightly
+      - name: Activate githook
+        run: make githooks
       - name: Update default colors
         run: make default-colors
       - name: PR default-colors update
