@@ -29,3 +29,6 @@ jobs:
           committer: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
           author: "${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>"
           delete-branch: true
+          add-paths: |
+            fnl/ex-colors/default-colors.lua
+            lua/ex-colors/default-colors.lua
