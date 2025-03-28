@@ -4,7 +4,7 @@
 
 (lua "
 --- Setup `ex-colors`.
----@param opts? table
+---@param opts? ExColors.Config
 ")
 
 (fn setup [opts]

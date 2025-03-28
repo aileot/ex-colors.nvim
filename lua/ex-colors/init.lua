@@ -4,7 +4,7 @@ local _local_1_ = require("ex-colors.commands")
 local define_commands_21 = _local_1_["define-commands!"]
 
 --- Setup `ex-colors`.
----@param opts? table
+---@param opts? ExColors.Config
 
 local function setup(opts)
   do
