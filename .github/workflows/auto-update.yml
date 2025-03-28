@@ -16,11 +16,14 @@ jobs:
         with:
           neovim: true
           version: nightly
+      - name: Activate githook
+        run: make githooks
       - name: Update default colors
         run: make default-colors
       - name: PR default-colors update
         uses: peter-evans/create-pull-request@v7
         with:
+          title: "feat(colors): auto update default-colors"
           branch: create-pull-request--branches--main--update-default-colors
           commit-message: "feat(colors): auto update default-colors"
           committer: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
