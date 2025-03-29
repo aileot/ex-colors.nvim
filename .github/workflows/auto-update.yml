@@ -11,6 +11,8 @@ jobs:
       pull-requests: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2 # To access HEAD~ in the script.
       - name: Install neovim nightly
         uses: rhysd/action-setup-vim@v1
         with:
