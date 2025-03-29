@@ -14072,12 +14072,6 @@ return
   gelStatement = {
     link = "Statement"
   },
-  ghosttyConfigComment = {
-    link = "Comment"
-  },
-  ghosttyConfigKeyword = {
-    link = "Keyword"
-  },
   giftAnswer = {
     link = "MoreMsg"
   },
@@ -20253,6 +20247,12 @@ return
   },
   kscriptType = {
     link = "Type"
+  },
+  kshSpecialVariables = {
+    link = "shShellVariables"
+  },
+  kshStatement = {
+    link = "shStatement"
   },
   ktAnnotation = {
     link = "Identifier"
@@ -37529,7 +37529,7 @@ return
     link = "shConditional"
   },
   shCharClass = {
-    link = "shSpecial"
+    link = "Identifier"
   },
   shCmdSubRegion = {
     link = "shShellVariables"
@@ -37559,6 +37559,9 @@ return
     link = "Special"
   },
   shCurlyError = {
+    link = "Error"
+  },
+  shDTestError = {
     link = "Error"
   },
   shDeref = {
