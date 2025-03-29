@@ -3,7 +3,7 @@
 (local {: clean-setup!} (include :test.helper.wrapper))
 (local {: assert/buf-contains-pattern : assert/buf-contains-no-pattern}
        (include :test.helper.assert))
-(include :test.context.prerequisites)
+(include :test.helper.prerequisites)
 
 (local presets (require :ex-colors.presets))
 

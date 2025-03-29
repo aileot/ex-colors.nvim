@@ -13,9 +13,9 @@
 (local {: assert/buf-contains-no-pattern} (include :test.helper.assert))
 
 (local {: output-colors-dir : output-path : original-colors-name}
-       (include :test.context.default))
+       (include :test.helper.default))
 
-(include :test.context.prerequisites)
+(include :test.helper.prerequisites)
 
 (describe* :command
   (setup* (fn []

@@ -10,7 +10,7 @@
 (local {: assert/buf-contains-pattern : assert/buf-contains-no-pattern}
        (include :test.helper.assert))
 
-(include :test.context.prerequisites)
+(include :test.helper.prerequisites)
 
 (describe* :option
   (describe* :relinker
