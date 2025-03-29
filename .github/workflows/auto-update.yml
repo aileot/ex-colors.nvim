@@ -11,6 +11,8 @@ jobs:
       pull-requests: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2 # To access HEAD~ in the script.
       - name: Install neovim nightly
         uses: rhysd/action-setup-vim@v1
         with:
@@ -20,14 +22,14 @@ jobs:
         run: make default-colors
       - name: Sync lua/ to fnl/
         run: |
-          git add .
+          git add -A
           scripts/sync-staged-lua-to-staged-fnl.sh
       - name: PR default-colors update
         uses: peter-evans/create-pull-request@v7
         with:
-          title: "feat(colors): auto update default-colors"
+          title: "feat(default-colors): auto update default-colors on nvim nightly"
           branch: create-pull-request--branches--main--update-default-colors
-          commit-message: "feat(colors): auto update default-colors"
+          commit-message: "feat(default-colors): auto update default-colors on nvim nightly"
           committer: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
           author: "${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>"
           delete-branch: true
