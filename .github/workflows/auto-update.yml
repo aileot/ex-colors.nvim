@@ -16,10 +16,12 @@ jobs:
         with:
           neovim: true
           version: nightly
-      - name: Activate githook
-        run: make githooks
       - name: Update default colors
         run: make default-colors
+      - name: Sync lua/ to fnl/
+        run: |
+          git add .
+          scripts/sync-staged-lua-to-staged-fnl.sh
       - name: PR default-colors update
         uses: peter-evans/create-pull-request@v7
         with:
@@ -29,3 +31,6 @@ jobs:
           committer: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
           author: "${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>"
           delete-branch: true
+          add-paths: |
+            fnl/ex-colors/default-colors.lua
+            lua/ex-colors/default-colors.lua
