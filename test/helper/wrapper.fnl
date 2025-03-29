@@ -1,4 +1,4 @@
-(local {: output-colors-dir} (include :test.helper.default))
+(local {: output-colors-dir} (include :test.helper.defaults))
 
 (local {:reset reset! :setup setup!} (require :ex-colors))
 

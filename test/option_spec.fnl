@@ -16,7 +16,7 @@
        (include :test.helper.assert))
 
 (local {: output-colors-dir : original-colors-name : output-colors-name}
-       (include :test.helper.default))
+       (include :test.helper.defaults))
 
 (include :test.helper.prerequisites)
 

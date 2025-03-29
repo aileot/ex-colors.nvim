@@ -13,7 +13,7 @@
 (local {: assert/buf-contains-no-pattern} (include :test.helper.assert))
 
 (local {: output-colors-dir : output-path : original-colors-name}
-       (include :test.helper.default))
+       (include :test.helper.defaults))
 
 (include :test.helper.prerequisites)
 
