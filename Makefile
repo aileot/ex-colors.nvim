@@ -90,7 +90,10 @@ clean: ## Remove generated files
 .PHONY: build
 build: $(LUA_RES_DIRS) $(LUA_RES) ## Compile fennel files from fnl/ into lua/
 
-%_spec.lua: %_spec.fnl $(LUA_RES) $(TEST_DEPS)
+$(TEST_CTX_HOME): # Prepare test context dir
+	@mkdir -p $@
+
+%_spec.lua: %_spec.fnl $(LUA_RES) $(TEST_DEPS) $(TEST_CTX_HOME)
 	@$(FENNEL) \
 		$(FNL_FLAGS) \
 		$(FNL_EXTRA_FLAGS) \
