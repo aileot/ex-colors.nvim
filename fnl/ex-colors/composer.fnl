@@ -90,7 +90,11 @@ corresponding options are enabled.
           hl-names
           (let [hl-maps (collect [_ hl-name (ipairs hl-names)]
                           (remap-hl-opts hl-name))
-                hi-cmds (doto (icollect [hl-name hl-opts (pairs hl-maps)]
+                filtered-hl-maps (collect [hl-name hl-map (pairs hl-maps)]
+                                   (when-not (ignored-definition? hl-name
+                                                                  hl-map)
+                                     (values hl-name hl-map)))
+                hi-cmds (doto (icollect [hl-name hl-opts (pairs filtered-hl-maps)]
                                 (when (next hl-opts)
                                   (.. indent
                                       (format-nvim-set-hl hl-name hl-opts))))
