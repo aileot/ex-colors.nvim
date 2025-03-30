@@ -60,80 +60,85 @@ local function compose_autocmd_lines(highlights)
   local autocmd_list = {}
   for au_event, au_pat__3ehl_pats in pairs(autocmd_patterns) do
     for au_pattern, hl_patterns in pairs(au_pat__3ehl_pats) do
-      local hl_names = filter_by_included_patterns(highlights, hl_patterns)
-      local hl_maps
-      do
-        local tbl_16_auto = {}
-        for _, hl_name in ipairs(hl_names) do
-          local k_17_auto, v_18_auto = remap_hl_opts(hl_name)
-          if ((k_17_auto ~= nil) and (v_18_auto ~= nil)) then
-            tbl_16_auto[k_17_auto] = v_18_auto
-          else
-          end
-        end
-        hl_maps = tbl_16_auto
-      end
-      local hi_cmds
-      do
-        local tmp_9_auto
+      local _9_ = filter_by_included_patterns(highlights, hl_patterns)
+      if ((_G.type(_9_) == "table") and (_9_[1] == nil)) then
+      elseif (nil ~= _9_) then
+        local hl_names = _9_
+        local hl_maps
         do
-          local tbl_21_auto = {}
-          local i_22_auto = 0
-          for hl_name, hl_opts in pairs(hl_maps) do
-            local val_23_auto
-            if next(hl_opts) then
-              val_23_auto = (indent .. format_nvim_set_hl(hl_name, hl_opts))
-            else
-              val_23_auto = nil
-            end
-            if (nil ~= val_23_auto) then
-              i_22_auto = (i_22_auto + 1)
-              tbl_21_auto[i_22_auto] = val_23_auto
+          local tbl_16_auto = {}
+          for _, hl_name in ipairs(hl_names) do
+            local k_17_auto, v_18_auto = remap_hl_opts(hl_name)
+            if ((k_17_auto ~= nil) and (v_18_auto ~= nil)) then
+              tbl_16_auto[k_17_auto] = v_18_auto
             else
             end
           end
-          tmp_9_auto = tbl_21_auto
+          hl_maps = tbl_16_auto
         end
-        table.sort(tmp_9_auto)
-        hi_cmds = tmp_9_auto
-      end
-      local callback_lines = flatten({"callback = function()", hi_cmds, "end,"})
-      local au_opt_lines
-      if ("*" == au_pattern) then
-        au_opt_lines = callback_lines
-      else
-        local pattern_line = ("  pattern = %s,"):format(__3eoneliner(au_pattern))
-        au_opt_lines = flatten({pattern_line, callback_lines})
-      end
-      local _let_13_ = vim.deepcopy(autocmd_template_lines)
-      local first_line = _let_13_[1]
-      local lines = _let_13_
-      local event_arg
-      do
-        local _14_ = type(au_event)
-        if (_14_ == "string") then
-          event_arg = ("%q"):format(au_event)
-        elseif (_14_ == "table") then
-          event_arg = au_event
-        elseif (nil ~= _14_) then
-          local _else = _14_
-          event_arg = error(("expected string or table, got " .. _else))
+        local hi_cmds
+        do
+          local tmp_9_auto
+          do
+            local tbl_21_auto = {}
+            local i_22_auto = 0
+            for hl_name, hl_opts in pairs(hl_maps) do
+              local val_23_auto
+              if next(hl_opts) then
+                val_23_auto = (indent .. format_nvim_set_hl(hl_name, hl_opts))
+              else
+                val_23_auto = nil
+              end
+              if (nil ~= val_23_auto) then
+                i_22_auto = (i_22_auto + 1)
+                tbl_21_auto[i_22_auto] = val_23_auto
+              else
+              end
+            end
+            tmp_9_auto = tbl_21_auto
+          end
+          table.sort(tmp_9_auto)
+          hi_cmds = tmp_9_auto
+        end
+        local callback_lines = flatten({"callback = function()", hi_cmds, "end,"})
+        local au_opt_lines
+        if ("*" == au_pattern) then
+          au_opt_lines = callback_lines
         else
-          event_arg = nil
+          local pattern_line = ("  pattern = %s,"):format(__3eoneliner(au_pattern))
+          au_opt_lines = flatten({pattern_line, callback_lines})
         end
+        local _let_14_ = vim.deepcopy(autocmd_template_lines)
+        local first_line = _let_14_[1]
+        local lines = _let_14_
+        local event_arg
+        do
+          local _15_ = type(au_event)
+          if (_15_ == "string") then
+            event_arg = ("%q"):format(au_event)
+          elseif (_15_ == "table") then
+            event_arg = au_event
+          elseif (nil ~= _15_) then
+            local _else = _15_
+            event_arg = error(("expected string or table, got " .. _else))
+          else
+            event_arg = nil
+          end
+        end
+        lines[1] = first_line:format(event_arg)
+        table.insert(lines, #lines, au_opt_lines)
+        table.insert(autocmd_list, flatten(lines))
+      else
       end
-      lines[1] = first_line:format(event_arg)
-      table.insert(lines, #lines, au_opt_lines)
-      table.insert(autocmd_list, flatten(lines))
     end
   end
   do
-    local function _18_(_16_, _17_)
-      local cmd_line1 = _16_[1]
-      local cmd_line2 = _17_[1]
+    local function _20_(_18_, _19_)
+      local cmd_line1 = _18_[1]
+      local cmd_line2 = _19_[1]
       return (cmd_line1 < cmd_line2)
     end
-    table.sort(autocmd_list, _18_)
+    table.sort(autocmd_list, _20_)
   end
   return flatten(autocmd_list)
 end
@@ -143,10 +148,10 @@ local function compose_hi_cmd_lines(highlights, dump_all_3f)
   local ignore_default_colors_3f = config.ignore_default_colors
   local ignore_clear_3f = config.ignore_clear
   local ignored_definition_3f
-  local function _19_(hl_name, hl_map)
+  local function _21_(hl_name, hl_map)
     return ((ignore_default_colors_3f and vim.deep_equal(hl_map, default_colors[hl_name])) or (ignore_clear_3f and not next(hl_map)))
   end
-  ignored_definition_3f = _19_
+  ignored_definition_3f = _21_
   local filtered_hl_maps
   if dump_all_3f then
     local tbl_16_auto = {}
@@ -192,7 +197,7 @@ local function compose_hi_cmd_lines(highlights, dump_all_3f)
     filtered_hl_maps = tbl_16_auto
   end
   local cmd_list
-  local function _25_()
+  local function _27_()
     local tbl_21_auto = {}
     local i_22_auto = 0
     for hl_name, hl_map in pairs(filtered_hl_maps) do
@@ -205,7 +210,7 @@ local function compose_hi_cmd_lines(highlights, dump_all_3f)
     end
     return tbl_21_auto
   end
-  cmd_list = flatten(_25_())
+  cmd_list = flatten(_27_())
   table.sort(cmd_list)
   return cmd_list
 end
@@ -258,9 +263,9 @@ local function compose_vim_options_cmd_lines()
     for _, vim_option_name in ipairs(vim_options) do
       local k_17_auto, v_18_auto = nil, nil
       do
-        local _31_ = vim.api.nvim_get_option_value(vim_option_name, {scope = "global"})
-        if (nil ~= _31_) then
-          local val = _31_
+        local _33_ = vim.api.nvim_get_option_value(vim_option_name, {scope = "global"})
+        if (nil ~= _33_) then
+          local val = _33_
           if (vim.api.nvim_get_option_info2(vim_option_name, {}).default ~= val) then
             k_17_auto, v_18_auto = vim_option_name, val
           else
