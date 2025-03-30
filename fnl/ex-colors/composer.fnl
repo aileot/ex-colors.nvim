@@ -11,6 +11,14 @@
 
 (local default-colors (require :ex-colors.default-colors))
 
+(fn ignored-definition? [hl-name hl-map]
+  (let [ignore-default-colors? config.ignore_default_colors
+        ignore-clear? config.ignore_clear]
+    (or (and ignore-default-colors? ;
+             (vim.deep_equal hl-map (. default-colors hl-name)))
+        (and ignore-clear? ;
+             (not (next hl-map))))))
+
 (fn extend-sequence! [dst ...]
   "Extend `dst` sequence with any number of the following sequences.
 Any `nil`s are ignored.
@@ -82,31 +90,36 @@ corresponding options are enabled.
           hl-names
           (let [hl-maps (collect [_ hl-name (ipairs hl-names)]
                           (remap-hl-opts hl-name))
-                hi-cmds (doto (icollect [hl-name hl-opts (pairs hl-maps)]
-                                (when (next hl-opts)
-                                  (.. indent
-                                      (format-nvim-set-hl hl-name hl-opts))))
-                          (table.sort))
-                ;; Note: \n is unavailable due to the restriction of
-                ;; vim.api.nvim_buf_set_lines.
-                callback-lines (flatten ["callback = function()"
-                                         hi-cmds
-                                         "end,"])
-                au-opt-lines (if (= "*" au-pattern)
-                                 callback-lines
-                                 (let [pattern-line (: "  pattern = %s,"
-                                                       :format
-                                                       (->oneliner au-pattern))]
-                                   (flatten [pattern-line callback-lines])))
-                [first-line &as lines] (vim.deepcopy autocmd-template-lines)
-                event-arg (case (type au-event)
-                            :string (: "%q" :format au-event)
-                            :table au-event
-                            else (error (.. "expected string or table, got "
-                                            else)))]
-            (tset lines 1 (first-line:format event-arg))
-            (table.insert lines (length lines) au-opt-lines)
-            (table.insert autocmd-list (flatten lines))))))
+                filtered-hl-maps (collect [hl-name hl-map (pairs hl-maps)]
+                                   (when-not (ignored-definition? hl-name
+                                                                  hl-map)
+                                     (values hl-name hl-map)))]
+            (when (next filtered-hl-maps)
+              (let [hi-cmds (doto (icollect [hl-name hl-opts (pairs filtered-hl-maps)]
+                                    (when (next hl-opts)
+                                      (.. indent
+                                          (format-nvim-set-hl hl-name hl-opts))))
+                              (table.sort))
+                    ;; Note: \n is unavailable due to the restriction of
+                    ;; vim.api.nvim_buf_set_lines.
+                    callback-lines (flatten ["callback = function()"
+                                             hi-cmds
+                                             "end,"])
+                    au-opt-lines (if (= "*" au-pattern)
+                                     callback-lines
+                                     (let [pattern-line (: "  pattern = %s,"
+                                                           :format
+                                                           (->oneliner au-pattern))]
+                                       (flatten [pattern-line callback-lines])))
+                    [first-line &as lines] (vim.deepcopy autocmd-template-lines)
+                    event-arg (case (type au-event)
+                                :string (: "%q" :format au-event)
+                                :table au-event
+                                else (error (.. "expected string or table, got "
+                                                else)))]
+                (tset lines 1 (first-line:format event-arg))
+                (table.insert lines (length lines) au-opt-lines)
+                (table.insert autocmd-list (flatten lines))))))))
     (doto autocmd-list
       (table.sort (fn [[cmd-line1] [cmd-line2]]
                     ;; Sort by the first arg of nvim_create_autocmd, i.e., by
@@ -117,15 +130,6 @@ corresponding options are enabled.
 (fn compose-hi-cmd-lines [highlights dump-all?]
   (let [included-patterns config.included_patterns
         included-hlgroups (filter-by-included-hlgroups highlights)
-        ignore-default-colors? config.ignore_default_colors
-        ignore-clear? config.ignore_clear
-        ignored-definition? (fn [hl-name hl-map]
-                              (or (and ignore-default-colors? ;
-                                       (vim.deep_equal hl-map
-                                                       (. default-colors
-                                                          hl-name)))
-                                  (and ignore-clear? ;
-                                       (not (next hl-map)))))
         filtered-hl-maps (if dump-all?
                              (collect [_ hl-name (ipairs highlights)]
                                (let [hl-map (vim.api.nvim_get_hl 0
@@ -136,10 +140,9 @@ corresponding options are enabled.
                                                            (vim.list_extend included-hlgroups))
                                    hl-maps (collect [_ hl-name (ipairs filtered-highlights)]
                                              (remap-hl-opts hl-name))]
-                               (-> (collect [hl-name hl-map (pairs hl-maps)]
-                                     (when-not (ignored-definition? hl-name
-                                                                    hl-map)
-                                       (values hl-name hl-map))))))
+                               (collect [hl-name hl-map (pairs hl-maps)]
+                                 (when-not (ignored-definition? hl-name hl-map)
+                                   (values hl-name hl-map)))))
         cmd-list (-> (icollect [hl-name hl-map (pairs filtered-hl-maps)]
                        (format-nvim-set-hl hl-name hl-map))
                      (flatten))]
