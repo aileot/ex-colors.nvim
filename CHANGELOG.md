@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.2.1](https://github.com/aileot/ex-colors.nvim/compare/v1.2.0...v1.2.1) (2025-03-30)
+
+
+### Bug Fixes
+
+* **autocmd-patterns:** filter out default-colors  ([#45](https://github.com/aileot/ex-colors.nvim/issues/45)) ([5edcaee](https://github.com/aileot/ex-colors.nvim/commit/5edcaee2aea26e243dc4191c94026da437196db9))
+
+
+### Performance Improvements
+
+* **autocmd-patterns:** ignore empty event-patterns ([#43](https://github.com/aileot/ex-colors.nvim/issues/43)) ([cd785b5](https://github.com/aileot/ex-colors.nvim/commit/cd785b50e1f1f6eccfe4fe7472378b3e5e8f9ad4))
+
 ## [1.2.0](https://github.com/aileot/ex-colors.nvim/compare/v1.1.1...v1.2.0) (2025-03-29)
 
 
