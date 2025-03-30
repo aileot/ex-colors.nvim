@@ -72,8 +72,8 @@ With executing a single command [`:ExColors`](#excolors) in Command-line mode,
 - **Filter off** unnecessary highlight definitions for your use of nvim.\
   _(Our colorscheme owners mercifully support
   a number of plugin-specific highlight groups.
-  Although We appreciate the efforts for the maintainance,
-  more than half of the defnitions are just overheads for individual users.)_
+  Although We appreciate the efforts for the maintenance,
+  more than half of the definitions are just overheads for individual users.)_
 - **Relink** the `link`ed highlight groups in the output,
   and help **omit** redundant ones.\
   For example, outputs can _redirect_ any definitions linked to the previous
@@ -328,7 +328,7 @@ The credits would go to them.\
 
 ### Q. Why don't you support byte-compile?
 
-**A.** Since I'd once attempted byte-complie
+**A.** Since I'd once attempted byte-compile
 but `vim.loader` did not seem to care about it:
 no performance changes, or negligible.
 Leave it to `vim.loader`.
