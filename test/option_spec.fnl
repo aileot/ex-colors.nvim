@@ -118,6 +118,14 @@
           (vim.api.nvim_set_hl 0 :String {})
           (vim.cmd :ExColors)
           (assert/buf-contains-pattern (.. "vim%.api%.nvim_set_hl%(.-"))))))
+  (describe* "autocmd_patterns"
+    (it* "will generate autocmd"
+      (clean-setup! {})
+      (vim.cmd "ExColors | update")
+      (assert/buf-contains-no-pattern "vim%.api%.nvim_create_autocmd%(.-")
+      (clean-setup! {:autocmd_patterns {:FileType {:markdown ["^String$"]}}})
+      (vim.cmd "ExColors | update")
+      (assert/buf-contains-pattern "vim%.api%.nvim_create_autocmd%(.-")))
   (describe* :omit_default
     (describe* "discards default field in output;"
       (describe* "thus, when <new-hl-name> is {fg='Red',default=true}"
