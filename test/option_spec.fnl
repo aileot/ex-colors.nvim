@@ -16,9 +16,9 @@
        (include :test.helper.assert))
 
 (local {: output-colors-dir : original-colors-name : output-colors-name}
-       (include :test.context.default))
+       (include :test.helper.defaults))
 
-(include :test.context.prerequisites)
+(include :test.helper.prerequisites)
 
 (var new-hl-name nil)
 
