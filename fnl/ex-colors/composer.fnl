@@ -93,32 +93,33 @@ corresponding options are enabled.
                 filtered-hl-maps (collect [hl-name hl-map (pairs hl-maps)]
                                    (when-not (ignored-definition? hl-name
                                                                   hl-map)
-                                     (values hl-name hl-map)))
-                hi-cmds (doto (icollect [hl-name hl-opts (pairs filtered-hl-maps)]
-                                (when (next hl-opts)
-                                  (.. indent
-                                      (format-nvim-set-hl hl-name hl-opts))))
-                          (table.sort))
-                ;; Note: \n is unavailable due to the restriction of
-                ;; vim.api.nvim_buf_set_lines.
-                callback-lines (flatten ["callback = function()"
-                                         hi-cmds
-                                         "end,"])
-                au-opt-lines (if (= "*" au-pattern)
-                                 callback-lines
-                                 (let [pattern-line (: "  pattern = %s,"
-                                                       :format
-                                                       (->oneliner au-pattern))]
-                                   (flatten [pattern-line callback-lines])))
-                [first-line &as lines] (vim.deepcopy autocmd-template-lines)
-                event-arg (case (type au-event)
-                            :string (: "%q" :format au-event)
-                            :table au-event
-                            else (error (.. "expected string or table, got "
-                                            else)))]
-            (tset lines 1 (first-line:format event-arg))
-            (table.insert lines (length lines) au-opt-lines)
-            (table.insert autocmd-list (flatten lines))))))
+                                     (values hl-name hl-map)))]
+            (when (next filtered-hl-maps)
+              (let [hi-cmds (doto (icollect [hl-name hl-opts (pairs filtered-hl-maps)]
+                                    (when (next hl-opts)
+                                      (.. indent
+                                          (format-nvim-set-hl hl-name hl-opts))))
+                              (table.sort))
+                    ;; Note: \n is unavailable due to the restriction of
+                    ;; vim.api.nvim_buf_set_lines.
+                    callback-lines (flatten ["callback = function()"
+                                             hi-cmds
+                                             "end,"])
+                    au-opt-lines (if (= "*" au-pattern)
+                                     callback-lines
+                                     (let [pattern-line (: "  pattern = %s,"
+                                                           :format
+                                                           (->oneliner au-pattern))]
+                                       (flatten [pattern-line callback-lines])))
+                    [first-line &as lines] (vim.deepcopy autocmd-template-lines)
+                    event-arg (case (type au-event)
+                                :string (: "%q" :format au-event)
+                                :table au-event
+                                else (error (.. "expected string or table, got "
+                                                else)))]
+                (tset lines 1 (first-line:format event-arg))
+                (table.insert lines (length lines) au-opt-lines)
+                (table.insert autocmd-list (flatten lines))))))))
     (doto autocmd-list
       (table.sort (fn [[cmd-line1] [cmd-line2]]
                     ;; Sort by the first arg of nvim_create_autocmd, i.e., by
