@@ -125,6 +125,11 @@
       (assert/buf-contains-no-pattern "vim%.api%.nvim_create_autocmd%(.-")
       (clean-setup! {:autocmd_patterns {:FileType {:markdown ["^String$"]}}})
       (vim.cmd "ExColors | update")
+      (assert/buf-contains-pattern "vim%.api%.nvim_create_autocmd%(.-"))
+    (it* "will not generate any autocmds if the matched highlight map is same as default"
+      (vim.api.nvim_set_hl 0 "@markup.italic" {:italic true})
+      (clean-setup! {:autocmd_patterns {:FileType {:markdown ["^@markup.italic$"]}}})
+      (vim.cmd "ExColors | update")
       (assert/buf-contains-pattern "vim%.api%.nvim_create_autocmd%(.-")))
   (describe* :omit_default
     (describe* "discards default field in output;"
