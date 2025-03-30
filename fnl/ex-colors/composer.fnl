@@ -11,6 +11,14 @@
 
 (local default-colors (require :ex-colors.default-colors))
 
+(fn ignored-definition? [hl-name hl-map]
+  (let [ignore-default-colors? config.ignore_default_colors
+        ignore-clear? config.ignore_clear]
+    (or (and ignore-default-colors? ;
+             (vim.deep_equal hl-map (. default-colors hl-name)))
+        (and ignore-clear? ;
+             (not (next hl-map))))))
+
 (fn extend-sequence! [dst ...]
   "Extend `dst` sequence with any number of the following sequences.
 Any `nil`s are ignored.
@@ -117,15 +125,6 @@ corresponding options are enabled.
 (fn compose-hi-cmd-lines [highlights dump-all?]
   (let [included-patterns config.included_patterns
         included-hlgroups (filter-by-included-hlgroups highlights)
-        ignore-default-colors? config.ignore_default_colors
-        ignore-clear? config.ignore_clear
-        ignored-definition? (fn [hl-name hl-map]
-                              (or (and ignore-default-colors? ;
-                                       (vim.deep_equal hl-map
-                                                       (. default-colors
-                                                          hl-name)))
-                                  (and ignore-clear? ;
-                                       (not (next hl-map)))))
         filtered-hl-maps (if dump-all?
                              (collect [_ hl-name (ipairs highlights)]
                                (let [hl-map (vim.api.nvim_get_hl 0

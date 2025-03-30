@@ -8,6 +8,11 @@ local filter_by_included_hlgroups = _local_2_["filter-by-included-hlgroups"]
 local _local_3_ = require("ex-colors.remap")
 local remap_hl_opts = _local_3_["remap-hl-opts"]
 local default_colors = require("ex-colors.default-colors")
+local function ignored_definition_3f(hl_name, hl_map)
+  local ignore_default_colors_3f = config.ignore_default_colors
+  local ignore_clear_3f = config.ignore_clear
+  return ((ignore_default_colors_3f and vim.deep_equal(hl_map, default_colors[hl_name])) or (ignore_clear_3f and not next(hl_map)))
+end
 local function extend_sequence_21(dst, ...)
   for i, _3flist in pairs({...}) do
     assert(("number" == type(i)), ("expected number, got " .. i))
@@ -145,13 +150,6 @@ end
 local function compose_hi_cmd_lines(highlights, dump_all_3f)
   local included_patterns = config.included_patterns
   local included_hlgroups = filter_by_included_hlgroups(highlights)
-  local ignore_default_colors_3f = config.ignore_default_colors
-  local ignore_clear_3f = config.ignore_clear
-  local ignored_definition_3f
-  local function _21_(hl_name, hl_map)
-    return ((ignore_default_colors_3f and vim.deep_equal(hl_map, default_colors[hl_name])) or (ignore_clear_3f and not next(hl_map)))
-  end
-  ignored_definition_3f = _21_
   local filtered_hl_maps
   if dump_all_3f then
     local tbl_16_auto = {}
@@ -197,7 +195,7 @@ local function compose_hi_cmd_lines(highlights, dump_all_3f)
     filtered_hl_maps = tbl_16_auto
   end
   local cmd_list
-  local function _27_()
+  local function _26_()
     local tbl_21_auto = {}
     local i_22_auto = 0
     for hl_name, hl_map in pairs(filtered_hl_maps) do
@@ -210,7 +208,7 @@ local function compose_hi_cmd_lines(highlights, dump_all_3f)
     end
     return tbl_21_auto
   end
-  cmd_list = flatten(_27_())
+  cmd_list = flatten(_26_())
   table.sort(cmd_list)
   return cmd_list
 end
@@ -263,9 +261,9 @@ local function compose_vim_options_cmd_lines()
     for _, vim_option_name in ipairs(vim_options) do
       local k_17_auto, v_18_auto = nil, nil
       do
-        local _33_ = vim.api.nvim_get_option_value(vim_option_name, {scope = "global"})
-        if (nil ~= _33_) then
-          local val = _33_
+        local _32_ = vim.api.nvim_get_option_value(vim_option_name, {scope = "global"})
+        if (nil ~= _32_) then
+          local val = _32_
           if (vim.api.nvim_get_option_info2(vim_option_name, {}).default ~= val) then
             k_17_auto, v_18_auto = vim_option_name, val
           else
