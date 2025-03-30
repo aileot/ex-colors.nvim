@@ -139,10 +139,9 @@ corresponding options are enabled.
                                                            (vim.list_extend included-hlgroups))
                                    hl-maps (collect [_ hl-name (ipairs filtered-highlights)]
                                              (remap-hl-opts hl-name))]
-                               (-> (collect [hl-name hl-map (pairs hl-maps)]
-                                     (when-not (ignored-definition? hl-name
-                                                                    hl-map)
-                                       (values hl-name hl-map))))))
+                               (collect [hl-name hl-map (pairs hl-maps)]
+                                 (when-not (ignored-definition? hl-name hl-map)
+                                   (values hl-name hl-map)))))
         cmd-list (-> (icollect [hl-name hl-map (pairs filtered-hl-maps)]
                        (format-nvim-set-hl hl-name hl-map))
                      (flatten))]
