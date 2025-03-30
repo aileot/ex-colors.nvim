@@ -265,11 +265,17 @@ require("ex-colors").setup({
         "^health%u",
       },
     },
-    -- FileType = {
-    --   ['Telescope*'] = {
-    --     '^Telescope%u', -- nvim-telescope/telescope.nvim
-    --   },
-    -- },
+    FileType = {
+      --  ['Telescope*'] = {
+      --    '^Telescope%u', -- nvim-telescope/telescope.nvim
+      --  },
+      ["markdown,vimdoc"] = {
+        "^@markup",
+      },
+      -- markdown = {
+      --   "^@.*%.markdown$", -- or this, especially for @markup.heading.{n}.markdown
+      -- },
+    },
   },
 })
 ```
