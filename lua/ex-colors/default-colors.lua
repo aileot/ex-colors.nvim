@@ -624,6 +624,9 @@ return
     ctermfg = 0,
     fg = 15659512
   },
+  DiffTextAdd = {
+    link = "DiffText"
+  },
   DirPagerDir = {
     ctermfg = 12,
     fg = 255
