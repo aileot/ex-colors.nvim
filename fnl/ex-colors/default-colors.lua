@@ -9595,6 +9595,39 @@ return
   dartType = {
     link = "Type"
   },
+  daxColumn = {
+    link = "Statement"
+  },
+  daxComment = {
+    link = "Comment"
+  },
+  daxFloat = {
+    link = "Float"
+  },
+  daxFunction = {
+    link = "Function"
+  },
+  daxNumber = {
+    link = "Number"
+  },
+  daxOperator = {
+    link = "Operator"
+  },
+  daxParen = {
+    link = "Delimiter"
+  },
+  daxStatement = {
+    link = "Keyword"
+  },
+  daxString = {
+    link = "String"
+  },
+  daxTable = {
+    link = "Number"
+  },
+  daxTodo = {
+    link = "Todo"
+  },
   dcdComment = {
     link = "Comment"
   },
@@ -20792,20 +20825,11 @@ return
   lexStartStateCmd = {
     link = "Special"
   },
+  lfCommandMarker = {
+    link = "Special"
+  },
   lfComment = {
     link = "Comment"
-  },
-  lfConstant = {
-    link = "Constant"
-  },
-  lfExternalPatch = {
-    link = "Special"
-  },
-  lfExternalShell = {
-    link = "Normal"
-  },
-  lfIgnore = {
-    link = "Special"
   },
   lfKeyword = {
     link = "Statement"
@@ -20813,14 +20837,14 @@ return
   lfOptions = {
     link = "Constant"
   },
-  lfSpecial = {
+  lfShellMarker = {
     link = "Special"
+  },
+  lfSpecial = {
+    link = "SpecialChar"
   },
   lfString = {
     link = "String"
-  },
-  lfVar = {
-    link = "Type"
   },
   lftpBoolean = {
     link = "Boolean"
@@ -30812,6 +30836,60 @@ return
   },
   ppwizString = {
     link = "Constant"
+  },
+  pqComment = {
+    link = "Comment"
+  },
+  pqConditional = {
+    link = "Conditional"
+  },
+  pqConstant = {
+    link = "Constant"
+  },
+  pqFloat = {
+    link = "Float"
+  },
+  pqFunction = {
+    link = "Delimiter"
+  },
+  pqIdentifier = {
+    link = "Number"
+  },
+  pqKeyword = {
+    link = "Keyword"
+  },
+  pqLetFold = {
+    link = "Constant"
+  },
+  pqList = {
+    link = "Delimiter"
+  },
+  pqNull = {
+    link = "Const"
+  },
+  pqNumber = {
+    link = "Number"
+  },
+  pqOperator = {
+    link = "Operator"
+  },
+  pqParen = {
+    link = "Delimiter"
+  },
+  pqRecord = {
+    link = "Statement"
+  },
+  pqString = {
+    link = "String"
+  },
+  pqTable = {
+    link = "Number"
+  },
+  pqTodo = {
+    link = "Todo"
+  },
+  pqType = {
+    link = "Type"
   },
   prescribeCSETArg = {
     link = "String"
