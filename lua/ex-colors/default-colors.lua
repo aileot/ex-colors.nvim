@@ -22956,6 +22956,87 @@ return
   maximaTodo = {
     link = "Todo"
   },
+  mbsBool = {
+    link = "Boolean"
+  },
+  mbsCConfItemK = {
+    link = "Statement"
+  },
+  mbsCConfManipOpt = {
+    link = "Keyword"
+  },
+  mbsCConfPatternOpt = {
+    link = "String"
+  },
+  mbsCConfPatternOptOp = {
+    link = "Operator"
+  },
+  mbsCConfProxOptOp = {
+    link = "Operator"
+  },
+  mbsCConfSyncOpt = {
+    link = "Keyword"
+  },
+  mbsCConfSyncStateOptOp = {
+    link = "Operator"
+  },
+  mbsCommand = {
+    link = "String"
+  },
+  mbsCommandPrompt = {
+    link = "Operator"
+  },
+  mbsCommentL = {
+    link = "Comment"
+  },
+  mbsError = {
+    link = "Error"
+  },
+  mbsGConfChannelOpt = {
+    link = "String"
+  },
+  mbsGConfItemK = {
+    link = "Statement"
+  },
+  mbsGlobConfItemK = {
+    link = "Statement"
+  },
+  mbsGlobOptItemK = {
+    link = "Statement"
+  },
+  mbsIAConfItemK = {
+    link = "Statement"
+  },
+  mbsIAConfSSLTypeOpt = {
+    link = "Keyword"
+  },
+  mbsIAConfSSLVersionsOpt = {
+    link = "Keyword"
+  },
+  mbsISConfItemK = {
+    link = "Statement"
+  },
+  mbsMdSConfItemK = {
+    link = "Statement"
+  },
+  mbsMdSConfSubFoldersOpt = {
+    link = "Keyword"
+  },
+  mbsName = {
+    link = "Constant"
+  },
+  mbsNumber = {
+    link = "Number"
+  },
+  mbsPath = {
+    link = "String"
+  },
+  mbsSizeUnit = {
+    link = "Type"
+  },
+  mbsString = {
+    link = "String"
+  },
   melBoolean = {
     link = "Boolean"
   },
