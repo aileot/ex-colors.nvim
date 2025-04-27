@@ -30792,6 +30792,9 @@ return
   povMessageDir = {
     link = "Debug"
   },
+  povMessageDirDeprecated = {
+    link = "povError"
+  },
   povModifiers = {
     link = "povFunctions"
   },
@@ -46287,7 +46290,7 @@ return
   vim9LambdaOperatorComment = {
     link = "vim9Comment"
   },
-  vim9LambdaParamsParen = {
+  vim9LambdaParen = {
     link = "vimParenSep"
   },
   vim9LhsRegister = {
@@ -46301,6 +46304,9 @@ return
   },
   vim9MethodDef = {
     link = "vimCommand"
+  },
+  vim9MethodDefComment = {
+    link = "vimDefComment"
   },
   vim9MethodName = {
     link = "vimFuncName"
@@ -46365,17 +46371,29 @@ return
   vimAugroupKey = {
     link = "vimCommand"
   },
-  vimAutoCmd = {
-    link = "vimCommand"
-  },
-  vimAutoCmdBang = {
-    link = "vimBang"
-  },
-  vimAutoCmdMod = {
-    link = "Special"
-  },
   vimAutoEvent = {
     link = "Type"
+  },
+  vimAutoEventGlob = {
+    link = "Type"
+  },
+  vimAutocmd = {
+    link = "vimCommand"
+  },
+  vimAutocmdBang = {
+    link = "vimBang"
+  },
+  vimAutocmdBufferPattern = {
+    link = "Special"
+  },
+  vimAutocmdMod = {
+    link = "Special"
+  },
+  vimAutocmdPatternEscape = {
+    link = "Special"
+  },
+  vimAutocmdPatternSep = {
+    link = "vimSep"
   },
   vimBang = {
     link = "vimOper"
@@ -46464,6 +46482,12 @@ return
   vimDelcommandAttr = {
     link = "vimUserCmdAttr"
   },
+  vimDoautocmd = {
+    link = "vimCommand"
+  },
+  vimDoautocmdMod = {
+    link = "Special"
+  },
   vimEcho = {
     link = "vimCommand"
   },
@@ -46496,6 +46520,12 @@ return
   },
   vimEscape = {
     link = "Special"
+  },
+  vimExFilter = {
+    link = "vimCommand"
+  },
+  vimExFilterBang = {
+    link = "vimCommand"
   },
   vimFBVar = {
     link = "vimVar"
@@ -46552,10 +46582,19 @@ return
     link = "vimNotation"
   },
   vimFuncScope = {
-    link = "vimVar"
+    link = "vimVarScope"
   },
   vimFunctionError = {
     link = "vimError"
+  },
+  vimGrep = {
+    link = "vimCommand"
+  },
+  vimGrepAdd = {
+    link = "vimCommand"
+  },
+  vimGrepBang = {
+    link = "vimBang"
   },
   vimGroup = {
     link = "Type"
@@ -46564,7 +46603,7 @@ return
     link = "vimSynOption"
   },
   vimGroupName = {
-    link = "vimGroup"
+    link = "Normal"
   },
   vimGroupRem = {
     link = "vimSynOption"
@@ -46574,6 +46613,9 @@ return
   },
   vimHLGroup = {
     link = "vimGroup"
+  },
+  vimHelpgrep = {
+    link = "vimCommand"
   },
   vimHiAttrib = {
     link = "PreProc"
@@ -46629,6 +46671,9 @@ return
   vimHiNmbr = {
     link = "Number"
   },
+  vimHiNone = {
+    link = "vimGroup"
+  },
   vimHiStartStop = {
     link = "vimHiTerm"
   },
@@ -46641,14 +46686,14 @@ return
   vimInsert = {
     link = "vimString"
   },
-  vimIskSep = {
-    link = "Delimiter"
-  },
   vimKeymapLineComment = {
     link = "vimComment"
   },
   vimKeymapTailComment = {
     link = "vimComment"
+  },
+  vimLambdaBrace = {
+    link = "Delimiter"
   },
   vimLambdaOperator = {
     link = "vimOper"
@@ -46666,7 +46711,7 @@ return
     link = "Special"
   },
   vimLetRegister = {
-    link = "Special"
+    link = "vimRegister"
   },
   vimLineComment = {
     link = "vimComment"
@@ -46679,6 +46724,15 @@ return
   },
   vimLockvarDepth = {
     link = "vimNumber"
+  },
+  vimMake = {
+    link = "vimCommand"
+  },
+  vimMakeBang = {
+    link = "vimBang"
+  },
+  vimMakeadd = {
+    link = "vimCommand"
   },
   vimMap = {
     link = "vimCommand"
@@ -46779,6 +46833,9 @@ return
   vimOptionVar = {
     link = "Identifier"
   },
+  vimOptionVarName = {
+    link = "Identifier"
+  },
   vimParenSep = {
     link = "Delimiter"
   },
@@ -46809,6 +46866,27 @@ return
   vimQuoteEscape = {
     link = "vimEscape"
   },
+  vimRedir = {
+    link = "vimCommand"
+  },
+  vimRedirBang = {
+    link = "vimBang"
+  },
+  vimRedirEnd = {
+    link = "Special"
+  },
+  vimRedirFileOperator = {
+    link = "vimOper"
+  },
+  vimRedirRegister = {
+    link = "vimRegister"
+  },
+  vimRedirRegisterOperator = {
+    link = "vimOper"
+  },
+  vimRedirVariableOperator = {
+    link = "vimOper"
+  },
   vimRegister = {
     link = "SpecialChar"
   },
@@ -46833,14 +46911,14 @@ return
   vimSetBang = {
     link = "vimBang"
   },
+  vimSetComment = {
+    link = "vimComment"
+  },
   vimSetMod = {
     link = "vimOption"
   },
   vimSetSep = {
     link = "vimSep"
-  },
-  vimSetString = {
-    link = "vimString"
   },
   vimSetTermcap = {
     link = "vimOption"
@@ -46859,6 +46937,18 @@ return
   },
   vimSleepBang = {
     link = "vimBang"
+  },
+  vimSort = {
+    link = "vimCommand"
+  },
+  vimSortBang = {
+    link = "vimBang"
+  },
+  vimSortOptions = {
+    link = "Special"
+  },
+  vimSortOptionsError = {
+    link = "Error"
   },
   vimSpecFile = {
     link = "Identifier"
@@ -46914,17 +47004,32 @@ return
   vimSynCcharValue = {
     link = "Character"
   },
+  vimSynConceal = {
+    link = "Type"
+  },
+  vimSynConcealError = {
+    link = "vimError"
+  },
   vimSynContains = {
     link = "vimSynOption"
   },
   vimSynError = {
-    link = "Error"
+    link = "vimError"
   },
-  vimSynFoldMethod = {
+  vimSynFoldlevel = {
     link = "Type"
   },
-  vimSynFoldMethodError = {
+  vimSynFoldlevelError = {
     link = "vimError"
+  },
+  vimSynIskeyword = {
+    link = "Type"
+  },
+  vimSynIskeywordError = {
+    link = "vimError"
+  },
+  vimSynIskeywordSep = {
+    link = "Delimiter"
   },
   vimSynKeyContainedin = {
     link = "vimSynContains"
@@ -46965,14 +47070,26 @@ return
   vimSynRegPat = {
     link = "vimString"
   },
+  vimSynSpell = {
+    link = "Type"
+  },
+  vimSynSpellError = {
+    link = "vimError"
+  },
   vimSynType = {
     link = "vimSpecial"
   },
-  vimSyncC = {
+  vimSyncCcomment = {
+    link = "Type"
+  },
+  vimSyncClear = {
     link = "Type"
   },
   vimSyncError = {
-    link = "Error"
+    link = "vimError"
+  },
+  vimSyncFromstart = {
+    link = "Type"
   },
   vimSyncGroup = {
     link = "vimGroupName"
@@ -46983,7 +47100,22 @@ return
   vimSyncKey = {
     link = "Type"
   },
+  vimSyncLinebreak = {
+    link = "Type"
+  },
+  vimSyncLinecont = {
+    link = "Type"
+  },
+  vimSyncLines = {
+    link = "Type"
+  },
+  vimSyncMatch = {
+    link = "Type"
+  },
   vimSyncNone = {
+    link = "Type"
+  },
+  vimSyncRegion = {
     link = "Type"
   },
   vimSyntax = {
@@ -47010,14 +47142,20 @@ return
   vimUnmap = {
     link = "vimMap"
   },
+  vimUserCmd = {
+    link = "vimCommand"
+  },
   vimUserCmdAttr = {
     link = "Special"
   },
   vimUserCmdAttrAddr = {
     link = "vimSpecial"
   },
-  vimUserCmdAttrCmplt = {
+  vimUserCmdAttrComplete = {
     link = "vimSpecial"
+  },
+  vimUserCmdAttrCompleteFunc = {
+    link = "vimVar"
   },
   vimUserCmdAttrError = {
     link = "Error"
@@ -47043,11 +47181,80 @@ return
   vimVar = {
     link = "Normal"
   },
+  vimVarScope = {
+    link = "Identifier"
+  },
   vimVimVar = {
     link = "Identifier"
   },
+  vimVimVarName = {
+    link = "Identifier"
+  },
+  vimVimgrep = {
+    link = "vimCommand"
+  },
+  vimVimgrepBang = {
+    link = "vimBang"
+  },
+  vimVimgrepFlags = {
+    link = "Special"
+  },
+  vimVimgrepadd = {
+    link = "vimCommand"
+  },
   vimWarn = {
     link = "WarningMsg"
+  },
+  vimWildcard = {
+    link = "Special"
+  },
+  vimWildcardBraceComma = {
+    link = "vimWildcard"
+  },
+  vimWildcardBracket = {
+    link = "vimWildcard"
+  },
+  vimWildcardBracketCaret = {
+    link = "vimWildcard"
+  },
+  vimWildcardBracketCharacter = {
+    link = "Normal"
+  },
+  vimWildcardBracketCharacterClass = {
+    link = "vimWildcard"
+  },
+  vimWildcardBracketCollatingSymbol = {
+    link = "vimWildcard"
+  },
+  vimWildcardBracketEnd = {
+    link = "vimWildcard"
+  },
+  vimWildcardBracketEquivalenceClass = {
+    link = "vimWildcard"
+  },
+  vimWildcardBracketEscape = {
+    link = "vimWildcard"
+  },
+  vimWildcardBracketHyphen = {
+    link = "vimWildcard"
+  },
+  vimWildcardBracketRightBracket = {
+    link = "vimWildcardBracketCharacter"
+  },
+  vimWildcardBracketStart = {
+    link = "vimWildcard"
+  },
+  vimWildcardEscape = {
+    link = "vimWildcard"
+  },
+  vimWildcardInterval = {
+    link = "vimWildcard"
+  },
+  vimWildcardQuestion = {
+    link = "vimWildcard"
+  },
+  vimWildcardStar = {
+    link = "vimWildcard"
   },
   viminfoComment = {
     link = "Comment"
