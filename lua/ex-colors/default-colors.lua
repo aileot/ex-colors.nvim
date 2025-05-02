@@ -14606,6 +14606,63 @@ return
   gkrellmrcStyleItem = {
     link = "gkrellmrcItem"
   },
+  gleamComment = {
+    link = "Comment"
+  },
+  gleamConditional = {
+    link = "Conditional"
+  },
+  gleamConstant = {
+    link = "Constant"
+  },
+  gleamDebug = {
+    link = "Debug"
+  },
+  gleamException = {
+    link = "Exception"
+  },
+  gleamFloat = {
+    link = "Float"
+  },
+  gleamFunction = {
+    link = "Function"
+  },
+  gleamIdentifier = {
+    link = "Identifier"
+  },
+  gleamInclude = {
+    link = "Include"
+  },
+  gleamKeyword = {
+    link = "Keyword"
+  },
+  gleamNumber = {
+    link = "Number"
+  },
+  gleamOperator = {
+    link = "Operator"
+  },
+  gleamPreProc = {
+    link = "PreProc"
+  },
+  gleamSpecial = {
+    link = "Special"
+  },
+  gleamSpecialComment = {
+    link = "SpecialComment"
+  },
+  gleamStorageClass = {
+    link = "StorageClass"
+  },
+  gleamString = {
+    link = "String"
+  },
+  gleamTodo = {
+    link = "Todo"
+  },
+  gleamType = {
+    link = "Type"
+  },
   globalVariables = {
     link = "Special"
   },
@@ -46458,6 +46515,9 @@ return
   vimContinueComment = {
     link = "vimComment"
   },
+  vimContinueString = {
+    link = "vimString"
+  },
   vimCount = {
     link = "Number"
   },
@@ -46497,6 +46557,9 @@ return
   vimEchohlNone = {
     link = "vimGroup"
   },
+  vimElse = {
+    link = "vimCommand"
+  },
   vimElseIfErr = {
     link = "Error"
   },
@@ -46507,6 +46570,9 @@ return
     link = "vimCommand"
   },
   vimEndfunction = {
+    link = "vimCommand"
+  },
+  vimEndif = {
     link = "vimCommand"
   },
   vimEnvvar = {
