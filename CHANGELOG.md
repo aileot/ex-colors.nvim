@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.0](https://github.com/aileot/ex-colors.nvim/compare/v1.6.0...v1.7.0) (2025-05-04)
+
+
+### Features
+
+* **default-colors:** auto update on nvim nightly ([#53](https://github.com/aileot/ex-colors.nvim/issues/53)) ([0e05415](https://github.com/aileot/ex-colors.nvim/commit/0e054159e18ac002ac4c7d731e49d60a34d25411))
+
 ## [1.6.0](https://github.com/aileot/ex-colors.nvim/compare/v1.5.0...v1.6.0) (2025-04-27)
 
 
