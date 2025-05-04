@@ -1,7 +1,7 @@
-name: Update Default Colors Weekly on Neovim Nightly
+name: Update Default Colors Monthly on Neovim Nightly
 on:
   schedule:
-    - cron: '0 0 * * 5'
+    - cron: '0 0 1-7 * 6'
   workflow_dispatch:
 jobs:
   update-default-colors:
