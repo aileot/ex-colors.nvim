@@ -1924,6 +1924,10 @@ return
   StatusLineTermNC = {
     link = "StatusLineNC"
   },
+  StderrMsg = {
+    link = "ErrorMsg"
+  },
+  StdoutMsg = {},
   StorageClass = {
     link = "Type"
   },
@@ -46316,6 +46320,24 @@ return
   },
   vim9Enum = {
     link = "vimCommand"
+  },
+  vim9EnumImplementedInterfaceComment = {
+    link = "vim9Comment"
+  },
+  vim9EnumImplements = {
+    link = "vim9Implements"
+  },
+  vim9EnumNameComment = {
+    link = "vim9Comment"
+  },
+  vim9EnumNameContinue = {
+    link = "vimContinue"
+  },
+  vim9EnumNameContinueComment = {
+    link = "vim9Comment"
+  },
+  vim9EnumValueListCommaComment = {
+    link = "vim9Comment"
   },
   vim9Export = {
     link = "vimCommand"
