@@ -1924,6 +1924,10 @@ return
   StatusLineTermNC = {
     link = "StatusLineNC"
   },
+  StderrMsg = {
+    link = "ErrorMsg"
+  },
+  StdoutMsg = {},
   StorageClass = {
     link = "Type"
   },
@@ -46317,6 +46321,24 @@ return
   vim9Enum = {
     link = "vimCommand"
   },
+  vim9EnumImplementedInterfaceComment = {
+    link = "vim9Comment"
+  },
+  vim9EnumImplements = {
+    link = "vim9Implements"
+  },
+  vim9EnumNameComment = {
+    link = "vim9Comment"
+  },
+  vim9EnumNameContinue = {
+    link = "vimContinue"
+  },
+  vim9EnumNameContinueComment = {
+    link = "vim9Comment"
+  },
+  vim9EnumValueListCommaComment = {
+    link = "vim9Comment"
+  },
   vim9Export = {
     link = "vimCommand"
   },
@@ -46563,9 +46585,6 @@ return
   vimElseIfErr = {
     link = "Error"
   },
-  vimEmbedError = {
-    link = "Normal"
-  },
   vimEnddef = {
     link = "vimCommand"
   },
@@ -46767,13 +46786,13 @@ return
   vimLet = {
     link = "vimCommand"
   },
-  vimLetHereDoc = {
+  vimLetHeredoc = {
     link = "vimString"
   },
-  vimLetHereDocStart = {
+  vimLetHeredocStart = {
     link = "Special"
   },
-  vimLetHereDocStop = {
+  vimLetHeredocStop = {
     link = "Special"
   },
   vimLetRegister = {
@@ -46790,6 +46809,9 @@ return
   },
   vimLockvarDepth = {
     link = "vimNumber"
+  },
+  vimLua = {
+    link = "vimCommand"
   },
   vimMake = {
     link = "vimCommand"
@@ -46866,6 +46888,12 @@ return
   vimMtchComment = {
     link = "vimComment"
   },
+  vimMzScheme = {
+    link = "vimCommand"
+  },
+  vimNonText = {
+    link = "NonText"
+  },
   vimNormal = {
     link = "vimCommand"
   },
@@ -46923,11 +46951,23 @@ return
   vimPattern = {
     link = "Type"
   },
+  vimPerl = {
+    link = "vimCommand"
+  },
   vimPlainMark = {
     link = "vimMark"
   },
   vimPlainRegister = {
     link = "vimRegister"
+  },
+  vimPython = {
+    link = "vimCommand"
+  },
+  vimPython3 = {
+    link = "vimCommand"
+  },
+  vimPythonX = {
+    link = "vimCommand"
   },
   vimQuoteEscape = {
     link = "vimEscape"
@@ -46956,8 +46996,17 @@ return
   vimRegister = {
     link = "SpecialChar"
   },
+  vimRuby = {
+    link = "vimCommand"
+  },
   vimScriptDelim = {
     link = "Comment"
+  },
+  vimScriptHeredocStart = {
+    link = "vimLetHeredocStart"
+  },
+  vimScriptHeredocStop = {
+    link = "vimLetHeredocStop"
   },
   vimSearch = {
     link = "vimString"
@@ -47185,6 +47234,9 @@ return
     link = "Type"
   },
   vimSyntax = {
+    link = "vimCommand"
+  },
+  vimTcl = {
     link = "vimCommand"
   },
   vimThrow = {
