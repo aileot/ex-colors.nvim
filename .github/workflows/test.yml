@@ -22,7 +22,8 @@ jobs:
         with:
           path: |
             ${{ runner.temp }}/nvim
-            ~/.luarocks
+            /usr/local/fennel
+            /usr/local/vusted
           key: ${{ runner.os }}-nvim-${{ matrix.nvim_version }}-${{ hashFiles('today') }}
       - name: Install nvim
         if: steps.cache-nvim-restore.outputs.cache-hit != 'true'
@@ -46,7 +47,10 @@ jobs:
         uses: actions/cache/save@v4
         if: steps.cache-nvim-restore.outputs.cache-hit != 'true'
         with:
-          path: ${{ runner.temp }}/nvim
+          path: |
+            ${{ runner.temp }}/nvim
+            /usr/local/fennel
+            /usr/local/vusted
           key: ${{ steps.cache-nvim-restore.outputs.cache-primary-key }}
       - name: Run tests
         env:
