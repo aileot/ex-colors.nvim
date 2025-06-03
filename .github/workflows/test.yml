@@ -41,8 +41,8 @@ jobs:
       - name: Install test dependencies in Luarocks
         if: steps.cache-test-deps.outputs.cache-hit != 'true'
         run: |
-          luarocks --lua-version=5.1 install fennel
-          luarocks --lua-version=5.1 install vusted
+          sudo luarocks --lua-version=5.1 install fennel
+          sudo luarocks --lua-version=5.1 install vusted
       - name: Cache test dependencies
         uses: actions/cache/save@v4
         with:
