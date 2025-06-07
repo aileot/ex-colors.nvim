@@ -23068,10 +23068,10 @@ return
   mbsIAConfItemK = {
     link = "Statement"
   },
-  mbsIAConfSSLTypeOpt = {
+  mbsIAConfSSLVersionsOpt = {
     link = "Keyword"
   },
-  mbsIAConfSSLVersionsOpt = {
+  mbsIAConfTLSTypeOpt = {
     link = "Keyword"
   },
   mbsISConfItemK = {
@@ -46974,6 +46974,21 @@ return
   },
   vimPlainRegister = {
     link = "vimRegister"
+  },
+  vimProfdel = {
+    link = "vimCommand"
+  },
+  vimProfdelArg = {
+    link = "vimSpecial"
+  },
+  vimProfile = {
+    link = "vimCommand"
+  },
+  vimProfileArg = {
+    link = "vimSpecial"
+  },
+  vimProfileBang = {
+    link = "vimBang"
   },
   vimPython = {
     link = "vimCommand"
