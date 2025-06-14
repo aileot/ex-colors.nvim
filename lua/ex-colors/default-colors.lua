@@ -23068,10 +23068,10 @@ return
   mbsIAConfItemK = {
     link = "Statement"
   },
-  mbsIAConfSSLTypeOpt = {
+  mbsIAConfSSLVersionsOpt = {
     link = "Keyword"
   },
-  mbsIAConfSSLVersionsOpt = {
+  mbsIAConfTLSTypeOpt = {
     link = "Keyword"
   },
   mbsISConfItemK = {
@@ -46429,6 +46429,9 @@ return
   vim9Variable = {
     link = "vimVar"
   },
+  vim9VariableType = {
+    link = "vimType"
+  },
   vim9Vim9Script = {
     link = "vimCommand"
   },
@@ -46549,20 +46552,29 @@ return
   vimDebuggreedy = {
     link = "vimCommand"
   },
+  vimDef = {
+    link = "vimCommand"
+  },
+  vimDefBang = {
+    link = "vimBang"
+  },
   vimDefComment = {
     link = "vim9Comment"
   },
-  vimDefKey = {
-    link = "vimCommand"
-  },
   vimDefParam = {
     link = "vimVar"
+  },
+  vimDelFunction = {
+    link = "vimCommand"
   },
   vimDelcommand = {
     link = "vimCommand"
   },
   vimDelcommandAttr = {
     link = "vimUserCmdAttr"
+  },
+  vimDelfunctionBang = {
+    link = "vimBang"
   },
   vimDoautocmd = {
     link = "vimCommand"
@@ -46642,38 +46654,38 @@ return
   vimFunc = {
     link = "vimError"
   },
-  vimFuncBang = {
-    link = "vimBang"
-  },
-  vimFuncComment = {
-    link = "vimComment"
-  },
   vimFuncEcho = {
     link = "vimCommand"
-  },
-  vimFuncKey = {
-    link = "vimCommand"
-  },
-  vimFuncMod = {
-    link = "Special"
   },
   vimFuncName = {
     link = "Function"
   },
-  vimFuncParam = {
-    link = "vimVar"
+  vimFunction = {
+    link = "vimCommand"
   },
-  vimFuncParamEquals = {
-    link = "vimOper"
+  vimFunctionBang = {
+    link = "vimBang"
   },
-  vimFuncSID = {
-    link = "vimNotation"
-  },
-  vimFuncScope = {
-    link = "vimVarScope"
+  vimFunctionComment = {
+    link = "vimComment"
   },
   vimFunctionError = {
     link = "vimError"
+  },
+  vimFunctionMod = {
+    link = "Special"
+  },
+  vimFunctionParam = {
+    link = "vimVar"
+  },
+  vimFunctionParamEquals = {
+    link = "vimOper"
+  },
+  vimFunctionSID = {
+    link = "vimNotation"
+  },
+  vimFunctionScope = {
+    link = "vimVarScope"
   },
   vimGrep = {
     link = "vimCommand"
@@ -46810,6 +46822,9 @@ return
   vimLetRegister = {
     link = "vimRegister"
   },
+  vimLetVar = {
+    link = "vimVar"
+  },
   vimLineComment = {
     link = "vimComment"
   },
@@ -46853,7 +46868,7 @@ return
     link = "vimError"
   },
   vimMapModKey = {
-    link = "vimFuncSID"
+    link = "vimFunctionSID"
   },
   vimMark = {
     link = "Number"
@@ -46974,6 +46989,21 @@ return
   },
   vimPlainRegister = {
     link = "vimRegister"
+  },
+  vimProfdel = {
+    link = "vimCommand"
+  },
+  vimProfdelArg = {
+    link = "vimSpecial"
+  },
+  vimProfile = {
+    link = "vimCommand"
+  },
+  vimProfileArg = {
+    link = "vimSpecial"
+  },
+  vimProfileBang = {
+    link = "vimBang"
   },
   vimPython = {
     link = "vimCommand"
