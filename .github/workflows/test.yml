@@ -24,6 +24,7 @@ jobs:
         with:
           path: |
             ${{ runner.temp }}/nvim
+            /usr/bin/lua5.1
             /usr/local/fennel
             /usr/local/vusted
           key: ${{ runner.os }}-nvim-${{ matrix.nvim_version }}-${{ steps.get-date.outputs.date }}
@@ -50,6 +51,7 @@ jobs:
         with:
           path: |
             ${{ runner.temp }}/nvim
+            /usr/bin/lua5.1
             /usr/local/fennel
             /usr/local/vusted
           key: ${{ steps.cache-test-deps.outputs.cache-primary-key }}
