@@ -15,16 +15,19 @@ jobs:
           - nightly
     steps:
       - uses: actions/checkout@v4
-      - run: date +%F > today
+      - name: Get date
+        id: get-date
+        run: echo "date=$(date +%F)" >> "$GITHUB_OUTPUT"
       - name: Restore test dependencies if available
         uses: actions/cache/restore@v4
         id: cache-test-deps
         with:
           path: |
             ${{ runner.temp }}/nvim
+            /usr/bin/lua5.1
             /usr/local/fennel
             /usr/local/vusted
-          key: ${{ runner.os }}-nvim-${{ matrix.nvim_version }}-${{ hashFiles('today') }}
+          key: ${{ runner.os }}-nvim-${{ matrix.nvim_version }}-${{ steps.get-date.outputs.date }}
       - name: Install nvim
         if: steps.cache-test-deps.outputs.cache-hit != 'true'
         shell: bash
@@ -48,11 +51,13 @@ jobs:
         with:
           path: |
             ${{ runner.temp }}/nvim
+            /usr/bin/lua5.1
             /usr/local/fennel
             /usr/local/vusted
           key: ${{ steps.cache-test-deps.outputs.cache-primary-key }}
       - name: Run tests
         env:
+          VUSTED_EXTRA_FLAGS: "--defer-print --suppress-pending"
           VUSTED_NVIM: ${{ runner.temp }}/nvim/usr/bin/nvim
         run: make test
         timeout-minutes: 5
