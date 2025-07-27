@@ -55,6 +55,7 @@ jobs:
           key: ${{ steps.cache-test-deps.outputs.cache-primary-key }}
       - name: Run tests
         env:
+          VUSTED_EXTRA_FLAGS: "--defer-print --suppress-pending"
           VUSTED_NVIM: ${{ runner.temp }}/nvim/usr/bin/nvim
         run: make test
         timeout-minutes: 5
