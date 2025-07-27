@@ -15,7 +15,9 @@ jobs:
           - nightly
     steps:
       - uses: actions/checkout@v4
-      - run: date +%F > today
+      - name: Get date
+        id: get-date
+        run: echo "date=$(date +%F)" >> "$GITHUB_OUTPUT"
       - name: Restore test dependencies if available
         uses: actions/cache/restore@v4
         id: cache-test-deps
@@ -24,7 +26,7 @@ jobs:
             ${{ runner.temp }}/nvim
             /usr/local/fennel
             /usr/local/vusted
-          key: ${{ runner.os }}-nvim-${{ matrix.nvim_version }}-${{ hashFiles('today') }}
+          key: ${{ runner.os }}-nvim-${{ matrix.nvim_version }}-${{ steps.get-date.outputs.date }}
       - name: Install nvim
         if: steps.cache-test-deps.outputs.cache-hit != 'true'
         shell: bash
