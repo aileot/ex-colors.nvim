@@ -3964,6 +3964,42 @@ return
   automakeSubst = {
     link = "PreProc"
   },
+  autopkgtestArbitrary = {
+    link = "Normal"
+  },
+  autopkgtestArchitecture = {
+    link = "Identifier"
+  },
+  autopkgtestComment = {
+    link = "Comment"
+  },
+  autopkgtestDepends = {
+    link = "Identifier"
+  },
+  autopkgtestDeprecatedRestrictions = {
+    link = "Error"
+  },
+  autopkgtestError = {
+    link = "Error"
+  },
+  autopkgtestFeatures = {
+    link = "Keyword"
+  },
+  autopkgtestKey = {
+    link = "Keyword"
+  },
+  autopkgtestMultiField = {
+    link = "Normal"
+  },
+  autopkgtestRestrictions = {
+    link = "Identifier"
+  },
+  autopkgtestStrictField = {
+    link = "Error"
+  },
+  autopkgtestTests = {
+    link = "Normal"
+  },
   aveClassMethods = {
     link = "Function"
   },
@@ -11493,6 +11529,12 @@ return
   erlangDefine = {
     link = "Define"
   },
+  erlangDocAttribute = {
+    link = "Keyword"
+  },
+  erlangDocStringDelimiter = {
+    link = "Comment"
+  },
   erlangEqualsBinary = {
     link = "ErrorMsg"
   },
@@ -11507,6 +11549,9 @@ return
   },
   erlangInclude = {
     link = "Include"
+  },
+  erlangInnerDocAttribute = {
+    link = "Keyword"
   },
   erlangKeyword = {
     link = "Keyword"
@@ -11576,6 +11621,9 @@ return
   },
   erlangStringModifier = {
     link = "Special"
+  },
+  erlangStringTripleQuoted = {
+    link = "String"
   },
   erlangTodo = {
     link = "Todo"
@@ -15905,6 +15953,12 @@ return
   hclValueString = {
     link = "String"
   },
+  healthSectionDelim = {
+    cterm = {
+      reverse = true
+    },
+    reverse = true
+  },
   helpBacktick = {
     link = "Ignore"
   },
@@ -16017,10 +16071,7 @@ return
     link = "Repeat"
   },
   helpSectionDelim = {
-    cterm = {
-      reverse = true
-    },
-    reverse = true
+    link = "PreProc"
   },
   helpSpecial = {
     link = "Special"
@@ -23068,10 +23119,10 @@ return
   mbsIAConfItemK = {
     link = "Statement"
   },
-  mbsIAConfSSLTypeOpt = {
+  mbsIAConfSSLVersionsOpt = {
     link = "Keyword"
   },
-  mbsIAConfSSLVersionsOpt = {
+  mbsIAConfTLSTypeOpt = {
     link = "Keyword"
   },
   mbsISConfItemK = {
@@ -31690,6 +31741,9 @@ return
   pythonBuiltin = {
     link = "Function"
   },
+  pythonBytes = {
+    link = "String"
+  },
   pythonComment = {
     link = "Comment"
   },
@@ -31717,6 +31771,9 @@ return
   pythonExceptions = {
     link = "Structure"
   },
+  pythonFString = {
+    link = "String"
+  },
   pythonFunction = {
     link = "Function"
   },
@@ -31730,6 +31787,12 @@ return
     link = "Operator"
   },
   pythonQuotes = {
+    link = "String"
+  },
+  pythonRawBytes = {
+    link = "String"
+  },
+  pythonRawFString = {
     link = "String"
   },
   pythonRawString = {
@@ -31749,6 +31812,9 @@ return
   },
   pythonTripleQuotes = {
     link = "pythonQuotes"
+  },
+  pythonUnicodeEscape = {
+    link = "pythonEscape"
   },
   qb64Float = {
     link = "basicFloat"
@@ -46354,6 +46420,9 @@ return
   vim9ForInComment = {
     link = "vim9Comment"
   },
+  vim9Func = {
+    link = "vimError"
+  },
   vim9Implements = {
     link = "Keyword"
   },
@@ -46428,6 +46497,12 @@ return
   },
   vim9Variable = {
     link = "vimVar"
+  },
+  vim9VariableType = {
+    link = "vimType"
+  },
+  vim9VariableTypeAny = {
+    link = "vimType"
   },
   vim9Vim9Script = {
     link = "vimCommand"
@@ -46510,6 +46585,12 @@ return
   vimCommand = {
     link = "Statement"
   },
+  vimCommandModifier = {
+    link = "vimCommand"
+  },
+  vimCommandModifierBang = {
+    link = "vimBang"
+  },
   vimComment = {
     link = "Comment"
   },
@@ -46549,20 +46630,29 @@ return
   vimDebuggreedy = {
     link = "vimCommand"
   },
+  vimDef = {
+    link = "vimCommand"
+  },
+  vimDefBang = {
+    link = "vimBang"
+  },
   vimDefComment = {
     link = "vim9Comment"
   },
-  vimDefKey = {
-    link = "vimCommand"
-  },
   vimDefParam = {
     link = "vimVar"
+  },
+  vimDelFunction = {
+    link = "vimCommand"
   },
   vimDelcommand = {
     link = "vimCommand"
   },
   vimDelcommandAttr = {
     link = "vimUserCmdAttr"
+  },
+  vimDelfunctionBang = {
+    link = "vimBang"
   },
   vimDoautocmd = {
     link = "vimCommand"
@@ -46606,11 +46696,14 @@ return
   vimEscape = {
     link = "Special"
   },
+  vimEval = {
+    link = "vimCommand"
+  },
   vimExFilter = {
     link = "vimCommand"
   },
   vimExFilterBang = {
-    link = "vimCommand"
+    link = "vimBang"
   },
   vimExMark = {
     link = "vimCommand"
@@ -46642,38 +46735,38 @@ return
   vimFunc = {
     link = "vimError"
   },
-  vimFuncBang = {
-    link = "vimBang"
-  },
-  vimFuncComment = {
-    link = "vimComment"
-  },
   vimFuncEcho = {
     link = "vimCommand"
-  },
-  vimFuncKey = {
-    link = "vimCommand"
-  },
-  vimFuncMod = {
-    link = "Special"
   },
   vimFuncName = {
     link = "Function"
   },
-  vimFuncParam = {
-    link = "vimVar"
+  vimFunction = {
+    link = "vimCommand"
   },
-  vimFuncParamEquals = {
-    link = "vimOper"
+  vimFunctionBang = {
+    link = "vimBang"
   },
-  vimFuncSID = {
-    link = "vimNotation"
-  },
-  vimFuncScope = {
-    link = "vimVarScope"
+  vimFunctionComment = {
+    link = "vimComment"
   },
   vimFunctionError = {
     link = "vimError"
+  },
+  vimFunctionMod = {
+    link = "Special"
+  },
+  vimFunctionParam = {
+    link = "vimVar"
+  },
+  vimFunctionParamEquals = {
+    link = "vimOper"
+  },
+  vimFunctionSID = {
+    link = "vimNotation"
+  },
+  vimFunctionScope = {
+    link = "vimVarScope"
   },
   vimGrep = {
     link = "vimCommand"
@@ -46810,6 +46903,9 @@ return
   vimLetRegister = {
     link = "vimRegister"
   },
+  vimLetVar = {
+    link = "vimVar"
+  },
   vimLineComment = {
     link = "vimComment"
   },
@@ -46853,7 +46949,7 @@ return
     link = "vimError"
   },
   vimMapModKey = {
-    link = "vimFuncSID"
+    link = "vimFunctionSID"
   },
   vimMark = {
     link = "Number"
@@ -46972,8 +47068,20 @@ return
   vimPlainMark = {
     link = "vimMark"
   },
-  vimPlainRegister = {
-    link = "vimRegister"
+  vimProfdel = {
+    link = "vimCommand"
+  },
+  vimProfdelArg = {
+    link = "vimSpecial"
+  },
+  vimProfile = {
+    link = "vimCommand"
+  },
+  vimProfileArg = {
+    link = "vimSpecial"
+  },
+  vimProfileBang = {
+    link = "vimBang"
   },
   vimPython = {
     link = "vimCommand"
@@ -47137,6 +47245,9 @@ return
   vimSynCcharValue = {
     link = "Character"
   },
+  vimSynColor = {
+    link = "vimCommand"
+  },
   vimSynConceal = {
     link = "Type"
   },
@@ -47169,6 +47280,9 @@ return
   },
   vimSynKeyOpt = {
     link = "vimSynOption"
+  },
+  vimSynLink = {
+    link = "vimCommand"
   },
   vimSynMenu = {
     link = "vimCommand"
@@ -47265,6 +47379,18 @@ return
   },
   vimType = {
     link = "Type"
+  },
+  vimTypeAny = {
+    link = "vimType"
+  },
+  vimUniq = {
+    link = "vimCommand"
+  },
+  vimUniqBang = {
+    link = "vimBang"
+  },
+  vimUniqOptions = {
+    link = "Special"
   },
   vimUnlet = {
     link = "vimCommand"
