@@ -27,6 +27,7 @@ jobs:
       - name: PR default-colors update
         uses: peter-evans/create-pull-request@v7
         with:
+          token: ${{ secrets.CREATE_PR_TOKEN }}
           title: "feat(default-colors): auto update on nvim nightly"
           branch: create-pull-request--branches--main--update-default-colors
           commit-message: "feat(default-colors): auto update on nvim nightly"
