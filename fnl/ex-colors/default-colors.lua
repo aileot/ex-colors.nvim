@@ -1568,6 +1568,9 @@ return
       reverse = true
     }
   },
+  PmenuBorder = {
+    link = "Pmenu"
+  },
   PmenuExtra = {
     link = "Pmenu"
   },
@@ -1602,6 +1605,12 @@ return
       underline = true
     },
     reverse = true
+  },
+  PmenuShadow = {
+    link = "FloatShadow"
+  },
+  PmenuShadowThrough = {
+    link = "FloatShadowThrough"
   },
   PmenuThumb = {
     bg = 5198424
@@ -5075,6 +5084,9 @@ return
   cangjieDeclaration = {
     link = "Keyword"
   },
+  cangjieEscape = {
+    link = "SpecialChar"
+  },
   cangjieFloatNumber = {
     link = "Float"
   },
@@ -5083,6 +5095,9 @@ return
   },
   cangjieHashType = {
     link = "Type"
+  },
+  cangjieHexFloatNumber = {
+    link = "Number"
   },
   cangjieHexNumber = {
     link = "Number"
@@ -5110,6 +5125,9 @@ return
   },
   cangjieRune = {
     link = "Character"
+  },
+  cangjieRuneError = {
+    link = "Error"
   },
   cangjieScienceNumber = {
     link = "Float"
@@ -22946,6 +22964,9 @@ return
   makeTarget = {
     link = "Function"
   },
+  makeTargetinDefine = {
+    link = "Function"
+  },
   makeTodo = {
     link = "Todo"
   },
@@ -35999,6 +36020,9 @@ return
   rstDoctestBlock = {
     link = "PreProc"
   },
+  rstDoctestBlockPrompt = {
+    link = "rstDelimiter"
+  },
   rstEmphasis = {
     cterm = {
       italic = true
@@ -36012,9 +36036,6 @@ return
     link = "Special"
   },
   rstEscapeInlineInternalTargets = {
-    link = "Special"
-  },
-  rstEscapeInlineLiteral = {
     link = "Special"
   },
   rstEscapeInterpretedTextOrHyperlinkReference = {
