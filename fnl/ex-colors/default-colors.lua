@@ -294,6 +294,20 @@ return
     ctermfg = 3,
     fg = 10088089
   },
+  Bold = {
+    bold = true,
+    cterm = {
+      bold = true
+    }
+  },
+  BoldItalic = {
+    bold = true,
+    cterm = {
+      bold = true,
+      italic = true
+    },
+    italic = true
+  },
   Boolean = {
     link = "Constant"
   },
@@ -416,7 +430,10 @@ return
     link = "MoreMsg"
   },
   ComplMatchIns = {},
-  Conceal = {},
+  Conceal = {
+    ctermfg = 12,
+    fg = 255
+  },
   Conditional = {
     link = "Statement"
   },
@@ -449,6 +466,9 @@ return
   },
   Cursor = {
     bg = 14738154,
+    cterm = {
+      reverse = true
+    },
     fg = 1316379
   },
   CursorColumn = {
@@ -632,6 +652,9 @@ return
   },
   DiffTextAdd = {
     link = "DiffText"
+  },
+  Dimmed = {
+    link = "Comment"
   },
   DirPagerDir = {
     ctermfg = 12,
@@ -994,7 +1017,8 @@ return
     fg = 10935295
   },
   Ignore = {
-    link = "Normal"
+    ctermfg = 0,
+    fg = 1316379
   },
   IncSearch = {
     link = "CurSearch"
@@ -1031,6 +1055,12 @@ return
   },
   IstTodo = {
     link = "Todo"
+  },
+  Italic = {
+    cterm = {
+      italic = true
+    },
+    italic = true
   },
   Keyword = {
     link = "Statement"
@@ -1075,6 +1105,12 @@ return
     link = "LspReferenceText"
   },
   LspSignatureActiveParameter = {
+    link = "Visual"
+  },
+  MCursor = {
+    link = "CurSearch"
+  },
+  MCursorVisual = {
     link = "Visual"
   },
   Macro = {
@@ -1752,6 +1788,9 @@ return
     ctermbg = 9,
     ctermfg = 0
   },
+  Regexp = {
+    link = "Constant"
+  },
   Removed = {
     ctermfg = 9,
     fg = 16761017
@@ -1876,10 +1915,6 @@ return
   SnippetTabstopActive = {
     link = "SnippetTabstop"
   },
-  Space = {
-    bg = 5242880,
-    ctermbg = 1
-  },
   Special = {
     ctermfg = 14,
     fg = 9238775
@@ -1891,7 +1926,7 @@ return
     link = "Special"
   },
   SpecialKey = {
-    fg = 5198424
+    link = "Special"
   },
   SpellBad = {
     cterm = {
@@ -1929,19 +1964,19 @@ return
     fg = 14738154
   },
   StatusLine = {
-    bg = 12895949,
+    bg = 5198424,
     cterm = {
       reverse = true
     },
-    fg = 2895411
+    fg = 14738154
   },
   StatusLineNC = {
-    bg = 5198424,
+    bg = 2895411,
     cterm = {
       bold = true,
       underline = true
     },
-    fg = 14738154
+    fg = 12895949
   },
   StatusLineTerm = {
     link = "StatusLine"
@@ -1969,18 +2004,19 @@ return
   Substitute = {
     link = "Search"
   },
-  Tab = {
-    bg = 12288,
-    ctermbg = 2
-  },
   TabLine = {
-    link = "StatusLineNC"
+    link = "TabLineFill"
   },
   TabLineFill = {
-    link = "TabLine"
+    link = "StatusLineNC"
   },
   TabLineSel = {
-    bold = true
+    bg = 1316379,
+    bold = true,
+    cterm = {
+      nocombine = true
+    },
+    fg = 14738154
   },
   Tag = {
     link = "Special"
@@ -2019,57 +2055,6 @@ return
       underline = true
     },
     underline = true
-  },
-  VRMLCharacter = {
-    link = "VRMLString"
-  },
-  VRMLComment = {
-    link = "Comment"
-  },
-  VRMLEvents = {
-    link = "Type"
-  },
-  VRMLFields = {
-    link = "Type"
-  },
-  VRMLInstName = {
-    link = "Identifier"
-  },
-  VRMLInstances = {
-    link = "PreCondit"
-  },
-  VRMLNodes = {
-    link = "Statement"
-  },
-  VRMLNumber = {
-    link = "VRMLString"
-  },
-  VRMLProtos = {
-    link = "PreProc"
-  },
-  VRMLRouteNode = {
-    link = "Identifier"
-  },
-  VRMLRoutes = {
-    link = "PreCondit"
-  },
-  VRMLSpecial = {
-    link = "Special"
-  },
-  VRMLSpecialCharacter = {
-    link = "VRMLSpecial"
-  },
-  VRMLString = {
-    link = "String"
-  },
-  VRMLTypes = {
-    link = "Identifier"
-  },
-  VRMLValues = {
-    link = "VRMLString"
-  },
-  VRMLfTypes = {
-    link = "LineNr"
   },
   VertSplit = {
     link = "WinSeparator"
@@ -2113,9 +2098,6 @@ return
   },
   WinSeparator = {
     link = "Normal"
-  },
-  XQdoc = {
-    link = "Special"
   },
   _icon = {
     link = "Special"
@@ -2627,6 +2609,75 @@ return
   algoholFunction = {
     link = "Function"
   },
+  algol68Boolean = {
+    link = "Boolean"
+  },
+  algol68Comment = {
+    link = "Comment"
+  },
+  algol68Conditional = {
+    link = "Conditional"
+  },
+  algol68Constant = {
+    link = "Constant"
+  },
+  algol68Float = {
+    link = "Float"
+  },
+  algol68Function = {
+    link = "Function"
+  },
+  algol68HexNumber = {
+    link = "Number"
+  },
+  algol68Label = {
+    link = "Label"
+  },
+  algol68MatrixDelimiter = {
+    link = "Identifier"
+  },
+  algol68Number = {
+    link = "Number"
+  },
+  algol68Operator = {
+    link = "Operator"
+  },
+  algol68PreProc = {
+    link = "PreProc"
+  },
+  algol68Predefined = {
+    link = "Identifier"
+  },
+  algol68Repeat = {
+    link = "Repeat"
+  },
+  algol68ShowTab = {
+    link = "Error"
+  },
+  algol68SpaceError = {
+    link = "Error"
+  },
+  algol68Statement = {
+    link = "Statement"
+  },
+  algol68String = {
+    link = "String"
+  },
+  algol68StringEscape = {
+    link = "Special"
+  },
+  algol68Struct = {
+    link = "algol68Statement"
+  },
+  algol68SymbolOperator = {
+    link = "algol68Operator"
+  },
+  algol68Todo = {
+    link = "Todo"
+  },
+  algol68Type = {
+    link = "Type"
+  },
   alsaconfComment = {
     link = "Comment"
   },
@@ -2654,34 +2705,67 @@ return
   alsoconfTodo = {
     link = "Todo"
   },
-  amiAlias = {
-    link = "Type"
+  amiBacktick = {
+    link = "Special"
+  },
+  amiCommand = {
+    link = "Statement"
   },
   amiComment = {
     link = "Comment"
   },
-  amiDev = {
-    link = "Type"
+  amiCondition = {
+    link = "Special"
+  },
+  amiConditional = {
+    link = "Conditional"
+  },
+  amiDirective = {
+    link = "PreProc"
   },
   amiEcho = {
     link = "String"
   },
   amiElse = {
-    link = "Statement"
+    link = "Conditional"
   },
-  amiError = {
+  amiEscape = {
+    link = "SpecialChar"
+  },
+  amiIfError = {
     link = "Error"
   },
-  amiKey = {
-    link = "Statement"
+  amiLabel = {
+    link = "Label"
   },
   amiNumber = {
     link = "Number"
   },
+  amiOperator = {
+    link = "Operator"
+  },
+  amiOption = {
+    link = "Identifier"
+  },
+  amiPath = {
+    link = "Type"
+  },
+  amiRepeat = {
+    link = "Repeat"
+  },
   amiString = {
     link = "String"
   },
-  amiTest = {
+  amiSubst = {
+    link = "Special"
+  },
+  amiTemplate = {
+    link = "Type"
+  },
+  amiTodo = {
+    link = "Todo"
+  },
+  amiVar = {
     link = "Special"
   },
   amlArcCmd = {
@@ -4502,6 +4586,45 @@ return
   basicTypeSuffix = {
     link = "Special"
   },
+  bazelrcCommand = {
+    link = "Statement"
+  },
+  bazelrcComment = {
+    link = "Comment"
+  },
+  bazelrcConfig = {
+    link = "Type"
+  },
+  bazelrcContinuation = {
+    link = "Special"
+  },
+  bazelrcEscape = {
+    link = "SpecialChar"
+  },
+  bazelrcFlag = {
+    link = "Identifier"
+  },
+  bazelrcImport = {
+    link = "Include"
+  },
+  bazelrcOperator = {
+    link = "Operator"
+  },
+  bazelrcPath = {
+    link = "String"
+  },
+  bazelrcString = {
+    link = "String"
+  },
+  bazelrcTodo = {
+    link = "Todo"
+  },
+  bazelrcVersion = {
+    link = "Constant"
+  },
+  bazelrcWorkspace = {
+    link = "PreProc"
+  },
   bbArrayBrackets = {
     link = "Statement"
   },
@@ -4628,6 +4751,48 @@ return
   bdfXProperty = {
     link = "Identifier"
   },
+  beanAccount = {
+    link = "Identifier"
+  },
+  beanAmount = {
+    link = "Number"
+  },
+  beanComment = {
+    link = "Comment"
+  },
+  beanCost = {
+    link = "Number"
+  },
+  beanCurrency = {
+    link = "Number"
+  },
+  beanDate = {
+    link = "Keyword"
+  },
+  beanFlag = {
+    link = "Keyword"
+  },
+  beanKeyword = {
+    link = "Keyword"
+  },
+  beanLink = {
+    link = "Comment"
+  },
+  beanMeta = {
+    link = "Special"
+  },
+  beanOptionTitle = {
+    link = "Keyword"
+  },
+  beanPrice = {
+    link = "Number"
+  },
+  beanString = {
+    link = "String"
+  },
+  beanTag = {
+    link = "Tag"
+  },
   beginCodeBegin = {
     link = "texCmdName"
   },
@@ -4675,6 +4840,42 @@ return
   },
   blockheadFunction = {
     link = "Function"
+  },
+  bpftraceBoolean = {
+    link = "Boolean"
+  },
+  bpftraceCommentBlock = {
+    link = "Comment"
+  },
+  bpftraceCommentLine = {
+    link = "Comment"
+  },
+  bpftraceConditional = {
+    link = "Conditional"
+  },
+  bpftraceKeyword = {
+    link = "Keyword"
+  },
+  bpftraceMacro = {
+    link = "Macro"
+  },
+  bpftraceNumber = {
+    link = "Number"
+  },
+  bpftraceProbe = {
+    link = "Identifier"
+  },
+  bpftraceRepeat = {
+    link = "Repeat"
+  },
+  bpftraceShebang = {
+    link = "Comment"
+  },
+  bpftraceString = {
+    link = "String"
+  },
+  bpftraceType = {
+    link = "Type"
   },
   bstBuiltIn = {
     link = "Statement"
@@ -4874,6 +5075,9 @@ return
   cFunctionPointer = {
     link = "Function"
   },
+  cFunctionSpec = {
+    link = "cStorageClass"
+  },
   cInclude = {
     link = "Include"
   },
@@ -4925,6 +5129,9 @@ return
   cSpecialError = {
     link = "cError"
   },
+  cStandardAttribute = {
+    link = "cStorageClass"
+  },
   cStatement = {
     link = "Statement"
   },
@@ -4942,6 +5149,9 @@ return
   },
   cType = {
     link = "Type"
+  },
+  cTypeQualifier = {
+    link = "cStorageClass"
   },
   cTypedef = {
     link = "Structure"
@@ -5078,22 +5288,37 @@ return
   cangjieCommonType = {
     link = "Type"
   },
+  cangjieCoreClass = {
+    link = "Type"
+  },
+  cangjieCoreError = {
+    link = "Structure"
+  },
+  cangjieCoreFunc = {
+    link = "Function"
+  },
+  cangjieCoreItf = {
+    link = "Type"
+  },
   cangjieDecimalNumber = {
     link = "Number"
   },
   cangjieDeclaration = {
     link = "Keyword"
   },
+  cangjieDocKeyword = {
+    link = "SpecialComment"
+  },
   cangjieEscape = {
     link = "SpecialChar"
+  },
+  cangjieFFIType = {
+    link = "Type"
   },
   cangjieFloatNumber = {
     link = "Float"
   },
   cangjieFloatType = {
-    link = "Type"
-  },
-  cangjieHashType = {
     link = "Type"
   },
   cangjieHexFloatNumber = {
@@ -8128,6 +8353,9 @@ return
   cppAccess = {
     link = "cppStatement"
   },
+  cppAttributeBracket = {
+    link = "Special"
+  },
   cppBoolean = {
     link = "Boolean"
   },
@@ -8164,11 +8392,17 @@ return
   cppRawStringDelimiter = {
     link = "Delimiter"
   },
+  cppReflect = {
+    link = "Operator"
+  },
   cppSpecialCharacter = {
     link = "cSpecialCharacter"
   },
   cppSpecialError = {
     link = "cSpecialError"
+  },
+  cppSpliceBracket = {
+    link = "Special"
   },
   cppStatement = {
     link = "Statement"
@@ -9040,6 +9274,9 @@ return
     link = "cssAttr"
   },
   cssObjectProp = {
+    link = "cssProp"
+  },
+  cssOverflowProp = {
     link = "cssProp"
   },
   cssPaddingAttr = {
@@ -9991,8 +10228,14 @@ return
   debchangelogVersion = {
     link = "Identifier"
   },
+  debcontrolArchSpec = {
+    link = "Identifier"
+  },
   debcontrolArchitecture = {
     link = "Normal"
+  },
+  debcontrolBuildProfile = {
+    link = "Identifier"
   },
   debcontrolComment = {
     link = "Comment"
@@ -10413,6 +10656,9 @@ return
   dircolorsTodo = {
     link = "Todo"
   },
+  directoryDirectory = {
+    link = "Directory"
+  },
   divaChkFunctions = {
     link = "Function"
   },
@@ -10457,6 +10703,9 @@ return
   },
   djangoFilter = {
     link = "Identifier"
+  },
+  djangoOperator = {
+    link = "Operator"
   },
   djangoStatement = {
     link = "Statement"
@@ -10649,6 +10898,9 @@ return
   },
   dotType = {
     link = "Type"
+  },
+  dotscreenCommands = {
+    link = "screenCommands"
   },
   draculaComment = {
     link = "Comment"
@@ -11145,6 +11397,222 @@ return
   ecdTagN = {
     link = "Statement"
   },
+  edAddress = {
+    link = "Constant"
+  },
+  edAddressModifier_Count = {
+    link = "Special"
+  },
+  edAddressModifier_Offset = {
+    link = "Special"
+  },
+  edAddress_Pattern = {
+    link = "Regexp"
+  },
+  edAddress_Pattern_Flag = {
+    link = "Special"
+  },
+  edArg_InputMode_EndMarker = {
+    link = "edCommand"
+  },
+  edArg_InputMode_Text = {
+    link = "Normal"
+  },
+  edArg_InputMode_Text_Global = {
+    link = "edArg_InputMode_Text"
+  },
+  edCommand = {
+    link = "Statement"
+  },
+  edCommand_Append = {
+    link = "Statement"
+  },
+  edCommand_Change = {
+    link = "Statement"
+  },
+  edCommand_Comment = {
+    link = "Comment"
+  },
+  edCommand_Copy = {
+    link = "Statement"
+  },
+  edCommand_Delete = {
+    link = "Statement"
+  },
+  edCommand_Edit = {
+    link = "Statement"
+  },
+  edCommand_EditWithoutChecking = {
+    link = "Statement"
+  },
+  edCommand_Filename = {
+    link = "Statement"
+  },
+  edCommand_Global = {
+    link = "Statement"
+  },
+  edCommand_GlobalNotMatched = {
+    link = "Statement"
+  },
+  edCommand_GlobalNotMatched_Arg_Regexp = {
+    link = "Regexp"
+  },
+  edCommand_GlobalNotMatched_Arg_Regexp_Flag = {
+    link = "Special"
+  },
+  edCommand_Global_Arg_Regexp = {
+    link = "Regexp"
+  },
+  edCommand_Global_Arg_Regexp_Flag = {
+    link = "Special"
+  },
+  edCommand_Help = {
+    link = "Statement"
+  },
+  edCommand_HelpMode = {
+    link = "Statement"
+  },
+  edCommand_Insert = {
+    link = "Statement"
+  },
+  edCommand_InteractiveGlobal = {
+    link = "Statement"
+  },
+  edCommand_InteractiveGlobalNotMatched = {
+    link = "Statement"
+  },
+  edCommand_InteractiveGlobalNotMatched_Arg_Regexp = {
+    link = "Regexp"
+  },
+  edCommand_InteractiveGlobalNotMatched_Arg_Regexp_Flag = {
+    link = "Special"
+  },
+  edCommand_InteractiveGlobal_Arg_Regexp = {
+    link = "Regexp"
+  },
+  edCommand_InteractiveGlobal_Arg_Regexp_Flag = {
+    link = "Special"
+  },
+  edCommand_Join = {
+    link = "Statement"
+  },
+  edCommand_LineNumber = {
+    link = "Statement"
+  },
+  edCommand_List = {
+    link = "Statement"
+  },
+  edCommand_List_InputMode = {
+    link = "edCommand_List"
+  },
+  edCommand_Mark = {
+    link = "Statement"
+  },
+  edCommand_Mark_Arg_Name = {
+    link = "Constant"
+  },
+  edCommand_Move = {
+    link = "Statement"
+  },
+  edCommand_Number = {
+    link = "Statement"
+  },
+  edCommand_Number_InputMode = {
+    link = "edCommand_Number"
+  },
+  edCommand_Paste = {
+    link = "Statement"
+  },
+  edCommand_Print = {
+    link = "Statement"
+  },
+  edCommand_Print_InputMode = {
+    link = "edCommand_Print"
+  },
+  edCommand_Prompt = {
+    link = "Statement"
+  },
+  edCommand_Quit = {
+    link = "Statement"
+  },
+  edCommand_QuitWithoutChecking = {
+    link = "Statement"
+  },
+  edCommand_Read = {
+    link = "Statement"
+  },
+  edCommand_Repeat = {
+    link = "Statement"
+  },
+  edCommand_Scroll = {
+    link = "Statement"
+  },
+  edCommand_Scroll_Arg_Count = {
+    link = "Number"
+  },
+  edCommand_ShellEscape = {
+    link = "Statement"
+  },
+  edCommand_ShellEscape_Arg_Command_BackslashEscape = {
+    link = "Special"
+  },
+  edCommand_ShellEscape_Arg_Command_Filename = {
+    link = "Special"
+  },
+  edCommand_ShellEscape_Arg_Command_FilenameEscape = {
+    link = "Special"
+  },
+  edCommand_ShellEscape_Arg_Previous = {
+    link = "Constant"
+  },
+  edCommand_Substitute = {
+    link = "Statement"
+  },
+  edCommand_Substitute_Arg_Count = {
+    link = "Special"
+  },
+  edCommand_Substitute_Arg_Flag = {
+    link = "Special"
+  },
+  edCommand_Substitute_Arg_Regexp = {
+    link = "Regexp"
+  },
+  edCommand_Substitute_Arg_Replacement_Escape = {
+    link = "Special"
+  },
+  edCommand_Substitute_Arg_Replacement_Match = {
+    link = "Special"
+  },
+  edCommand_Substitute_Arg_Replacement_Newline = {
+    link = "Special"
+  },
+  edCommand_Substitute_Arg_Replacement_Repeat = {
+    link = "Special"
+  },
+  edCommand_Undo = {
+    link = "Statement"
+  },
+  edCommand_Write = {
+    link = "Statement"
+  },
+  edCommand_WriteAppend = {
+    link = "Statement"
+  },
+  edCommand_WriteQuit = {
+    link = "Statement"
+  },
+  edCommand_Yank = {
+    link = "Statement"
+  },
+  edLineContinue = {
+    link = "Delimiter"
+  },
+  edLineContinue_InputMode = {
+    link = "edLineContinue"
+  },
+  edLineContinue_InputMode_Text = {
+    link = "edLineContinue"
+  },
   edifError = {
     link = "Error"
   },
@@ -11628,6 +12096,21 @@ return
   },
   endIterateLeaveLabelRegion = {
     link = "rexxKeyword"
+  },
+  envComment = {
+    link = "Comment"
+  },
+  envField = {
+    link = "Identifier"
+  },
+  envTitle = {
+    link = "PreProc"
+  },
+  envTodo = {
+    link = "Todo"
+  },
+  envValue = {
+    link = "String"
   },
   erlangAnonymousVariable = {
     link = "erlangVariable"
@@ -14092,35 +14575,650 @@ return
   gdResourceString = {
     link = "String"
   },
+  gdbAdiArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbAliasEndOption = {
+    link = "gdbCommandArgs"
+  },
+  gdbAliasName = {
+    link = "Function"
+  },
+  gdbAliasOption = {
+    link = "gdbCommandArgs"
+  },
+  gdbAppendArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbAppendBinaryArgs = {
+    link = "gdbAppendArgs"
+  },
+  gdbArchitecture = {
+    link = "Constant"
+  },
+  gdbBreakpointCount = {
+    link = "Number"
+  },
+  gdbBreakpointNumber = {
+    link = "Constant"
+  },
+  gdbBreakpointRange = {
+    link = "Constant"
+  },
+  gdbCatchArgs = {
+    link = "gdbCommandArgs"
+  },
   gdbCharacter = {
     link = "Character"
+  },
+  gdbCommand = {
+    link = "Statement"
+  },
+  gdbCommandArgs = {
+    link = "Type"
+  },
+  gdbCommandsKeyword = {
+    link = "gdbCommand"
   },
   gdbComment = {
     link = "Comment"
   },
+  gdbCompile = {
+    link = "gdbCommand"
+  },
+  gdbCompileArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbCompileCodeOptions = {
+    link = "gdbOption"
+  },
+  gdbCompilePrintFormat = {
+    link = "gdbFormat"
+  },
+  gdbCompilePrintOptions = {
+    link = "gdbOption"
+  },
+  gdbConditionEndOption = {
+    link = "gdbCommandArgs"
+  },
+  gdbConditionOption = {
+    link = "gdbCommandArgs"
+  },
+  gdbDeleteArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbDetachArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbDisableArgs = {
+    link = "gdbCommandArgs"
+  },
   gdbDocument = {
     link = "Special"
+  },
+  gdbDumpArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbDumpBinaryArgs = {
+    link = "gdbDumpArgs"
+  },
+  gdbEnableArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbEnableBreakpointArgs = {
+    link = "gdbEnableArgs"
+  },
+  gdbExploreArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbFormat = {
+    link = "Special"
+  },
+  gdbFrameApplyArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbFrameArgs = {
+    link = "gdbCommandArgs"
   },
   gdbFuncDef = {
     link = "Function"
   },
-  gdbInfo = {
-    link = "Type"
+  gdbFunctionArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbInfoArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbInfoAutoLoadArgs = {
+    link = "gdbInfoArgs"
+  },
+  gdbInfoFrameArgs = {
+    link = "gdbInfoArgs"
+  },
+  gdbInfoModuleArgs = {
+    link = "gdbInfoArgs"
+  },
+  gdbInfoProbesArgs = {
+    link = "gdbInfoArgs"
+  },
+  gdbInfoProcArgs = {
+    link = "gdbInfoArgs"
+  },
+  gdbInfoW32Args = {
+    link = "gdbInfoArgs"
+  },
+  gdbKillArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbLayoutArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbLineContinuation = {
+    link = "Special"
+  },
+  gdbMacroArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbMaintenanceArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbMaintenanceBtraceArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbMaintenanceCheckArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbMaintenanceCplusArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbMaintenanceFlushArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbMaintenanceFrameUnwinderArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbMaintenanceInfoArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbMaintenancePrintArcArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbMaintenancePrintArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbMaintenanceSetAdaArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbMaintenanceSetArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbMaintenanceSetBtraceArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbMaintenanceSetBtracePtArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbMaintenanceSetDebuginfodArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbMaintenanceSetDemanglerWarningArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbMaintenanceSetDwarfArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbMaintenanceSetGnuSourceHighlightArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbMaintenanceSetInternalErrorArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbMaintenanceSetInternalWarningArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbMaintenanceSetLibopcodesStylingArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbMaintenanceSetPerCommandArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbMaintenanceSetSelftestArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbMaintenanceSetTestSettingsArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbMaintenanceShowArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbMaintenanceTestOptionsArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbMemoryTagArgs = {
+    link = "gdbCommandArgs"
   },
   gdbNumber = {
     link = "Number"
   },
-  gdbSet = {
+  gdbOption = {
+    link = "Special"
+  },
+  gdbOverlayArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbPrefix = {
+    link = "gdbCommand"
+  },
+  gdbPrintFormat = {
+    link = "gdbFormat"
+  },
+  gdbRecordArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbRecordBtraceArgs = {
+    link = "gdbRecordArgs"
+  },
+  gdbRecordFullArgs = {
+    link = "gdbRecordArgs"
+  },
+  gdbRecordGotoArgs = {
+    link = "gdbRecordArgs"
+  },
+  gdbRemoteArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbSaveArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbSelectFrameArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbSetAdaArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbSetAdaSourceCharsetValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbSetArmAbiValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetArmArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbSetArmDisassemblerValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetArmFallbackModeValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetArmForceModeValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetArmFpuValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetAskValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetAutoBooleanValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetAutoloadArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbSetAutoloadValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetBacktraceArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbSetBooleanValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetBreakpointArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbSetBreakpointCondtionEvaluationValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetCheckArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbSetCheckRangeValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetCpAbiValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetCrisModeValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetDcacheArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbSetDebugArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbSetDebugEventLoopValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetDebugRiscvArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbSetDebuginfodArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbSetDemangleStyleValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetDisassemblyFlavorValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetDprintfStyleValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetEndianValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetExecDirectionValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetExecFileMismatchValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetExtendedPromptValue = {
+    link = "gdbString"
+  },
+  gdbSetFilenameDisplayValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetFilenameValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetFollowExecModeValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetFollowForkModeValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetFortranArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbSetFrameFilterArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbSetFrameFilterPriorityValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetGuileArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbSetGuilePrintStackValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetHistoryArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbSetIndexCacheArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbSetIntegerValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetLanguageValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetLoggingArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbSetMemArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbSetMipsAbiValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetMipsArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbSetMipsCompressionValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetMipsfpuValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetMpxArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbSetMultipleSymbolsValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetOptionalFilenameValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetOsabiValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetPowerpcArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbSetPowerpcVectorAbiValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetPrintArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbSetPrintCharactersValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetPrintEntryValuesValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetPrintFrameArgumentsValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetPrintFrameInfoValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetPrintTypeArgs = {
+    link = "gdbSetPrintArgs"
+  },
+  gdbSetPythonArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbSetPythonPrintStackValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetRavenscarArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbSetRecordArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbSetRecordBtraceArgs = {
+    link = "gdbSetRecordArgs"
+  },
+  gdbSetRecordBtraceBtsArgs = {
+    link = "gdbSetRecordBtraceArgs"
+  },
+  gdbSetRecordBtraceCpuArgs = {
+    link = "gdbSetRecordBtraceArgs"
+  },
+  gdbSetRecordBtracePtArgs = {
+    link = "gdbSetRecordBtraceArgs"
+  },
+  gdbSetRecordBtraceReplayMemoryAccessValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetRecordFullArgs = {
+    link = "gdbSetRecordArgs"
+  },
+  gdbSetRemoteArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbSetRemoteInterruptSequenceValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetRemotePacketSizeValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetRemotelogbaseValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetRiscvArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbSetSchedulerLockingValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetScriptExtensionValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetSerialArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbSetSerialParityValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetShArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbSetShCallingConventionValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetSourceArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbSetStringNoEscapeValue = {
+    link = "gdbString"
+  },
+  gdbSetStringValue = {
+    link = "gdbString"
+  },
+  gdbSetStructConventionValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetStyleArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbSetStyleAttributeArgs = {
+    link = "gdbSetStyleArgs"
+  },
+  gdbSetStyleBorderAttributeArgs = {
+    link = "gdbSetStyleArgs"
+  },
+  gdbSetStyleColorValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetStyleDissassemblerArgs = {
+    link = "gdbSetStyleArgs"
+  },
+  gdbSetStyleIntensityValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetSymbolLoadingValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetTargetFileSystemKindValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetTcpArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbSetTdescArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbSetTuiArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbSetTuiBorderKindValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetTuiBorderModeValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetUIntegerValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetValue = {
     link = "Constant"
   },
-  gdbStatement = {
-    link = "Statement"
+  gdbSetZIntegerValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetZUIntegerUnlimitedValue = {
+    link = "gdbSetValue"
+  },
+  gdbSetZUIntegerValue = {
+    link = "gdbSetValue"
+  },
+  gdbShowArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbShowIndexCacheArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbSkipArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbSourceOption = {
+    link = "gdbCommandArgs"
   },
   gdbString = {
     link = "String"
   },
+  gdbStringEscape = {
+    link = "SpecialChar"
+  },
+  gdbTargetArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbTaskApplyArgs = {
+    link = "gdbTaskArgs"
+  },
+  gdbTaskArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbTfindArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbThreadApplyArgs = {
+    link = "gdbThreadArgs"
+  },
+  gdbThreadArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbTuiArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbTuiWindowArgs = {
+    link = "gdbTuiArgs"
+  },
+  gdbUnquotedString = {
+    link = "String"
+  },
+  gdbUnsetArgs = {
+    link = "gdbCommandArgs"
+  },
+  gdbUnsetTdescArgs = {
+    link = "gdbUnsetArgs"
+  },
   gdbVariable = {
     link = "Identifier"
+  },
+  gdbWatchEndOption = {
+    link = "gdbCommandArgs"
+  },
+  gdbWatchOption = {
+    link = "gdbCommandArgs"
+  },
+  gdbWindowName = {
+    link = "Constant"
+  },
+  gdbWith = {
+    link = "gdbCommand"
   },
   gdmoBraces = {
     link = "Function"
@@ -14734,6 +15832,12 @@ return
   gitrebaseSummary = {
     link = "String"
   },
+  gitrevlistComment = {
+    link = "Comment"
+  },
+  gitrevlistHash = {
+    link = "Identifier"
+  },
   gitsendemailComment = {
     link = "Comment"
   },
@@ -15335,6 +16439,9 @@ return
     link = "PreProc"
   },
   graphqlDirectiveLocation = {
+    link = "Special"
+  },
+  graphqlEscape = {
     link = "Special"
   },
   graphqlKeyword = {
@@ -16041,6 +17148,60 @@ return
   hastepreprocVar = {
     link = "Special"
   },
+  hbsArg = {
+    link = "Type"
+  },
+  hbsBool = {
+    link = "Boolean"
+  },
+  hbsBuiltInHelper = {
+    link = "Function"
+  },
+  hbsBuiltInHelperInElse = {
+    link = "Function"
+  },
+  hbsComment = {
+    link = "Comment"
+  },
+  hbsComponentStatement = {
+    link = "Define"
+  },
+  hbsControlFlow = {
+    link = "Function"
+  },
+  hbsDelimiter = {
+    link = "Delimiter"
+  },
+  hbsHandles = {
+    link = "Define"
+  },
+  hbsIdentifier = {
+    link = "Identifier"
+  },
+  hbsKeyword = {
+    link = "Keyword"
+  },
+  hbsMustacheName = {
+    link = "Statement"
+  },
+  hbsNumber = {
+    link = "Special"
+  },
+  hbsOperator = {
+    link = "Operator"
+  },
+  hbsPencilName = {
+    link = "Statement"
+  },
+  hbsString = {
+    link = "String"
+  },
+  hbsUnescapedHandles = {
+    link = "Identifier"
+  },
+  hbsUnescapedIdentifier = {
+    link = "Identifier"
+  },
   hclAttributeName = {
     link = "Identifier"
   },
@@ -16094,6 +17255,12 @@ return
   },
   helpBar = {
     link = "Ignore"
+  },
+  helpBold = {
+    link = "Bold"
+  },
+  helpBoldItalic = {
+    link = "BoldItalic"
   },
   helpBoolean = {
     link = "Boolean"
@@ -16170,6 +17337,9 @@ return
   helpInclude = {
     link = "Include"
   },
+  helpItalic = {
+    link = "Italic"
+  },
   helpKeyword = {
     link = "Keyword"
   },
@@ -16196,6 +17366,9 @@ return
   },
   helpPreProc = {
     link = "PreProc"
+  },
+  helpRegexp = {
+    link = "Regexp"
   },
   helpRepeat = {
     link = "Repeat"
@@ -16407,6 +17580,66 @@ return
   },
   hgcommitUser = {
     link = "String"
+  },
+  hipConstant = {
+    link = "Constant"
+  },
+  hipStorageClass = {
+    link = "StorageClass"
+  },
+  hipType = {
+    link = "Type"
+  },
+  hipVariable = {
+    link = "Identifier"
+  },
+  hlslBlockComment = {
+    link = "Comment"
+  },
+  hlslChar = {
+    link = "Character"
+  },
+  hlslCondition = {
+    link = "Statement"
+  },
+  hlslEscape = {
+    link = "Special"
+  },
+  hlslFloat = {
+    link = "Float"
+  },
+  hlslHex = {
+    link = "Number"
+  },
+  hlslInteger = {
+    link = "Number"
+  },
+  hlslLineComment = {
+    link = "Comment"
+  },
+  hlslOct = {
+    link = "Number"
+  },
+  hlslPreProc = {
+    link = "PreProc"
+  },
+  hlslRepeat = {
+    link = "Statement"
+  },
+  hlslSemantic = {
+    link = "Identifier"
+  },
+  hlslStatement = {
+    link = "Statement"
+  },
+  hlslString = {
+    link = "String"
+  },
+  hlslTodo = {
+    link = "Todo"
+  },
+  hlslType = {
+    link = "Type"
   },
   hlsplaylistAttributeEnum = {
     link = "Constant"
@@ -16710,6 +17943,9 @@ return
   },
   htmlCssStyleComment = {
     link = "Comment"
+  },
+  htmlDoctype = {
+    link = "htmlComment"
   },
   htmlEndTag = {
     link = "Identifier"
@@ -17115,6 +18351,9 @@ return
   i3ConfigFocusWrappingOpts = {
     link = "i3ConfigOption"
   },
+  i3ConfigFont = {
+    link = "i3ConfigParamLine"
+  },
   i3ConfigFontNamespace = {
     link = "i3ConfigOption"
   },
@@ -17130,6 +18369,9 @@ return
   i3ConfigGapsWhich = {
     link = "i3ConfigOption"
   },
+  i3ConfigIdent = {
+    link = "Identifier"
+  },
   i3ConfigKeyword = {
     link = "Keyword"
   },
@@ -17138,6 +18380,12 @@ return
   },
   i3ConfigMark = {
     link = "i3ConfigCommand"
+  },
+  i3ConfigMarkOpt = {
+    link = "i3ConfigOption"
+  },
+  i3ConfigModeIdent = {
+    link = "i3ConfigIdent"
   },
   i3ConfigMouseWarpingOpts = {
     link = "i3ConfigOption"
@@ -17170,7 +18418,7 @@ return
     link = "i3ConfigOption"
   },
   i3ConfigOutputIdent = {
-    link = "i3ConfigParamLine"
+    link = "i3ConfigIdent"
   },
   i3ConfigParamLine = {
     link = "i3ConfigString"
@@ -17180,6 +18428,9 @@ return
   },
   i3ConfigPopupFullscreenOpts = {
     link = "i3ConfigOption"
+  },
+  i3ConfigPopupFullscreenOptsExtra = {
+    link = "i3ConfigPopupFullscreenOpts"
   },
   i3ConfigResizeDir = {
     link = "i3ConfigOption"
@@ -17239,7 +18490,7 @@ return
     link = "i3ConfigOption"
   },
   i3ConfigWorkspaceIdent = {
-    link = "i3ConfigParamLine"
+    link = "i3ConfigIdent"
   },
   i3ConfigWorkspaceLayoutOpts = {
     link = "i3ConfigOption"
@@ -17357,6 +18608,57 @@ return
   },
   ibasicTypeSpecifier = {
     link = "Type"
+  },
+  icalendarComponentBegin = {
+    link = "Structure"
+  },
+  icalendarComponentEnd = {
+    link = "Structure"
+  },
+  icalendarComponentSeparator = {
+    link = "Operator"
+  },
+  icalendarComponentType = {
+    link = "Type"
+  },
+  icalendarParamEquals = {
+    link = "Operator"
+  },
+  icalendarParamSeparator = {
+    link = "Operator"
+  },
+  icalendarPropertyName = {
+    link = "Identifier"
+  },
+  icalendarPropertyParamName = {
+    link = "Type"
+  },
+  icalendarPropertyParamValue = {
+    link = "String"
+  },
+  icalendarPropertySeparator = {
+    link = "Operator"
+  },
+  icalendarPropertyValue = {
+    link = "Constant"
+  },
+  icalendarRrule = {
+    link = "Identifier"
+  },
+  icalendarRruleEquals = {
+    link = "Operator"
+  },
+  icalendarRruleParamName = {
+    link = "Type"
+  },
+  icalendarRruleParamSeparator = {
+    link = "Operator"
+  },
+  icalendarRruleParamValue = {
+    link = "String"
+  },
+  icalendarRruleSeparator = {
+    link = "Operator"
   },
   iconBraceError = {
     link = "iconError"
@@ -19278,6 +20580,9 @@ return
   jjRemoved = {
     link = "Removed"
   },
+  jjRenamed = {
+    link = "Changed"
+  },
   jovialBitConstant = {
     link = "Number"
   },
@@ -19517,6 +20822,9 @@ return
   },
   jsonTripleQuotesError = {
     link = "Error"
+  },
+  jsonldKeyword = {
+    link = "SpecialChar"
   },
   jspCommand = {
     link = "jspTag"
@@ -20451,6 +21759,9 @@ return
   krlError10 = {
     link = "Error"
   },
+  krlError11 = {
+    link = "Error"
+  },
   krlError2 = {
     link = "Error"
   },
@@ -20729,6 +22040,9 @@ return
   },
   lCursor = {
     bg = 14738154,
+    cterm = {
+      reverse = true
+    },
     fg = 1316379
   },
   laceAdaptClassName = {
@@ -21024,6 +22338,42 @@ return
   },
   ldifStringValue = {
     link = "String"
+  },
+  leexComment = {
+    link = "Comment"
+  },
+  leexHeading = {
+    link = "PreProc"
+  },
+  leexMacroEquals = {
+    link = "Operator"
+  },
+  leexMacroName = {
+    link = "Identifier"
+  },
+  leexMacroRef = {
+    link = "Macro"
+  },
+  leexMacroValue = {
+    link = "String"
+  },
+  leexRegexDelimiter = {
+    link = "Delimiter"
+  },
+  leexRegexEscape = {
+    link = "SpecialChar"
+  },
+  leexRegexOperator = {
+    link = "Operator"
+  },
+  leexRegexRange = {
+    link = "String"
+  },
+  leexRegexSpecial = {
+    link = "Special"
+  },
+  leexRuleColon = {
+    link = "Operator"
   },
   lessAmpersand = {
     link = "Character"
@@ -21733,74 +23083,91 @@ return
   lnkmapTime = {
     link = "Comment"
   },
-  logBinaryNumber = {
-    link = "Number"
+  logBlue = {
+    ctermfg = 81,
+    fg = 11393254
   },
   logBoolean = {
     link = "Boolean"
   },
-  logBrackets = {
-    link = "Comment"
-  },
   logDate = {
-    link = "Identifier"
-  },
-  logDateDay = {
-    link = "Identifier"
+    link = "Type"
   },
   logDuration = {
-    link = "Identifier"
+    link = "Operator"
   },
   logFilePath = {
-    link = "Conditional"
+    link = "Structure"
   },
-  logFloatNumber = {
-    link = "Float"
+  logGreen = {
+    ctermfg = 121,
+    fg = 9498256
   },
-  logHexNumber = {
-    link = "Number"
+  logIPv4 = {
+    link = "Underlined"
   },
-  logIPV4 = {
-    link = "Label"
-  },
-  logIPV6 = {
-    link = "ErrorMsg"
+  logIPv6 = {
+    link = "Underlined"
   },
   logJavaError = {
     link = "ErrorMsg"
   },
-  logLevelAlert = {
+  logLvAlert = {
     link = "ErrorMsg"
   },
-  logLevelCritical = {
+  logLvBad = {
+    link = "WarningMsg"
+  },
+  logLvCritical = {
     link = "ErrorMsg"
   },
-  logLevelDebug = {
+  logLvDebug = {
     link = "Debug"
   },
-  logLevelEmergency = {
+  logLvEmergency = {
     link = "ErrorMsg"
   },
-  logLevelError = {
+  logLvError = {
     link = "ErrorMsg"
   },
-  logLevelInfo = {
-    link = "Repeat"
+  logLvFail = {
+    link = "ErrorMsg"
   },
-  logLevelNotice = {
-    link = "Character"
+  logLvFatal = {
+    link = "ErrorMsg"
   },
-  logLevelTrace = {
-    link = "Comment"
+  logLvFault = {
+    link = "ErrorMsg"
   },
-  logLevelWarning = {
+  logLvInfo = {
+    link = "logBlue"
+  },
+  logLvNack = {
+    link = "ErrorMsg"
+  },
+  logLvNotice = {
+    link = "Exception"
+  },
+  logLvPass = {
+    link = "logGreen"
+  },
+  logLvSuccess = {
+    link = "logGreen"
+  },
+  logLvTrace = {
+    link = "Special"
+  },
+  logLvVerbose = {
+    link = "Special"
+  },
+  logLvWarning = {
     link = "WarningMsg"
   },
   logMD5 = {
     link = "Label"
   },
   logMacAddress = {
-    link = "Label"
+    link = "Underlined"
   },
   logNull = {
     link = "Constant"
@@ -21808,8 +23175,20 @@ return
   logNumber = {
     link = "Number"
   },
-  logOperator = {
-    link = "Operator"
+  logNumberBin = {
+    link = "Number"
+  },
+  logNumberFloat = {
+    link = "Float"
+  },
+  logNumberHex = {
+    link = "Number"
+  },
+  logNumberOct = {
+    link = "Number"
+  },
+  logSHA = {
+    link = "Label"
   },
   logSeparator = {
     link = "Comment"
@@ -21817,17 +23196,20 @@ return
   logString = {
     link = "String"
   },
-  logSysColumns = {
-    link = "Conditional"
+  logSymbol = {
+    link = "Delimiter"
+  },
+  logSysColumn = {
+    link = "Statement"
   },
   logSysProcess = {
-    link = "Include"
-  },
-  logTime = {
     link = "Function"
   },
+  logTime = {
+    link = "Operator"
+  },
   logTimeZone = {
-    link = "Identifier"
+    link = "Operator"
   },
   logUUID = {
     link = "Label"
@@ -22670,6 +24052,123 @@ return
   luaTodo = {
     link = "Todo"
   },
+  luauAttribute = {
+    link = "PreProc"
+  },
+  luauAttributeDelimiter = {
+    link = "PreProc"
+  },
+  luauAttributeName = {
+    link = "PreProc"
+  },
+  luauBuiltinConstant = {
+    link = "Constant"
+  },
+  luauComment = {
+    link = "Comment"
+  },
+  luauCommentDelimiter = {
+    link = "luauComment"
+  },
+  luauCond = {
+    link = "Conditional"
+  },
+  luauConstant = {
+    link = "Constant"
+  },
+  luauDeclareName = {
+    link = "Identifier"
+  },
+  luauDirective = {
+    link = "PreProc"
+  },
+  luauFunc = {
+    link = "Identifier"
+  },
+  luauFunction = {
+    link = "Function"
+  },
+  luauFunctionTypeParam = {
+    link = "luauType"
+  },
+  luauGlobal = {
+    link = "Identifier"
+  },
+  luauInterpDelimiter = {
+    link = "Special"
+  },
+  luauInterpString = {
+    link = "String"
+  },
+  luauMetaMethod = {
+    link = "Function"
+  },
+  luauModifier = {
+    link = "StorageClass"
+  },
+  luauNumber = {
+    link = "Number"
+  },
+  luauOperator = {
+    link = "Operator"
+  },
+  luauRepeat = {
+    link = "Repeat"
+  },
+  luauSelf = {
+    link = "Identifier"
+  },
+  luauSpecial = {
+    link = "SpecialChar"
+  },
+  luauStatement = {
+    link = "Statement"
+  },
+  luauString = {
+    link = "String"
+  },
+  luauString2 = {
+    link = "String"
+  },
+  luauStringDelimiter = {
+    link = "luauString"
+  },
+  luauSymbolOperator = {
+    link = "luauOperator"
+  },
+  luauTable = {
+    link = "Structure"
+  },
+  luauTableElementType = {
+    link = "luauType"
+  },
+  luauTodo = {
+    link = "Todo"
+  },
+  luauType = {
+    link = "Type"
+  },
+  luauTypeAfterColon = {
+    link = "luauType"
+  },
+  luauTypeAliasAssign = {
+    link = "luauSymbolOperator"
+  },
+  luauTypeFunction = {
+    link = "luauFunction"
+  },
+  luauTypeKeyword = {
+    link = "Keyword"
+  },
+  luauTypeName = {
+    link = "luauType"
+  },
+  luauTypeParam = {
+    link = "Type"
+  },
+  luauTypedef = {
+    link = "Typedef"
+  },
   lynxBoolean = {
     link = "Boolean"
   },
@@ -23186,6 +24685,108 @@ return
   markdownUrlTitleDelimiter = {
     link = "Delimiter"
   },
+  markoAttrName = {
+    link = "Type"
+  },
+  markoAttrTagName = {
+    link = "Identifier"
+  },
+  markoBlockDelim = {
+    link = "Special"
+  },
+  markoCData = {
+    link = "String"
+  },
+  markoCloseAnon = {
+    link = "Special"
+  },
+  markoCloseGt = {
+    link = "Special"
+  },
+  markoCloseName = {
+    link = "Statement"
+  },
+  markoCloseTail = {
+    link = "Statement"
+  },
+  markoComment = {
+    link = "Comment"
+  },
+  markoDeclaration = {
+    link = "PreProc"
+  },
+  markoEntity = {
+    link = "Special"
+  },
+  markoEscape = {
+    link = "Special"
+  },
+  markoHtmlComment = {
+    link = "Comment"
+  },
+  markoHtmlCommentTag = {
+    link = "Comment"
+  },
+  markoOperator = {
+    link = "Operator"
+  },
+  markoPlaceholderDelim = {
+    link = "Special"
+  },
+  markoScriptDelim = {
+    link = "Special"
+  },
+  markoScriptletDelim = {
+    link = "Special"
+  },
+  markoShorthandClass = {
+    link = "Identifier"
+  },
+  markoShorthandId = {
+    link = "Constant"
+  },
+  markoSpread = {
+    link = "Operator"
+  },
+  markoStatementKeyword = {
+    link = "Keyword"
+  },
+  markoString = {
+    link = "String"
+  },
+  markoStyleDelim = {
+    link = "Special"
+  },
+  markoTagComment = {
+    link = "Comment"
+  },
+  markoTagDelim = {
+    link = "Special"
+  },
+  markoTagName = {
+    link = "Statement"
+  },
+  markoTagNameBuiltin = {
+    link = "Macro"
+  },
+  markoTagNameConditional = {
+    link = "Conditional"
+  },
+  markoTagNameException = {
+    link = "Exception"
+  },
+  markoTagNameRepeat = {
+    link = "Repeat"
+  },
+  markoTagNameStatement = {
+    link = "Statement"
+  },
+  markoTagNameTail = {
+    link = "Statement"
+  },
+  markoTagVar = {
+    link = "Identifier"
+  },
   masmBinary = {
     link = "Number"
   },
@@ -23460,6 +25061,9 @@ return
     link = "Keyword"
   },
   mbsIAConfTLSTypeOpt = {
+    link = "Keyword"
+  },
+  mbsIAConfTLSVersionsOpt = {
     link = "Keyword"
   },
   mbsISConfItemK = {
@@ -26845,111 +28449,6 @@ return
   netrcSpecial = {
     link = "Special"
   },
-  netrwBak = {
-    link = "netrwGray"
-  },
-  netrwClassify = {
-    link = "Function"
-  },
-  netrwCmdSep = {
-    link = "Delimiter"
-  },
-  netrwComma = {
-    link = "netrwComment"
-  },
-  netrwComment = {
-    link = "Comment"
-  },
-  netrwCompress = {
-    link = "netrwGray"
-  },
-  netrwCoreDump = {
-    link = "WarningMsg"
-  },
-  netrwData = {
-    link = "Folded"
-  },
-  netrwDateSep = {
-    link = "Delimiter"
-  },
-  netrwDir = {
-    link = "Directory"
-  },
-  netrwExe = {
-    link = "PreProc"
-  },
-  netrwGray = {
-    link = "Folded"
-  },
-  netrwHdr = {
-    link = "netrwPlain"
-  },
-  netrwHelpCmd = {
-    link = "Function"
-  },
-  netrwHide = {
-    link = "netrwComment"
-  },
-  netrwHidePat = {
-    link = "Statement"
-  },
-  netrwHideSep = {
-    link = "netrwComment"
-  },
-  netrwLex = {
-    link = "netrwPlain"
-  },
-  netrwLib = {
-    link = "DiffChange"
-  },
-  netrwLink = {
-    link = "Special"
-  },
-  netrwList = {
-    link = "Statement"
-  },
-  netrwMakefile = {
-    link = "DiffChange"
-  },
-  netrwMarkFile = {
-    link = "TabLineSel"
-  },
-  netrwObj = {
-    link = "netrwGray"
-  },
-  netrwPix = {
-    link = "Special"
-  },
-  netrwQHTopic = {
-    link = "Number"
-  },
-  netrwSpecFile = {
-    link = "netrwGray"
-  },
-  netrwSymLink = {
-    link = "Question"
-  },
-  netrwTags = {
-    link = "netrwGray"
-  },
-  netrwTilde = {
-    link = "netrwGray"
-  },
-  netrwTimeSep = {
-    link = "netrwDateSep"
-  },
-  netrwTmp = {
-    link = "netrwGray"
-  },
-  netrwTreeBar = {
-    link = "Special"
-  },
-  netrwVersion = {
-    link = "Identifier"
-  },
-  netrwYacc = {
-    link = "netrwPlain"
-  },
   networkPipeFunction = {
     link = "Function"
   },
@@ -27427,6 +28926,9 @@ return
   nsisBrandingTextKwd = {
     link = "Constant"
   },
+  nsisCPUKwd = {
+    link = "Constant"
+  },
   nsisCRCCheckKwd = {
     link = "Constant"
   },
@@ -27536,6 +29038,12 @@ return
     link = "Macro"
   },
   nsisManifestDPIAwareKwd = {
+    link = "Constant"
+  },
+  nsisManifestDisableWindowFilteringKwd = {
+    link = "Constant"
+  },
+  nsisManifestGdiScalingKwd = {
     link = "Constant"
   },
   nsisManifestLongPathAwareKwd = {
@@ -31400,6 +32908,9 @@ return
   povBMPType = {
     link = "povSpecial"
   },
+  povBlockComment = {
+    link = "Comment"
+  },
   povCSG = {
     link = "Operator"
   },
@@ -31408,9 +32919,6 @@ return
   },
   povCommands = {
     link = "Operator"
-  },
-  povComment = {
-    link = "Comment"
   },
   povCommentError = {
     link = "povError"
@@ -31465,6 +32973,9 @@ return
   },
   povLabelDir = {
     link = "PreProc"
+  },
+  povLineComment = {
+    link = "Comment"
   },
   povMessageDir = {
     link = "Debug"
@@ -31673,29 +33184,50 @@ return
   privoxyAction = {
     link = "Identifier"
   },
-  privoxyActionLineDelimiter = {
+  privoxyAliasEqual = {
+    link = "Operator"
+  },
+  privoxyAliasHeader = {
+    link = "Title"
+  },
+  privoxyBraces = {
     link = "Delimiter"
   },
   privoxyComment = {
     link = "Comment"
   },
-  privoxyDisabledPrefix = {
-    link = "SpecialChar"
+  privoxyDescriptionHeader = {
+    link = "Title"
   },
-  privoxyEnabledPrefix = {
-    link = "SpecialChar"
+  privoxyDisablePrefix = {
+    link = "Added"
+  },
+  privoxyEnablePrefix = {
+    link = "Removed"
   },
   privoxyFilterAction = {
-    link = "Identifier"
+    link = "privoxyAction"
   },
   privoxyFilterArg = {
     link = "Constant"
   },
-  privoxyHeader = {
-    link = "PreProc"
+  privoxyLineContinuation = {
+    link = "Special"
   },
-  privoxySetting = {
-    link = "Identifier"
+  privoxyParamBraces = {
+    link = "privoxyBraces"
+  },
+  privoxySettingEqual = {
+    link = "Operator"
+  },
+  privoxySettingName = {
+    link = "Keyword"
+  },
+  privoxySettingValue = {
+    link = "Constant"
+  },
+  privoxySettingsHeader = {
+    link = "Title"
   },
   privoxyTodo = {
     link = "Todo"
@@ -32303,6 +33835,9 @@ return
   pythonAsync = {
     link = "Statement"
   },
+  pythonBoolean = {
+    link = "Function"
+  },
   pythonBuiltin = {
     link = "Function"
   },
@@ -32320,6 +33855,9 @@ return
   },
   pythonConditional = {
     link = "Conditional"
+  },
+  pythonConstant = {
+    link = "Function"
   },
   pythonDecorator = {
     link = "Define"
@@ -32789,6 +34327,9 @@ return
   raccTokenR = {
     link = "raccToken"
   },
+  racketBlockComment = {
+    link = "Comment"
+  },
   racketBoolean = {
     link = "Boolean"
   },
@@ -32827,9 +34368,6 @@ return
   },
   racketLit = {
     link = "Type"
-  },
-  racketMultilineComment = {
-    link = "Comment"
   },
   racketNote = {
     link = "SpecialComment"
@@ -32907,6 +34445,36 @@ return
     link = "Type"
   },
   radianceTodo = {
+    link = "Todo"
+  },
+  radvdBlock = {
+    link = "Keyword"
+  },
+  radvdBool = {
+    link = "Boolean"
+  },
+  radvdComment = {
+    link = "Comment"
+  },
+  radvdDelimiter = {
+    link = "Delimiter"
+  },
+  radvdIPv6 = {
+    link = "Constant"
+  },
+  radvdInfinity = {
+    link = "Constant"
+  },
+  radvdNumber = {
+    link = "Number"
+  },
+  radvdOption = {
+    link = "Identifier"
+  },
+  radvdPreference = {
+    link = "Constant"
+  },
+  radvdTodo = {
     link = "Todo"
   },
   rakuAttention = {
@@ -37440,6 +39008,9 @@ return
   screenComment = {
     link = "Comment"
   },
+  screenDecimalNumber = {
+    link = "screenNumbers"
+  },
   screenEscape = {
     link = "Special"
   },
@@ -37449,8 +39020,14 @@ return
   screenNumbers = {
     link = "Number"
   },
+  screenOctalNumber = {
+    link = "screenNumbers"
+  },
   screenSpecials = {
     link = "Special"
+  },
+  screenSpecialsQualifier = {
+    link = "Underlined"
   },
   screenString = {
     link = "String"
@@ -37460,6 +39037,9 @@ return
   },
   screenVariable = {
     link = "Identifier"
+  },
+  screenVersion5Commands = {
+    link = "screenCommands"
   },
   scssComment = {
     link = "Comment"
@@ -38175,6 +39755,42 @@ return
   sexplibUnquotedAtomErr = {
     link = "Error"
   },
+  sgfBracket = {
+    link = "Delimiter"
+  },
+  sgfCommentProp = {
+    link = "Comment"
+  },
+  sgfCommentValue = {
+    link = "Comment"
+  },
+  sgfDelimiter = {
+    link = "Delimiter"
+  },
+  sgfEscape = {
+    link = "SpecialChar"
+  },
+  sgfGameInfoProp = {
+    link = "Label"
+  },
+  sgfMarkupProp = {
+    link = "Identifier"
+  },
+  sgfMoveProp = {
+    link = "Statement"
+  },
+  sgfProperty = {
+    link = "Identifier"
+  },
+  sgfRootProp = {
+    link = "PreProc"
+  },
+  sgfSetupProp = {
+    link = "Type"
+  },
+  sgfValue = {
+    link = "String"
+  },
   sgmlAbbrEndTag = {
     link = "Identifier"
   },
@@ -38526,14 +40142,41 @@ return
   shForPP = {
     link = "shLoop"
   },
-  shFunction = {
-    link = "Function"
+  shFunctionCmdOne = {
+    link = "shFunctionOne"
+  },
+  shFunctionCmdTwo = {
+    link = "shFunctionOne"
+  },
+  shFunctionExprRegion = {
+    link = "shExprRegion"
+  },
+  shFunctionFour = {
+    link = "shFunctionOne"
   },
   shFunctionKey = {
+    link = "Keyword"
+  },
+  shFunctionNameAssignError = {
+    link = "Error"
+  },
+  shFunctionNameCommentError = {
+    link = "Error"
+  },
+  shFunctionOne = {
     link = "Function"
   },
-  shFunctionName = {
-    link = "Function"
+  shFunctionParens = {
+    link = "Delimiter"
+  },
+  shFunctionSubShRegion = {
+    link = "shSubShRegion"
+  },
+  shFunctionThree = {
+    link = "shFunctionOne"
+  },
+  shFunctionTwo = {
+    link = "shFunctionOne"
   },
   shHereDoc = {
     link = "shString"
@@ -38603,6 +40246,9 @@ return
   },
   shLoop = {
     link = "shStatement"
+  },
+  shNamespaceOne = {
+    link = "Function"
   },
   shNoQuote = {
     link = "shDoubleQuote"
@@ -39251,6 +40897,63 @@ return
   },
   skeyword = {
     link = "Keyword"
+  },
+  skhdCommand = {
+    link = "Function"
+  },
+  skhdComment = {
+    link = "Comment"
+  },
+  skhdDirective = {
+    link = "PreProc"
+  },
+  skhdGroupDef = {
+    link = "Label"
+  },
+  skhdGroupName = {
+    link = "Identifier"
+  },
+  skhdHeadline = {
+    link = "Title"
+  },
+  skhdKey = {
+    link = "Identifier"
+  },
+  skhdKeycode = {
+    link = "Number"
+  },
+  skhdModifier = {
+    link = "Keyword"
+  },
+  skhdOperator = {
+    link = "Operator"
+  },
+  skhdProcMapApp = {
+    link = "Type"
+  },
+  skhdProcMapDelim = {
+    link = "Operator"
+  },
+  skhdProcMapUnbind = {
+    link = "Special"
+  },
+  skhdProcMapWildcard = {
+    link = "Special"
+  },
+  skhdString = {
+    link = "String"
+  },
+  skhdSubCmd = {
+    link = "Statement"
+  },
+  skhdSwitch = {
+    link = "Operator"
+  },
+  skhdTargetGroup = {
+    link = "Type"
+  },
+  skhdWildcard = {
+    link = "Special"
   },
   skillAttribute = {
     link = "String"
@@ -40032,9 +41735,6 @@ return
   smlBrackErr = {
     link = "Error"
   },
-  smlCharErr = {
-    link = "Error"
-  },
   smlCharacter = {
     link = "Character"
   },
@@ -40051,6 +41751,12 @@ return
     link = "Keyword"
   },
   smlEndErr = {
+    link = "Error"
+  },
+  smlEscape = {
+    link = "Special"
+  },
+  smlEscapeErr = {
     link = "Error"
   },
   smlFullMod = {
@@ -40124,6 +41830,9 @@ return
   },
   smlWith = {
     link = "Include"
+  },
+  smlWord = {
+    link = "Number"
   },
   snnsnetComment = {
     link = "Comment"
@@ -41300,17 +43009,68 @@ return
     },
     underline = true
   },
-  sshConfigDeprecated = {
-    link = "Error"
+  sshAllowedSignersOptionAssignment = {
+    link = "Operator"
+  },
+  sshAllowedSignersOptionKeyword = {
+    link = "Keyword"
+  },
+  sshAllowedSignersOptionSeparator = {
+    link = "Delimiter"
+  },
+  sshAllowedSignersOptionValue = {
+    link = "String"
+  },
+  sshAllowedSignersPrincipal = {
+    link = "Identifier"
+  },
+  sshAllowedSignersPrincipalSeparator = {
+    link = "Delimiter"
+  },
+  sshAuthorizedKeyOptionAssignment = {
+    link = "Operator"
+  },
+  sshAuthorizedKeyOptionKeyword = {
+    link = "Keyword"
+  },
+  sshAuthorizedKeyOptionSeparator = {
+    link = "Delimiter"
+  },
+  sshAuthorizedKeyOptionValue = {
+    link = "String"
+  },
+  sshKeyBase64Encoded = {
+    link = "String"
+  },
+  sshKeyComment = {
+    link = "Comment"
+  },
+  sshKeyType = {
+    link = "Type"
+  },
+  sshKnownHostsHashedHostname = {
+    link = "Identifier"
+  },
+  sshKnownHostsHostname = {
+    link = "Identifier"
+  },
+  sshKnownHostsHostnameSeparator = {
+    link = "Delimiter"
+  },
+  sshKnownHostsMarker = {
+    link = "Statement"
   },
   sshconfigAddressFamily = {
     link = "sshconfigEnum"
   },
   sshconfigCipher = {
-    link = "sshConfigDeprecated"
+    link = "sshconfigDeprecated"
   },
   sshconfigCiphers = {
     link = "sshconfigEnum"
+  },
+  sshconfigCiphersDeprecated = {
+    link = "sshconfigDeprecated"
   },
   sshconfigComment = {
     link = "Comment"
@@ -41318,11 +43078,17 @@ return
   sshconfigConstant = {
     link = "Constant"
   },
+  sshconfigDeprecated = {
+    link = "Error"
+  },
   sshconfigEnum = {
     link = "Identifier"
   },
   sshconfigHostKeyAlgo = {
     link = "sshconfigEnum"
+  },
+  sshconfigHostKeyAlgoDeprecated = {
+    link = "sshconfigDeprecated"
   },
   sshconfigHostPort = {
     link = "sshconfigConstant"
@@ -41332,6 +43098,9 @@ return
   },
   sshconfigIPQoS = {
     link = "sshconfigEnum"
+  },
+  sshconfigIPQoSDeprecated = {
+    link = "sshconfigDeprecated"
   },
   sshconfigKbdInteractive = {
     link = "sshconfigEnum"
@@ -41347,6 +43116,9 @@ return
   },
   sshconfigMAC = {
     link = "sshconfigEnum"
+  },
+  sshconfigMACDeprecated = {
+    link = "sshconfigDeprecated"
   },
   sshconfigMatch = {
     link = "Type"
@@ -41381,6 +43153,9 @@ return
   sshdconfigCiphers = {
     link = "sshdconfigEnum"
   },
+  sshdconfigCiphersDeprecated = {
+    link = "sshdconfigDeprecated"
+  },
   sshdconfigComment = {
     link = "Comment"
   },
@@ -41390,11 +43165,17 @@ return
   sshdconfigConstant = {
     link = "Constant"
   },
+  sshdconfigDeprecated = {
+    link = "Error"
+  },
   sshdconfigEnum = {
     link = "Function"
   },
   sshdconfigHostKeyAlgo = {
     link = "sshdconfigEnum"
+  },
+  sshdconfigHostKeyAlgoDeprecated = {
+    link = "sshdconfigDeprecated"
   },
   sshdconfigHostPort = {
     link = "sshdconfigConstant"
@@ -41402,8 +43183,14 @@ return
   sshdconfigIPQoS = {
     link = "sshdconfigEnum"
   },
+  sshdconfigIPQoSDeprecated = {
+    link = "sshdconfigDeprecated"
+  },
   sshdconfigKexAlgo = {
     link = "sshdconfigEnum"
+  },
+  sshdconfigKexAlgoDeprecated = {
+    link = "sshdconfigDeprecated"
   },
   sshdconfigKeyword = {
     link = "Keyword"
@@ -41414,6 +43201,9 @@ return
   sshdconfigMAC = {
     link = "sshdconfigEnum"
   },
+  sshdconfigMACDeprecated = {
+    link = "sshdconfigDeprecated"
+  },
   sshdconfigMatch = {
     link = "Type"
   },
@@ -41421,6 +43211,9 @@ return
     link = "Number"
   },
   sshdconfigPrivilegeSeparation = {
+    link = "sshdconfigEnum"
+  },
+  sshdconfigPubkeyAuthOptions = {
     link = "sshdconfigEnum"
   },
   sshdconfigRootLogin = {
@@ -41642,6 +43435,9 @@ return
   straceSpecialChar = {
     link = "Special"
   },
+  straceStackTrace = {
+    link = "Comment"
+  },
   straceString = {
     link = "String"
   },
@@ -41656,6 +43452,12 @@ return
   },
   sudoersAlias = {
     link = "Keyword"
+  },
+  sudoersAppArmorSpecEquals = {
+    link = "Operator"
+  },
+  sudoersAppArmorSpecParam = {
+    link = "String"
   },
   sudoersBooleanParameter = {
     link = "Identifier"
@@ -41672,17 +43474,38 @@ return
   sudoersCmndAliasInSpec = {
     link = "PreProc"
   },
+  sudoersCmndAliasRef = {
+    link = "PreProc"
+  },
+  sudoersCmndComma = {
+    link = "Delimiter"
+  },
+  sudoersCmndDigestColon = {
+    link = "Operator"
+  },
+  sudoersCmndDigestComma = {
+    link = "Delimiter"
+  },
+  sudoersCmndDigestInList = {
+    link = "Type"
+  },
   sudoersCmndListColon = {
     link = "Delimiter"
   },
   sudoersCmndListComma = {
     link = "Delimiter"
   },
+  sudoersCmndName = {
+    link = "String"
+  },
   sudoersCmndNameInList = {
     link = "String"
   },
   sudoersCmndNameInSpec = {
     link = "String"
+  },
+  sudoersCmndNegation = {
+    link = "Operator"
   },
   sudoersCmndNegationInList = {
     link = "Operator"
@@ -41696,6 +43519,12 @@ return
   sudoersCmndSpecComma = {
     link = "Delimiter"
   },
+  sudoersCmndSpecial = {
+    link = "Special"
+  },
+  sudoersCmndSpecialInSpec = {
+    link = "Special"
+  },
   sudoersCommandArgs = {
     link = "String"
   },
@@ -41705,10 +43534,19 @@ return
   sudoersComment = {
     link = "Comment"
   },
+  sudoersDateSpecEquals = {
+    link = "Operator"
+  },
+  sudoersDateSpecParam = {
+    link = "Number"
+  },
   sudoersDefaultEntry = {
     link = "Keyword"
   },
   sudoersDefaultTypeAt = {
+    link = "Special"
+  },
+  sudoersDefaultTypeBang = {
     link = "Special"
   },
   sudoersDefaultTypeColon = {
@@ -41716,6 +43554,39 @@ return
   },
   sudoersDefaultTypeGreaterThan = {
     link = "Special"
+  },
+  sudoersDigestBase64 = {
+    link = "Number"
+  },
+  sudoersDigestHex = {
+    link = "Number"
+  },
+  sudoersDirectorySpecEquals = {
+    link = "Operator"
+  },
+  sudoersDirectorySpecParam = {
+    link = "String"
+  },
+  sudoersFloatOrBooleanParameter = {
+    link = "Identifier"
+  },
+  sudoersFloatParameterEquals = {
+    link = "Operator"
+  },
+  sudoersFloatValue = {
+    link = "Float"
+  },
+  sudoersGID = {
+    link = "Number"
+  },
+  sudoersGIDInList = {
+    link = "Number"
+  },
+  sudoersGIDInRunas = {
+    link = "Number"
+  },
+  sudoersGIDInSpec = {
+    link = "Number"
   },
   sudoersGroup = {
     link = "PreProc"
@@ -41743,6 +43614,15 @@ return
   },
   sudoersHostAliasRef = {
     link = "PreProc"
+  },
+  sudoersHostAll = {
+    link = "Special"
+  },
+  sudoersHostAllInSpec = {
+    link = "Special"
+  },
+  sudoersHostComma = {
+    link = "Delimiter"
   },
   sudoersHostListColon = {
     link = "Delimiter"
@@ -41792,6 +43672,9 @@ return
   sudoersInclude = {
     link = "Statement"
   },
+  sudoersIntegerOrBooleanParameter = {
+    link = "Identifier"
+  },
   sudoersIntegerParameter = {
     link = "Identifier"
   },
@@ -41810,6 +43693,18 @@ return
   sudoersListValue = {
     link = "String"
   },
+  sudoersModeOrBooleanParameter = {
+    link = "Identifier"
+  },
+  sudoersModeParameter = {
+    link = "Identifier"
+  },
+  sudoersModeParameterEquals = {
+    link = "Operator"
+  },
+  sudoersModeValue = {
+    link = "Number"
+  },
   sudoersNetwork = {
     link = "Number"
   },
@@ -41819,11 +43714,32 @@ return
   sudoersNetworkInSpec = {
     link = "Number"
   },
+  sudoersOptionSpec = {
+    link = "Special"
+  },
   sudoersParameterListComma = {
     link = "Delimiter"
   },
+  sudoersParameterNegation = {
+    link = "Operator"
+  },
+  sudoersSELinuxSpecEquals = {
+    link = "Operator"
+  },
+  sudoersSELinuxSpecParam = {
+    link = "String"
+  },
+  sudoersSolarisPrivSpecEquals = {
+    link = "Operator"
+  },
+  sudoersSolarisPrivSpecParam = {
+    link = "String"
+  },
   sudoersSpecEquals = {
     link = "Operator"
+  },
+  sudoersStringOrBooleanParameter = {
+    link = "Identifier"
   },
   sudoersStringParameter = {
     link = "Identifier"
@@ -41836,6 +43752,24 @@ return
   },
   sudoersTagSpec = {
     link = "Special"
+  },
+  sudoersTagSpecColon = {
+    link = "Delimiter"
+  },
+  sudoersTimeoutOrBooleanParameter = {
+    link = "Identifier"
+  },
+  sudoersTimeoutParameterEquals = {
+    link = "Operator"
+  },
+  sudoersTimeoutSpecEquals = {
+    link = "Operator"
+  },
+  sudoersTimeoutSpecParam = {
+    link = "Number"
+  },
+  sudoersTimeoutValue = {
+    link = "Number"
   },
   sudoersTodo = {
     link = "Todo"
@@ -41869,6 +43803,21 @@ return
   },
   sudoersUserAliasRef = {
     link = "PreProc"
+  },
+  sudoersUserAll = {
+    link = "Special"
+  },
+  sudoersUserAllInList = {
+    link = "Special"
+  },
+  sudoersUserAllInRunas = {
+    link = "Special"
+  },
+  sudoersUserAllInSpec = {
+    link = "Special"
+  },
+  sudoersUserComma = {
+    link = "Delimiter"
   },
   sudoersUserListColon = {
     link = "Delimiter"
@@ -41927,6 +43876,49 @@ return
   sudoersUserSpecComma = {
     link = "Delimiter"
   },
+  svelteArg = {
+    link = "Type"
+  },
+  svelteBraces = {
+    link = "Delimiter"
+  },
+  svelteComponent = {
+    link = "svelteTagName"
+  },
+  svelteDirective = {
+    link = "Type"
+  },
+  svelteEndTag = {
+    link = "Identifier"
+  },
+  svelteEqual = {},
+  svelteKeyword = {
+    link = "Statement"
+  },
+  sveltePreProc = {
+    link = "Comment"
+  },
+  svelteRune = {
+    link = "Statement"
+  },
+  svelteScriptTag = {
+    link = "Function"
+  },
+  svelteString = {
+    link = "String"
+  },
+  svelteStyleTag = {
+    link = "Function"
+  },
+  svelteTag = {
+    link = "Function"
+  },
+  svelteTagName = {
+    link = "Statement"
+  },
+  svelteValue = {
+    link = "String"
+  },
   svnAdded = {
     link = "Identifier"
   },
@@ -41953,6 +43945,9 @@ return
   },
   svnSummary = {
     link = "Keyword"
+  },
+  swayConfigBarIdent = {
+    link = "i3ConfigIdent"
   },
   swayConfigBindgestureArgument = {
     link = "i3ConfigBindArgument"
@@ -41985,7 +43980,7 @@ return
     link = "i3ConfigNumber"
   },
   swayConfigInputIdent = {
-    link = "i3ConfigMoveDir"
+    link = "i3ConfigIdent"
   },
   swayConfigInputOptVals = {
     link = "i3ConfigShParam"
@@ -41996,11 +43991,23 @@ return
   swayConfigInputType = {
     link = "i3ConfigMoveType"
   },
+  swayConfigInputTypeIdent = {
+    link = "i3ConfigMoveDir"
+  },
+  swayConfigOutputBg = {
+    link = "i3ConfigString"
+  },
   swayConfigOutputBgVals = {
     link = "swayConfigInputOptVals"
   },
   swayConfigOutputFPS = {
     link = "Constant"
+  },
+  swayConfigOutputICCPath = {
+    link = "i3ConfigString"
+  },
+  swayConfigOutputIdent = {
+    link = "i3ConfigIdent"
   },
   swayConfigOutputMode = {
     link = "i3ConfigNumber"
@@ -42010,6 +44017,9 @@ return
   },
   swayConfigOutputOpts = {
     link = "swayConfigInputOpts"
+  },
+  swayConfigSeatIdent = {
+    link = "i3ConfigIdent"
   },
   swayConfigSeatOptVals = {
     link = "swayConfigInputOptVals"
@@ -42783,9 +44793,6 @@ return
   tcshComment = {
     link = "Comment"
   },
-  tcshCommentTi = {
-    link = "PreProc"
-  },
   tcshDQuote = {
     link = "tcshSQuote"
   },
@@ -42813,6 +44820,9 @@ return
   tcshIf = {
     link = "tcshBuiltin"
   },
+  tcshLabel = {
+    link = "Label"
+  },
   tcshMeta = {
     link = "tcshSubst"
   },
@@ -42832,10 +44842,10 @@ return
     link = "tcshOperator"
   },
   tcshSQuote = {
-    link = "Constant"
+    link = "String"
   },
   tcshSharpBang = {
-    link = "tcshCommentTi"
+    link = "PreProc"
   },
   tcshShellVar = {
     link = "PreProc"
@@ -42861,6 +44871,9 @@ return
   teraBoolean = {
     link = "Boolean"
   },
+  teraBracket = {
+    link = "Operator"
+  },
   teraCommentBlock = {
     link = "Comment"
   },
@@ -42879,17 +44892,32 @@ return
   teraKeyword = {
     link = "Statement"
   },
+  teraNamespace = {
+    link = "Function"
+  },
   teraNumber = {
     link = "Number"
   },
   teraOperator = {
     link = "Operator"
   },
+  teraProperty = {
+    link = "Identifier"
+  },
+  teraSpecialVariable = {
+    link = "Special"
+  },
   teraStatement = {
     link = "Statement"
   },
   teraString = {
     link = "String"
+  },
+  teraStringEscape = {
+    link = "SpecialChar"
+  },
+  teraTest = {
+    link = "Keyword"
   },
   terminfoBooleans = {
     link = "Type"
@@ -44484,6 +46512,18 @@ return
   tmuxVariableExpansion = {
     link = "Identifier"
   },
+  tolkComment = {
+    link = "Comment"
+  },
+  tolkKeyword = {
+    link = "Keyword"
+  },
+  tolkNumber = {
+    link = "Number"
+  },
+  tolkString = {
+    link = "String"
+  },
   tomlBoolean = {
     link = "Boolean"
   },
@@ -45784,66 +47824,6 @@ return
   typescriptXHRProp = {
     link = "Keyword"
   },
-  typstCodeBrace = {
-    link = "Noise"
-  },
-  typstCodeBracket = {
-    link = "Noise"
-  },
-  typstCodeConditional = {
-    link = "Conditional"
-  },
-  typstCodeConstant = {
-    link = "Constant"
-  },
-  typstCodeDollar = {
-    link = "Noise"
-  },
-  typstCodeFieldAccess = {
-    link = "Identifier"
-  },
-  typstCodeFunction = {
-    link = "Function"
-  },
-  typstCodeIdentifier = {
-    link = "Identifier"
-  },
-  typstCodeKeyword = {
-    link = "Keyword"
-  },
-  typstCodeLabel = {
-    link = "Structure"
-  },
-  typstCodeNumberAngle = {
-    link = "Number"
-  },
-  typstCodeNumberFloat = {
-    link = "Number"
-  },
-  typstCodeNumberFraction = {
-    link = "Number"
-  },
-  typstCodeNumberInteger = {
-    link = "Number"
-  },
-  typstCodeNumberLength = {
-    link = "Number"
-  },
-  typstCodeNumberRatio = {
-    link = "Number"
-  },
-  typstCodeParen = {
-    link = "Noise"
-  },
-  typstCodeRepeat = {
-    link = "Repeat"
-  },
-  typstCodeStatementWord = {
-    link = "Statement"
-  },
-  typstCodeString = {
-    link = "String"
-  },
   typstCommentBlock = {
     link = "Comment"
   },
@@ -45853,114 +47833,95 @@ return
   typstCommentTodo = {
     link = "Todo"
   },
-  typstHashtagBrace = {
-    link = "Noise"
-  },
-  typstHashtagBracket = {
-    link = "Noise"
-  },
-  typstHashtagConditional = {
-    link = "Conditional"
-  },
-  typstHashtagConstant = {
-    link = "Constant"
-  },
-  typstHashtagDollar = {
-    link = "Noise"
-  },
-  typstHashtagFieldAccess = {
+  typstExprBareVar = {
     link = "Identifier"
   },
-  typstHashtagFunction = {
-    link = "Function"
-  },
-  typstHashtagIdentifier = {
-    link = "Identifier"
-  },
-  typstHashtagKeyword = {
-    link = "Keyword"
-  },
-  typstHashtagParen = {
-    link = "Noise"
-  },
-  typstHashtagRepeat = {
-    link = "Repeat"
-  },
-  typstHashtagStatementWord = {
+  typstExprCommand = {
     link = "Statement"
   },
+  typstExprConstant = {
+    link = "Constant"
+  },
+  typstExprEmbeddedBareVar = {
+    link = "Identifier"
+  },
+  typstExprFunc = {
+    link = "Function"
+  },
+  typstExprLabel = {
+    link = "Structure"
+  },
+  typstExprNumber = {
+    link = "Number"
+  },
+  typstExprNumberType = {
+    link = "Constant"
+  },
+  typstExprOp = {
+    link = "Statement"
+  },
+  typstExprStart = {
+    link = "Special"
+  },
+  typstExprString = {
+    link = "String"
+  },
   typstMarkupBold = {
-    bold = true,
-    cterm = {
-      bold = true
-    }
+    link = "Bold"
   },
   typstMarkupBoldItalic = {
-    bold = true,
-    cterm = {
-      bold = true,
-      italic = true
-    },
-    italic = true
+    link = "BoldItalic"
   },
   typstMarkupBulletList = {
-    link = "Structure"
+    link = "PreProc"
   },
   typstMarkupDash = {
-    link = "Structure"
+    link = "Special"
   },
   typstMarkupDollar = {
-    link = "Noise"
+    link = "Special"
   },
   typstMarkupEllipsis = {
-    link = "Structure"
+    link = "Special"
   },
   typstMarkupEnumList = {
-    link = "Structure"
+    link = "PreProc"
   },
   typstMarkupHeading = {
-    bold = true,
-    cterm = {
-      bold = true,
-      underline = true
-    },
-    underline = true
+    link = "Title"
+  },
+  typstMarkupHeadingDelimiter = {
+    link = "Type"
   },
   typstMarkupItalic = {
-    cterm = {
-      italic = true
-    },
-    italic = true
+    link = "Italic"
   },
   typstMarkupLabel = {
-    link = "Structure"
+    link = "PreProc"
   },
   typstMarkupLinebreak = {
-    link = "Structure"
+    link = "Special"
   },
   typstMarkupNonbreakingSpace = {
-    link = "Structure"
+    link = "Special"
   },
-  typstMarkupRawBlock = {
-    link = "Macro"
-  },
-  typstMarkupRawInline = {
-    link = "Macro"
+  typstMarkupRawDelimiter = {
+    link = "Special"
   },
   typstMarkupReference = {
-    link = "Structure"
+    link = "Special"
   },
   typstMarkupShy = {
-    link = "Structure"
+    link = "Special"
   },
   typstMarkupTermList = {
-    link = "Structure"
+    link = "Bold"
+  },
+  typstMarkupTermListDelimiter = {
+    link = "PreProc"
   },
   typstMarkupUrl = {
-    cterm = {
-      underline = true
-    },
-    underline = true
+    link = "Underlined"
   },
   typstMathFunction = {
     link = "Statement"
@@ -46319,6 +48280,9 @@ return
   unisonDebug = {
     link = "Debug"
   },
+  unisonDef = {
+    link = "Typedef"
+  },
   unisonDelimiter = {
     link = "Delimiter"
   },
@@ -46514,27 +48478,6 @@ return
   usw2kagtlog_Target = {
     link = "Identifier"
   },
-  valgrindAddr = {
-    link = "Number"
-  },
-  valgrindAt = {
-    link = "Special"
-  },
-  valgrindBin = {
-    link = "Comment"
-  },
-  valgrindError = {
-    link = "Special"
-  },
-  valgrindFunc = {
-    link = "Type"
-  },
-  valgrindNote = {
-    link = "Comment"
-  },
-  valgrindOptions = {
-    link = "Type"
-  },
   valgrindPid0 = {
     link = "Special"
   },
@@ -46556,22 +48499,7 @@ return
   valgrindPid6 = {
     link = "Statement"
   },
-  valgrindPid7 = {
-    link = "Error"
-  },
-  valgrindPid8 = {
-    link = "LineNr"
-  },
-  valgrindPid9 = {
-    link = "Normal"
-  },
   valgrindSpecLine = {
-    link = "Type"
-  },
-  valgrindSrc = {
-    link = "Statement"
-  },
-  valgrindSummary = {
     link = "Type"
   },
   vbBoolean = {
@@ -46643,192 +48571,6 @@ return
   vbTypes = {
     link = "Type"
   },
-  vdfBrace = {
-    link = "Delimiter"
-  },
-  vdfComment = {
-    link = "Comment"
-  },
-  vdfConditional = {
-    link = "Constant"
-  },
-  vdfEscape = {
-    link = "SpecialChar"
-  },
-  vdfMacro = {
-    link = "Macro"
-  },
-  vdfNumber = {
-    link = "Number"
-  },
-  vdfTag = {
-    link = "Keyword"
-  },
-  vdfTodo = {
-    link = "Todo"
-  },
-  vdfValue = {
-    link = "String"
-  },
-  vdfVariable = {
-    link = "Identifier"
-  },
-  veraCharacter = {
-    link = "Character"
-  },
-  veraClass = {
-    link = "Identifier"
-  },
-  veraComment = {
-    link = "Comment"
-  },
-  veraComment2String = {
-    link = "veraString"
-  },
-  veraCommentError = {
-    link = "veraError"
-  },
-  veraCommentL = {
-    link = "veraComment"
-  },
-  veraCommentSkip = {
-    link = "veraComment"
-  },
-  veraCommentStart = {
-    link = "veraComment"
-  },
-  veraCommentStartError = {
-    link = "veraError"
-  },
-  veraCommentString = {
-    link = "veraString"
-  },
-  veraConditional = {
-    link = "Conditional"
-  },
-  veraConstant = {
-    link = "Keyword"
-  },
-  veraCppOut = {
-    link = "Comment"
-  },
-  veraCppOut2 = {
-    link = "veraCppOut"
-  },
-  veraCppSkip = {
-    link = "veraCppOut"
-  },
-  veraCppString = {
-    link = "veraString"
-  },
-  veraDefine = {
-    link = "Macro"
-  },
-  veraDeprecated = {
-    link = "veraError"
-  },
-  veraErrInBracket = {
-    link = "veraError"
-  },
-  veraErrInParen = {
-    link = "veraError"
-  },
-  veraError = {
-    link = "Error"
-  },
-  veraFloat = {
-    link = "Float"
-  },
-  veraFormat = {
-    link = "veraSpecial"
-  },
-  veraInclude = {
-    link = "Include"
-  },
-  veraIncluded = {
-    link = "veraString"
-  },
-  veraInterface = {
-    link = "Function"
-  },
-  veraLabel = {
-    link = "Label"
-  },
-  veraMethods = {
-    link = "Statement"
-  },
-  veraModifier = {
-    link = "Tag"
-  },
-  veraNumber = {
-    link = "Number"
-  },
-  veraObject = {
-    link = "Identifier"
-  },
-  veraOctal = {
-    link = "Number"
-  },
-  veraOctalError = {
-    link = "veraError"
-  },
-  veraOctalZero = {
-    link = "PreProc"
-  },
-  veraOperator = {
-    link = "Operator"
-  },
-  veraParenError = {
-    link = "veraError"
-  },
-  veraPreCondit = {
-    link = "PreCondit"
-  },
-  veraPreProc = {
-    link = "PreProc"
-  },
-  veraRepeat = {
-    link = "Repeat"
-  },
-  veraSpaceError = {
-    link = "SpaceError"
-  },
-  veraSpecial = {
-    link = "SpecialChar"
-  },
-  veraSpecialCharacter = {
-    link = "veraSpecial"
-  },
-  veraSpecialError = {
-    link = "veraError"
-  },
-  veraStatement = {
-    link = "Statement"
-  },
-  veraString = {
-    link = "String"
-  },
-  veraStructure = {
-    link = "Structure"
-  },
-  veraTask = {
-    link = "Keyword"
-  },
-  veraTodo = {
-    link = "Todo"
-  },
-  veraType = {
-    link = "Type"
-  },
-  veraUserConstant = {
-    link = "Constant"
-  },
-  veraUserLabel = {
-    link = "Label"
-  },
-  veraUserMethod = {
-    link = "Function"
-  },
   verilogCharacter = {
     link = "Character"
   },
@@ -46870,60 +48612,6 @@ return
   },
   verilogTodo = {
     link = "Todo"
-  },
-  verilogamsCharacter = {
-    link = "Character"
-  },
-  verilogamsComment = {
-    link = "Comment"
-  },
-  verilogamsConditional = {
-    link = "Conditional"
-  },
-  verilogamsConstant = {
-    link = "Constant"
-  },
-  verilogamsDirective = {
-    link = "SpecialComment"
-  },
-  verilogamsEscape = {
-    link = "Special"
-  },
-  verilogamsGlobal = {
-    link = "Define"
-  },
-  verilogamsLabel = {
-    link = "Label"
-  },
-  verilogamsNumber = {
-    link = "Number"
-  },
-  verilogamsOperator = {
-    link = "Special"
-  },
-  verilogamsRepeat = {
-    link = "Repeat"
-  },
-  verilogamsStatement = {
-    link = "Statement"
-  },
-  verilogamsString = {
-    link = "String"
-  },
-  verilogamsSystask = {
-    link = "Function"
-  },
-  verilogamsTodo = {
-    link = "Todo"
-  },
-  verilogamsType = {
-    link = "Type"
-  },
-  vgrindefsComment = {
-    link = "Comment"
-  },
-  vgrindefsField = {
-    link = "Statement"
   },
   vhdlAttribute = {
     link = "Special"
@@ -47121,7 +48809,13 @@ return
     link = "vimType"
   },
   vim9VariableTypeAny = {
-    link = "vimType"
+    link = "vimTypeAny"
+  },
+  vim9VariableTypeObject = {
+    link = "vimTypeObject"
+  },
+  vim9VariableTypeObjectBracket = {
+    link = "vimTypeObjectBracket"
   },
   vim9Vim9Script = {
     link = "vimCommand"
@@ -47134,6 +48828,12 @@ return
   },
   vimAddress = {
     link = "vimMark"
+  },
+  vimAt = {
+    link = "vimCommand"
+  },
+  vimAtArg = {
+    link = "Special"
   },
   vimAugroupBang = {
     link = "vimBang"
@@ -47186,6 +48886,30 @@ return
   vimBracket = {
     link = "Delimiter"
   },
+  vimBreakadd = {
+    link = "vimCommand"
+  },
+  vimBreakaddExpr = {
+    link = "Special"
+  },
+  vimBreakaddFile = {
+    link = "Special"
+  },
+  vimBreakaddFunc = {
+    link = "Special"
+  },
+  vimBreakaddHere = {
+    link = "Special"
+  },
+  vimBreakdel = {
+    link = "vimCommand"
+  },
+  vimBreaklist = {
+    link = "vimCommand"
+  },
+  vimBreakpointGlob = {
+    link = "Special"
+  },
   vimBufnrWarn = {
     link = "vimWarn"
   },
@@ -47194,6 +48918,12 @@ return
   },
   vimCatch = {
     link = "vimCommand"
+  },
+  vimCd = {
+    link = "vimCommand"
+  },
+  vimCdBang = {
+    link = "vimBang"
   },
   vimCmplxRepeat = {
     link = "SpecialChar"
@@ -47246,6 +48976,9 @@ return
   vimCtrlChar = {
     link = "SpecialChar"
   },
+  vimDebug = {
+    link = "vimCommand"
+  },
   vimDebuggreedy = {
     link = "vimCommand"
   },
@@ -47274,6 +49007,12 @@ return
     link = "vimUserCmdAttr"
   },
   vimDelfunctionBang = {
+    link = "vimBang"
+  },
+  vimDoCommand = {
+    link = "vimCommand"
+  },
+  vimDoCommandBang = {
     link = "vimBang"
   },
   vimDoautocmd = {
@@ -47405,6 +49144,15 @@ return
   vimGroupAdd = {
     link = "vimSynOption"
   },
+  vimGroupListContinue = {
+    link = "vimContinue"
+  },
+  vimGroupListContinueComment = {
+    link = "vimContinueComment"
+  },
+  vimGroupListEquals = {
+    link = "vimSynOption"
+  },
   vimGroupName = {
     link = "Normal"
   },
@@ -47416,6 +49164,12 @@ return
   },
   vimHLGroup = {
     link = "vimGroup"
+  },
+  vimHelp = {
+    link = "vimCommand"
+  },
+  vimHelpBang = {
+    link = "vimBang"
   },
   vimHelpgrep = {
     link = "vimCommand"
@@ -47486,6 +49240,12 @@ return
   vimHighlight = {
     link = "vimCommand"
   },
+  vimHistory = {
+    link = "vimCommand"
+  },
+  vimHistoryName = {
+    link = "Special"
+  },
   vimImport = {
     link = "vimCommand"
   },
@@ -47509,6 +49269,15 @@ return
   },
   vimLambdaOperator = {
     link = "vimOper"
+  },
+  vimLanguage = {
+    link = "vimCommand"
+  },
+  vimLanguageCategory = {
+    link = "Special"
+  },
+  vimLanguageNameReserved = {
+    link = "Constant"
   },
   vimLet = {
     link = "vimCommand"
@@ -47705,6 +49474,9 @@ return
   vimProfileBang = {
     link = "vimBang"
   },
+  vimPrompt = {
+    link = "vimCommand"
+  },
   vimPython = {
     link = "vimCommand"
   },
@@ -47810,11 +49582,11 @@ return
   vimSortOptionsError = {
     link = "Error"
   },
-  vimSpecFile = {
-    link = "Identifier"
-  },
   vimSpecFileMod = {
-    link = "vimSpecFile"
+    link = "vimSpecfile"
+  },
+  vimSpecfile = {
+    link = "Identifier"
   },
   vimSpecial = {
     link = "Type"
@@ -47876,6 +49648,9 @@ return
   vimSynConcealError = {
     link = "vimError"
   },
+  vimSynContainedin = {
+    link = "vimSynContains"
+  },
   vimSynContains = {
     link = "vimSynOption"
   },
@@ -47897,8 +49672,8 @@ return
   vimSynIskeywordSep = {
     link = "Delimiter"
   },
-  vimSynKeyContainedin = {
-    link = "vimSynContains"
+  vimSynKeyError = {
+    link = "vimError"
   },
   vimSynKeyOpt = {
     link = "vimSynOption"
@@ -47990,8 +49765,35 @@ return
   vimSyntax = {
     link = "vimCommand"
   },
+  vimSyntime = {
+    link = "vimCommand"
+  },
+  vimSyntimeArg = {
+    link = "vimSpecial"
+  },
   vimTcl = {
     link = "vimCommand"
+  },
+  vimTerminal = {
+    link = "vimCommand"
+  },
+  vimTerminalContinue = {
+    link = "vimContinue"
+  },
+  vimTerminalContinueComment = {
+    link = "vimContinueComment"
+  },
+  vimTerminalKillOptionArg = {
+    link = "Constant"
+  },
+  vimTerminalOption = {
+    link = "vimSpecial"
+  },
+  vimTerminalSizeOptionArg = {
+    link = "Constant"
+  },
+  vimTerminalTypeOptionArg = {
+    link = "Constant"
   },
   vimThrow = {
     link = "vimCommand"
@@ -48004,6 +49806,12 @@ return
   },
   vimTypeAny = {
     link = "vimType"
+  },
+  vimTypeObject = {
+    link = "vimType"
+  },
+  vimTypeObjectBracket = {
+    link = "vimTypeObject"
   },
   vimUniq = {
     link = "vimCommand"
@@ -48062,8 +49870,14 @@ return
   vimUserFunc = {
     link = "Normal"
   },
+  vimUserFuncKey = {
+    link = "vimUserFunc"
+  },
   vimVar = {
     link = "Normal"
+  },
+  vimVarKey = {
+    link = "vimVar"
   },
   vimVarScope = {
     link = "Identifier"
@@ -48143,492 +49957,11 @@ return
   vimWincmd = {
     link = "vimCommand"
   },
-  viminfoComment = {
-    link = "Comment"
-  },
-  viminfoError = {
-    link = "Error"
-  },
-  viminfoNew = {
-    link = "String"
-  },
-  viminfoStatement = {
-    link = "Statement"
-  },
   vipcxjFunction = {
     link = "Function"
   },
-  virataCfgStatement = {
-    link = "Statement"
-  },
-  virataCharacter = {
-    link = "Character"
-  },
-  virataComment = {
-    link = "Comment"
-  },
-  virataDecNumber = {
-    link = "Number"
-  },
-  virataDefSubst = {
-    link = "virataPreProc"
-  },
-  virataDefSubstError = {
-    link = "virataPreProcError"
-  },
-  virataDefine = {
-    link = "Define"
-  },
-  virataDirective = {
-    link = "Keyword"
-  },
-  virataHexNumber = {
-    link = "Number"
-  },
-  virataIdentError = {
-    link = "Error"
-  },
-  virataInAlter = {
-    link = "virataOperator"
-  },
-  virataInCommentTodo = {
-    link = "Todo"
-  },
-  virataInExec = {
-    link = "virataOperator"
-  },
-  virataInExport = {
-    link = "virataOperator"
-  },
-  virataInImport = {
-    link = "virataOperator"
-  },
-  virataInInstance = {
-    link = "virataOperator"
-  },
-  virataInMacAddr = {
-    link = "virataHexNumber"
-  },
-  virataInMake = {
-    link = "virataOperator"
-  },
-  virataInModule = {
-    link = "virataOperator"
-  },
-  virataInProcess = {
-    link = "virataOperator"
-  },
-  virataInclude = {
-    link = "Include"
-  },
-  virataNumberError = {
-    link = "Error"
-  },
-  virataOperator = {
-    link = "Operator"
-  },
-  virataPreCondit = {
-    link = "PreCondit"
-  },
-  virataPreProc = {
-    link = "PreProc"
-  },
-  virataPreProcError = {
-    link = "Error"
-  },
-  virataPreProcWarn = {
-    link = "Todo"
-  },
-  virataSizeNumber = {
-    link = "Number"
-  },
-  virataSpclChar = {
-    link = "Special"
-  },
-  virataSpclComment = {
-    link = "SpecialComment"
-  },
-  virataStatement = {
-    link = "Statement"
-  },
-  virataString = {
-    link = "String"
-  },
-  virataStringError = {
-    link = "Error"
-  },
-  vmasmComment = {
-    link = "Comment"
-  },
-  vmasmCond = {
-    link = "Conditional"
-  },
-  vmasmDirective = {
-    link = "Special"
-  },
-  vmasmInclude = {
-    link = "Include"
-  },
-  vmasmLabel = {
-    link = "Type"
-  },
-  vmasmMacro = {
-    link = "Macro"
-  },
-  vmasmOpcode = {
-    link = "Statement"
-  },
-  vmasmOperator = {
-    link = "Identifier"
-  },
-  vmasmPreCond = {
-    link = "Special"
-  },
-  vmasmReg = {
-    link = "Identifier"
-  },
-  vmasmRepeat = {
-    link = "Repeat"
-  },
-  vmasmTodo = {
-    link = "Todo"
-  },
-  vmasmbinNumber = {
-    link = "Number"
-  },
-  vmasmdecNumber = {
-    link = "Number"
-  },
-  vmasmfloatNumber = {
-    link = "Number"
-  },
-  vmasmhexNumber = {
-    link = "Number"
-  },
-  vmasmoctNumber = {
-    link = "Number"
-  },
-  voscmCommand = {
-    link = "Structure"
-  },
-  voscmComment = {
-    link = "Comment"
-  },
-  voscmConditional = {
-    link = "Conditional"
-  },
-  voscmContinuation = {
-    link = "Macro"
-  },
-  voscmDecimalNumber = {
-    link = "Float"
-  },
-  voscmError = {
-    link = "Error"
-  },
-  voscmFunction = {
-    link = "Function"
-  },
-  voscmIdentifier = {
-    link = "Identifier"
-  },
-  voscmJump = {
-    link = "Statement"
-  },
-  voscmLabelId = {
-    link = "String"
-  },
-  voscmNumber = {
-    link = "Number"
-  },
-  voscmParam = {
-    link = "Statement"
-  },
-  voscmParamId = {
-    link = "Identifier"
-  },
-  voscmParamKeyword = {
-    link = "Statement"
-  },
-  voscmParamList = {},
-  voscmParamName = {
-    link = "String"
-  },
-  voscmSetvar = {
-    link = "Statement"
-  },
-  voscmStatement = {
-    link = "Statement"
-  },
-  voscmString = {
-    link = "String"
-  },
-  voscmTab = {
-    link = "Error"
-  },
-  voscmTodo = {
-    link = "Todo"
-  },
-  voscmVariable = {
-    link = "Identifier"
-  },
-  vroomBind = {
-    link = "vroomMode"
-  },
-  vroomBuffer = {
-    link = "vroomInput"
-  },
-  vroomChannel = {
-    link = "vroomMode"
-  },
-  vroomColoredAction = {
-    link = "Statement"
-  },
-  vroomContinuation = {
-    link = "Constant"
-  },
-  vroomControlBlock = {
-    link = "vroomInput"
-  },
-  vroomControlEscape = {
-    link = "Special"
-  },
-  vroomDelay = {
-    link = "Type"
-  },
-  vroomDirective = {
-    link = "vroomInput"
-  },
-  vroomHijack = {
-    link = "Special"
-  },
-  vroomHijackAction = {
-    link = "vroomHijack"
-  },
-  vroomInput = {
-    link = "Identifier"
-  },
-  vroomMessage = {
-    link = "vroomOutput"
-  },
-  vroomMessageBody = {
-    link = "Constant"
-  },
-  vroomMode = {
-    link = "Constant"
-  },
-  vroomOutput = {
-    link = "Statement"
-  },
-  vroomRange = {
-    link = "Include"
-  },
-  vroomStrictness = {
-    link = "vroomMode"
-  },
-  vroomSystem = {
-    link = "vroomInput"
-  },
-  vroomSystemAction = {
-    link = "vroomSystem"
-  },
-  vsejclComment = {
-    link = "Comment"
-  },
-  vsejclField = {
-    link = "Type"
-  },
-  vsejclKeyword = {
-    link = "Statement"
-  },
-  vsejclMisc = {
-    link = "Special"
-  },
-  vsejclObject = {
-    link = "Constant"
-  },
-  vsejclParms = {
-    link = "Constant"
-  },
-  vsejclString = {
-    link = "Constant"
-  },
-  watComment = {
-    link = "Comment"
-  },
-  watControlInst = {
-    link = "Statement"
-  },
-  watEscapedUtf8 = {
-    link = "Special"
-  },
-  watFloat = {
-    link = "Float"
-  },
-  watInstGeneral = {
-    link = "Operator"
-  },
-  watInstGetSet = {
-    link = "Operator"
-  },
-  watInstWithType = {
-    link = "Operator"
-  },
-  watListDelimiter = {
-    link = "Delimiter"
-  },
-  watModule = {
-    link = "PreProc"
-  },
-  watNamedVar = {
-    link = "Identifier"
-  },
-  watNumber = {
-    link = "Number"
-  },
-  watParamInst = {
-    link = "Conditional"
-  },
-  watSimdInst = {
-    link = "Operator"
-  },
-  watString = {
-    link = "String"
-  },
-  watStringSpecial = {
-    link = "Special"
-  },
-  watType = {
-    link = "Type"
-  },
-  watUnnamedVar = {
-    link = "PreProc"
-  },
-  wdiffNew = {
-    link = "Identifier"
-  },
-  wdiffOld = {
-    link = "Special"
-  },
-  wdlCommandSection = {
-    link = "String"
-  },
-  wdlComment = {
-    link = "Comment"
-  },
-  wdlConditional = {
-    link = "Conditional"
-  },
-  wdlFunctions = {
-    link = "Function"
-  },
-  wdlStatement = {
-    link = "Statement"
-  },
-  wdlString = {
-    link = "String"
-  },
-  wdlTodo = {
-    link = "Todo"
-  },
-  wdlType = {
-    link = "Type"
-  },
   webRestrictedTeX = {
     link = "String"
-  },
-  webmacroBoolean = {
-    link = "Boolean"
-  },
-  webmacroBracesError = {
-    link = "Error"
-  },
-  webmacroComment = {
-    link = "CommentTitle"
-  },
-  webmacroForeach = {
-    link = "webmacroStatement"
-  },
-  webmacroIf = {
-    link = "webmacroStatement"
-  },
-  webmacroInclude = {
-    link = "webmacroStatement"
-  },
-  webmacroNumber = {
-    link = "Number"
-  },
-  webmacroParse = {
-    link = "webmacroStatement"
-  },
-  webmacroSet = {
-    link = "webmacroStatement"
-  },
-  webmacroSpecial = {
-    link = "Special"
-  },
-  webmacroStatement = {
-    link = "Function"
-  },
-  webmacroString = {
-    link = "String"
-  },
-  webmacroVariable = {
-    link = "PreProc"
-  },
-  wget2AssignmentOperator = {
-    link = "Special"
-  },
-  wget2Boolean = {
-    link = "Boolean"
-  },
-  wget2Command = {
-    link = "Identifier"
-  },
-  wget2Comment = {
-    link = "Comment"
-  },
-  wget2Number = {
-    link = "Number"
-  },
-  wget2Quota = {
-    link = "Number"
-  },
-  wget2String = {
-    link = "String"
-  },
-  wget2Time = {
-    link = "Number"
-  },
-  wget2Todo = {
-    link = "Todo"
-  },
-  wgetAssignmentOperator = {
-    link = "Special"
-  },
-  wgetBoolean = {
-    link = "Boolean"
-  },
-  wgetCommand = {
-    link = "Identifier"
-  },
-  wgetComment = {
-    link = "Comment"
-  },
-  wgetNumber = {
-    link = "Number"
-  },
-  wgetQuota = {
-    link = "Number"
-  },
-  wgetString = {
-    link = "String"
-  },
-  wgetTime = {
-    link = "Number"
-  },
-  wgetTodo = {
-    link = "Todo"
   },
   wikiBold = {
     link = "htmlBold"
@@ -48698,663 +50031,6 @@ return
   },
   wikiTemplateParam = {
     link = "htmlSpecial"
-  },
-  winbatchComment = {
-    link = "Comment"
-  },
-  winbatchConstant = {
-    link = "StorageClass"
-  },
-  winbatchCtl = {
-    link = "Operator"
-  },
-  winbatchImplicit = {
-    link = "Special"
-  },
-  winbatchLabel = {
-    link = "PreProc"
-  },
-  winbatchNumber = {
-    link = "Number"
-  },
-  winbatchStatement = {
-    link = "Statement"
-  },
-  winbatchString = {
-    link = "String"
-  },
-  winbatchTodo = {
-    link = "Todo"
-  },
-  winbatchVar = {
-    link = "Type"
-  },
-  wmlBody = {
-    link = "Special"
-  },
-  wmlComment = {
-    link = "Comment"
-  },
-  wmlDefineName = {
-    link = "String"
-  },
-  wmlDivert = {
-    link = "Delimiter"
-  },
-  wmlDivertEnd = {
-    link = "Delimiter"
-  },
-  wmlDiverted = {
-    link = "Label"
-  },
-  wmlInclude = {
-    link = "Include"
-  },
-  wmlLocation = {
-    link = "Delimiter"
-  },
-  wmlLocationId = {
-    link = "Label"
-  },
-  wmlNextLine = {
-    link = "Special"
-  },
-  wmlSharpBang = {
-    link = "PreProc"
-  },
-  wmlUse = {
-    link = "Include"
-  },
-  wmlUsed = {
-    link = "String"
-  },
-  wmlVerbatimTag = {
-    link = "htmlTag"
-  },
-  wmlVerbatimTagN = {
-    link = "htmlStatement"
-  },
-  wsmlAxiom = {
-    link = "Typedef"
-  },
-  wsmlBehavioral = {
-    link = "Typedef"
-  },
-  wsmlBrace = {
-    link = "Operator"
-  },
-  wsmlCharacter = {
-    link = "Character"
-  },
-  wsmlChoreographyPri = {
-    link = "Typedef"
-  },
-  wsmlChoreographySec = {
-    link = "Operator"
-  },
-  wsmlChoreographyTer = {
-    link = "Special"
-  },
-  wsmlComment = {
-    link = "Comment"
-  },
-  wsmlCommentStar = {
-    link = "wsmlComment"
-  },
-  wsmlCommentTitle = {
-    link = "SpecialComment"
-  },
-  wsmlDataTypes = {
-    link = "Special"
-  },
-  wsmlDocComment = {
-    link = "Comment"
-  },
-  wsmlFixMe = {
-    link = "Error"
-  },
-  wsmlHeader = {
-    link = "Typedef"
-  },
-  wsmlIdentifier = {
-    link = "Normal"
-  },
-  wsmlKeywordsInsideLEs = {
-    link = "Operator"
-  },
-  wsmlLineComment = {
-    link = "Comment"
-  },
-  wsmlMediation = {
-    link = "Typedef"
-  },
-  wsmlNFP = {
-    link = "Typedef"
-  },
-  wsmlNamespace = {
-    link = "Typedef"
-  },
-  wsmlNumber = {
-    link = "Number"
-  },
-  wsmlOntology = {
-    link = "Statement"
-  },
-  wsmlOperator = {
-    link = "Operator"
-  },
-  wsmlService = {
-    link = "Typedef"
-  },
-  wsmlSqName = {
-    link = "Normal"
-  },
-  wsmlString = {
-    link = "String"
-  },
-  wsmlTodo = {
-    link = "Todo"
-  },
-  wsmlTopLevel = {
-    link = "Typedef"
-  },
-  wsmlVariable = {
-    link = "Define"
-  },
-  wvdialComment = {
-    link = "Comment"
-  },
-  wvdialEqual = {
-    link = "Statement"
-  },
-  wvdialSection = {
-    link = "PreProc"
-  },
-  wvdialValue = {
-    link = "String"
-  },
-  wvdialVar = {
-    link = "Identifier"
-  },
-  xcomposeColon = {
-    link = "Delimiter"
-  },
-  xcomposeComment = {
-    link = "Comment"
-  },
-  xcomposeFile = {
-    link = "String"
-  },
-  xcomposeInclude = {
-    link = "Include"
-  },
-  xcomposeKeysym = {
-    link = "Constant"
-  },
-  xcomposeModifier = {
-    link = "Function"
-  },
-  xcomposeModifierPrefix = {
-    link = "Operator"
-  },
-  xcomposeString = {
-    link = "String"
-  },
-  xcomposeSubstitution = {
-    link = "Special"
-  },
-  xcomposeTodo = {
-    link = "Todo"
-  },
-  xdefaultsComment = {
-    link = "Comment"
-  },
-  xdefaultsCommentError = {
-    link = "Error"
-  },
-  xdefaultsCommentH = {
-    link = "xdefaultsComment"
-  },
-  xdefaultsCppOut = {
-    link = "Comment"
-  },
-  xdefaultsCppOut2 = {
-    link = "xdefaultsCppOut"
-  },
-  xdefaultsCppSkip = {
-    link = "xdefaultsCppOut"
-  },
-  xdefaultsDefine = {
-    link = "Macro"
-  },
-  xdefaultsErrorLine = {
-    link = "Error"
-  },
-  xdefaultsInclude = {
-    link = "xdefaultsPreProc"
-  },
-  xdefaultsIncluded = {
-    link = "String"
-  },
-  xdefaultsLabel = {
-    link = "Type"
-  },
-  xdefaultsLineEnd = {
-    link = "Special"
-  },
-  xdefaultsPreProc = {
-    link = "PreProc"
-  },
-  xdefaultsPunct = {
-    link = "Normal"
-  },
-  xdefaultsSpecial = {
-    link = "Statement"
-  },
-  xdefaultsSymbol = {
-    link = "Statement"
-  },
-  xdefaultsTodo = {
-    link = "Todo"
-  },
-  xdefaultsValue = {
-    link = "Constant"
-  },
-  xf86confComment = {
-    link = "Comment"
-  },
-  xf86confConstant = {
-    link = "Special"
-  },
-  xf86confDecimalNumber = {
-    link = "xf86confNumber"
-  },
-  xf86confError = {
-    link = "Error"
-  },
-  xf86confFrequency = {
-    link = "xf86confNumber"
-  },
-  xf86confHexadecimalNumber = {
-    link = "xf86confNumber"
-  },
-  xf86confKeyword = {
-    link = "Type"
-  },
-  xf86confMatch = {
-    link = "xf86confKeyword"
-  },
-  xf86confModeLine = {
-    link = "xf86confKeyword"
-  },
-  xf86confModeLineValue = {
-    link = "Constant"
-  },
-  xf86confModeSubSectionError = {
-    link = "xf86confError"
-  },
-  xf86confNumber = {
-    link = "Constant"
-  },
-  xf86confOctalNumber = {
-    link = "xf86confNumber"
-  },
-  xf86confOctalNumberError = {
-    link = "xf86confError"
-  },
-  xf86confOption = {
-    link = "xf86confKeyword"
-  },
-  xf86confOptionName = {
-    link = "Identifier"
-  },
-  xf86confSectionDelim = {
-    link = "Statement"
-  },
-  xf86confSectionError = {
-    link = "xf86confError"
-  },
-  xf86confSpecialChar = {
-    link = "Special"
-  },
-  xf86confString = {
-    link = "String"
-  },
-  xf86confSubSectionError = {
-    link = "xf86confError"
-  },
-  xf86confSync = {
-    link = "xf86confConstant"
-  },
-  xf86confTodo = {
-    link = "Todo"
-  },
-  xf86confValue = {
-    link = "Constant"
-  },
-  xinetdAS = {
-    link = "xinetdNumber"
-  },
-  xinetdASEq = {
-    link = "xinetdEq"
-  },
-  xinetdASMult = {
-    link = "PreProc"
-  },
-  xinetdAttribute = {
-    link = "Type"
-  },
-  xinetdBoolean = {
-    link = "Boolean"
-  },
-  xinetdBooleanEq = {
-    link = "xinetdEq"
-  },
-  xinetdCPS = {
-    link = "xinetdNumber"
-  },
-  xinetdCPSEq = {
-    link = "xinetdEq"
-  },
-  xinetdComment = {
-    link = "Comment"
-  },
-  xinetdDefaults = {
-    link = "Keyword"
-  },
-  xinetdDenyTime = {
-    link = "PreProc"
-  },
-  xinetdDenyTimeEq = {
-    link = "xinetdEq"
-  },
-  xinetdDeprFlags = {
-    link = "WarningMsg"
-  },
-  xinetdDisable = {
-    link = "Special"
-  },
-  xinetdEnvEq = {
-    link = "xinetdEq"
-  },
-  xinetdEnvName = {
-    link = "Identifier"
-  },
-  xinetdEnvNameEq = {
-    link = "xinetdEq"
-  },
-  xinetdEnvValue = {
-    link = "String"
-  },
-  xinetdEq = {
-    link = "Operator"
-  },
-  xinetdFlags = {
-    link = "xinetdType"
-  },
-  xinetdFlagsEq = {
-    link = "xinetdEq"
-  },
-  xinetdFloat = {
-    link = "xinetdNumber"
-  },
-  xinetdFloatEq = {
-    link = "xinetdEq"
-  },
-  xinetdLogFailure = {
-    link = "xinetdType"
-  },
-  xinetdLogFailureEq = {
-    link = "xinetdEq"
-  },
-  xinetdLogFile = {
-    link = "xinetdPath"
-  },
-  xinetdLogHardLimit = {
-    link = "xinetdNumber"
-  },
-  xinetdLogSoftLimit = {
-    link = "xinetdNumber"
-  },
-  xinetdLogSuccess = {
-    link = "xinetdType"
-  },
-  xinetdLogSuccessEq = {
-    link = "xinetdEq"
-  },
-  xinetdLogType = {
-    link = "Keyword"
-  },
-  xinetdLogTypeEq = {
-    link = "xinetdEq"
-  },
-  xinetdNumber = {
-    link = "Number"
-  },
-  xinetdNumberEq = {
-    link = "xinetdEq"
-  },
-  xinetdOctal = {
-    link = "xinetdNumber"
-  },
-  xinetdOctalEq = {
-    link = "xinetdEq"
-  },
-  xinetdOctalError = {
-    link = "Error"
-  },
-  xinetdOctalZero = {
-    link = "PreProc"
-  },
-  xinetdPPAttribute = {
-    link = "PreProc"
-  },
-  xinetdPath = {
-    link = "String"
-  },
-  xinetdPathEq = {
-    link = "xinetdEq"
-  },
-  xinetdRPCVersion = {
-    link = "xinetdNumber"
-  },
-  xinetdRPCVersionEq = {
-    link = "xinetdEq"
-  },
-  xinetdRedirectEq = {
-    link = "xinetdEq"
-  },
-  xinetdRedirectIP = {
-    link = "String"
-  },
-  xinetdReqAttribute = {
-    link = "Keyword"
-  },
-  xinetdService = {
-    link = "Keyword"
-  },
-  xinetdServiceGroupD = {
-    link = "Delimiter"
-  },
-  xinetdServiceName = {
-    link = "String"
-  },
-  xinetdSignedNumEq = {
-    link = "xinetdEq"
-  },
-  xinetdSignedNumber = {
-    link = "xinetdNumber"
-  },
-  xinetdSocketType = {
-    link = "xinetdType"
-  },
-  xinetdSocketTypeEq = {
-    link = "xinetdEq"
-  },
-  xinetdString = {
-    link = "String"
-  },
-  xinetdStringEq = {
-    link = "xinetdEq"
-  },
-  xinetdStrings = {
-    link = "xinetdString"
-  },
-  xinetdStringsAdvEq = {
-    link = "xinetdEq"
-  },
-  xinetdStringsEq = {
-    link = "xinetdEq"
-  },
-  xinetdSyslogLevel = {
-    link = "Number"
-  },
-  xinetdSyslogType = {
-    link = "xinetdType"
-  },
-  xinetdTimeRanges = {
-    link = "Number"
-  },
-  xinetdTimeRangesEq = {
-    link = "xinetdEq"
-  },
-  xinetdTodo = {
-    link = "Todo"
-  },
-  xinetdType = {
-    link = "Identifier"
-  },
-  xinetdTypeEq = {
-    link = "xinetdEq"
-  },
-  xinetdUNumberEq = {
-    link = "xinetdEq"
-  },
-  xinetdUnlimited = {
-    link = "Define"
-  },
-  xkbBalancingError = {
-    link = "xkbError"
-  },
-  xkbBraceError = {
-    link = "xkbBalancingError"
-  },
-  xkbBraketError = {
-    link = "xkbBalancingError"
-  },
-  xkbComment = {
-    link = "Comment"
-  },
-  xkbCommentError = {
-    link = "xkbError"
-  },
-  xkbCommentStartError = {
-    link = "xkbCommentError"
-  },
-  xkbConstant = {
-    link = "Constant"
-  },
-  xkbError = {
-    link = "Error"
-  },
-  xkbFunction = {
-    link = "Function"
-  },
-  xkbIdentifier = {
-    link = "Keyword"
-  },
-  xkbKeyword = {
-    link = "Keyword"
-  },
-  xkbModif = {
-    link = "xkbPreproc"
-  },
-  xkbParenError = {
-    link = "xkbBalancingError"
-  },
-  xkbPhysicalKey = {
-    link = "Identifier"
-  },
-  xkbPreproc = {
-    link = "PreProc"
-  },
-  xkbSect = {
-    link = "Type"
-  },
-  xkbSpecial = {
-    link = "Special"
-  },
-  xkbSpecialChar = {
-    link = "xkbSpecial"
-  },
-  xkbString = {
-    link = "String"
-  },
-  xkbTModif = {
-    link = "xkbPreproc"
-  },
-  xkbTodo = {
-    link = "Todo"
-  },
-  xmathBraceError = {
-    link = "xmathError"
-  },
-  xmathCharacter = {
-    link = "Character"
-  },
-  xmathCmd = {
-    link = "xmathStatement"
-  },
-  xmathComma = {
-    link = "Delimiter"
-  },
-  xmathComment = {
-    link = "Comment"
-  },
-  xmathCommentBlock = {
-    link = "xmathComment"
-  },
-  xmathConditional = {
-    link = "Conditional"
-  },
-  xmathCurlyError = {
-    link = "xmathError"
-  },
-  xmathError = {
-    link = "Error"
-  },
-  xmathFunc = {
-    link = "Function"
-  },
-  xmathFuncCmd = {
-    link = "xmathStatement"
-  },
-  xmathLabel = {
-    link = "PreProc"
-  },
-  xmathNumber = {
-    link = "Number"
-  },
-  xmathParenError = {
-    link = "xmathError"
-  },
-  xmathRepeat = {
-    link = "Repeat"
-  },
-  xmathSpecial = {
-    link = "Type"
-  },
-  xmathSpecialChar = {
-    link = "SpecialChar"
-  },
-  xmathStatement = {
-    link = "Statement"
-  },
-  xmathString = {
-    link = "String"
-  },
-  xmathTodo = {
-    link = "Todo"
   },
   xmlAttrib = {
     link = "Type"
@@ -49430,198 +50106,6 @@ return
   },
   xmlTodo = {
     link = "Todo"
-  },
-  xmodmapComment = {
-    link = "Comment"
-  },
-  xmodmapHex = {
-    link = "Number"
-  },
-  xmodmapInt = {
-    link = "Number"
-  },
-  xmodmapKeySym = {
-    link = "Constant"
-  },
-  xmodmapKeyword = {
-    link = "Keyword"
-  },
-  xmodmapOctal = {
-    link = "Number"
-  },
-  xmodmapOctalError = {
-    link = "Error"
-  },
-  xmodmapTodo = {
-    link = "Todo"
-  },
-  xpm2Comment = {
-    link = "Comment"
-  },
-  xpm2PixelString = {
-    link = "String"
-  },
-  xpm2StorageClass = {
-    link = "StorageClass"
-  },
-  xpm2Todo = {
-    link = "Todo"
-  },
-  xpm2Type = {
-    link = "Type"
-  },
-  xpmComment = {
-    link = "Comment"
-  },
-  xpmPixelString = {
-    link = "String"
-  },
-  xpmStorageClass = {
-    link = "StorageClass"
-  },
-  xpmTodo = {
-    link = "Todo"
-  },
-  xpmType = {
-    link = "Type"
-  },
-  xqComment = {
-    link = "Comment"
-  },
-  xqExist = {
-    link = "Operator"
-  },
-  xqFloat = {
-    link = "Number"
-  },
-  xqFunction = {
-    link = "Function"
-  },
-  xqNumber = {
-    link = "Number"
-  },
-  xqOperator = {
-    link = "Operator"
-  },
-  xqSeparator = {
-    link = "Operator"
-  },
-  xqStatement = {
-    link = "Statement"
-  },
-  xqString = {
-    link = "String"
-  },
-  xqType = {
-    link = "Type"
-  },
-  xqVariable = {
-    link = "Identifier"
-  },
-  xqXPath = {
-    link = "Operator"
-  },
-  xsConstant = {
-    link = "Constant"
-  },
-  xsException = {
-    link = "Exception"
-  },
-  xsFunction = {
-    link = "Function"
-  },
-  xsKeyword = {
-    link = "Keyword"
-  },
-  xsMacro = {
-    link = "Macro"
-  },
-  xsPrivate = {
-    link = "Error"
-  },
-  xsString = {
-    link = "String"
-  },
-  xsSuperseded = {
-    link = "Error"
-  },
-  xsType = {
-    link = "Type"
-  },
-  xsVariable = {
-    link = "Identifier"
-  },
-  xsdElement = {
-    link = "Statement"
-  },
-  xslElement = {
-    link = "Statement"
-  },
-  xxdAddress = {
-    link = "Constant"
-  },
-  xxdAscii = {
-    link = "Statement"
-  },
-  xxdSep = {
-    link = "Identifier"
-  },
-  yaccBrkt = {
-    link = "yaccStmt"
-  },
-  yaccComment = {
-    link = "Comment"
-  },
-  yaccCurly = {
-    link = "Delimiter"
-  },
-  yaccCurlyError = {
-    link = "Error"
-  },
-  yaccDefines = {
-    link = "cDefine"
-  },
-  yaccDelim = {
-    link = "Delimiter"
-  },
-  yaccKey = {
-    link = "yaccStmt"
-  },
-  yaccKeyActn = {
-    link = "Special"
-  },
-  yaccNonterminal = {
-    link = "Function"
-  },
-  yaccOper = {
-    link = "yaccStmt"
-  },
-  yaccParseOption = {
-    link = "cDefine"
-  },
-  yaccParseParam = {
-    link = "yaccParseOption"
-  },
-  yaccSectionSep = {
-    link = "Todo"
-  },
-  yaccSep = {
-    link = "Delimiter"
-  },
-  yaccStmt = {
-    link = "Statement"
-  },
-  yaccString = {
-    link = "String"
-  },
-  yaccType = {
-    link = "Type"
-  },
-  yaccUnionStart = {
-    link = "yaccKey"
-  },
-  yaccVar = {
-    link = "Special"
   },
   yamlAlias = {
     link = "Type"
@@ -49755,300 +50239,6 @@ return
   yulVarDeclaration = {
     link = "Keyword"
   },
-  z8aComment = {
-    link = "Comment"
-  },
-  z8aInclude = {
-    link = "Include"
-  },
-  z8aInstruction = {
-    link = "Statement"
-  },
-  z8aLabel = {
-    link = "Label"
-  },
-  z8aNumber = {
-    link = "Number"
-  },
-  z8aPreCondit = {
-    link = "PreCondit"
-  },
-  z8aPreProc = {
-    link = "PreProc"
-  },
-  z8aSection = {
-    link = "Special"
-  },
-  z8aSpecInst = {
-    link = "Statement"
-  },
-  z8aSpecialLabel = {
-    link = "Label"
-  },
-  z8aString = {
-    link = "String"
-  },
-  zathurarcBoolean = {
-    link = "Boolean"
-  },
-  zathurarcBracket = {
-    link = "Delimiter"
-  },
-  zathurarcCommand = {
-    link = "Statement"
-  },
-  zathurarcComment = {
-    link = "Comment"
-  },
-  zathurarcMode = {
-    link = "Macro"
-  },
-  zathurarcNotation = {
-    link = "Special"
-  },
-  zathurarcNumber = {
-    link = "Number"
-  },
-  zathurarcOption = {
-    link = "PreProc"
-  },
-  zathurarcString = {
-    link = "String"
-  },
-  zigArrowCharacter = {
-    link = "zigOperator"
-  },
-  zigBinNumber = {
-    link = "zigNumber"
-  },
-  zigBoolean = {
-    link = "Boolean"
-  },
-  zigBuiltinFn = {
-    link = "Statement"
-  },
-  zigCharacter = {
-    link = "Character"
-  },
-  zigCharacterInvalid = {
-    link = "Error"
-  },
-  zigCharacterInvalidUnicode = {
-    link = "zigCharacterInvalid"
-  },
-  zigCommentLine = {
-    link = "Comment"
-  },
-  zigCommentLineDoc = {
-    link = "Comment"
-  },
-  zigComparatorWord = {
-    link = "Keyword"
-  },
-  zigConditional = {
-    link = "Conditional"
-  },
-  zigConstant = {
-    link = "Constant"
-  },
-  zigDecNumber = {
-    link = "zigNumber"
-  },
-  zigDummyVariable = {
-    link = "Comment"
-  },
-  zigEscape = {
-    link = "Special"
-  },
-  zigEscapeError = {
-    link = "Error"
-  },
-  zigEscapeUnicode = {
-    link = "zigEscape"
-  },
-  zigException = {
-    link = "Exception"
-  },
-  zigExecution = {
-    link = "Special"
-  },
-  zigHexNumber = {
-    link = "zigNumber"
-  },
-  zigKeyword = {
-    link = "Keyword"
-  },
-  zigMacro = {
-    link = "Macro"
-  },
-  zigMultilineString = {
-    link = "String"
-  },
-  zigMultilineStringContent = {
-    link = "String"
-  },
-  zigMultilineStringDelimiter = {
-    link = "Delimiter"
-  },
-  zigMultilineStringPrefix = {
-    link = "String"
-  },
-  zigNull = {
-    link = "Boolean"
-  },
-  zigNumber = {
-    link = "Number"
-  },
-  zigOctNumber = {
-    link = "zigNumber"
-  },
-  zigOperator = {
-    link = "Operator"
-  },
-  zigPreProc = {
-    link = "PreProc"
-  },
-  zigRepeat = {
-    link = "Repeat"
-  },
-  zigSpecial = {
-    link = "Special"
-  },
-  zigString = {
-    link = "String"
-  },
-  zigStringDelimiter = {
-    link = "String"
-  },
-  zigStructure = {
-    link = "Structure"
-  },
-  zigTodo = {
-    link = "Todo"
-  },
-  zigType = {
-    link = "Type"
-  },
-  zigVarDecl = {
-    link = "Function"
-  },
-  zimbuAttribute = {
-    link = "PreProc"
-  },
-  zimbuBasicType = {
-    link = "Type"
-  },
-  zimbuBlockComment = {
-    link = "Comment"
-  },
-  zimbuBlockgc = {
-    link = "PreProc"
-  },
-  zimbuCblock = {
-    link = "Comment"
-  },
-  zimbuChar = {
-    link = "Constant"
-  },
-  zimbuCode = {
-    link = "Statement"
-  },
-  zimbuComment = {
-    link = "Comment"
-  },
-  zimbuCommentStart = {
-    link = "zimbuComment"
-  },
-  zimbuCompType = {
-    link = "Type"
-  },
-  zimbuError = {
-    link = "Error"
-  },
-  zimbuFixed = {
-    link = "Constant"
-  },
-  zimbuImport = {
-    link = "PreProc"
-  },
-  zimbuLongString = {
-    link = "Special"
-  },
-  zimbuMethod = {
-    link = "PreProc"
-  },
-  zimbuModule = {
-    link = "PreProc"
-  },
-  zimbuNoBacktick = {
-    link = "Ignore"
-  },
-  zimbuNoBar = {
-    link = "Ignore"
-  },
-  zimbuOperator = {
-    link = "Statement"
-  },
-  zimbuParam = {
-    link = "Constant"
-  },
-  zimbuSpaceError = {
-    link = "Error"
-  },
-  zimbuStatement = {
-    link = "Statement"
-  },
-  zimbuString = {
-    link = "Constant"
-  },
-  zimbuTodo = {
-    link = "Todo"
-  },
-  zimbuType = {
-    link = "Type"
-  },
-  zimbuUses = {
-    link = "PreProc"
-  },
-  zirBinNumber = {
-    link = "Constant"
-  },
-  zirCommentLine = {
-    link = "Comment"
-  },
-  zirDecNumber = {
-    link = "Constant"
-  },
-  zirEscape = {
-    link = "Special"
-  },
-  zirEscapeError = {
-    link = "Error"
-  },
-  zirEscapeUnicode = {
-    link = "zirEscape"
-  },
-  zirGlobal = {
-    link = "Identifier"
-  },
-  zirHexNumber = {
-    link = "Constant"
-  },
-  zirKeyword = {
-    link = "Keyword"
-  },
-  zirLocal = {
-    link = "Identifier"
-  },
-  zirOctNumber = {
-    link = "Constant"
-  },
-  zirString = {
-    link = "Constant"
-  },
-  zirTodo = {
-    link = "Todo"
-  },
   zoneClass = {
     link = "Include"
   },
@@ -50102,215 +50292,5 @@ return
   },
   zoneUnknown = {
     link = "Error"
-  },
-  zserioAlign = {
-    link = "Label"
-  },
-  zserioBinaryB = {
-    link = "Special"
-  },
-  zserioBoolean = {
-    link = "Boolean"
-  },
-  zserioComment = {
-    link = "Comment"
-  },
-  zserioCommentError = {
-    link = "Error"
-  },
-  zserioCommentL = {
-    link = "zserioComment"
-  },
-  zserioCommentStart = {
-    link = "zserioComment"
-  },
-  zserioCommentStartError = {
-    link = "Error"
-  },
-  zserioCompound = {
-    link = "Structure"
-  },
-  zserioConditional = {
-    link = "Conditional"
-  },
-  zserioEndian = {
-    link = "StorageClass"
-  },
-  zserioKeyword = {
-    link = "Statement"
-  },
-  zserioLabel = {
-    link = "Label"
-  },
-  zserioNumber = {
-    link = "Number"
-  },
-  zserioNumberBin = {
-    link = "Number"
-  },
-  zserioNumberHex = {
-    link = "Number"
-  },
-  zserioOctal = {
-    link = "Number"
-  },
-  zserioOctalError = {
-    link = "Error"
-  },
-  zserioOctalZero = {
-    link = "Special"
-  },
-  zserioOffset = {
-    link = "Label"
-  },
-  zserioOperator = {
-    link = "Operator"
-  },
-  zserioPackage = {
-    link = "Include"
-  },
-  zserioRpc = {
-    link = "Keyword"
-  },
-  zserioRule = {
-    link = "Keyword"
-  },
-  zserioSql = {
-    link = "PreProc"
-  },
-  zserioStorageClass = {
-    link = "StorageClass"
-  },
-  zserioString = {
-    link = "String"
-  },
-  zserioTodo = {
-    link = "Todo"
-  },
-  zserioType = {
-    link = "Type"
-  },
-  zshCase = {
-    link = "zshConditional"
-  },
-  zshCaseIn = {
-    link = "zshCase"
-  },
-  zshCommands = {
-    link = "Keyword"
-  },
-  zshComment = {
-    link = "Comment"
-  },
-  zshConditional = {
-    link = "Conditional"
-  },
-  zshDelimiter = {
-    link = "Keyword"
-  },
-  zshDeref = {
-    link = "zshDereferencing"
-  },
-  zshDereferencing = {
-    link = "PreProc"
-  },
-  zshDollarVar = {
-    link = "zshDereferencing"
-  },
-  zshException = {
-    link = "Exception"
-  },
-  zshFunction = {
-    link = "None"
-  },
-  zshGlob = {
-    link = "zshSubst"
-  },
-  zshHereDoc = {
-    link = "String"
-  },
-  zshJobSpec = {
-    link = "Special"
-  },
-  zshKSHFunction = {
-    link = "zshFunction"
-  },
-  zshKeyword = {
-    link = "Keyword"
-  },
-  zshLongDeref = {
-    link = "zshDereferencing"
-  },
-  zshMathSubst = {
-    link = "zshSubst"
-  },
-  zshNumber = {
-    link = "Number"
-  },
-  zshOldSubst = {
-    link = "zshSubst"
-  },
-  zshOperator = {
-    link = "None"
-  },
-  zshOptStart = {
-    link = "Keyword"
-  },
-  zshOption = {
-    link = "Constant"
-  },
-  zshPOSIXQuoted = {
-    link = "SpecialChar"
-  },
-  zshPOSIXString = {
-    link = "zshString"
-  },
-  zshPreProc = {
-    link = "PreProc"
-  },
-  zshPrecommand = {
-    link = "Special"
-  },
-  zshQuoted = {
-    link = "SpecialChar"
-  },
-  zshRedir = {
-    link = "Operator"
-  },
-  zshRepeat = {
-    link = "Repeat"
-  },
-  zshShortDeref = {
-    link = "zshDereferencing"
-  },
-  zshString = {
-    link = "String"
-  },
-  zshStringDelimiter = {
-    link = "zshString"
-  },
-  zshSubst = {
-    link = "PreProc"
-  },
-  zshSubstDelim = {
-    link = "zshSubst"
-  },
-  zshSubstQuoted = {
-    link = "zshSubst"
-  },
-  zshSwitches = {
-    link = "Special"
-  },
-  zshTodo = {
-    link = "Todo"
-  },
-  zshTypes = {
-    link = "Type"
-  },
-  zshVariable = {
-    link = "None"
-  },
-  zshVariableDef = {
-    link = "zshVariable"
   }
 }
